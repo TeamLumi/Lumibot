@@ -1,0 +1,31 @@
+{
+	"name": "lumibot",
+	"version": "1.0.0",
+	"description": "An in-progress bot for Team Luminescent. Built from the DiscordBot-Template by Naman Vrati",
+	"types": "./typings.d.ts",
+	"main": "bot.js",
+	"scripts": {
+		"start": "node bot.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/TeamLumi/Lumibot.git"
+	},
+	"keywords": [
+		"discord-js"
+	],
+	"author": {
+		"name": "Zatsu Fakuzatsu",
+		"url": "https://github.com/Fakuzatsu"
+	},
+	"license": "Apache-2.0",
+	"bugs": {
+		"url": "https://github.com/TeamLumi/Lumibot/issues"
+	},
+	"homepage": "https://luminescent.team/",
+	"dependencies": {
+		"@discordjs/rest": "^1.6.0",
+		"discord-api-types": "^0.37.36",
+		"discord.js": "^14.9.0"
+	}
+}
