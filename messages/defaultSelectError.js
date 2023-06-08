@@ -1,9 +1,3 @@
-/**
- * @file Default Error Message On Error Select Menu Interaction
- * @author Naman Vrati
- * @since 3.0.0
- */
-
 module.exports = {
 	/**
 	 * @description Executes when the select menu interaction could not be fetched.

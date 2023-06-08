@@ -1,9 +1,3 @@
-/**
- * @file Default Bot Mention Command
- * @author Naman Vrati
- * @since 3.0.0
- */
-
 const { prefix } = require("../config.json");
 
 module.exports = {
