@@ -2,7 +2,7 @@ const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 
 module.exports = {
 	data: {
-		name: ["[Rule 0]", "[rule 0]", "[Rule0]", "[rule0]", "[RULE 0]", "[RULE0]"],
+		name: ["[rule 0]", "[rule0]"],
 		},
 	execute(message, args) {
 		const attachment = new AttachmentBuilder('./assets/ban_hammer.png');

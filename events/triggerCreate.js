@@ -18,7 +18,7 @@ module.exports = {
 		  if (triggered) break;
   
 		  // If validated, it will try to execute the trigger.
-		  if (message.content.includes(name)) {
+		  if (message.content.toLowerCase().includes(name)) {
 			try {
 			  await trigger.execute(message, args);
 			} catch (error) {

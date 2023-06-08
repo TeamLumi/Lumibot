@@ -2,7 +2,7 @@ const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 
 module.exports = {
 	data: {
-	name: ["[DJ]", "[dj]", "[Dj]"],
+	name: ["dj"],
 	},
 	execute(message, args) {
 		const attachment = new AttachmentBuilder('./assets/eevee.png');
