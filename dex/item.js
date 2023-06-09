@@ -1,4 +1,5 @@
-const { itemNames } = require('../../../__gamedata');
+const { itemNames } = require('../__gamedata');
+const { PersonalTable } = require ('../__gamedata');
 
 function getItemIdFromItemName(itemName) {
   if (!itemName) throw Error(`Bad item name: ${itemName}`);
@@ -13,4 +14,9 @@ function getItemString(itemId = 0) {
   return itemNames.labelDataArray[itemId].wordDataArray[0].str;
 }
 
-export { getItemIdFromItemName, getItemString };
+function getPokemonHeldItems(pokemonId = 0) {
+  const p = PersonalTable.Personal[pokemonId];
+  return [p.item1, p.item2, p.item3];
+}
+
+export { getItemIdFromItemName, getItemString, getPokemonHeldItems };
