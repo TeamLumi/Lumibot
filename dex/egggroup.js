@@ -1,4 +1,4 @@
-import { PersonalTable } from '../../../__gamedata';
+const { PersonalTable } = require('../../lumibot/__gamedata');
 
 const EGG_GROUPS = {
   0: 'None',
@@ -39,7 +39,7 @@ function getEggGroupNameById(eggGroupId = 0) {
 }
 
 function createPokemonByEggGroupMap(pokemonMap, currentPokemon) {
-  //Use sets so I don't have to handle duplicates, looking at you Unown
+  // Use sets so I don't have to handle duplicates, looking at you Unown
   if (pokemonMap[currentPokemon.egg_group1] === undefined) {
     pokemonMap[currentPokemon.egg_group1] = new Set();
   }
@@ -56,7 +56,11 @@ function createPokemonByEggGroupMap(pokemonMap, currentPokemon) {
 function getPokemonIdsInEggGroup(eggGroupId = 0) {
   if (!Number.isInteger(eggGroupId) || eggGroupId < 0 || eggGroupId > HIGHEST_EGG_GROUP_ID)
     throw new Error(`Bad eggGroupId: ${eggGroupId}`);
-  return Array.from(POKEMON_IDS_BY_EGG_GROUP[eggGroupId]); //Back to array for easier handling
+  return Array.from(POKEMON_IDS_BY_EGG_GROUP[eggGroupId]); // Back to array for easier handling
 }
 
-export { getPokemonIdsInEggGroup, getEggGroupNameById, getEggGroupViaPokemonId };
+module.exports = {
+  getPokemonIdsInEggGroup,
+  getEggGroupNameById,
+  getEggGroupViaPokemonId,
+};

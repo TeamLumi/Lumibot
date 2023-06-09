@@ -1,4 +1,4 @@
-import {
+const {
   LearnsetTable,
   EggMovesTable,
   MovesTable,
@@ -8,17 +8,13 @@ import {
   PersonalTable,
   moveNames,
   moveInfo,
-} from '../../luminescent-team/__gamedata';
-import { getPokemonFormId } from './name';
+} = require('../../lumibot/__gamedata');
+const { getPokemonFormId } = require('./name');
 
 const IS_MOVE_INDEX = false;
 const MAX_TM_COUNT = 104;
 
 function generateMovesViaLearnset(monsNo, level) {
-  /**
-   * In BDSP, a trainer's Pokemon, when provided no moves,
-   * will use the four most recent moves in the learnset.
-   */
   if (!Number.isInteger(monsNo) || monsNo < 0 || !LearnsetTable.WazaOboe[monsNo]) {
     throw new Error('Invalid Pokémon number');
   }
@@ -80,7 +76,7 @@ function getMoveProperties(moveId = 0) {
     name: moveNames.labelDataArray[moveId].wordDataArray[0]?.str ?? 'None',
     desc: getMoveDescription(moveId),
     type,
-    damageType, //0 = Status, 1 = Physical, 2 = Special
+    damageType,
     maxPP,
     power,
     accuracy: hitPer,
@@ -149,7 +145,7 @@ function getPokemonLearnset(pokemonId = 0) {
   return LearnsetTable.WazaOboe[pokemonId]?.ar ?? [];
 }
 
-export {
+module.exports = {
   generateMovesViaLearnset,
   getMoveId,
   getMoveString,
