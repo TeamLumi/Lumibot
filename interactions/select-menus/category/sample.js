@@ -1,4 +1,4 @@
-odule.exports = {
+module.exports = {
 	id: "sample",
 
 	async execute(interaction) {
