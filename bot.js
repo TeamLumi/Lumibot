@@ -124,10 +124,10 @@ for (const module of autocompleteInteractions) {
   for (const interactionFile of files) {
     const filePath = path.join(modulePath, interactionFile);
     const interaction = require(filePath);
-	if ('data' in interaction && 'execute' in interaction) {
-    client.autocompleteInteractions.set(interaction.data.name, interaction);
+	if ('execute' in interaction) {
+    client.autocompleteInteractions.set(interaction.name, interaction);
 	} else {
-		console.log(`[WARNING] the autocomplete interaction at ${filePath} is missing a required "data" or "execute" property.`)
+		console.log(`[WARNING] the autocomplete interaction at ${filePath} is missing a required "execute" property.`)
 	}
   }
 }

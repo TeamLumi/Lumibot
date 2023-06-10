@@ -2,6 +2,7 @@ const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const { getPokemonMonsnoFromName } = require('../../../dex/name.js');
 const { getPokemonInfo } = require('../../../dex/index.js');
 
+// Array for pokemon types to set colours.
 const typeColors = {
   Grass: '#A3B18A',
   Fire: '#EE8130',
@@ -23,6 +24,28 @@ const typeColors = {
   Normal: '#A8A77A',
 };
 
+// Array for pokemon types to set icons.
+const typeIcons = {
+  Bug: '<:t_bug:1117062630553702431>',
+  Dark:'<:t_dark:1117063037858353162>',
+  Dragon: '<:t_dragon:1117062647439949875>',
+  Electric: '<:t_electric:1117063036268711957>',
+  Fairy: '<:t_fairy:1117062642964635698>',
+  Fighting: '<:t_fighting:1117063035224334426>',
+  Fire: '<:t_fire:1117063764487962624>',
+  Flying: '<:t_flying:1117063032644845680>',
+  Ghost: '<:t_ghost:1117062639420452874>',
+  Grass: '<:t_grass:1117063031579488370>',
+  Ground: '<:t_ground:1117062637566570538>',
+  Ice: '<:t_ice:1117062636861927505>',
+  Normal: '<:t_normal:1117062635817554010>',
+  Poison: '<:t_poison:1117062634219524146>',
+  Psychic: '<:t_psychic:1117062633191919657>',
+  Rock: '<:t_rock:1117062629282816061>',
+  Steel: '<:t_steel:1117062632172683414>',
+  Water: '<:t_water:1117063766308298772>',
+};
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('pokedex')
@@ -30,12 +53,16 @@ module.exports = {
     .addStringOption(option =>
       option.setName('pokemon')
         .setDescription('The name of the Pokemon')
-        .setRequired(true)),
+        .setRequired(true)
+        .setAutocomplete(true)),
 
-  execute(interaction) {
-    // Here we grab the Pokemon name from the interaction, then convert that to its monsNo so we can parse the pokemon's data with the dex commands.
+  async execute(interaction) {
+
+    // Here we grab the Pokemon name from the interaction and convert it to use proper capitalisation.
     const pokemonName = interaction.options.getString('pokemon').toLowerCase();
     const pokemonNameCapital = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
+
+    // Then we convert the name to the Pokemon's monnsNo which we use to get further information.
     const monsNo = getPokemonMonsnoFromName(pokemonNameCapital);
     const pokemonInfo = getPokemonInfo(monsNo);
 
@@ -87,9 +114,12 @@ module.exports = {
     }
 
     if (type1 === type2) {
-      embed.setDescription(`**Type:** ${type1}`);
+      const type1Icon = typeIcons[type1];
+      embed.setDescription(`**Type:** ${type1Icon}`);
     } else {
-      embed.setDescription(`**Type:** ${type1} | ${type2}`);
+      const type1Icon = typeIcons[type1];
+      const type2Icon = typeIcons[type2];
+      embed.setDescription(`**Type:** ${type1Icon} | ${type2Icon}`);
     }
 
       interaction.reply({ embeds: [embed] });
