@@ -1,1 +1,20 @@
-node_modules
+# Custom
+/config.json
+.vscode/
+.node-version
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Diagnostic reports
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Dependency directories
+package-lock.json
+node_modules/
+
+# dotenv environment variables file
+.env
+.env.test
