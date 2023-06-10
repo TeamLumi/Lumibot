@@ -1,6 +1,16 @@
-import { makeSmogonAbilityObject, getAbilityIdFromAbilityName, getAbilityString, getAbilityInfo } from './ability';
-import { getItemIdFromItemName, getItemString } from './item';
-import {
+const {
+  makeSmogonAbilityObject,
+  getAbilityIdFromAbilityName,
+  getAbilityString,
+  getAbilityInfo
+} = require('./ability');
+
+const {
+  getItemIdFromItemName,
+  getItemString
+} = require('./item');
+
+const {
   generateMovesViaLearnset,
   getMoveId,
   getMoveString,
@@ -9,35 +19,40 @@ import {
   getTechMachineLearnset,
   getMoveProperties,
   getPokemonLearnset,
-  getTMCompatibility,
-} from './moves';
-import {
+  getTMCompatibility
+} = require('./moves');
+
+const {
   getPokemonMonsnoFromName,
   getFormName,
   getFormNameOfProblematicPokemon,
   getPokemonName,
   getPokemonIdFromName,
   getPokemonNames,
-  getPokemonFormId,
-} from './name';
-import { getNatureId, getNatureName } from './nature';
-import { getTypeName, getTypes } from './types';
-import { getWeight, getHeight } from './details';
-import {
+  getPokemonFormId
+} = require('./name');
+
+const { getNatureId, getNatureName } = require('./nature');
+
+const { getTypeName, getTypes } = require('./types');
+
+const { getWeight, getHeight } = require('./details');
+
+const {
   FORM_MAP,
   getPokemonIdFromFormMap,
   getGender,
   getGrassKnotPower,
   getImage,
   formatBaseStats,
-  getPokemonIdFromMonsNoAndForm,
-} from './functions';
+  getPokemonIdFromMonsNoAndForm
+} = require('./functions');
 
-import { PersonalTable } from '../../../__gamedata';
+const { PersonalTable } = require('../../lumibot/__gamedata');
 
 const POKEMON_MOVE_LEVEL_TYPE = {
   EGG: 'egg',
-  TM: 'tm',
+  TM: 'tm'
 };
 
 function getPokemonInfo(monsno = 0) {
@@ -56,7 +71,7 @@ function getPokemonInfo(monsno = 0) {
       def: p.basic_def,
       spa: p.basic_spatk,
       spd: p.basic_spdef,
-      spe: p.basic_agi,
+      spe: p.basic_agi
     },
     baseStatsTotal: p.basic_hp + p.basic_atk + p.basic_def + p.basic_spatk + p.basic_spdef + p.basic_agi,
     weight: getWeight(monsno),
@@ -65,11 +80,11 @@ function getPokemonInfo(monsno = 0) {
     type1: getTypeName(p.type1),
     type2: getTypeName(p.type2),
     imageSrc: getImage(monsno),
-    genderDecimalValue: p.sex,
+    genderDecimalValue: p.sex
   };
 }
 
-export {
+module.exports = {
   FORM_MAP,
   getPokemonIdFromFormMap,
   getGender,
@@ -106,5 +121,5 @@ export {
   getTypes,
   getPokemonLearnset,
   getPokemonFormId,
-  POKEMON_MOVE_LEVEL_TYPE,
+  POKEMON_MOVE_LEVEL_TYPE
 };

@@ -1,4 +1,4 @@
-import { PersonalTable } from '../../luminescent-team/__gamedata';
+const { PersonalTable } = require('../../lumibot/__gamedata');
 
 //BDSP does not stick to the same structure when working with forms, thus this map is necessary.
 const FORM_MAP = PersonalTable.Personal.reduce(createFormMap, {});
@@ -46,7 +46,7 @@ function getPokemonIdFromMonsNoAndForm(monsno, formno) {
   return PersonalTable.Personal.find((e) => e.monsno === monsno && FORM_MAP[e.monsno][formno] === e.id)?.id;
 }
 
-export {
+module.exports = {
   FORM_MAP,
   getPokemonIdFromFormMap,
   getGender,

@@ -1,5 +1,4 @@
-const { itemNames } = require('../__gamedata');
-const { PersonalTable } = require ('../__gamedata');
+const { itemNames, PersonalTable } = require('../../lumibot/__gamedata');
 
 function getItemIdFromItemName(itemName) {
   if (!itemName) throw Error(`Bad item name: ${itemName}`);
@@ -19,4 +18,4 @@ function getPokemonHeldItems(pokemonId = 0) {
   return [p.item1, p.item2, p.item3];
 }
 
-export { getItemIdFromItemName, getItemString, getPokemonHeldItems };
+module.exports = { getItemIdFromItemName, getItemString, getPokemonHeldItems };
