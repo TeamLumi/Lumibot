@@ -27,7 +27,6 @@ const itemNames = require('./english_ss_itemname.json');
 // Custom files
 const moveEnum = require('./moveEnum.json');
 const smogonMoves = require('./smogonMoves.json');
-const trainerInfo = require('./trainer_info.json');
 
 module.exports = {
   PersonalTable,
