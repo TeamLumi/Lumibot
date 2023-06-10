@@ -92,18 +92,27 @@ module.exports = {
 
     const embed = new EmbedBuilder()
     .setTitle(pokemonNameCapital)
-    .setThumbnail(imageLnk)
-    .addFields(
-      { name: `**Abilties:**`, value: `${ability1} | ${ability2}`, inline: true },
-      { name: `**Hidden Ability:**`, value: `${abilityH}`, inline: true },
-    )
-    .addFields(
+    .setThumbnail(imageLnk);
+
+    if (ability1 === ability2) {
+      embed.addFields(
+        { name: `**Abilties:**`, value: `${ability1}`, inline: true },
+        { name: `**Hidden Ability:**`, value: `${abilityH}`, inline: true },
+      )
+    } else {
+      embed.addFields(
+        { name: `**Abilties:**`, value: `${ability1}\n${ability2}`, inline: true },
+        { name: `**Hidden Ability:**`, value: `${abilityH}`, inline: true },
+      )
+    }
+
+    embed.addFields(
       { 
         name: `**Base Stats:**`, 
         value: `\`╔═══╤═══╤═══╤═══╤═══╤═══╗\`\n\`║HP\u00A0│ATK│DEF│SPA│SPD│SPE║\`\n\`╠═══╪═══╪═══╪═══╪═══╪═══╣\`\n\`║${hp}│${atk}│${def}│${spa}│${spd}│${spe}║\`\n\`╚═══╧═══╧═══╧═══╧═══╧═══╝\``
       },
-    )
-    .addFields(
+    );
+    embed.addFields(
       { name: `**Weight:**`, value: `${weight} kg`, inline: true },
       { name: `**Height:**`, value: `${height} m`, inline: true },
     );
