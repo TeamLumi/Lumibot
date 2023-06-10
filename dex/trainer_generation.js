@@ -1,3 +1,5 @@
+const { trainerInfo } = require('../../lumibot/__gamedata');
+
 const GENDER = { "0": "MALE", "1": "FEMALE", "2": "NEUTRAL" };
 ZONE_ORDER = [
     "Route 201",
@@ -252,7 +254,7 @@ function get_pokemon_from_trainer_info(trainer) {
   return pokemon_list;
 }
 
-function sort_trainers_by_level(trainer_info) {
+function sortTrainersByLevel(trainer_info) {
   /*
     Requires the trainer_info from the trainer_info.json
     Function requirements: get_trainer_pokemon, get_avg_trainer_level, sort_dicts_by_key
@@ -267,3 +269,5 @@ function sort_trainers_by_level(trainer_info) {
   const sorted_trainers_by_level = sort_dicts_by_key(trainer_info, 'zoneName', 'avg_lvl', ZONE_ORDER);
   return sorted_trainers_by_level;
 }
+
+module.exports = { sortTrainersByLevel };
