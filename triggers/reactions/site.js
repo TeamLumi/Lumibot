@@ -7,15 +7,11 @@ module.exports = {
 	execute(message, args) {
 
 		const embed = new EmbedBuilder()
-		.setColor(0xADD8E6)
-		.setTitle('Shaymin:')
 		.setThumbnail('https://archives.bulbagarden.net/media/upload/0/0c/133Eevee_RB.png')
-		.addFields(
-			{ 
-				name: `Luminescent Website`, 
-				value: `Check out [our website :computer:](https://luminescent.team/) for all the help you need!`
-			}
-		)
+		.setTitle("Luminescent Website")
+		.setURL("https://luminescent.team/")
+		.setDescription("Check out our website :computer: for all the help you need!")
+		.setColor(0x00b0f4)
 	
 		message.channel.send({ embeds: [embed] });
 	},
