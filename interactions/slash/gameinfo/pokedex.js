@@ -1,6 +1,7 @@
-const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
+const { AttachmentBuilder, EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const { getPokemonMonsnoFromName } = require('../../../dex/name.js');
 const { getPokemonInfo } = require('../../../dex/index.js');
+const { CanvasRenderService } = require('chartjs-node-canvas');
 
 // Array for pokemon types to set colours.
 const typeColors = {
@@ -54,7 +55,15 @@ module.exports = {
       option.setName('pokemon')
         .setDescription('The name of the Pokemon')
         .setRequired(true)
-        .setAutocomplete(true)),
+        .setAutocomplete(true))
+        .addStringOption(option =>
+          option.setName('visualization')
+            .setDescription('The type of visualization (graph or table)')
+            .setRequired(false)
+            .addChoices(
+              { name: 'Graph', value: 'graph' },
+              { name: 'Table', value: 'table' },
+            )),
 
   async execute(interaction) {
 
@@ -66,23 +75,18 @@ module.exports = {
     const monsNo = getPokemonMonsnoFromName(pokemonNameCapital);
     const pokemonInfo = getPokemonInfo(monsNo);
 
+    // Get the visualisation option.
+    const visualization = interaction.options.getString('visualization');
+
     // We log the pokemon's data to individual constants to make it easier to use the EmbedBuilder.
 
     const ability1 = pokemonInfo.ability1;
     const ability2 = pokemonInfo.ability2;
     const abilityH = pokemonInfo.abilityH;
     const tmLearnset = pokemonInfo.tmLearnset;
-    const prettyBaseStats = pokemonInfo.prettyBaseStats;
-    const hp = String(pokemonInfo.baseStats.hp).padEnd(3, ' ');
-    const atk = String(pokemonInfo.baseStats.atk).padEnd(3, ' ');
-    const def = String(pokemonInfo.baseStats.def).padEnd(3, ' ');
-    const spa = String(pokemonInfo.baseStats.spa).padEnd(3, ' ');
-    const spd = String(pokemonInfo.baseStats.spd).padEnd(3, ' ');
-    const spe = String(pokemonInfo.baseStats.spe).padEnd(3, ' ');    
     const baseStatsTotal = pokemonInfo.baseStatsTotal;
-    const weight = pokemonInfo.weight;
-    const height = pokemonInfo.height;
-    const grassKnotPower = pokemonInfo.grassKnotPower;
+    const pWeight = pokemonInfo.weight;
+    const pHeight = pokemonInfo.height;
     const type1 = pokemonInfo.type1;
     const type2 = pokemonInfo.type2;
     const imageSrc = pokemonInfo.imageSrc;
@@ -90,9 +94,25 @@ module.exports = {
     const imageLnk = `${imagePrefix}${imageSrc}`;
     const genderDecimalValue = pokemonInfo.genderDecimalValue;
 
+    // Chance of being male and female.
+    let malePercentage;
+    let femalePercentage;
+
+    if (genderDecimalValue === 255) {
+      malePercentage = 0;
+      femalePercentage = 0;
+    } else {
+      const totalPossibleValues = 254;
+      const femaleValue = genderDecimalValue;
+      const maleValue = totalPossibleValues - genderDecimalValue;
+
+      malePercentage = Math.round((maleValue / totalPossibleValues) * 100);
+      femalePercentage = Math.round((femaleValue / totalPossibleValues) * 100);
+    }
+
     const embed = new EmbedBuilder()
     .setTitle(pokemonNameCapital)
-    .setThumbnail(imageLnk);
+    .setThumbnail(imageLnk)
 
     if (ability1 === ability2) {
       embed.addFields(
@@ -104,17 +124,10 @@ module.exports = {
         { name: `**Abilties:**`, value: `${ability1}\n${ability2}`, inline: true },
         { name: `**Hidden Ability:**`, value: `${abilityH}`, inline: true },
       )
-    }
+    };
 
     embed.addFields(
-      { 
-        name: `**Base Stats:**`, 
-        value: `\`╔═══╤═══╤═══╤═══╤═══╤═══╗\`\n\`║HP\u00A0│ATK│DEF│SPA│SPD│SPE║\`\n\`╠═══╪═══╪═══╪═══╪═══╪═══╣\`\n\`║${hp}│${atk}│${def}│${spa}│${spd}│${spe}║\`\n\`╚═══╧═══╧═══╧═══╧═══╧═══╝\``
-      },
-    );
-    embed.addFields(
-      { name: `**Weight:**`, value: `${weight} kg`, inline: true },
-      { name: `**Height:**`, value: `${height} m`, inline: true },
+      { name: `**Stats:**`, value:`Total: ${baseStatsTotal}`,}
     );
 
     const typeColor = typeColors[type1];
@@ -128,9 +141,115 @@ module.exports = {
     } else {
       const type1Icon = typeIcons[type1];
       const type2Icon = typeIcons[type2];
-      embed.setDescription(`**Type:** ${type1Icon} | ${type2Icon}`);
-    }
+      embed.setDescription(`**Type:** ${type1Icon} \u200b ${type2Icon}`);
+    };
+
+    if (malePercentage === 0 && femalePercentage === 0) {
+      embed.setFooter({text: `Gender: Unknown`,});
+    } else if (malePercentage === 100) {
+      embed.setFooter({text: `Gender: 100% Male`,});
+    } else if (femalePercentage === 100) {
+      embed.setFooter({text: `Gender: 100% Female`,});
+    } else {
+      embed.setFooter({text: `Gender: ${malePercentage}% Male, ${femalePercentage}% Female`,});
+    };
+
+    if (visualization === 'graph') {
+    // Start chart builder below:
+
+    const hp = pokemonInfo.baseStats.hp;
+    const atk = pokemonInfo.baseStats.atk;
+    const def = pokemonInfo.baseStats.def;
+    const spa = pokemonInfo.baseStats.spa;
+    const spd = pokemonInfo.baseStats.spd;
+    const spe =pokemonInfo.baseStats.spe;
+
+    const width = 240; // Define the width of the chart
+    const height = 240; // Define the height of the chart
+    
+    const canvasRenderService = new CanvasRenderService(width, height, (ChartJS) => {});
+    
+    // Define configuration for the chart
+    const configuration = {
+      type: 'radar',
+      data: {
+        labels: [`Hp ${hp}`, `Atk\n${atk}`, `${def}\nDef`, `${spe} Spe`, `${spd}\nSpDef`, `SpAtk\n${spa}`],
+          datasets: [{
+              data: [
+                hp,
+                atk,
+                def,
+                spe,
+                spd,
+                spa
+              ],
+              backgroundColor: 'rgba(152,187,219,100)',
+              borderColor: 'rgba(152,187,219,255)',
+              borderWidth: 2.0,
+              pointRadius: 0,
+          }]
+      },
+      options: {
+        scale: {
+          ticks: {
+            display: false,
+            beginAtZero: true,
+            max: 260,
+            stepSize: 260
+          },
+          angleLines: {
+            diplay: true,
+            color: 'rgba(102,121,207,255)'
+          },
+          gridLines: {
+            display: true,
+            color: 'rgba(102,121,207,255)',
+          },
+          pointLabels: {
+            display: true,
+            padding: 15,
+            fontColor: 'rgba(255, 255, 255, 255)', // Add this line to set the font color
+            fontSize: 11,
+            fontStyle: 'bold',
+          }
+        },
+        layout: {
+          padding: {
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 15
+          }
+        },
+        legend: {
+          display: false  // Turn off the legend
+        },
+      }
+    };
+
+    // Render the chart to an image
+    const image = await canvasRenderService.renderToBuffer(configuration);
+
+    const attachment = new AttachmentBuilder(image, { name: 'chart.png' });
+
+    embed.setImage('attachment://chart.png');
+
+    interaction.reply({ embeds: [embed], files: [attachment] });
+    } else {
+
+      const hp = String(pokemonInfo.baseStats.hp).padEnd(3, ' ');
+      const atk = String(pokemonInfo.baseStats.atk).padEnd(3, ' ');
+      const def = String(pokemonInfo.baseStats.def).padEnd(3, ' ');
+      const spa = String(pokemonInfo.baseStats.spa).padEnd(3, ' ');
+      const spd = String(pokemonInfo.baseStats.spd).padEnd(3, ' ');
+      const spe = String(pokemonInfo.baseStats.spe).padEnd(3, ' '); 
+
+      //Handle non-graph instances of the code as table.
+      embed.addFields(
+        { name: `**Base Stats:**`, value: `\`╔═══╤═══╤═══╤═══╤═══╤═══╗\`\n\`║HP\u00A0│ATK│DEF│SPA│SPD│SPE║\`\n\`╠═══╪═══╪═══╪═══╪═══╪═══╣\`\n\`║${hp}│${atk}│${def}│${spa}│${spd}│${spe}║\`\n\`╚═══╧═══╧═══╧═══╧═══╧═══╝\``},
+      );
 
       interaction.reply({ embeds: [embed] });
     }
+  }
 };
