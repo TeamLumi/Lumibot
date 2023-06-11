@@ -1,24 +1,21 @@
-const {POKEMON_NAME_MAP} = require('../../../dex/name');
-const {findClosestString} = require('../../../dex/levenshtein');
-const POKEMON_NAME_LIST = Object.values(POKEMON_NAME_MAP);
+const Fuse = require('fuse.js');
 
-module.exports = {
-	name: "pokedex",
+function findClosestString(arr, inputvalue, returnLimit = 5) {
+  const options = {
+    keys: ['name'],
+    includeScore: true,
+    threshold: 0.3, // Adjust this threshold value to control the matching sensitivity. 0.3 seems to be a reasonable default.
+  };
 
-	async execute(interaction) {
-		// Preparation for the autocomplete request.
+  const fuse = new Fuse(arr, options);
+  const results = fuse.search(inputvalue);
 
-		const focusedValue = interaction.options.getFocused().toLowerCase();
+  const closestOnes = [];
+  for (let i = 0; i < Math.min(returnLimit, results.length); i++) {
+    closestOnes.push(results[i].item);
+  }
 
-		//We don't want empty values reaching the autocomplete code.
-		if(!focusedValue.trim()) return;
+  return closestOnes;
+}
 
-		//Find the closest name to the input by Levenshtein Distance https://en.wikipedia.org/wiki/Levenshtein_distance
-		const closestNames = findClosestString(POKEMON_NAME_LIST, focusedValue || "", 5);
-
-		// Respond to the request here.
-		await interaction.respond(
-			closestNames.map((choice) => ({ name: choice, value: choice }))
-		);
-	},
-};
+module.exports = { findClosestString };
