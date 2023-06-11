@@ -1,21 +1,31 @@
-const Fuse = require('fuse.js');
+const { POKEMON_NAME_MAP } = require('../../../dex/name');
+const { findClosestString } = require('../../../dex/fuzzy');
+const POKEMON_NAME_LIST = Object.values(POKEMON_NAME_MAP);
 
-function findClosestString(arr, inputvalue, returnLimit = 5) {
-  const options = {
-    keys: ['name'],
-    includeScore: true,
-    threshold: 0.3, // Adjust this threshold value to control the matching sensitivity. 0.3 seems to be a reasonable default.
-  };
+module.exports = {
+  name: "pokedex",
 
-  const fuse = new Fuse(arr, options);
-  const results = fuse.search(inputvalue);
+  async execute(interaction) {
+    const focusedValue = interaction.options.getFocused().toLowerCase();
 
-  const closestOnes = [];
-  for (let i = 0; i < Math.min(returnLimit, results.length); i++) {
-    closestOnes.push(results[i].item);
-  }
+    // Fuzzy search returns nothing when the input is empty. So we just send some default results.
+    if (!focusedValue.trim()) {
+      const defaultResults = ["Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon"];
 
-  return closestOnes;
-}
+      // Respond with the default results.
+      await interaction.respond(
+        defaultResults.map((choice) => ({ name: choice, value: choice }))
+      );
 
-module.exports = { findClosestString };
+      return; // Exit the function after sending the default results.
+    }
+
+    // Runs a fuzzy search on the POKEMON_NAME_LIST.
+    const closestNames = findClosestString(POKEMON_NAME_LIST, focusedValue || "", 5);
+
+    // Respond with the fuzzy search results.
+    await interaction.respond(
+      closestNames.map((choice) => ({ name: choice, value: choice }))
+    );
+  },
+};
