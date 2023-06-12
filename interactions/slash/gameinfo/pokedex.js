@@ -1,5 +1,5 @@
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { getPokemonMonsnoFromName } = require('../../../dex/name.js');
+const { getPokemonIdFromName } = require('../../../dex/name.js');
 const { getPokemonInfo } = require('../../../dex/index.js');
 
 // Array for pokemon types to set colours.
@@ -63,7 +63,7 @@ module.exports = {
     const pokemonNameCapital = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
 
     // Then we convert the name to the Pokemon's monnsNo which we use to get further information.
-    const monsNo = getPokemonMonsnoFromName(pokemonNameCapital);
+    const monsNo = getPokemonIdFromName(pokemonNameCapital);
     const pokemonInfo = getPokemonInfo(monsNo);
 
     // We log the pokemon's data to individual constants to make it easier to use the EmbedBuilder.

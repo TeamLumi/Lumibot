@@ -31,7 +31,7 @@ function getFormName(id = 0) {
 }
 
 function getPokemonName(pokemonId = 0) {
-  return POKEMON_NAME_MAP[pokemonId];
+  return POKEMON_NAME_LIST[pokemonId];
 }
 
 function getPokemonIdFromName(name = 'Egg') {
