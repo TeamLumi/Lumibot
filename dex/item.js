@@ -1,4 +1,4 @@
-const { itemNames, PersonalTable, itemInfo } = require('../../Lumibot/__gamedata');
+const { itemNames, PersonalTable, itemInfo } = require('../../lumibot/__gamedata');
 
 function getItemIdFromItemName(itemName) {
   if (!itemName) throw Error(`Bad item name: ${itemName}`);
@@ -27,5 +27,4 @@ function getItemDescription(itemId = 0) {
   return result
 }
 
-console.log(getItemDescription(1))
 module.exports = { getItemIdFromItemName, getItemString, getPokemonHeldItems };
