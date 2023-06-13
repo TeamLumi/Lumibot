@@ -24,6 +24,7 @@ const typeName = require('./english_ss_typename.json');
 const moveNames = require('./english_ss_wazaname.json');
 const moveInfo = require('./english_ss_wazainfo.json');
 const itemNames = require('./english_ss_itemname.json');
+const itemInfo = require('./english_ss_iteminfo.json');
 
 // Custom files
 const moveEnum = require('./moveEnum.json');
@@ -55,4 +56,5 @@ module.exports = {
   smogonMoves,
   trainerInfo,
   TrainerTable,
+  itemInfo
 };
