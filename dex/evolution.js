@@ -1,4 +1,6 @@
-const { EvolveTable, formPokemonNames  } = require('../../Lumibot/__gamedata');
+const { EvolveTable, formPokemonNames  } = require('../../lumibot/__gamedata');
+const { getPokemonIdFromMonsNoAndForm } = require('./functions');
+const { getPokemonName } = require('./name');
 
 const None = 0,
   Item = 1,
