@@ -66,10 +66,10 @@ function getPokemonMonsnoFromName(pokemonName) {
 function getPokemonMonsNoAndFormNoFromPokemonId(pokemonId = 0) {
   const {monsno} = PersonalTable.Personal[pokemonId];
   const formno =  FORM_MAP[monsno].indexOf(pokemonId);
-  return {
+  return [
     monsno,
     formno
-  }
+  ];
 }
 
 function getPokemonNames(to, from = 0) {
@@ -86,10 +86,10 @@ module.exports = {
   getFormName,
   getFormNameOfProblematicPokemon,
   getPokemonName,
+  getPokemonMonsNoAndFormNoFromPokemonId,
   getPokemonIdFromName,
   getPokemonNames,
   getPokemonFormId,
   createPokemonMap,
-  getPokemonMonsNoAndFormNoFromPokemonId,
   POKEMON_NAME_MAP,
 };

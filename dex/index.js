@@ -27,6 +27,7 @@ const {
   getFormName,
   getFormNameOfProblematicPokemon,
   getPokemonName,
+  getPokemonMonsNoAndFormNoFromPokemonId,
   getPokemonIdFromName,
   getPokemonNames,
   getPokemonFormId
@@ -55,12 +56,14 @@ const POKEMON_MOVE_LEVEL_TYPE = {
   TM: 'tm'
 };
 
-function getPokemonInfo(monsno = 0) {
-  const p = PersonalTable.Personal[monsno];
+function getPokemonInfo(monsId = 0) {
+  const p = PersonalTable.Personal[monsId];
+  const [ monsNo, formNo ] = getPokemonMonsNoAndFormNoFromPokemonId(monsId);
   return {
-    monsno: monsno,
-    name: getPokemonName(monsno),
-    ability1: getAbilityString(p.tokusei1),
+    formno: formNo,
+    monsno: monsNo,
+    name: getPokemonName(monsId),
+    ability1: getAbilityString(p.tokusei1), 
     ability2: getAbilityString(p.tokusei2),
     abilityH: getAbilityString(p.tokusei3),
     tmLearnset: getTechMachineLearnset(p.id),
@@ -74,12 +77,12 @@ function getPokemonInfo(monsno = 0) {
       spe: p.basic_agi
     },
     baseStatsTotal: p.basic_hp + p.basic_atk + p.basic_def + p.basic_spatk + p.basic_spdef + p.basic_agi,
-    weight: getWeight(monsno),
-    height: getHeight(monsno),
-    grassKnotPower: getGrassKnotPower(getWeight(monsno)),
+    weight: getWeight(monsId),
+    height: getHeight(monsId),
+    grassKnotPower: getGrassKnotPower(getWeight(monsId)),
     type1: getTypeName(p.type1),
     type2: getTypeName(p.type2),
-    imageSrc: getImage(monsno),
+    imageSrc: getImage(monsNo, formNo),
     genderDecimalValue: p.sex
   };
 }

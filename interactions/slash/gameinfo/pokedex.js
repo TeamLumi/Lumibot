@@ -70,17 +70,19 @@ module.exports = {
 
     // Here we grab the Pokemon name from the interaction and convert it to use proper capitalisation.
     const pokemonName = interaction.options.getString('pokemon').toLowerCase();
-    const pokemonNameCapital = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
+    const pokemonNameCapital = pokemonName.replace(/(?:^|\s)\S/g, (char) => char.toUpperCase());
 
     // Then we convert the name to the Pokemon's monnsNo which we use to get further information.
-    const monsNo = getPokemonIdFromName(pokemonNameCapital);
-    const pokemonInfo = getPokemonInfo(monsNo);
+    const monsID = getPokemonIdFromName(pokemonNameCapital);
+
+    const pokemonInfo = getPokemonInfo(monsID);
 
     // Get the visualisation option.
     const visualization = interaction.options.getString('visualization');
 
     // We log the pokemon's data to individual constants to make it easier to use the EmbedBuilder.
 
+    const name = pokemonInfo.name;
     const ability1 = pokemonInfo.ability1;
     const ability2 = pokemonInfo.ability2;
     const abilityH = pokemonInfo.abilityH;
@@ -112,7 +114,7 @@ module.exports = {
     }
 
     const embed = new EmbedBuilder()
-    .setTitle(pokemonNameCapital)
+    .setTitle(name)
     .setThumbnail(imageLnk)
 
     if (ability1 === ability2) {
