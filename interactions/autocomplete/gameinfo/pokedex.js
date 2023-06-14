@@ -1,6 +1,6 @@
-const { POKEMON_NAME_MAP } = require('../../../dex/name');
+const { DISPLAY_POKEMON_NAME_MAP } = require('../../../dex/name');
 const { findClosestString } = require('../../../dex/fuzzy');
-const POKEMON_NAME_LIST = Object.values(POKEMON_NAME_MAP);
+const POKEMON_NAME_LIST = Object.values(DISPLAY_POKEMON_NAME_MAP);
 
 module.exports = {
   name: "pokedex",

@@ -1,6 +1,6 @@
 
 const { AttachmentBuilder, EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { getPokemonIdFromName } = require('../../../dex/name.js');
+const { getPokemonIdFromDisplayName } = require('../../../dex/name.js');
 const { getPokemonInfo } = require('../../../dex/index.js');
 const { CanvasRenderService } = require('chartjs-node-canvas');
 
@@ -73,7 +73,7 @@ module.exports = {
     const pokemonNameCapital = pokemonName.replace(/(?:^|\s)\S/g, (char) => char.toUpperCase());
 
     // Then we convert the name to the Pokemon's monnsNo which we use to get further information.
-    const monsID = getPokemonIdFromName(pokemonNameCapital);
+    const monsID = getPokemonIdFromDisplayName(pokemonNameCapital);
 
     const pokemonInfo = getPokemonInfo(monsID);
 

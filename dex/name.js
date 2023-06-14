@@ -3,6 +3,8 @@ const { FORM_MAP } = require('./functions');
 
 const POKEMON_NAME_MAP = PersonalTable.Personal.reduce(createPokemonMap, {});
 const POKEMON_NAME_LIST = Object.values(POKEMON_NAME_MAP);
+const DISPLAY_POKEMON_NAME_MAP = PersonalTable.Personal.reduce(createPokemonDisplayNameMap, {});
+
 function createPokemonMap(pokemonNameMap, currentPokemon) {
   try {
     const { id } = currentPokemon;
@@ -16,6 +18,33 @@ function createPokemonMap(pokemonNameMap, currentPokemon) {
     const alternateFormName = formPokemonNames.labelDataArray[id]?.wordDataArray[0]?.str;
     if (typeof alternateFormName === 'string' && alternateFormName.length > 0) {
       pokemonNameMap[id] = alternateFormName;
+      return pokemonNameMap;
+    }
+
+    pokemonNameMap[id] = getFormNameOfProblematicPokemon(id);
+    return pokemonNameMap;
+  } catch (e) {
+    throw Error(`${currentPokemon.id} - ${e}`);
+  }
+}
+
+function createPokemonDisplayNameMap(pokemonNameMap, currentPokemon) {
+  try {
+    const { id } = currentPokemon;
+
+    const baseFormName = basePokemonNames.labelDataArray[id]?.wordDataArray[0]?.str;
+    if (typeof baseFormName === 'string' && baseFormName.length > 0) {
+      pokemonNameMap[id] = baseFormName;
+      return pokemonNameMap;
+    }
+
+    const alternateFormName = formPokemonNames.labelDataArray[id]?.wordDataArray[0]?.str;
+    if (typeof alternateFormName === 'string' && alternateFormName.length > 0) {
+      const basePokemonId = FORM_MAP[PersonalTable.Personal[id].monsno][0];
+      const baseName = basePokemonNames.labelDataArray[basePokemonId]?.wordDataArray[0]?.str;
+
+      const displayName = `${baseName} - ${alternateFormName}`;
+      pokemonNameMap[id] = displayName;
       return pokemonNameMap;
     }
 
@@ -81,6 +110,15 @@ function getPokemonFormId(monsno = 0, id) {
   return FORM_MAP[monsno]?.findIndex((e) => e === id) ?? -1;
 }
 
+function getPokemonDisplayName(pokemonId = 0) {
+  return DISPLAY_POKEMON_NAME_MAP[pokemonId];
+}
+
+function getPokemonIdFromDisplayName(displayName) {
+  const id = Object.values(DISPLAY_POKEMON_NAME_MAP).findIndex((e) => e === displayName);
+  return id === -1 ? 0 : id;
+}
+
 module.exports = {
   getPokemonMonsnoFromName,
   getFormName,
@@ -92,4 +130,7 @@ module.exports = {
   getPokemonFormId,
   createPokemonMap,
   POKEMON_NAME_MAP,
+  DISPLAY_POKEMON_NAME_MAP,
+  getPokemonDisplayName,
+  getPokemonIdFromDisplayName
 };

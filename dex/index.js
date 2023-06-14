@@ -30,7 +30,8 @@ const {
   getPokemonMonsNoAndFormNoFromPokemonId,
   getPokemonIdFromName,
   getPokemonNames,
-  getPokemonFormId
+  getPokemonFormId,
+  getPokemonDisplayName
 } = require('./name');
 
 const { getNatureId, getNatureName } = require('./nature');
@@ -62,7 +63,7 @@ function getPokemonInfo(monsId = 0) {
   return {
     formno: formNo,
     monsno: monsNo,
-    name: getPokemonName(monsId),
+    name: getPokemonDisplayName(monsId),
     ability1: getAbilityString(p.tokusei1), 
     ability2: getAbilityString(p.tokusei2),
     abilityH: getAbilityString(p.tokusei3),
