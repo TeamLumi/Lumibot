@@ -68,36 +68,70 @@ module.exports = {
 
   async execute(interaction) {
 
-    // Here we grab the Pokemon name from the interaction and convert it to use proper capitalisation.
-    const pokemonName = interaction.options.getString('pokemon').toLowerCase();
-    const pokemonNameCapital = pokemonName.replace(/(?:^|\s|-)\S/g, (char) => char.toUpperCase());
-
-    // Then we convert the name to the Pokemon's monnsNo which we use to get further information.
-    const monsID = getPokemonIdFromDisplayName(pokemonNameCapital);
-
+    // Here we grab the Pokemon name then we convert it to the Pokemon's ID which we use to get further information.
+    const pokemonName = interaction.options.getString('pokemon');
+    const monsID = getPokemonIdFromDisplayName(pokemonName);
     const pokemonInfo = getPokemonInfo(monsID);
 
-    // Get the visualisation option.
+    // Get the visualisation option for presenting the Pokemon's data.
     const visualization = interaction.options.getString('visualization');
 
-    // We log the pokemon's data to individual constants to make it easier to use the EmbedBuilder.
+    // We initialise all of the Pokemon's data as individual variables to be filled subsiquently.
+    let name, ability1, ability2, abilityH, tmLearnset, baseStatsTotal, pWeight, pHeight, type1, type2, imageSrc, imageLnk, genderDecimalValue;
 
-    const name = pokemonInfo.name;
-    const ability1 = pokemonInfo.ability1;
-    const ability2 = pokemonInfo.ability2;
-    const abilityH = pokemonInfo.abilityH;
-    const tmLearnset = pokemonInfo.tmLearnset;
-    const baseStatsTotal = pokemonInfo.baseStatsTotal;
-    const pWeight = pokemonInfo.weight;
-    const pHeight = pokemonInfo.height;
-    const type1 = pokemonInfo.type1;
-    const type2 = pokemonInfo.type2;
-    const imageSrc = pokemonInfo.imageSrc;
-    const imagePrefix = `https://luminescent.team`;
-    const imageLnk = `${imagePrefix}${imageSrc}`;
-    const genderDecimalValue = pokemonInfo.genderDecimalValue;
+    /* Here we default to the string conversion method of getting Pokemon info if you manage to avoid
+       the autocomplete. Unless you allow the autocomplete to choose the Pokemon name correctly. */
+    if (pokemonInfo.name === 'Egg') {
+      const pokemonBackupName = interaction.options.getString('pokemon').toLowerCase();
+      const pokemonBackupNameCapital = pokemonBackupName.replace(/(?:^|\s|-)\S/g, (char) => char.toUpperCase());
+      const monsBackupID = getPokemonIdFromDisplayName(pokemonBackupNameCapital);
+      const pokemonBackupInfo = getPokemonInfo(monsBackupID);
 
-    // Chance of being male and female.
+      name = pokemonBackupInfo.name;
+      ability1 = pokemonBackupInfo.ability1;
+      ability2 = pokemonBackupInfo.ability2;
+      abilityH = pokemonBackupInfo.abilityH;
+      tmLearnset = pokemonBackupInfo.tmLearnset;
+      baseStatsTotal = pokemonBackupInfo.baseStatsTotal;
+      pWeight = pokemonBackupInfo.weight;
+      pHeight = pokemonBackupInfo.height;
+      type1 = pokemonBackupInfo.type1;
+      type2 = pokemonBackupInfo.type2;
+      imageSrc = pokemonBackupInfo.imageSrc;
+      imagePrefix = `https://luminescent.team`;
+      imageLnk = `${imagePrefix}${imageSrc}`;
+      genderDecimalValue = pokemonBackupInfo.genderDecimalValue;
+    } else {
+      name = pokemonInfo.name;
+      ability1 = pokemonInfo.ability1;
+      ability2 = pokemonInfo.ability2;
+      abilityH = pokemonInfo.abilityH;
+      tmLearnset = pokemonInfo.tmLearnset;
+      baseStatsTotal = pokemonInfo.baseStatsTotal;
+      pWeight = pokemonInfo.weight;
+      pHeight = pokemonInfo.height;
+      type1 = pokemonInfo.type1;
+      type2 = pokemonInfo.type2;
+      imageSrc = pokemonInfo.imageSrc;
+      imagePrefix = `https://luminescent.team`;
+      imageLnk = `${imagePrefix}${imageSrc}`;
+      genderDecimalValue = pokemonInfo.genderDecimalValue;
+    }
+
+    // Ignore pokemon that are still eggs after  error catching.
+    if (name === 'Egg') {
+      const attachment = new AttachmentBuilder('./assets/shaymin_paradox_error.png');
+
+      const embed = new EmbedBuilder()
+      .setTitle(`Oops!`)
+      .setDescription(`I couldn't find that in the Pokédex. \nPerhaps there are still Pokémon yet \u00A0 \u00A0\nto be discovered!`)
+      .setThumbnail('attachment://shaymin_paradox_error.png')
+      .setColor(0x2664EA);
+
+      return interaction.reply({ embeds: [embed], files: [attachment] });
+    }
+
+    // Convert the genderDecimalValue to a percentage value for the chance of being Male/Female.
     let malePercentage;
     let femalePercentage;
 
@@ -113,6 +147,7 @@ module.exports = {
       femalePercentage = Math.round((femaleValue / totalPossibleValues) * 100);
     }
 
+    // Build the Embed.
     const embed = new EmbedBuilder()
     .setTitle(name)
     .setThumbnail(imageLnk)

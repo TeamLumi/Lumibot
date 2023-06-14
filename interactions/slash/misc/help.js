@@ -1,4 +1,4 @@
-const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
+const { AttachmentBuilder, EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
 	// The data needed to register slash commands to Discord.
@@ -23,9 +23,9 @@ module.exports = {
 
 			// If a single command has been asked for, send only this command's help.
 
-			helpEmbed.setTitle(`Help for \`${name}\` command`);
-
 			if (interaction.client.slashCommands.has(name)) {
+				helpEmbed.setTitle(`Help for \`${name}\` command`);
+
 				const command = interaction.client.slashCommands.get(name);
 
 				if (command.data.description) {
@@ -49,9 +49,15 @@ module.exports = {
 				}
 
 			} else {
+				const attachment = new AttachmentBuilder('./assets/shaymin_paradox_error.png');
+
 				helpEmbed
-					.setDescription(`No slash command with the name \`${name}\` found.`)
-					.setColor("Red");
+					.setTitle(`Oops!`)
+					.setDescription(`I couldn't find a command by that name\nin our system, so I can't help you with it.\nSorry!`)
+					.setThumbnail('attachment://shaymin_paradox_error.png')
+					.setColor(0x2664EA);
+
+					return interaction.reply({ embeds: [helpEmbed], files: [attachment] });
 			}
 		} else {
 			// Give a list of all the commands

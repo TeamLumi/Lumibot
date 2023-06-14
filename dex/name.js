@@ -43,7 +43,13 @@ function createPokemonDisplayNameMap(pokemonNameMap, currentPokemon) {
       const basePokemonId = FORM_MAP[PersonalTable.Personal[id].monsno][0];
       const baseName = basePokemonNames.labelDataArray[basePokemonId]?.wordDataArray[0]?.str;
 
-      const displayName = `${baseName} - ${alternateFormName}`;
+      let displayName = `${baseName} - ${alternateFormName}`;
+
+      // Check if the alternate form name includes the base name
+      if (alternateFormName.includes(baseName)) {
+        displayName = alternateFormName;
+      }
+
       pokemonNameMap[id] = displayName;
       return pokemonNameMap;
     }
