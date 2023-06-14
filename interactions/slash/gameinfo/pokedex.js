@@ -1,6 +1,6 @@
 
 const { AttachmentBuilder, EmbedBuilder, SlashCommandBuilder } = require('discord.js');
-const { getPokemonIdFromDisplayName } = require('../../../dex/name.js');
+const { getPokemonIdFromDisplayName } = require('../../../dex/index.js');
 const { getPokemonInfo } = require('../../../dex/index.js');
 const { CanvasRenderService } = require('chartjs-node-canvas');
 
@@ -70,7 +70,7 @@ module.exports = {
 
     // Here we grab the Pokemon name from the interaction and convert it to use proper capitalisation.
     const pokemonName = interaction.options.getString('pokemon').toLowerCase();
-    const pokemonNameCapital = pokemonName.replace(/(?:^|\s)\S/g, (char) => char.toUpperCase());
+    const pokemonNameCapital = pokemonName.replace(/(?:^|\s|-)\S/g, (char) => char.toUpperCase());
 
     // Then we convert the name to the Pokemon's monnsNo which we use to get further information.
     const monsID = getPokemonIdFromDisplayName(pokemonNameCapital);

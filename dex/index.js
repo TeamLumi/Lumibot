@@ -29,6 +29,7 @@ const {
   getPokemonName,
   getPokemonMonsNoAndFormNoFromPokemonId,
   getPokemonIdFromName,
+  getPokemonIdFromDisplayName,
   getPokemonNames,
   getPokemonFormId,
   getPokemonDisplayName
@@ -118,6 +119,7 @@ module.exports = {
   getFormNameOfProblematicPokemon,
   getPokemonName,
   getPokemonIdFromName,
+  getPokemonIdFromDisplayName,
   getPokemonNames,
   getNatureId,
   getNatureName,
