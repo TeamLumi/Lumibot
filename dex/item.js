@@ -1,4 +1,4 @@
-const { itemNames, PersonalTable } = require('../../lumibot/__gamedata');
+const { itemNames, PersonalTable, itemInfo } = require('../../lumibot/__gamedata');
 
 function getItemIdFromItemName(itemName) {
   if (!itemName) throw Error(`Bad item name: ${itemName}`);
@@ -16,6 +16,15 @@ function getItemString(itemId = 0) {
 function getPokemonHeldItems(pokemonId = 0) {
   const p = PersonalTable.Personal[pokemonId];
   return [p.item1, p.item2, p.item3];
+}
+
+function getItemDescription(itemId = 0) {
+  const wordDataArray = itemInfo.labelDataArray[itemId].wordDataArray
+  result = ""
+  for (let i = 0; i < wordDataArray.length; i++) {
+    result += wordDataArray[i].str + " ";
+  }
+  return result
 }
 
 module.exports = { getItemIdFromItemName, getItemString, getPokemonHeldItems };
