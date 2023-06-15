@@ -1,5 +1,8 @@
 const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 
+/**
+ * @type {import('../../../typings').SlashInteractionCommand}
+ */
 module.exports = {
 	// The data needed to register slash commands to Discord.
 

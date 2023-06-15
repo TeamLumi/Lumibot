@@ -1,3 +1,6 @@
+/**
+ * @type {import('../../../typings').ContextInteractionCommand}
+ */
 module.exports = {
 	data: {
 		name: "sample",

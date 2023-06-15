@@ -51,6 +51,9 @@ const typeIcons = {
 	Normal: "<:t_normal:1117062635817554010>",
 };
 
+/**
+ * @type {import('../../../typings').SlashInteractionCommand}
+ */
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("pokedex")

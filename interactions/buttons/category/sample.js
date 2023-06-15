@@ -1,3 +1,6 @@
+/**
+ * @type {import('../../../typings').ButtonInteractionCommand}
+ */
 module.exports = {
 	id: "sample",
 

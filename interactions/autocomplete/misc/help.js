@@ -1,3 +1,6 @@
+/**
+ * @type {import("../../../typings").AutocompleteInteraction}
+ */
 module.exports = {
 	name: "help",
 

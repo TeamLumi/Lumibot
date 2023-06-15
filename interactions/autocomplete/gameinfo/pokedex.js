@@ -2,6 +2,9 @@ const { DISPLAY_POKEMON_NAME_MAP } = require("../../../dex/name");
 const { findClosestString } = require("../../../dex/fuzzy");
 const POKEMON_NAME_LIST = Object.values(DISPLAY_POKEMON_NAME_MAP);
 
+/**
+ * @type {import("../../../typings").AutocompleteInteraction}
+ */
 module.exports = {
 	name: "pokedex",
 
