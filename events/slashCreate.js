@@ -1,6 +1,10 @@
 module.exports = {
 	name: "interactionCreate",
 
+	/**
+	 * @description Executes when an interaction is created and handle it.
+	 * @param {import('discord.js').CommandInteraction & { client: import('../typings').Client }} interaction The interaction which was created
+	 */
 	async execute(interaction) {
 		// Deconstructed client from interaction object.
 		const { client } = interaction;

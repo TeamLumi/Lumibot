@@ -3,6 +3,10 @@ const { InteractionType } = require("discord-api-types/v10");
 module.exports = {
 	name: "interactionCreate",
 
+	/**
+	 * @description Executes when an interaction is created and handle it.
+	 * @param {import('discord.js').Interaction & { client: import('../typings').Client }} interaction The interaction which was created
+	 */
 	async execute(interaction) {
 		// Deconstructed client from interaction object.
 		const { client } = interaction;
