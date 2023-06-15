@@ -1,8 +1,6 @@
 const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
-	// The data needed to register slash commands to Discord.
-
 	data: new SlashCommandBuilder()
 		.setName("amicute")
 		.setDescription("Tests whether or not you are cute."),

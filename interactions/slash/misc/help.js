@@ -5,8 +5,6 @@ const {
 } = require("discord.js");
 
 module.exports = {
-	// The data needed to register slash commands to Discord.
-
 	data: new SlashCommandBuilder()
 		.setName("help")
 		.setDescription(
@@ -39,6 +37,7 @@ module.exports = {
 					helpEmbed.setDescription(
 						command.data.description + "\n\n**Parameters:**",
 					);
+
 					// Loop through each parameter of the command and add it to the embed.
 					if (command.data.options && command.data.options.length > 0) {
 						for (const option of command.data.options) {
@@ -81,9 +80,6 @@ module.exports = {
 					"`",
 			);
 		}
-
-		// Replies to the interaction!
-
 		await interaction.reply({
 			embeds: [helpEmbed],
 		});

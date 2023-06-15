@@ -18,7 +18,7 @@ module.exports = {
 		const { client, guild, channel, content, author } = message;
 
 		// Checks if the bot is mentioned in the message all alone and triggers onMention trigger.
-		// You can change the behavior as per your liking at ./messages/onMention.js
+		// We can change the behavior as per your liking at ./messages/onMention.js
 
 		if (
 			message.content == `<@${client.user.id}>` ||
@@ -29,43 +29,31 @@ module.exports = {
 		}
 
 		const checkPrefix = prefix.toLowerCase();
-
 		const prefixRegex = new RegExp(
 			`^(<@!?${client.user.id}>|${escapeRegex(checkPrefix)})\\s*`,
 		);
 
-		// Checks if message content in lower case starts with bot's mention.
-
 		if (!prefixRegex.test(content.toLowerCase())) return;
-
 		const [matchedPrefix] = content.toLowerCase().match(prefixRegex);
-
 		const args = content.slice(matchedPrefix.length).trim().split(/ +/);
-
 		const commandName = args.shift().toLowerCase();
-
-		// Check if mesage does not starts with prefix, or message author is bot. If yes, return.
 
 		if (!message.content.startsWith(matchedPrefix) || message.author.bot)
 			return;
-
 		const command =
 			client.commands.get(commandName) ||
 			client.commands.find(
 				(cmd) => cmd.aliases && cmd.aliases.includes(commandName),
 			);
-
-		// It it's not a command, return :)
-
 		if (!command) return;
 
-		// Owner Only Property, add in your command properties if true.
+		// Owner Only Property, add in our command properties if true.
 
 		if (command.ownerOnly && message.author.id !== owner) {
 			return message.reply({ content: "This is a owner only command!" });
 		}
 
-		// Guild Only Property, add in your command properties if true.
+		// Guild Only Property, add in our command properties if true.
 
 		if (command.guildOnly && message.channel.type === ChannelType.DM) {
 			return message.reply({
@@ -73,7 +61,6 @@ module.exports = {
 			});
 		}
 
-		// Author perms property
 		// Will skip the permission check if command channel is a DM. Use guildOnly for possible error prone commands!
 
 		if (command.permissions && message.channel.type !== ChannelType.DM) {
@@ -82,8 +69,6 @@ module.exports = {
 				return message.reply({ content: "You can not do this!" });
 			}
 		}
-
-		// Args missing
 
 		if (command.args && !args.length) {
 			let reply = `You didn't provide any arguments, ${message.author}!`;
@@ -94,8 +79,6 @@ module.exports = {
 
 			return message.channel.send({ content: reply });
 		}
-
-		// Cooldowns
 
 		const { cooldowns } = client;
 
@@ -123,9 +106,7 @@ module.exports = {
 		timestamps.set(message.author.id, now);
 		setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
-		// Rest your creativity is below.
-
-		// execute the final command. Put everything above this.
+		// execute the final command. Put custom code above this.
 		try {
 			command.execute(message, args);
 		} catch (error) {

@@ -78,11 +78,8 @@ module.exports = {
 		const pokemonName = interaction.options.getString("pokemon");
 		const monsID = getPokemonIdFromDisplayName(pokemonName);
 		const pokemonInfo = getPokemonInfo(monsID);
-
-		// Get the visualisation option for presenting the Pokemon's data.
 		const visualization = interaction.options.getString("visualization");
 
-		// We initialise all of the Pokemon's data as individual variables to be filled subsiquently.
 		let name,
 			ability1,
 			ability2,
@@ -97,8 +94,7 @@ module.exports = {
 			imageLnk,
 			genderDecimalValue;
 
-		/* Here we default to the string conversion method of getting Pokemon info if you manage to avoid
-       the autocomplete. Unless you allow the autocomplete to choose the Pokemon name correctly. */
+		// Here we default to the string conversion method of getting Pokemon info if you manage to avoid the autocomplete. Else set normally.
 		if (pokemonInfo.name === "Egg") {
 			const pokemonBackupName = interaction.options
 				.getString("pokemon")
@@ -160,7 +156,7 @@ module.exports = {
 			return interaction.reply({ embeds: [embed], files: [attachment] });
 		}
 
-		// Convert the genderDecimalValue to a percentage value for the chance of being Male/Female.
+
 		let malePercentage;
 		let femalePercentage;
 
@@ -176,7 +172,6 @@ module.exports = {
 			femalePercentage = Math.round((femaleValue / totalPossibleValues) * 100);
 		}
 
-		// Build the Embed.
 		const embed = new EmbedBuilder().setTitle(name).setThumbnail(imageLnk);
 
 		if (ability1 === ability2) {
@@ -224,7 +219,6 @@ module.exports = {
 		}
 
 		if (visualization === "graph") {
-			// Start chart builder below:
 
 			const hp = pokemonInfo.baseStats.hp;
 			const atk = pokemonInfo.baseStats.atk;
@@ -283,7 +277,7 @@ module.exports = {
 						pointLabels: {
 							display: true,
 							padding: 15,
-							fontColor: "rgba(255, 255, 255, 255)", // Add this line to set the font color
+							fontColor: "rgba(255, 255, 255, 255)",
 							fontSize: 11,
 							fontStyle: "bold",
 						},
@@ -297,16 +291,12 @@ module.exports = {
 						},
 					},
 					legend: {
-						display: false, // Turn off the legend
+						display: false,
 					},
 				},
 			};
-
-			// Render the chart to an image
 			const image = await canvasRenderService.renderToBuffer(configuration);
-
 			const attachment = new AttachmentBuilder(image, { name: "chart.png" });
-
 			embed.setImage("attachment://chart.png");
 
 			interaction.reply({ embeds: [embed], files: [attachment] });
@@ -318,7 +308,6 @@ module.exports = {
 			const spd = String(pokemonInfo.baseStats.spd).padEnd(3, " ");
 			const spe = String(pokemonInfo.baseStats.spe).padEnd(3, " ");
 
-			//Handle non-graph instances of the code as table.
 			embed.addFields({
 				name: `**Base Stats:**`,
 				value: `\`╔═══╤═══╤═══╤═══╤═══╤═══╗\`\n\`║HP\u00A0│ATK│DEF│SPA│SPD│SPE║\`\n\`╠═══╪═══╪═══╪═══╪═══╪═══╣\`\n\`║${hp}│${atk}│${def}│${spa}│${spd}│${spe}║\`\n\`╚═══╧═══╧═══╧═══╧═══╧═══╝\``,

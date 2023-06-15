@@ -17,23 +17,18 @@ module.exports = {
 				"Charmander",
 				"Charmeleon",
 			];
-
-			// Respond with the default results.
 			await interaction.respond(
 				defaultResults.map((choice) => ({ name: choice, value: choice })),
 			);
-
-			return; // Exit the function after sending the default results.
+			return;
 		}
 
-		// Runs a fuzzy search on the POKEMON_NAME_LIST.
+		// Runs a fuzzy search on the POKEMON_NAME_LIST and return those results.
 		const closestNames = findClosestString(
 			POKEMON_NAME_LIST,
 			focusedValue || "",
 			5,
 		);
-
-		// Respond with the fuzzy search results.
 		await interaction.respond(
 			closestNames.map((choice) => ({ name: choice, value: choice })),
 		);

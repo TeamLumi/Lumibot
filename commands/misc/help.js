@@ -1,7 +1,4 @@
-// Deconstructing prefix from config file to use in help command
 const { prefix } = require("./../../config.json");
-
-// Deconstructing EmbedBuilder to create embeds within this command
 const { EmbedBuilder, ChannelType } = require("discord.js");
 
 module.exports = {
@@ -15,8 +12,6 @@ module.exports = {
 
 	execute(message, args) {
 		const { commands } = message.client;
-
-		// If there are no args, it means it needs whole help command.
 
 		if (!args.length) {
 			/**
@@ -38,22 +33,17 @@ module.exports = {
 					},
 				]);
 
-			// Attempts to send embed in DMs.
-
 			return message.author
 				.send({ embeds: [helpEmbed] })
 
 				.then(() => {
 					if (message.channel.type === ChannelType.DM) return;
 
-					// On validation, reply back.
-
 					message.reply({
 						content: "I've sent you a DM with all my commands!",
 					});
 				})
 				.catch((error) => {
-					// On failing, throw error.
 
 					console.error(
 						`Could not send help DM to ${message.author.tag}.\n`,
@@ -76,7 +66,6 @@ module.exports = {
 			return message.reply({ content: "That's not a valid command!" });
 		}
 
-		// Create embed
 		let commandEmbed = new EmbedBuilder()
 			.setColor("Random")
 			.setTitle("Command Help");
@@ -105,8 +94,6 @@ module.exports = {
 					inline: true,
 				},
 			]);
-
-		// Finally send the embed.
 
 		message.channel.send({ embeds: [commandEmbed] });
 	},

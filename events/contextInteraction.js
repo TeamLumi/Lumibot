@@ -2,24 +2,14 @@ module.exports = {
 	name: "interactionCreate",
 
 	execute: async (interaction) => {
-		// Deconstructed client from interaction object.
 		const { client } = interaction;
-
-		// Checks if the interaction is a context interaction (to prevent weird bugs)
-
 		if (!interaction.isContextMenuCommand()) return;
-
-		/**********************************************************************/
-
-		// Checks if the interaction target was a user
 
 		if (interaction.isUserContextMenuCommand()) {
 			const command = client.contextCommands.get(
 				"USER " + interaction.commandName,
 			);
 
-			// A try to execute the interaction.
-
 			try {
 				await command.execute(interaction);
 				return;
@@ -31,15 +21,11 @@ module.exports = {
 				});
 				return;
 			}
-		}
-		// Checks if the interaction target was a user
-		else if (interaction.isMessageContextMenuCommand()) {
+		} else if (interaction.isMessageContextMenuCommand()) {
 			const command = client.contextCommands.get(
 				"MESSAGE " + interaction.commandName,
 			);
 
-			// A try to execute the interaction.
-
 			try {
 				await command.execute(interaction);
 				return;
@@ -51,11 +37,7 @@ module.exports = {
 				});
 				return;
 			}
-		}
-
-		// Practically not possible, but we are still caching the bug.
-		// Possible Fix is a restart!
-		else {
+		} else {
 			return console.log(
 				"Something weird happening in context menu. Received a context menu of unknown type.",
 			);

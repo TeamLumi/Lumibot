@@ -1,7 +1,7 @@
 module.exports = {
 	data: {
 		name: "sample",
-		type: 2, // 2 is for user context menus
+		type: 2,
 	},
 
 	async execute(interaction) {

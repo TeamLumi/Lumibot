@@ -12,7 +12,6 @@ npm-debug.log*
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # Dependency directories
-package-lock.json
 node_modules/
 
 # dotenv environment variables file
