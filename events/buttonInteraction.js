@@ -8,7 +8,7 @@ module.exports = {
 		const { client } = interaction;
 
 		// Checks if the interaction is a button interaction (to prevent weird bugs)
-		
+
 		if (!interaction.isButton()) return;
 
 		const command = client.buttonCommands.get(interaction.customId);

@@ -31,7 +31,7 @@ module.exports = {
 		const checkPrefix = prefix.toLowerCase();
 
 		const prefixRegex = new RegExp(
-			`^(<@!?${client.user.id}>|${escapeRegex(checkPrefix)})\\s*`
+			`^(<@!?${client.user.id}>|${escapeRegex(checkPrefix)})\\s*`,
 		);
 
 		// Checks if message content in lower case starts with bot's mention.
@@ -52,7 +52,7 @@ module.exports = {
 		const command =
 			client.commands.get(commandName) ||
 			client.commands.find(
-				(cmd) => cmd.aliases && cmd.aliases.includes(commandName)
+				(cmd) => cmd.aliases && cmd.aliases.includes(commandName),
 			);
 
 		// It it's not a command, return :)
@@ -114,7 +114,7 @@ module.exports = {
 				const timeLeft = (expirationTime - now) / 1000;
 				return message.reply({
 					content: `please wait ${timeLeft.toFixed(
-						1
+						1,
 					)} more second(s) before reusing the \`${command.name}\` command.`,
 				});
 			}

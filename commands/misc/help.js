@@ -11,7 +11,7 @@ module.exports = {
 		aliases: ["commands"],
 		usage: "[command name]",
 		cooldown: 5,
-		},
+	},
 
 	execute(message, args) {
 		const { commands } = message.client;
@@ -28,7 +28,7 @@ module.exports = {
 				.setColor("Random")
 				.setTitle("List of all my commands")
 				.setDescription(
-					"`" + commands.map((command) => command.name).join("`, `") + "`"
+					"`" + commands.map((command) => command.name).join("`, `") + "`",
 				)
 
 				.addFields([
@@ -57,7 +57,7 @@ module.exports = {
 
 					console.error(
 						`Could not send help DM to ${message.author.tag}.\n`,
-						error
+						error,
 					);
 
 					message.reply({ content: "It seems like I can't DM you!" });

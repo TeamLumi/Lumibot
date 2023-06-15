@@ -1,6 +1,6 @@
 module.exports = {
 	data: {
-		name: "ping"
+		name: "ping",
 	},
 
 	execute(message, args) {

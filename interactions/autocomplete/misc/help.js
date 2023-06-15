@@ -1,7 +1,7 @@
 module.exports = {
-  name: "help",
+	name: "help",
 
-    async execute(interaction) {
+	async execute(interaction) {
 		// Preparation for the autocomplete request.
 
 		const focusedValue = interaction.options.getFocused().toLowerCase();
@@ -9,19 +9,19 @@ module.exports = {
 		// Extract choices automatically from your choice array (can be dynamic too)!
 
 		const choices = interaction.client.slashCommands
-        .filter((command) => command.data && command.data.name)
-        .filter((command) => !shouldExcludeCommand(command))
-        .map((command) => command.data.name);
+			.filter((command) => command.data && command.data.name)
+			.filter((command) => !shouldExcludeCommand(command))
+			.map((command) => command.data.name);
 
 		// Filter choices according to user input.
 
 		const filtered = choices.filter((choice) =>
-			choice.startsWith(focusedValue)
+			choice.startsWith(focusedValue),
 		);
 
 		// Respond the request here.
 		await interaction.respond(
-			filtered.map((choice) => ({ name: choice, value: choice }))
+			filtered.map((choice) => ({ name: choice, value: choice })),
 		);
 
 		return;
@@ -29,5 +29,5 @@ module.exports = {
 };
 
 function shouldExcludeCommand(command) {
-    return command.data.name === "amicute";
+	return command.data.name === "amicute";
 }

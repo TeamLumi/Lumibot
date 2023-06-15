@@ -15,7 +15,7 @@ module.exports = {
 
 		if (interaction.isUserContextMenuCommand()) {
 			const command = client.contextCommands.get(
-				"USER " + interaction.commandName
+				"USER " + interaction.commandName,
 			);
 
 			// A try to execute the interaction.
@@ -35,7 +35,7 @@ module.exports = {
 		// Checks if the interaction target was a user
 		else if (interaction.isMessageContextMenuCommand()) {
 			const command = client.contextCommands.get(
-				"MESSAGE " + interaction.commandName
+				"MESSAGE " + interaction.commandName,
 			);
 
 			// A try to execute the interaction.
@@ -57,7 +57,7 @@ module.exports = {
 		// Possible Fix is a restart!
 		else {
 			return console.log(
-				"Something weird happening in context menu. Received a context menu of unknown type."
+				"Something weird happening in context menu. Received a context menu of unknown type.",
 			);
 		}
 	},
