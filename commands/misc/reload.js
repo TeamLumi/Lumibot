@@ -1,6 +1,9 @@
 // "fs" declared is used in reloading command cache of the specified command.
 const fs = require("fs");
 
+/**
+ * @type {import('../../typings').LegacyCommand}
+ */
 module.exports = {
 	data: {
 		name: "reload",

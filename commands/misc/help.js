@@ -4,6 +4,9 @@ const { prefix } = require("./../../config.json");
 // Deconstructing EmbedBuilder to create embeds within this command
 const { EmbedBuilder, ChannelType } = require("discord.js");
 
+/**
+ * @type {import('../../typings').LegacyCommand}
+ */
 module.exports = {
 	data: {
 		name: "help",
