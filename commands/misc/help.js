@@ -14,10 +14,6 @@ module.exports = {
 		const { commands } = message.client;
 
 		if (!args.length) {
-			/**
-			 * @type {EmbedBuilder}
-			 * @description Help command embed object
-			 */
 
 			let helpEmbed = new EmbedBuilder()
 				.setColor("Random")
