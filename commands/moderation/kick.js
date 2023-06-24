@@ -1,5 +1,8 @@
 const { EmbedBuilder, PermissionsBitField } = require("discord.js");
 
+/**
+ * @type {import('../../typings').LegacyCommand}
+ */
 module.exports = {
 	data: {
 		name: "kick",
