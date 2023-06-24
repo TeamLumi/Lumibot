@@ -3,6 +3,10 @@ const { InteractionType, ComponentType } = require("discord-api-types/v10");
 module.exports = {
 	name: "interactionCreate",
 
+	/**
+	 * @description Executes when an interaction is created and handle it.
+	 * @param {import('discord.js').ButtonInteraction & { client: import('../typings').Client }} interaction The interaction which was created
+	 */
 	async execute(interaction) {
 		const { client } = interaction;
 		if (!interaction.isButton()) return;

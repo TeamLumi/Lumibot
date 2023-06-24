@@ -1,5 +1,8 @@
 const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 
+/**
+ * @type {import('../../../typings').SlashInteractionCommand}
+ */
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("amicute")

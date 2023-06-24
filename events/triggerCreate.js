@@ -1,6 +1,10 @@
 module.exports = {
 	name: "messageCreate",
 
+	/**
+	 * @description Executes when a message is created and handle it.
+	 * @param {import('discord.js').Message & { client: import('../typings').Client }} message The message which was created.
+	 */
 	async execute(message) {
 		const args = message.content.split(/ +/);
 		if (message.author.bot) return;

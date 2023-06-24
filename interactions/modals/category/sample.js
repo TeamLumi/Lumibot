@@ -1,3 +1,6 @@
+/**
+ * @type {import('../../../typings').ModalInteractionCommand}
+ */
 module.exports = {
 	id: "sample",
 

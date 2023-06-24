@@ -1,5 +1,8 @@
 const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 
+/**
+ * @type {import('../../typings').TriggerCommand}
+ */
 module.exports = {
 	data: {
 		name: ["[dj]"],

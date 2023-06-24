@@ -1,5 +1,8 @@
 const fs = require("fs");
 
+/**
+ * @type {import('../../typings').LegacyCommand}
+ */
 module.exports = {
 	data: {
 		name: "reload",

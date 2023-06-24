@@ -12,6 +12,10 @@ const escapeRegex = (string) => {
 module.exports = {
 	name: "messageCreate",
 
+	/**
+	 * @description Executes when a message is created and handle it.
+	 * @param {import('discord.js').Message & { client: import('../typings').Client }} message The message which was created.
+	 */
 	async execute(message) {
 		// Declares const to be used.
 

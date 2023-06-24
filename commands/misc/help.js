@@ -1,6 +1,9 @@
 const { prefix } = require("./../../config.json");
 const { EmbedBuilder, ChannelType } = require("discord.js");
 
+/**
+ * @type {import('../../typings').LegacyCommand}
+ */
 module.exports = {
 	data: {
 		name: "help",
