@@ -1,4 +1,4 @@
-const { EvolveTable } = require("../../lumibot/__gamedata");
+const { evolutionData } = require("../../lumibot/__gamedata");
 const { getPokemonIdFromMonsNoAndForm } = require("./functions");
 const { EVOLUTION_METHOD_DETAILS } = require('./evolutionConstants');
 
@@ -9,10 +9,10 @@ function getEvolutionMethodDetail(methodId) {
 }
 
 function getEvolutionTree(pokemonId = 0, fromRoot = true) {
-  const pokemon = EvolveTable[pokemonId];
+  const pokemon = evolutionData[pokemonId];
   const startPokemonId = fromRoot ? pokemon.path[0] : pokemonId;
 
-  const evolution = EvolveTable[startPokemonId];
+  const evolution = evolutionData[startPokemonId];
 
   return {
     pokemonId: startPokemonId,
@@ -22,7 +22,7 @@ function getEvolutionTree(pokemonId = 0, fromRoot = true) {
 }
 
 function getEvolutionDetails(pokemonId) {
-  const evolutionDetails = EvolveTable[pokemonId].ar;
+  const evolutionDetails = evolutionData[pokemonId].ar;
 
   for (let i = 0; i < evolutionDetails.length; i++) {
     const evolutionData = evolutionDetails[i];
