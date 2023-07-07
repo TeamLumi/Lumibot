@@ -30,6 +30,7 @@ const itemInfo = require('./english_ss_iteminfo.json');
 const moveEnum = require('./moveEnum.json');
 const smogonMoves = require('./smogonMoves.json');
 const trainerInfo = require('./trainer_info.json');
+const evolutionData = require('./evolution.json');
 
 module.exports = {
   PersonalTable,
@@ -56,5 +57,6 @@ module.exports = {
   smogonMoves,
   trainerInfo,
   TrainerTable,
-  itemInfo
+  itemInfo,
+  evolutionData
 };
