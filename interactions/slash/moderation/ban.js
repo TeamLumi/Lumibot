@@ -10,8 +10,8 @@ const {
  */
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName("kick")
-		.setDescription("Moderator Command: Kicks a user")
+		.setName("ban")
+		.setDescription("Moderator Command: Bans a user")
 		.addStringOption((option) =>
 			option
 				.setName("user")
@@ -22,22 +22,37 @@ module.exports = {
 		.addStringOption((option) =>
 			option
 				.setName("reason")
-				.setDescription("Reason for the kick")
+				.setDescription("Reason for the ban")
 				.setRequired(false),
 		)
-		.setDefaultMemberPermissions(PermissionsBitField.Flags.KickMembers)
+		.addStringOption((option) =>
+			option
+				.setName("deletemessages")
+				.setDescription("Users messages to be deleted")
+				.setRequired(false)
+				.addChoices(
+					{ name: "None", value: "0" },
+					{ name: "Past Day", value: "1" },
+					{ name: "Past Week", value: "7" },
+				),
+		)
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.BanMembers)
 		.setDMPermission(false),
 
 	async execute(interaction) {
 		const userName = interaction.options.getString("user");
 		const providedReason = interaction.options.getString("reason");
-		const kickReason = providedReason || "No reason provided.";
+		const banReason = providedReason || "No reason provided.";
+		const deleteMessages = interaction.options.getString("deletemessages");
+		const deleteDays = deleteMessages || "0";
+
+		console.log(deleteDays);
 
 		if (
-			!interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)
+			!interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers)
 		) {
 			return interaction.reply({
-				content: `You don't have permission to kick users.`,
+				content: `You don't have permission to ban users.`,
 				ephemeral: true,
 			});
 		}
@@ -55,14 +70,14 @@ module.exports = {
 
 				if (member.id === "1115351318740095058") {
 					return interaction.reply({
-						content: `I can't kick myself!`,
+						content: `I can't ban myself!`,
 						ephemeral: true,
 					});
 				}
 
 				if (interaction.member.id === member.id) {
 					return interaction.reply({
-						content: `I can't kick you.`,
+						content: `I can't ban you.`,
 						ephemeral: true,
 					});
 				}
@@ -72,19 +87,20 @@ module.exports = {
 
 				if (userHighestRole.comparePositionTo(targetHighestRole) <= 0) {
 					return interaction.reply({
-						content: `Your permissions are less than or equal to the user you are trying to kick.`,
+						content: `Your permissions are less than or equal to the user you are trying to ban.`,
 						ephemeral: true,
 					});
 				}
 
 				try {
-					await member.kick({
-						reason: kickReason,
+					await member.ban({
+						days: deleteDays,
+						reason: banReason,
 					});
 					const embed = new EmbedBuilder()
-						.setTitle(`Member Kicked`)
+						.setTitle(`Member Banned`)
 						.setDescription(
-							`> ${member} just got kicked. For reason: ${kickReason}`,
+							`> ${member} just got banned. For reason: ${banReason}`,
 						)
 						.setColor("#00ff00")
 						.setFooter(`Requested by ${interaction.author.username}`)
@@ -94,9 +110,9 @@ module.exports = {
 						embeds: [embed],
 					});
 				} catch (error) {
-					console.error(`Failed to kick member:`, error);
+					console.error(`Failed to ban member:`, error);
 					interaction.reply({
-						content: `Failed to kick the member. I may not have permission to kick users.`,
+						content: `Failed to ban the member. I may not have permission to ban users.`,
 						ephemeral: true,
 					});
 				}

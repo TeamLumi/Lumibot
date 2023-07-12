@@ -11,7 +11,7 @@ module.exports = {
 	async execute(interaction) {
 		const embed = new EmbedBuilder().setTitle(`Shaymin:`);
 
-		if (interaction.member.roles.cache.has("999400184582774824")) {
+		if (interaction.member.id === "194583783368818688") {
 			embed.setDescription("You're very cute DJ! :)");
 		} else {
 			embed.setDescription("You are not as cute as DJ. Sorry :(");
