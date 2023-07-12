@@ -46,8 +46,6 @@ module.exports = {
 		const deleteMessages = interaction.options.getString("deletemessages");
 		const deleteDays = deleteMessages || "0";
 
-		console.log(deleteDays);
-
 		if (
 			!interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers)
 		) {
