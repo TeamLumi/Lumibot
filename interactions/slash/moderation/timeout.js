@@ -151,10 +151,12 @@ module.exports = {
 							.setTitle(`Timeout ended`)
 							.setDescription(`> ${member}'s timeout has been ended.`)
 							.setColor("#00ff00")
-							.setFooter(`Requested by ${interaction.author.username}`)
-							.setTimestamp();
+							.setFooter({
+								text: `Requested by ${interaction.member.user.username}`,
+								iconURL: interaction.member.user.displayAvatarURL(),
+							});
 
-						return interaction.channel.send({
+						return interaction.reply({
 							embeds: [embed],
 						});
 					} catch (error) {
@@ -171,13 +173,15 @@ module.exports = {
 					const embed = new EmbedBuilder()
 						.setTitle(`Member Timed Out`)
 						.setDescription(
-							`> ${member} just got Timed Out for ${prettyDuration}.\n\nFor reason: ${timeoutReason}`,
+							`> ${member} just got Timed Out for ${prettyDuration}. For reason: ${timeoutReason}`,
 						)
-						.setColor("#00ff00")
-						.setFooter(`Requested by ${interaction.author.username}`)
-						.setTimestamp();
+						.setColor("#D22B2B")
+						.setFooter({
+							text: `Requested by ${interaction.member.displayName}`,
+							iconURL: interaction.member.user.displayAvatarURL(),
+						});
 
-					interaction.channel.send({
+					interaction.reply({
 						embeds: [embed],
 					});
 				} catch (error) {

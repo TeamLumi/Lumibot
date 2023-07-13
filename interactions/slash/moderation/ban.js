@@ -117,13 +117,15 @@ module.exports = {
 					const embed = new EmbedBuilder()
 						.setTitle(`Member Banned`)
 						.setDescription(
-							`> ${member} just got banned. For reason: ${banReason}`,
+							`> ${member.user.username} just got banned. For reason: ${banReason}`,
 						)
-						.setColor("#00ff00")
-						.setFooter(`Requested by ${interaction.author.username}`)
-						.setTimestamp();
+						.setColor("#D22B2B")
+						.setFooter({
+							text: `Requested by ${interaction.member.displayName}`,
+							iconURL: interaction.member.user.displayAvatarURL(),
+						});
 
-					interaction.channel.send({
+					interaction.reply({
 						embeds: [embed],
 					});
 				} catch (error) {

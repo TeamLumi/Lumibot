@@ -103,13 +103,15 @@ module.exports = {
 					const embed = new EmbedBuilder()
 						.setTitle(`Member Kicked`)
 						.setDescription(
-							`> ${member} just got kicked. For reason: ${kickReason}`,
+							`> ${member.user.username} just got kicked. For reason: ${kickReason}`,
 						)
-						.setColor("#00ff00")
-						.setFooter(`Requested by ${interaction.author.username}`)
-						.setTimestamp();
+						.setColor("#D22B2B")
+						.setFooter({
+							text: `Requested by ${interaction.member.user.username}`,
+							iconURL: interaction.member.user.displayAvatarURL(),
+						});
 
-					interaction.channel.send({
+					interaction.reply({
 						embeds: [embed],
 					});
 				} catch (error) {
