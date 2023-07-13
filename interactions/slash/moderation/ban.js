@@ -55,6 +55,17 @@ module.exports = {
 			});
 		}
 
+		if (
+			!interaction.guild.members.me.permissions.has(
+				PermissionsBitField.Flags.BanMembers,
+			)
+		) {
+			return interaction.reply({
+				content: `I don't have permission to ban users.`,
+				ephemeral: true,
+			});
+		}
+
 		interaction.guild.members
 			.fetch({ query: userName, limit: 1 })
 			.then(async (members) => {
@@ -82,10 +93,18 @@ module.exports = {
 
 				const targetHighestRole = member.roles.highest;
 				const userHighestRole = interaction.member.roles.highest;
+				const botHighestRole = interaction.guild.members.me.roles.highest;
 
 				if (userHighestRole.comparePositionTo(targetHighestRole) <= 0) {
 					return interaction.reply({
 						content: `Your permissions are less than or equal to the user you are trying to ban.`,
+						ephemeral: true,
+					});
+				}
+
+				if (botHighestRole.comparePositionTo(targetHighestRole) <= 0) {
+					return interaction.reply({
+						content: `My permissions are less than or equal to the user you are trying to ban.`,
 						ephemeral: true,
 					});
 				}
@@ -110,7 +129,7 @@ module.exports = {
 				} catch (error) {
 					console.error(`Failed to ban member:`, error);
 					interaction.reply({
-						content: `Failed to ban the member. I may not have permission to ban users.`,
+						content: `An issue occured banning that user. Consult the logs for more info.`,
 						ephemeral: true,
 					});
 				}

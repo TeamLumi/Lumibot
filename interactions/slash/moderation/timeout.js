@@ -83,6 +83,17 @@ module.exports = {
 			});
 		}
 
+		if (
+			!interaction.guild.members.me.permissions.has(
+				PermissionsBitField.Flags.MuteMembers,
+			)
+		) {
+			return interaction.reply({
+				content: `I don't have permission to timeout users.`,
+				ephemeral: true,
+			});
+		}
+
 		if ((timeoutMS !== 0 && timeoutMS < 5000) || timeoutMS > 2.419e9) {
 			return interaction.reply({
 				content: `That's not a valid timeout duration.\n\nTimeout must be longer than 5 seconds and shorter than 28 days.`,
@@ -117,10 +128,18 @@ module.exports = {
 
 				const targetHighestRole = member.roles.highest;
 				const userHighestRole = interaction.member.roles.highest;
+				const botHighestRole = interaction.guild.members.me.roles.highest;
 
 				if (userHighestRole.comparePositionTo(targetHighestRole) <= 0) {
 					return interaction.reply({
 						content: `Your permissions are less than or equal to the user you are trying to timeout.`,
+						ephemeral: true,
+					});
+				}
+
+				if (botHighestRole.comparePositionTo(targetHighestRole) <= 0) {
+					return interaction.reply({
+						content: `My permissions are less than or equal to the user you are trying to ban.`,
 						ephemeral: true,
 					});
 				}
@@ -164,7 +183,7 @@ module.exports = {
 				} catch (error) {
 					console.error(`Failed to timeout member:`, error);
 					interaction.reply({
-						content: `Failed to timeout the member. I may not have permission to timeout users.`,
+						content: `An issue occured timing out that user. Consult the logs for more info.`,
 						ephemeral: true,
 					});
 				}

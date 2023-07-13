@@ -42,6 +42,17 @@ module.exports = {
 			});
 		}
 
+		if (
+			!interaction.guild.members.me.permissions.has(
+				PermissionsBitField.Flags.KickMembers,
+			)
+		) {
+			return interaction.reply({
+				content: `I don't have permission to kick users.`,
+				ephemeral: true,
+			});
+		}
+
 		interaction.guild.members
 			.fetch({ query: userName, limit: 1 })
 			.then(async (members) => {
@@ -69,10 +80,18 @@ module.exports = {
 
 				const targetHighestRole = member.roles.highest;
 				const userHighestRole = interaction.member.roles.highest;
+				const botHighestRole = interaction.guild.members.me.roles.highest;
 
 				if (userHighestRole.comparePositionTo(targetHighestRole) <= 0) {
 					return interaction.reply({
 						content: `Your permissions are less than or equal to the user you are trying to kick.`,
+						ephemeral: true,
+					});
+				}
+
+				if (botHighestRole.comparePositionTo(targetHighestRole) <= 0) {
+					return interaction.reply({
+						content: `My permissions are less than or equal to the user you are trying to ban.`,
 						ephemeral: true,
 					});
 				}
@@ -96,7 +115,7 @@ module.exports = {
 				} catch (error) {
 					console.error(`Failed to kick member:`, error);
 					interaction.reply({
-						content: `Failed to kick the member. I may not have permission to kick users.`,
+						content: `An issue occured kicking that user. Consult the logs for more info.`,
 						ephemeral: true,
 					});
 				}
