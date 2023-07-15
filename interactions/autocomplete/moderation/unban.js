@@ -2,7 +2,7 @@
  * @type {import("../../../typings").AutocompleteInteraction}
  */
 module.exports = {
-	name: "ban",
+	name: "unban",
 
 	async execute(interaction) {
 		const focusedValue = interaction.options.getFocused().toLowerCase();
@@ -10,13 +10,24 @@ module.exports = {
 		interaction.guild.bans
 			.fetch()
 			.then(async (bans) => {
-				// Filter the bans based on the focused value - NOT WORKING
-				const filteredBans = bans.filter((ban) =>
-					ban.user.username.toLowerCase().includes(focusedValue),
+				if (bans.size === 0) {
+					const defaultResults = ["There are no banned users."];
+					await interaction.respond(
+						defaultResults.map((choice) => ({ name: choice, value: choice })),
+					);
+					return;
+				}
+
+				let bannedUsers = bans.filter((ban) =>
+					ban.user.username.includes(focusedValue),
 				);
 
+				if (bannedUsers.length > 5) {
+					bannedUsers = bannedUsers.slice(0, 5);
+				}
+
 				await interaction.respond(
-					filteredBans.map((ban) => ({
+					bannedUsers.map((ban) => ({
 						name: ban.user.username,
 						value: ban.user.username,
 					})),
