@@ -5,12 +5,34 @@ module.exports = {
 	name: "kick",
 
 	async execute(interaction) {
-		// Will populate autocomplete with cached members. Non-cached members can still be explicitly called.
-		const guildMembers = interaction.guild.members.cache;
-		const userNames = guildMembers.map((member) => member.user.username);
+		const focusedValue = interaction.options.getFocused().toLowerCase();
 
-		await interaction.respond(
-			userNames.map((userName) => ({ name: userName, value: userName })),
-		);
+		interaction.guild.members
+			.fetch()
+			.then(async (members) => {
+				let guildUsers = members.filter(
+					(member) =>
+						member.user.username.includes(focusedValue) &&
+						member.id !== interaction.member.id &&
+						member.id !== interaction.client.user.id &&
+						interaction.member.roles.highest.comparePositionTo(
+							member.roles.highest,
+						) > 0,
+				);
+
+				if (guildUsers.size > 5) {
+					guildUsers = guildUsers.first(5);
+				}
+
+				await interaction.respond(
+					guildUsers.map((member) => ({
+						name: member.user.username,
+						value: member.user.username,
+					})),
+				);
+			})
+			.catch((error) => {
+				console.error(`Failed to fetch guild members: ${error}`);
+			});
 	},
 };
