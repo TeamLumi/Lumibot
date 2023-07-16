@@ -68,13 +68,15 @@ module.exports = {
 			client.slashCommands.delete(commandName);
 			client.slashCommands.set(newCommand.data.name, newCommand);
 
-			interaction.reply({
+			return interaction.reply({
 				content: `Command \`${newCommand.data.name}\` was reloaded!`,
+				ephemeral: true,
 			});
 		} catch (error) {
 			console.error(error);
-			interaction.reply({
-				content: `There was an error while reloading command \`${commandName}\`:\n\`${error.message}\``,
+			return interaction.reply({
+				content: `There was an error while reloading command \`${commandName}\``,
+				ephemeral: true,
 			});
 		}
 	},
