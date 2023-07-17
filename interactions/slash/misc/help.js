@@ -4,6 +4,14 @@ const {
 	SlashCommandBuilder,
 } = require("discord.js");
 
+// Calculated from https://discordapi.com/permissions.html
+const permissionName = {
+	2: "Kick Members",
+	4: "Ban Members",
+	8: "Moderator",
+	4194304: "Mute Members",
+};
+
 /**
  * @type {import('../../../typings').SlashInteractionCommand}
  */
@@ -23,18 +31,46 @@ module.exports = {
 
 	async execute(interaction) {
 		let name = interaction.options.getString("command");
-
 		const helpEmbed = new EmbedBuilder().setColor("Random");
 
 		if (name) {
 			name = name.toLowerCase();
 
 			// If a single command has been asked for, send only this command's help.
-
-			if (interaction.client.slashCommands.has(name)) {
+			if (name === "tags") {
+				helpEmbed.setTitle(`List of all my tags`).setDescription(
+					"`" +
+						interaction.client.triggers
+							.filter((command) => !shouldExcludeCommand(command))
+							.map((command) => command.data.name)
+							.join("`, `") +
+						"`",
+				);
+			} else if (interaction.client.slashCommands.has(name)) {
 				helpEmbed.setTitle(`Help for \`${name}\` command`);
-
 				const command = interaction.client.slashCommands.get(name);
+
+				// Check if the command has required permissions and filter users who don't have permission.
+				if (command.data.default_member_permissions) {
+					const requiredPermissions = command.data.default_member_permissions;
+					const permissionDisplay = permissionName[requiredPermissions];
+
+					if (!interaction.member.permissions.has(requiredPermissions)) {
+						helpEmbed
+							.setDescription(`You don't have permission to use this command.`)
+							.setFooter({
+								text: `Required permissions: ${permissionDisplay}`,
+							});
+
+						return interaction.reply({
+							embeds: [helpEmbed],
+							ephemeral: true,
+						});
+					}
+					helpEmbed.setFooter({
+						text: `Required permissions: ${permissionDisplay}`,
+					});
+				}
 
 				if (command.data.description) {
 					helpEmbed.setDescription(
@@ -72,12 +108,20 @@ module.exports = {
 				return interaction.reply({ embeds: [helpEmbed], files: [attachment] });
 			}
 		} else {
-			// Give a list of all the commands
-
+			// Give a list of all the commands.
 			helpEmbed.setTitle("List of all my slash commands").setDescription(
 				"`" +
 					interaction.client.slashCommands
 						.filter((command) => !shouldExcludeCommand(command))
+						.filter((command) => {
+							// Check if the command has specific member permissions defined and filter out.
+							const requiredPermissions =
+								command.data.default_member_permissions;
+							if (requiredPermissions) {
+								return interaction.member.permissions.has(requiredPermissions);
+							}
+							return true;
+						})
 						.map((command) => command.data.name)
 						.join("`, `") +
 					"`",
@@ -90,5 +134,7 @@ module.exports = {
 };
 
 function shouldExcludeCommand(command) {
-	return command.data.name === "amicute";
+	return (
+		command.data.name === "amicute" || command.data.name === "someOtherCommand"
+	);
 }

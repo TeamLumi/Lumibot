@@ -7,24 +7,37 @@ module.exports = {
 	async execute(interaction) {
 		const focusedValue = interaction.options.getFocused().toLowerCase();
 
-		// Extract choices automatically from our array of commands. Then filter.
+		let choices = ["tags"];
 
-		const choices = interaction.client.slashCommands
-			.filter((command) => command.data && command.data.name)
-			.filter((command) => !shouldExcludeCommand(command))
-			.map((command) => command.data.name);
-
-		const filtered = choices.filter((choice) =>
-			choice.startsWith(focusedValue),
+		choices.push(
+			...interaction.client.slashCommands
+				.filter((command) => command.data && command.data.name)
+				.filter((command) => !shouldExcludeCommand(command))
+				.filter((command) => {
+					// Check if the command has specific member permissions defined and filter out.
+					const requiredPermissions = command.data.default_member_permissions;
+					if (requiredPermissions) {
+						return interaction.member.permissions.has(requiredPermissions);
+					}
+					return true;
+				})
+				.map((command) => command.data.name),
 		);
+
+		choices = choices.filter((choice) => choice.includes(focusedValue));
+
+		if (choices.length > 5) {
+			choices = choices.slice(0, 5);
+		}
+
 		await interaction.respond(
-			filtered.map((choice) => ({ name: choice, value: choice })),
+			choices.map((choice) => ({ name: choice, value: choice })),
 		);
-
-		return;
 	},
 };
 
 function shouldExcludeCommand(command) {
-	return command.data.name === "amicute";
+	return (
+		command.data.name === "amicute" || command.data.name === "someOtherCommand"
+	);
 }
