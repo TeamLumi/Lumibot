@@ -7,7 +7,9 @@ module.exports = {
 	async execute(interaction) {
 		const { client } = interaction;
 		const focusedValue = interaction.options.getFocused().toLowerCase();
-		const slashCommandNames = [...client.slashCommands.keys()];
+		let slashCommandNames = [...client.slashCommands.keys()];
+
+		slashCommandNames.push("triggers");
 
 		const filteredCommands = slashCommandNames
 			.filter((commandName) => commandName.toLowerCase().includes(focusedValue))
