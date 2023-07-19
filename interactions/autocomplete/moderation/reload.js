@@ -9,7 +9,7 @@ module.exports = {
 		const focusedValue = interaction.options.getFocused().toLowerCase();
 		let slashCommandNames = [...client.slashCommands.keys()];
 
-		slashCommandNames.push("triggers");
+		slashCommandNames.push("new", "triggers");
 
 		const filteredCommands = slashCommandNames
 			.filter((commandName) => commandName.toLowerCase().includes(focusedValue))

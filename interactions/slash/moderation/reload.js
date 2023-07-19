@@ -59,8 +59,6 @@ module.exports = {
 
 			try {
 				const newCommand = require(filePath);
-
-				// Remove old command and set the new one.
 				client.slashCommands.delete(commandName);
 				client.slashCommands.set(newCommand.data.name, newCommand);
 
@@ -119,6 +117,55 @@ module.exports = {
 			}
 			return interaction.reply({
 				content: `All triggers have been reloaded!`,
+				ephemeral: true,
+			});
+		} else if (commandName === "new") {
+			// Loads new commands.
+
+			const slashCommandsFolderPath = path.join(
+				__dirname,
+				"..",
+				"..",
+				"..",
+				"interactions",
+				"slash",
+			);
+			const slashCommands = fs.readdirSync(slashCommandsFolderPath);
+			const existingCommandNames = new Set(client.slashCommands.keyArray());
+			const newCommandNames = new Set();
+
+			for (const module of slashCommands) {
+				const modulePath = path.join(slashCommandsFolderPath, module);
+				const commandFiles = fs
+					.readdirSync(modulePath)
+					.filter((file) => file.endsWith(".js"));
+
+				for (const commandFile of commandFiles) {
+					const filePath = path.join(modulePath, commandFile);
+					const command = require(filePath);
+
+					if ("data" in command && "execute" in command) {
+						if (!existingCommandNames.has(command.data.name)) {
+							// This is a new command, add it to the collection
+							client.slashCommands.set(command.data.name, command);
+							existingCommandNames.add(command.data.name);
+							newCommandNames.add(command.data.name);
+						}
+					} else {
+						console.log(
+							`[WARNING] the slash-command at ${filePath} is missing a required "data" or "execute" property.`,
+						);
+					}
+				}
+			}
+			const newCommandNamesArray = Array.from(newCommandNames);
+			const newCommandList =
+				newCommandNamesArray.length > 0
+					? newCommandNamesArray.join(", ")
+					: "None";
+
+			return interaction.reply({
+				content: `Registered new commands: \`${newCommandList}\``,
 				ephemeral: true,
 			});
 		} else {
