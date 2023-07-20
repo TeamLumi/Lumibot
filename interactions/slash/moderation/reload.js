@@ -131,7 +131,7 @@ module.exports = {
 				"slash",
 			);
 			const slashCommands = fs.readdirSync(slashCommandsFolderPath);
-			const existingCommandNames = new Set(client.slashCommands.keyArray());
+			const existingCommandNames = new Set(client.slashCommands.keys()); // Use .keys() instead of .keyArray()
 			const newCommandNames = new Set();
 
 			for (const module of slashCommands) {
