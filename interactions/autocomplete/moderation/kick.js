@@ -12,12 +12,14 @@ module.exports = {
 			.then(async (members) => {
 				let guildUsers = members.filter(
 					(member) =>
-						member.user.username.includes(focusedValue) &&
-						member.id !== interaction.member.id &&
-						member.id !== interaction.client.user.id &&
-						interaction.member.roles.highest.comparePositionTo(
-							member.roles.highest,
-						) > 0,
+						(member.nickname &&
+							member.nickname.toLowerCase().includes(focusedValue)) ||
+						(member.user.username.toLowerCase().includes(focusedValue) &&
+							member.id !== interaction.member.id &&
+							member.id !== interaction.client.user.id &&
+							interaction.member.roles.highest.comparePositionTo(
+								member.roles.highest,
+							) > 0),
 				);
 
 				if (guildUsers.size > 5) {
@@ -26,7 +28,9 @@ module.exports = {
 
 				await interaction.respond(
 					guildUsers.map((member) => ({
-						name: member.user.username,
+						name: member.nickname
+							? `${member.nickname}/${member.user.username}`
+							: member.user.username,
 						value: member.user.username,
 					})),
 				);

@@ -45,44 +45,35 @@ module.exports = {
 			});
 		}
 
-		interaction.guild.bans
-			.fetch({ query: userName, limit: 1 })
-			.then(async (members) => {
-				const member = members.first();
-				if (!member) {
-					return interaction.reply({
-						content: `Sorry! I couldn't find that member.`,
-						ephemeral: true,
-					});
-				}
-				try {
-					await interaction.guild.members.unban(member.user);
-					const embed = new EmbedBuilder()
-						.setTitle(`Member Unbanned`)
-						.setDescription(`> ${member.user.username} just got unbanned.`)
-						.setColor("#00ff00")
-						.setFooter({
-							text: `Requested by ${interaction.member.user.username}`,
-							iconURL: interaction.member.user.displayAvatarURL(),
-						});
+		try {
+			const bannedUsers = await interaction.guild.bans.fetch();
+			const member = bannedUsers.find((ban) => ban.user.username === userName);
 
-					interaction.reply({
-						embeds: [embed],
-					});
-				} catch (error) {
-					console.error(`Failed to unban member:`, error);
-					interaction.reply({
-						content: `An issue occured unbanning that user. Consult the logs for more info.`,
-						ephemeral: true,
-					});
-				}
-			})
-			.catch((error) => {
-				console.log(error);
+			if (!member) {
 				return interaction.reply({
-					content: `Sorry! An error occurred. Consult the logs for more info.`,
+					content: `Sorry! I couldn't find that member.`,
 					ephemeral: true,
 				});
+			}
+			await interaction.guild.members.unban(member.user);
+			const embed = new EmbedBuilder()
+				.setTitle(`Member Unbanned`)
+				.setDescription(`> ${member.user.username} just got unbanned.`)
+				.setColor("#00ff00")
+				.setFooter({
+					text: `Requested by ${interaction.member.user.username}`,
+					iconURL: interaction.member.user.displayAvatarURL(),
+				});
+
+			interaction.reply({
+				embeds: [embed],
 			});
+		} catch (error) {
+			console.error(`Failed to unban member:`, error);
+			interaction.reply({
+				content: `An issue occured unbanning that user. Consult the logs for more info.`,
+				ephemeral: true,
+			});
+		}
 	},
 };
