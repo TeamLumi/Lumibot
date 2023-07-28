@@ -25,6 +25,16 @@ module.exports = {
 				.setDescription("Reason for the kick")
 				.setRequired(false),
 		)
+		.addStringOption((option) =>
+			option
+				.setName("deletemessages")
+				.setDescription("Users messages to be deleted")
+				.setRequired(false)
+				.addChoices(
+					{ name: "No", value: "0" },
+					{ name: "Yes", value: "86400" },
+				),
+		)
 		.setDefaultMemberPermissions(PermissionsBitField.Flags.KickMembers)
 		.setDMPermission(false),
 
@@ -32,6 +42,8 @@ module.exports = {
 		const userName = interaction.options.getString("user");
 		const providedReason = interaction.options.getString("reason");
 		const kickReason = providedReason || "No reason provided.";
+		const deleteMessages = interaction.options.getString("deletemessages");
+		const deleteSeconds = deleteMessages || "0";
 
 		if (
 			!interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)
@@ -100,6 +112,29 @@ module.exports = {
 					await member.kick({
 						reason: kickReason,
 					});
+
+					if (deleteSeconds > 0) {
+						try {
+							const messages = await interaction.channel.messages.fetch({
+								limit: 100,
+							});
+
+							const userMessages = messages.filter(
+								(msg) => msg.author.id === member.id,
+							);
+							const messagesToDelete = userMessages.filter(
+								(msg) =>
+									Date.now() - msg.createdTimestamp < deleteSeconds * 1000,
+							);
+
+							if (messagesToDelete.size > 0) {
+								await interaction.channel.bulkDelete(messagesToDelete, true);
+							}
+						} catch (error) {
+							console.log(error);
+						}
+					}
+
 					const embed = new EmbedBuilder()
 						.setTitle(`Member Kicked`)
 						.setDescription(

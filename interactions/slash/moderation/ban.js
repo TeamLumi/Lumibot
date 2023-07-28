@@ -31,9 +31,8 @@ module.exports = {
 				.setDescription("Users messages to be deleted")
 				.setRequired(false)
 				.addChoices(
-					{ name: "None", value: "0" },
-					{ name: "Past Day", value: "1" },
-					{ name: "Past Week", value: "7" },
+					{ name: "No", value: "0" },
+					{ name: "Yes", value: "86400" },
 				),
 		)
 		.setDefaultMemberPermissions(PermissionsBitField.Flags.BanMembers)
@@ -44,7 +43,7 @@ module.exports = {
 		const providedReason = interaction.options.getString("reason");
 		const banReason = providedReason || "No reason provided.";
 		const deleteMessages = interaction.options.getString("deletemessages");
-		const deleteDays = deleteMessages || "0";
+		const deleteSeconds = deleteMessages || "0";
 
 		if (
 			!interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers)
@@ -125,9 +124,30 @@ module.exports = {
 					}
 
 					await member.ban({
-						days: deleteDays,
 						reason: banReason,
 					});
+
+					if (deleteSeconds > 0) {
+						try {
+							const messages = await interaction.channel.messages.fetch({
+								limit: 100,
+							});
+
+							const userMessages = messages.filter(
+								(msg) => msg.author.id === member.id,
+							);
+							const messagesToDelete = userMessages.filter(
+								(msg) =>
+									Date.now() - msg.createdTimestamp < deleteSeconds * 1000,
+							);
+
+							if (messagesToDelete.size > 0) {
+								await interaction.channel.bulkDelete(messagesToDelete, true);
+							}
+						} catch (error) {
+							console.log(error);
+						}
+					}
 
 					const embed = new EmbedBuilder()
 						.setTitle(`Member Banned`)
