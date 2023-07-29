@@ -29,6 +29,11 @@ module.exports = {
 		const commandName = interaction.options.getString("command");
 		const command = client.slashCommands.get(commandName);
 
+		await interaction.reply({
+			content: "Processing...",
+			ephemeral: true,
+		});
+
 		if (command) {
 			// Reload the specified command.
 
@@ -62,7 +67,7 @@ module.exports = {
 				client.slashCommands.delete(commandName);
 				client.slashCommands.set(newCommand.data.name, newCommand);
 
-				return interaction.reply({
+				return interaction.editReply({
 					content: `Command \`${newCommand.data.name}\` was reloaded!`,
 					ephemeral: true,
 				});
@@ -115,7 +120,7 @@ module.exports = {
 					}
 				}
 			}
-			return interaction.reply({
+			return interaction.editReply({
 				content: `All triggers have been reloaded!`,
 				ephemeral: true,
 			});
@@ -164,12 +169,12 @@ module.exports = {
 					? newCommandNamesArray.join(", ")
 					: "None";
 
-			return interaction.reply({
+			return interaction.editReply({
 				content: `Registered new commands: \`${newCommandList}\``,
 				ephemeral: true,
 			});
 		} else {
-			return interaction.reply({
+			return interaction.editReply({
 				content: `There is no command with name or alias \`${commandName}\``,
 				ephemeral: true,
 			});

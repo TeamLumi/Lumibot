@@ -23,7 +23,7 @@ module.exports = {
 
 		await interaction.reply({
 			content: "Processing...",
-			ephemeral: true, // Set ephemeral to true if you want to hide the response from other users
+			ephemeral: true,
 		});
 
 		if (statusSummary.files.length > 0) {
