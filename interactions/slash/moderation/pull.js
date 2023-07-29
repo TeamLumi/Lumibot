@@ -21,21 +21,26 @@ module.exports = {
 		const git = simpleGit();
 		const statusSummary = await git.status();
 
+		await interaction.reply({
+			content: "Processing...",
+			ephemeral: true, // Set ephemeral to true if you want to hide the response from other users
+		});
+
 		if (statusSummary.files.length > 0) {
-			await interaction.reply({
+			return interaction.editReply({
 				content: `Cannot pull changes because there are pending changes in the local repository.\nTell my creator to stop tinkering with my code on the local repo.`,
 				ephemeral: true,
 			});
 		} else {
 			try {
 				await git.pull();
-				await interaction.reply({
+				return interaction.editReply({
 					content: `Successfully pulled changes from the remote repository. Thanks for the update!`,
 					ephemeral: true,
 				});
 			} catch (error) {
 				console.log(error);
-				await interaction.reply({
+				return interaction.editReply({
 					content: `Sorry! Failed to pull changes from the remote repo. See the logs for more info.`,
 					ephemeral: true,
 				});
