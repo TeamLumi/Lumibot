@@ -23,23 +23,20 @@ module.exports = {
 
 		if (statusSummary.files.length > 0) {
 			await interaction.reply({
-				content:
-					"Cannot pull changes because there are pending changes in the local repository.\nTell my creator to stop tinkering with my code on the local repo.",
+				content: `Cannot pull changes because there are pending changes in the local repository.\nTell my creator to stop tinkering with my code on the local repo.`,
 				ephemeral: true,
 			});
 		} else {
 			try {
 				await git.pull();
 				await interaction.reply({
-					content:
-						"Successfully pulled changes from the remote repository. Thanks for the update!",
+					content: `Successfully pulled changes from the remote repository. Thanks for the update!`,
 					ephemeral: true,
 				});
 			} catch (error) {
 				console.log(error);
 				await interaction.reply({
-					content:
-						"Failed to pull changes from the remote repository. See the log for more info.",
+					content: `Sorry! Failed to pull changes from the remote repo. See the logs for more info.`,
 					ephemeral: true,
 				});
 			}
