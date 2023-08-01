@@ -1,14 +1,8 @@
-const { abilityNames, abilityInfo } = require("../../lumibot/__gamedata");
+const { encounterData } = require("../../lumibot/__gamedata");
 
 function getEncounterLocations(monsNo) {
-	const debug_file_path = ""; // Add the correct path to your debug folder if needed
-	const encounterFile = path.join(debug_file_path, "encounter_locations.json");
-
-	// Read the encounter data from the JSON file
-	const data = JSON.parse(fs.readFileSync(encounterFile, "utf8"));
-
 	// If the Pokémon number is not found, return an empty array
-	if (!data[monsNo]) {
+	if (!encounterData[monsNo]) {
 		return [];
 	}
 
@@ -16,7 +10,7 @@ function getEncounterLocations(monsNo) {
 
 	// Process each location and store the encounter details in the 'locations' array
 	const sorted_data = sort_dicts_by_keys_and_list(
-		data[monsNo],
+		encounterData[monsNo],
 		"routeName",
 		constants.DOCS_ZONE_ORDER,
 	);

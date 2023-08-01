@@ -173,16 +173,28 @@ module.exports = {
 
 		if (mode === "location") {
 			// Begin location mode.
-			const embed = new EmbedBuilder()
-				.setTitle(name)
-				.setDescription(
-					`Location mode was enabled, but I still haven't learned everything about where to catch Pokemon. Perhaps you can help by filling out your Pokedex!`,
-				)
-				.setThumbnail(imageLnk);
+			const locations = getEncounterLocations(monsID);
+
+			const embed = new EmbedBuilder().setTitle(name).setThumbnail(imageLnk);
 
 			const typeColor = typeColors[type1];
 			if (typeColor) {
 				embed.setColor(typeColor);
+			}
+
+			if (locations.length === 0) {
+				embed.setDescription(
+					`No encounter locations found for the specified Pokémon.`,
+				);
+			} else {
+				const formattedLocations = locations
+					.map((location) => {
+						return `${location.location}|${location.type}|${location.level}|${location.rate}`;
+					})
+					.join("\n");
+				embed.setDescription(
+					`**Encounter information:**\n\n${formattedLocations}`,
+				);
 			}
 
 			return interaction.reply({ embeds: [embed] });
