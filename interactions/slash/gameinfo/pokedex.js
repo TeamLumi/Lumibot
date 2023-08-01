@@ -144,21 +144,18 @@ module.exports = {
 
 		// Ignore pokemon that are still eggs after  error catching.
 		if (name === "Egg") {
-			const attachment = new AttachmentBuilder(
-				"./assets/shaymin_paradox_error.png",
-			);
-
 			const embed = new EmbedBuilder()
 				.setTitle(`Oops!`)
 				.setDescription(
 					`I couldn't find that in the Pokédex. \nPerhaps there are still Pokémon yet \u00A0 \u00A0\nto be discovered!`,
 				)
-				.setThumbnail("attachment://shaymin_paradox_error.png")
+				.setThumbnail(
+					"https://cdn.discordapp.com/attachments/995539661084696626/1116076538480308244/shaymin_paradox_error.png",
+				)
 				.setColor(0x2664ea);
 
-			return interaction.reply({ embeds: [embed], files: [attachment] });
+			return interaction.reply({ embeds: [embed] });
 		}
-
 
 		let malePercentage;
 		let femalePercentage;
@@ -222,7 +219,6 @@ module.exports = {
 		}
 
 		if (visualization === "graph") {
-
 			const hp = pokemonInfo.baseStats.hp;
 			const atk = pokemonInfo.baseStats.atk;
 			const def = pokemonInfo.baseStats.def;

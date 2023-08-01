@@ -8,14 +8,14 @@ module.exports = {
 		name: ["[dj]"],
 	},
 	execute(message, args) {
-		const attachment = new AttachmentBuilder("./assets/eevee.png");
-
 		const embed = new EmbedBuilder()
 			.setTitle("DJ")
 			.setDescription(`The best person on the Lumi team.`)
-			.setImage("attachment://eevee.png")
+			.setImage(
+				"https://archives.bulbagarden.net/media/upload/4/4c/0133Eevee.png",
+			)
 			.setColor(0x000000);
 
-		message.channel.send({ embeds: [embed], files: [attachment] });
+		message.channel.send({ embeds: [embed] });
 	},
 };

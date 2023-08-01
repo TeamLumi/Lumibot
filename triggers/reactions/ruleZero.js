@@ -8,10 +8,10 @@ module.exports = {
 		name: ["[rule 0]", "[rule0]"],
 	},
 	execute(message, args) {
-		const attachment = new AttachmentBuilder("./assets/ban_hammer.png");
-
 		const embed = new EmbedBuilder()
-			.setThumbnail("attachment://ban_hammer.png")
+			.setThumbnail(
+				"https://cdn.discordapp.com/attachments/1115345759496323173/1115682729107935392/ban_hammer_dj.png",
+			)
 			.setTitle("Rule 0")
 			.setURL(
 				"https://discord.com/channels/912508046159261728/915762325150105631",
@@ -21,6 +21,6 @@ module.exports = {
 			)
 			.setColor(0xe6676b);
 
-		message.channel.send({ embeds: [embed], files: [attachment] });
+		message.channel.send({ embeds: [embed] });
 	},
 };

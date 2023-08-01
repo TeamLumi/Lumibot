@@ -8,10 +8,10 @@ module.exports = {
 		name: ["[faq]"],
 	},
 	execute(message, args) {
-		const attachment = new AttachmentBuilder("./assets/eevee.png");
-
 		const embed = new EmbedBuilder()
-			.setThumbnail("attachment://eevee.png")
+			.setThumbnail(
+				"https://cdn.discordapp.com/attachments/1115345759496323173/1115682731343499314/faq.png",
+			)
 			.setTitle("Frequently Asked Questions")
 			.setURL("https://luminescent.team/faq")
 			.setDescription(
@@ -19,6 +19,6 @@ module.exports = {
 			)
 			.setColor(0x90ee90);
 
-		message.channel.send({ embeds: [embed], files: [attachment] });
+		message.channel.send({ embeds: [embed] });
 	},
 };
