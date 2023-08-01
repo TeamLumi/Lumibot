@@ -6,29 +6,24 @@ function getEncounterLocations(monsNo) {
 		return [];
 	}
 
+	// Rename the encounter types
+	const reverseEncounterTypeMap = {
+		ground_mons: "Grass",
+		swayGrass: "Radar",
+		tairyo: "Swarm",
+		water_mons: "Surfing",
+		boro_mons: "Old Rod",
+		ii_mons: "Good Rod",
+		sugoi_mons: "Super Rod",
+	};
+
 	const locations = [];
 
-	// Process each location and store the encounter details in the 'locations' array
-	const sorted_data = sort_dicts_by_keys_and_list(
-		encounterData[monsNo],
-		"routeName",
-		constants.DOCS_ZONE_ORDER,
-	);
-	for (const location of sorted_data) {
-		const enc_type = location["encounterType"];
+	for (const location of encounterData[monsNo]) {
+		let enc_type = location["encounterType"];
 		let enc_location = location["routeName"];
 
-		// Rename the encounter types
-		const encounterTypeMap = {
-			[constants.REGULAR_ENC]: "Grass",
-			[constants.SWARM]: "Swarm",
-			[constants.RADAR]: "Radar",
-			[constants.SURF_ENC]: "Surfing",
-			[constants.OLD_ENC]: "Old Rod",
-			[constants.GOOD_ENC]: "Good Rod",
-			[constants.SUPER_ENC]: "Super Rod",
-		};
-		enc_type = encounterTypeMap[enc_type] || enc_type;
+		const enc_type_altered = reverseEncounterTypeMap[enc_type] || enc_type;
 
 		const enc_level = location["maxLevel"];
 		let enc_rate = location["encounterRate"];
@@ -44,7 +39,7 @@ function getEncounterLocations(monsNo) {
 		// Store the encounter details in the 'locations' array
 		locations.push({
 			location: enc_location,
-			type: enc_type,
+			type: enc_type_altered,
 			level: enc_level,
 			rate: `${enc_rate}%`,
 		});

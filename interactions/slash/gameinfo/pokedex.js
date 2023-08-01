@@ -189,7 +189,7 @@ module.exports = {
 			} else {
 				const formattedLocations = locations
 					.map((location) => {
-						return `${location.location}|${location.type}|${location.level}|${location.rate}`;
+						return `${location.location} | ${location.type} | level: ${location.level} | rate: ${location.rate}`;
 					})
 					.join("\n");
 				embed.setDescription(
