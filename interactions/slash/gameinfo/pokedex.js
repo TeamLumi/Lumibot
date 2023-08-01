@@ -5,6 +5,7 @@ const {
 } = require("discord.js");
 const { getPokemonIdFromDisplayName } = require("../../../dex/index.js");
 const { getPokemonInfo } = require("../../../dex/index.js");
+const { getEncounterLocations } = require("../../../dex/index.js");
 const { CanvasRenderService } = require("chartjs-node-canvas");
 
 // Array for pokemon types to set colours.
@@ -74,6 +75,18 @@ module.exports = {
 					{ name: "Graph", value: "graph" },
 					{ name: "Table", value: "table" },
 				),
+		)
+		.addStringOption((option) =>
+			option
+				.setName("mode")
+				.setDescription(
+					"Additional pokedex functions for location and evolution etc.",
+				)
+				.setRequired(false)
+				.addChoices(
+					{ name: "Statistics", value: "statistics" },
+					{ name: "Location", value: "location" },
+				),
 		),
 
 	async execute(interaction) {
@@ -82,6 +95,7 @@ module.exports = {
 		const monsID = getPokemonIdFromDisplayName(pokemonName);
 		const pokemonInfo = getPokemonInfo(monsID);
 		const visualization = interaction.options.getString("visualization");
+		const mode = interaction.options.getString("mode");
 
 		let name,
 			ability1,
@@ -157,162 +171,200 @@ module.exports = {
 			return interaction.reply({ embeds: [embed] });
 		}
 
-		let malePercentage;
-		let femalePercentage;
+		if (mode === "location") {
+			// Begin location mode.
+			const embed = new EmbedBuilder()
+				.setTitle(name)
+				.setDescription(
+					`Location mode was enabled, but I still haven't learned everything about where to catch Pokemon. Perhaps you can help by filling out your Pokedex!`,
+				)
+				.setThumbnail(imageLnk);
 
-		if (genderDecimalValue === 255) {
-			malePercentage = 0;
-			femalePercentage = 0;
+			const typeColor = typeColors[type1];
+			if (typeColor) {
+				embed.setColor(typeColor);
+			}
+
+			return interaction.reply({ embeds: [embed] });
+		} else if (mode === "evolution") {
+			// Begin evolution mode
+			const embed = new EmbedBuilder()
+				.setTitle(name)
+				.setDescription(
+					`Evolution mode was enabled, but I still haven't learned everything about evolution. Perhaps you can help by filling out your Pokedex!`,
+				)
+				.setThumbnail(imageLnk);
+
+			const typeColor = typeColors[type1];
+			if (typeColor) {
+				embed.setColor(typeColor);
+			}
+
+			return interaction.reply({ embeds: [embed] });
 		} else {
-			const totalPossibleValues = 254;
-			const femaleValue = genderDecimalValue;
-			const maleValue = totalPossibleValues - genderDecimalValue;
+			// Begin general/statistics mode.
+			let malePercentage;
+			let femalePercentage;
 
-			malePercentage = Math.round((maleValue / totalPossibleValues) * 100);
-			femalePercentage = Math.round((femaleValue / totalPossibleValues) * 100);
-		}
+			if (genderDecimalValue === 255) {
+				malePercentage = 0;
+				femalePercentage = 0;
+			} else {
+				const totalPossibleValues = 254;
+				const femaleValue = genderDecimalValue;
+				const maleValue = totalPossibleValues - genderDecimalValue;
 
-		const embed = new EmbedBuilder().setTitle(name).setThumbnail(imageLnk);
+				malePercentage = Math.round((maleValue / totalPossibleValues) * 100);
+				femalePercentage = Math.round(
+					(femaleValue / totalPossibleValues) * 100,
+				);
+			}
 
-		if (ability1 === ability2) {
-			embed.addFields(
-				{ name: `**Abilties:**`, value: `${ability1}`, inline: true },
-				{ name: `**Hidden Ability:**`, value: `${abilityH}`, inline: true },
-			);
-		} else {
-			embed.addFields(
-				{
-					name: `**Abilties:**`,
-					value: `${ability1}\n${ability2}`,
-					inline: true,
-				},
-				{ name: `**Hidden Ability:**`, value: `${abilityH}`, inline: true },
-			);
-		}
+			const embed = new EmbedBuilder().setTitle(name).setThumbnail(imageLnk);
 
-		embed.addFields({ name: `**Stats:**`, value: `Total: ${baseStatsTotal}` });
-
-		const typeColor = typeColors[type1];
-		if (typeColor) {
-			embed.setColor(typeColor);
-		}
-
-		if (type1 === type2) {
-			const type1Icon = typeIcons[type1];
-			embed.setDescription(`**Type:** ${type1Icon}`);
-		} else {
-			const type1Icon = typeIcons[type1];
-			const type2Icon = typeIcons[type2];
-			embed.setDescription(`**Type:** ${type1Icon} \u200b ${type2Icon}`);
-		}
-
-		if (malePercentage === 0 && femalePercentage === 0) {
-			embed.setFooter({ text: `Gender: Unknown` });
-		} else if (malePercentage === 100) {
-			embed.setFooter({ text: `Gender: 100% Male` });
-		} else if (femalePercentage === 100) {
-			embed.setFooter({ text: `Gender: 100% Female` });
-		} else {
-			embed.setFooter({
-				text: `Gender: ${malePercentage}% Male, ${femalePercentage}% Female`,
-			});
-		}
-
-		if (visualization === "graph") {
-			const hp = pokemonInfo.baseStats.hp;
-			const atk = pokemonInfo.baseStats.atk;
-			const def = pokemonInfo.baseStats.def;
-			const spa = pokemonInfo.baseStats.spa;
-			const spd = pokemonInfo.baseStats.spd;
-			const spe = pokemonInfo.baseStats.spe;
-
-			const width = 240; // Define the width of the chart
-			const height = 240; // Define the height of the chart
-
-			const canvasRenderService = new CanvasRenderService(
-				width,
-				height,
-				(ChartJS) => {},
-			);
-
-			// Define configuration for the chart
-			const configuration = {
-				type: "radar",
-				data: {
-					labels: [
-						`Hp ${hp}`,
-						`Atk\n${atk}`,
-						`${def}\nDef`,
-						`${spe} Spe`,
-						`${spd}\nSpDef`,
-						`SpAtk\n${spa}`,
-					],
-					datasets: [
-						{
-							data: [hp, atk, def, spe, spd, spa],
-							backgroundColor: "rgba(152,187,219,100)",
-							borderColor: "rgba(152,187,219,255)",
-							borderWidth: 2.0,
-							pointRadius: 0,
-						},
-					],
-				},
-				options: {
-					scale: {
-						ticks: {
-							display: false,
-							beginAtZero: true,
-							max: 260,
-							stepSize: 260,
-						},
-						angleLines: {
-							diplay: true,
-							color: "rgba(102,121,207,255)",
-						},
-						gridLines: {
-							display: true,
-							color: "rgba(102,121,207,255)",
-						},
-						pointLabels: {
-							display: true,
-							padding: 15,
-							fontColor: "rgba(255, 255, 255, 255)",
-							fontSize: 11,
-							fontStyle: "bold",
-						},
+			if (ability1 === ability2) {
+				embed.addFields(
+					{ name: `**Abilties:**`, value: `${ability1}`, inline: true },
+					{ name: `**Hidden Ability:**`, value: `${abilityH}`, inline: true },
+				);
+			} else {
+				embed.addFields(
+					{
+						name: `**Abilties:**`,
+						value: `${ability1}\n${ability2}`,
+						inline: true,
 					},
-					layout: {
-						padding: {
-							left: 0,
-							right: 0,
-							top: 0,
-							bottom: 15,
-						},
-					},
-					legend: {
-						display: false,
-					},
-				},
-			};
-			const image = await canvasRenderService.renderToBuffer(configuration);
-			const attachment = new AttachmentBuilder(image, { name: "chart.png" });
-			embed.setImage("attachment://chart.png");
-
-			interaction.reply({ embeds: [embed], files: [attachment] });
-		} else {
-			const hp = String(pokemonInfo.baseStats.hp).padEnd(3, " ");
-			const atk = String(pokemonInfo.baseStats.atk).padEnd(3, " ");
-			const def = String(pokemonInfo.baseStats.def).padEnd(3, " ");
-			const spa = String(pokemonInfo.baseStats.spa).padEnd(3, " ");
-			const spd = String(pokemonInfo.baseStats.spd).padEnd(3, " ");
-			const spe = String(pokemonInfo.baseStats.spe).padEnd(3, " ");
+					{ name: `**Hidden Ability:**`, value: `${abilityH}`, inline: true },
+				);
+			}
 
 			embed.addFields({
-				name: `**Base Stats:**`,
-				value: `\`╔═══╤═══╤═══╤═══╤═══╤═══╗\`\n\`║HP\u00A0│ATK│DEF│SPA│SPD│SPE║\`\n\`╠═══╪═══╪═══╪═══╪═══╪═══╣\`\n\`║${hp}│${atk}│${def}│${spa}│${spd}│${spe}║\`\n\`╚═══╧═══╧═══╧═══╧═══╧═══╝\``,
+				name: `**Stats:**`,
+				value: `Total: ${baseStatsTotal}`,
 			});
 
-			interaction.reply({ embeds: [embed] });
+			const typeColor = typeColors[type1];
+			if (typeColor) {
+				embed.setColor(typeColor);
+			}
+
+			if (type1 === type2) {
+				const type1Icon = typeIcons[type1];
+				embed.setDescription(`**Type:** ${type1Icon}`);
+			} else {
+				const type1Icon = typeIcons[type1];
+				const type2Icon = typeIcons[type2];
+				embed.setDescription(`**Type:** ${type1Icon} \u200b ${type2Icon}`);
+			}
+
+			if (malePercentage === 0 && femalePercentage === 0) {
+				embed.setFooter({ text: `Gender: Unknown` });
+			} else if (malePercentage === 100) {
+				embed.setFooter({ text: `Gender: 100% Male` });
+			} else if (femalePercentage === 100) {
+				embed.setFooter({ text: `Gender: 100% Female` });
+			} else {
+				embed.setFooter({
+					text: `Gender: ${malePercentage}% Male, ${femalePercentage}% Female`,
+				});
+			}
+
+			if (visualization === "graph") {
+				const hp = pokemonInfo.baseStats.hp;
+				const atk = pokemonInfo.baseStats.atk;
+				const def = pokemonInfo.baseStats.def;
+				const spa = pokemonInfo.baseStats.spa;
+				const spd = pokemonInfo.baseStats.spd;
+				const spe = pokemonInfo.baseStats.spe;
+
+				const width = 240; // Define the width of the chart
+				const height = 240; // Define the height of the chart
+
+				const canvasRenderService = new CanvasRenderService(
+					width,
+					height,
+					(ChartJS) => {},
+				);
+
+				// Define configuration for the chart
+				const configuration = {
+					type: "radar",
+					data: {
+						labels: [
+							`Hp ${hp}`,
+							`Atk\n${atk}`,
+							`${def}\nDef`,
+							`${spe} Spe`,
+							`${spd}\nSpDef`,
+							`SpAtk\n${spa}`,
+						],
+						datasets: [
+							{
+								data: [hp, atk, def, spe, spd, spa],
+								backgroundColor: "rgba(152,187,219,100)",
+								borderColor: "rgba(152,187,219,255)",
+								borderWidth: 2.0,
+								pointRadius: 0,
+							},
+						],
+					},
+					options: {
+						scale: {
+							ticks: {
+								display: false,
+								beginAtZero: true,
+								max: 260,
+								stepSize: 260,
+							},
+							angleLines: {
+								diplay: true,
+								color: "rgba(102,121,207,255)",
+							},
+							gridLines: {
+								display: true,
+								color: "rgba(102,121,207,255)",
+							},
+							pointLabels: {
+								display: true,
+								padding: 15,
+								fontColor: "rgba(255, 255, 255, 255)",
+								fontSize: 11,
+								fontStyle: "bold",
+							},
+						},
+						layout: {
+							padding: {
+								left: 0,
+								right: 0,
+								top: 0,
+								bottom: 15,
+							},
+						},
+						legend: {
+							display: false,
+						},
+					},
+				};
+				const image = await canvasRenderService.renderToBuffer(configuration);
+				const attachment = new AttachmentBuilder(image, { name: "chart.png" });
+				embed.setImage("attachment://chart.png");
+
+				interaction.reply({ embeds: [embed], files: [attachment] });
+			} else {
+				const hp = String(pokemonInfo.baseStats.hp).padEnd(3, " ");
+				const atk = String(pokemonInfo.baseStats.atk).padEnd(3, " ");
+				const def = String(pokemonInfo.baseStats.def).padEnd(3, " ");
+				const spa = String(pokemonInfo.baseStats.spa).padEnd(3, " ");
+				const spd = String(pokemonInfo.baseStats.spd).padEnd(3, " ");
+				const spe = String(pokemonInfo.baseStats.spe).padEnd(3, " ");
+
+				embed.addFields({
+					name: `**Base Stats:**`,
+					value: `\`╔═══╤═══╤═══╤═══╤═══╤═══╗\`\n\`║HP\u00A0│ATK│DEF│SPA│SPD│SPE║\`\n\`╠═══╪═══╪═══╪═══╪═══╪═══╣\`\n\`║${hp}│${atk}│${def}│${spa}│${spd}│${spe}║\`\n\`╚═══╧═══╧═══╧═══╧═══╧═══╝\``,
+				});
+
+				interaction.reply({ embeds: [embed] });
+			}
 		}
 	},
 };
