@@ -15,6 +15,8 @@ function getEncounterLocations(monsNo) {
 		boro_mons: "Old Rod",
 		ii_mons: "Good Rod",
 		sugoi_mons: "Super Rod",
+		day: "Day",
+		night: "Night",
 	};
 
 	const locations = [];
@@ -24,7 +26,6 @@ function getEncounterLocations(monsNo) {
 		let enc_type = location["encounterType"];
 		let enc_location = location["routeName"];
 
-		const enc_type_altered = reverseEncounterTypeMap[enc_type] || enc_type;
 
 		const enc_level = location["maxLevel"];
 		let enc_rate = location["encounterRate"];
@@ -36,6 +37,7 @@ function getEncounterLocations(monsNo) {
 		} else {
 			enc_rate = parseInt(enc_rate.split("%")[0]);
 		}
+		const enc_type_altered = reverseEncounterTypeMap[enc_type] || enc_type;
 
 		// Store the encounter details in the 'locations' array
 		if (!(enc_location in enc_obj)) {
