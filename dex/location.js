@@ -8,24 +8,24 @@ function getEncounterLocations(monsNo) {
 
 	// Rename the encounter types
 	const reverseEncounterTypeMap = {
-		ground_mons: "Grass",
-		swayGrass: "Radar",
-		tairyo: "Swarm",
-		water_mons: "Surfing",
-		boro_mons: "Old Rod",
-		ii_mons: "Good Rod",
-		sugoi_mons: "Super Rod",
-		day: "Day",
-		night: "Night",
+		ground_mons: "<:grass:1136228499477246043>",
+		swayGrass: ":red_envelope",
+		tairyo: ":tv:",
+		water_mons: ":ocean",
+		boro_mons: "<:oldrod:1136220484304896001>",
+		ii_mons: "<:goodrod:1136220559856906400>",
+		sugoi_mons: "<:superrod:1136220619432792097>",
+		day: ":sunny:",
+		night: ":crescent_moon:",
+		Morning: ":sunrise_over_mountains:",
+		"Honey Tree": ":honey_pot:",
 	};
 
 	const locations = [];
-	const enc_obj = {}
 
 	for (const location of encounterData[monsNo]) {
 		let enc_type = location["encounterType"];
 		let enc_location = location["routeName"];
-
 
 		const enc_level = location["maxLevel"];
 		let enc_rate = location["encounterRate"];
@@ -39,44 +39,43 @@ function getEncounterLocations(monsNo) {
 		}
 		const enc_type_altered = reverseEncounterTypeMap[enc_type] || enc_type;
 
-		// Store the encounter details in the 'locations' array
-		if (!(enc_location in enc_obj)) {
-			enc_obj[enc_location] = [{
-				type: enc_type_altered,
-				level: enc_level,
-				rate: enc_rate,
-			}];
+		// Find existing location entry in the 'locations' array
+		const existingLocation = locations.find(
+			(loc) => loc.location === enc_location,
+		);
+
+		if (existingLocation) {
+			// Find existing encounter in the 'encounters' array of the location
+			const existingEncounter = existingLocation.encounters.find(
+				(enc) => enc.type === enc_type_altered && enc.level === enc_level,
+			);
+
+			if (existingEncounter) {
+				// Combine encounter rates if encounter type and level are the same
+				existingEncounter.rate += enc_rate;
+			} else {
+				// Add new encounter to the 'encounters' array of the location
+				existingLocation.encounters.push({
+					type: enc_type_altered,
+					level: enc_level,
+					rate: enc_rate,
+				});
+			}
 		} else {
-			enc_obj[enc_location].push({
-				type: enc_type_altered,
-				level: enc_level,
-				rate: enc_rate,
-			})
-		};
-	};
-	for (const enc_key of Object.keys(enc_obj)) {
-		const nest_array = enc_obj[enc_key];
-		const route_obj = {};
-		const level_obj = {};
-	
-		for (const enc_type of nest_array) {
-			level_obj[enc_key] = enc_type.level;
-			const key = `${enc_key}|${enc_type.type}`;
-			route_obj[key] = (route_obj[key] || 0) + enc_type.rate;
-		}
-	
-		for (const key of Object.keys(route_obj)) {
-			const [location, enc_type] = key.split("|");
-			const enc_level = level_obj[location];
-			const rate = route_obj[key];
+			// Add new location entry to the 'locations' array
 			locations.push({
-				location: location,
-				type: enc_type,
-				level: enc_level,
-				rate: `${rate}%`,
+				location: enc_location,
+				encounters: [
+					{
+						type: enc_type_altered,
+						level: enc_level,
+						rate: enc_rate,
+					},
+				],
 			});
 		}
-	}	
+	}
+
 	return locations;
 }
 

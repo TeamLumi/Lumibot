@@ -172,11 +172,24 @@ module.exports = {
 		}
 
 		if (mode === "location") {
-			// Begin location mode.
+			// Begin location mode and handle the Magikarp situation.
+			if (pokemonName === "Magikarp") {
+				const embed = new EmbedBuilder()
+					.setTitle(name)
+					.setThumbnail(imageLnk)
+					.setDescription(
+						`Hmm, this Pokemon seems to appear anywhere there is an open body of water. What a successful species! It must be exceedingly strong...`,
+					);
+				const typeColor = typeColors[type1];
+				if (typeColor) {
+					embed.setColor(typeColor);
+				}
+				return interaction.reply({ embeds: [embed] });
+			}
+
 			const locations = getEncounterLocations(monsID);
 
 			const embed = new EmbedBuilder().setTitle(name).setThumbnail(imageLnk);
-
 			const typeColor = typeColors[type1];
 			if (typeColor) {
 				embed.setColor(typeColor);
@@ -184,16 +197,21 @@ module.exports = {
 
 			if (locations.length === 0) {
 				embed.setDescription(
-					`No encounter locations found for the specified Pokémon.`,
+					`Sorry! I couldn't locate that Pokemon as I don't have enough data about it. It might not appear in the wild, or maybe it's just exceedinly rare.`,
 				);
 			} else {
 				const formattedLocations = locations
 					.map((location) => {
-						return `${location.location} | ${location.type} | level: ${location.level} | rate: ${location.rate}`;
+						const encounters = location.encounters
+							.map((encounter) => {
+								return `${encounter.type} Level: ${encounter.level} | Rate: ${encounter.rate}%`;
+							})
+							.join("\n");
+						return `**${location.location}**\n${encounters}`;
 					})
-					.join("\n");
+					.join("\n\n");
 				embed.setDescription(
-					`**Encounter information:**\n\n${formattedLocations}`,
+					`**Encounter information:**\n\nAll encounters assume standard conditions.\n\n${formattedLocations}`,
 				);
 			}
 
