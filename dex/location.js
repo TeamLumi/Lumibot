@@ -8,17 +8,18 @@ function getEncounterLocations(monsNo) {
 
 	// Rename the encounter types
 	const reverseEncounterTypeMap = {
-		ground_mons: "<:grass:1136228499477246043>",
-		swayGrass: ":red_envelope",
-		tairyo: ":tv:",
-		water_mons: ":ocean",
-		boro_mons: "<:oldrod:1136220484304896001>",
-		ii_mons: "<:goodrod:1136220559856906400>",
-		sugoi_mons: "<:superrod:1136220619432792097>",
-		day: ":sunny:",
-		night: ":crescent_moon:",
-		Morning: ":sunrise_over_mountains:",
-		"Honey Tree": ":honey_pot:",
+		ground_mons: "<:grass:1136228499477246043> Walking",
+		swayGrass: "<:pokeradar:1136357617074180116> Radar",
+		tairyo: ":tv: Swarm",
+		water_mons: ":ocean: Surfing",
+		boro_mons: "<:oldrod:1136220484304896001> Old Rod",
+		ii_mons: "<:goodrod:1136220559856906400> Good Rod",
+		sugoi_mons: "<:superrod:1136220619432792097> Super Rod",
+		day: ":sunny: Day",
+		night: ":crescent_moon: Night",
+		Morning: ":sunrise_over_mountains: Morning",
+		"Honey Tree": ":honey_pot: Honey Tree",
+		Incense: "<:incense:1136358228356243506> Incense",
 	};
 
 	const locations = [];
@@ -37,32 +38,38 @@ function getEncounterLocations(monsNo) {
 		} else {
 			enc_rate = parseInt(enc_rate.split("%")[0]);
 		}
+
 		const enc_type_altered = reverseEncounterTypeMap[enc_type] || enc_type;
 
-		// Find existing location entry in the 'locations' array
-		const existingLocation = locations.find(
-			(loc) => loc.location === enc_location,
+		// Compress locations with similar encounter types and levels
+		const similarLocation = locations.find((loc) =>
+			loc.encounters.some(
+				(enc) => enc.type === enc_type_altered && enc.level === enc_level,
+			),
 		);
 
-		if (existingLocation) {
-			// Find existing encounter in the 'encounters' array of the location
-			const existingEncounter = existingLocation.encounters.find(
+		if (similarLocation) {
+			const existingEncounter = similarLocation.encounters.find(
 				(enc) => enc.type === enc_type_altered && enc.level === enc_level,
 			);
-
 			if (existingEncounter) {
-				// Combine encounter rates if encounter type and level are the same
-				existingEncounter.rate += enc_rate;
+				// Only update the encounter rate if the location names are the same
+				if (similarLocation.location === enc_location) {
+					existingEncounter.rate += enc_rate;
+				}
 			} else {
-				// Add new encounter to the 'encounters' array of the location
-				existingLocation.encounters.push({
+				similarLocation.encounters.push({
 					type: enc_type_altered,
 					level: enc_level,
 					rate: enc_rate,
 				});
 			}
+
+			// Add the floor or location information to the existing location's name
+			if (!similarLocation.location.includes(enc_location)) {
+				similarLocation.location += `, ${enc_location}`;
+			}
 		} else {
-			// Add new location entry to the 'locations' array
 			locations.push({
 				location: enc_location,
 				encounters: [
@@ -75,8 +82,45 @@ function getEncounterLocations(monsNo) {
 			});
 		}
 	}
+	// Group all locations that have the same names after creating an array as above
+	const groupedLocations = [];
+	for (const location of locations) {
+		const existingGroupedLocation = groupedLocations.find(
+			(loc) => loc.location === location.location,
+		);
 
-	return locations;
+		if (existingGroupedLocation) {
+			existingGroupedLocation.encounters.push(...location.encounters);
+		} else {
+			groupedLocations.push(location);
+		}
+	}
+	// New: Clean and compress location names
+	const cleanedLocations = groupedLocations.map((location) => {
+		const nameWithFloor = location.location.match(
+			/.*?(?=\s\d+F\b)|.*?(?=\s\()/i,
+		);
+		const mainLocationName = nameWithFloor
+			? nameWithFloor[0]
+			: location.location;
+		let encounteredMainName = false;
+
+		const cleanedName = location.location.replace(
+			new RegExp(mainLocationName, "g"),
+			(match) => {
+				if (encounteredMainName && match === mainLocationName) {
+					return "";
+				} else {
+					encounteredMainName = true;
+					return match;
+				}
+			},
+		);
+
+		return { ...location, location: cleanedName };
+	});
+
+	return cleanedLocations;
 }
 
 module.exports = { getEncounterLocations };

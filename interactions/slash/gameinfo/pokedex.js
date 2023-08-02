@@ -204,14 +204,14 @@ module.exports = {
 					.map((location) => {
 						const encounters = location.encounters
 							.map((encounter) => {
-								return `${encounter.type} Level: ${encounter.level} | Rate: ${encounter.rate}%`;
+								return `${encounter.type}\nLevel: ${encounter.level} | Rate: ${encounter.rate}%`;
 							})
 							.join("\n");
 						return `**${location.location}**\n${encounters}`;
 					})
 					.join("\n\n");
 				embed.setDescription(
-					`**Encounter information:**\n\nAll encounters assume standard conditions.\n\n${formattedLocations}`,
+					`**Encounter information:**\n\nStandard rates assume that incense/radar are not active. For further accuracy, visit [our docs](https://luminescent.team/docs).\n\n${formattedLocations}`,
 				);
 			}
 
