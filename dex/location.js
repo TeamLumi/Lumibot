@@ -38,11 +38,19 @@ function getEncounterLocations(monsNo) {
 		}
 
 		// Store the encounter details in the 'locations' array
-		enc_obj.enc_location.push([{
-			type: enc_type_altered,
-			level: enc_level,
-			rate: enc_rate,
-		}]);
+		if (!(enc_location in enc_obj)) {
+			enc_obj[enc_location] = [{
+				type: enc_type_altered,
+				level: enc_level,
+				rate: enc_rate,
+			}];
+		} else {
+			enc_obj[enc_location].push({
+				type: enc_type_altered,
+				level: enc_level,
+				rate: enc_rate,
+			})
+		};
 	};
 	for (const enc_key of Object.keys(enc_obj)) {
 		const nest_array = enc_obj[enc_key];
@@ -57,13 +65,13 @@ function getEncounterLocations(monsNo) {
 	
 		for (const key of Object.keys(route_obj)) {
 			const [location, enc_type] = key.split("|");
-			const level = level_obj[location];
+			const enc_level = level_obj[location];
 			const rate = route_obj[key];
 			locations.push({
 				location: location,
 				type: enc_type,
-				level: level,
-				rate: rate,
+				level: enc_level,
+				rate: `${rate}%`,
 			});
 		}
 	}	
