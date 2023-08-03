@@ -68,16 +68,6 @@ module.exports = {
 		)
 		.addStringOption((option) =>
 			option
-				.setName("visualization")
-				.setDescription("The type of visualization (graph or table)")
-				.setRequired(false)
-				.addChoices(
-					{ name: "Graph", value: "graph" },
-					{ name: "Table", value: "table" },
-				),
-		)
-		.addStringOption((option) =>
-			option
 				.setName("mode")
 				.setDescription(
 					"Additional pokedex functions for location and evolution etc.",
@@ -86,6 +76,16 @@ module.exports = {
 				.addChoices(
 					{ name: "Statistics", value: "statistics" },
 					{ name: "Location", value: "location" },
+				),
+		)
+		.addStringOption((option) =>
+			option
+				.setName("visualization")
+				.setDescription("The type of visualization (graph or table)")
+				.setRequired(false)
+				.addChoices(
+					{ name: "Graph", value: "graph" },
+					{ name: "Table", value: "table" },
 				),
 		),
 
