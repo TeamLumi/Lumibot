@@ -41,10 +41,23 @@ function getEncounterLocations(monsNo) {
 
 		const enc_type_altered = reverseEncounterTypeMap[enc_type] || enc_type;
 
+		const nameWithFloor = enc_location.match(
+			/.*?(?=\s(?:\d+F|B\d+F|Area\b))|.*?(?=\s\()/i,
+		);
+		const mainLocationName = nameWithFloor ? nameWithFloor[0] : enc_location;
+		const mainLocationNamePattern = new RegExp(
+			mainLocationName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+			"i",
+		);
+
 		// Compress locations with similar encounter types and levels
 		const similarLocation = locations.find((loc) =>
 			loc.encounters.some(
-				(enc) => enc.type === enc_type_altered && enc.level === enc_level,
+				(enc) =>
+					enc.type === enc_type_altered &&
+					enc.level === enc_level &&
+					mainLocationNamePattern.test(loc.location) &&
+					mainLocationNamePattern.test(enc_location),
 			),
 		);
 
@@ -95,10 +108,10 @@ function getEncounterLocations(monsNo) {
 			groupedLocations.push(location);
 		}
 	}
-	// New: Clean and compress location names
+	// Clean and compress location names
 	const cleanedLocations = groupedLocations.map((location) => {
 		const nameWithFloor = location.location.match(
-			/.*?(?=\s\d+F\b)|.*?(?=\s\()/i,
+			/.*?(?=\s(?:\d+F|B\d+F|Area\b))|.*?(?=\s\()/i,
 		);
 		const mainLocationName = nameWithFloor
 			? nameWithFloor[0]
@@ -117,10 +130,69 @@ function getEncounterLocations(monsNo) {
 			},
 		);
 
-		return { ...location, location: cleanedName };
+		const cleanedNameWithAreas = cleanedName.replace(
+			/Area\s(\d+),?\s?/g,
+			(match, p1, offset, string) => {
+				if (offset === string.length - match.length) {
+					// Remove the comma at the end of the string
+					return `${p1}`;
+				} else {
+					return `${p1}, `;
+				}
+			},
+		);
+
+		return { ...location, location: cleanedNameWithAreas };
 	});
 
-	return cleanedLocations;
+	const optimizedLocations = [];
+
+	for (const location of cleanedLocations) {
+		const { location: locName, encounters: originalEncounters } = location;
+
+		// Separate the morning/day/night encounters from the other encounters
+		const morningDayNightEncounters = originalEncounters.filter(
+			(enc) =>
+				enc.type === ":sunrise_over_mountains: Morning" ||
+				enc.type === ":sunny: Day" ||
+				enc.type === ":crescent_moon: Night",
+		);
+
+		const otherEncounters = originalEncounters.filter(
+			(enc) =>
+				enc.type !== ":sunrise_over_mountains: Morning" &&
+				enc.type !== ":sunny: Day" &&
+				enc.type !== ":crescent_moon: Night",
+		);
+
+		// Check if the morning/day/night encounters have the same rate and level
+		const sameRateAndLevel =
+			morningDayNightEncounters.length === 3 &&
+			morningDayNightEncounters.every(
+				(enc, index, arr) =>
+					enc.rate === arr[0].rate && enc.level === arr[0].level,
+			);
+
+		if (sameRateAndLevel) {
+			// If the morning/day/night encounters have the same rate and level, replace them with 'ground_mons'
+			optimizedLocations.push({
+				location: locName,
+				encounters: [
+					{
+						type: "<:grass:1136228499477246043> Walking",
+						level: morningDayNightEncounters[0].level,
+						rate: morningDayNightEncounters[0].rate,
+					},
+					...otherEncounters, // Add back the other encounters
+				],
+			});
+		} else {
+			// If they have different rates/levels, keep the original encounters as is
+			optimizedLocations.push(location);
+		}
+	}
+
+	return optimizedLocations;
 }
 
 module.exports = { getEncounterLocations };
