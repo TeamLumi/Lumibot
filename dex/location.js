@@ -41,6 +41,8 @@ function getEncounterLocations(monsNo) {
 
 		const enc_type_altered = reverseEncounterTypeMap[enc_type] || enc_type;
 
+		const isRouteLocation = enc_location.toLowerCase().startsWith("route");
+
 		const nameWithFloor = enc_location.match(
 			/.*?(?=\s(?:\d+F|B\d+F|Area\b))|.*?(?=\s\()/i,
 		);
@@ -56,8 +58,9 @@ function getEncounterLocations(monsNo) {
 				(enc) =>
 					enc.type === enc_type_altered &&
 					enc.level === enc_level &&
-					mainLocationNamePattern.test(loc.location) &&
-					mainLocationNamePattern.test(enc_location),
+					((isRouteLocation &&
+						loc.location.toLowerCase().startsWith("route")) ||
+						(!isRouteLocation && mainLocationNamePattern.test(loc.location))),
 			),
 		);
 
@@ -142,7 +145,20 @@ function getEncounterLocations(monsNo) {
 			},
 		);
 
-		return { ...location, location: cleanedNameWithAreas };
+		// Clean up extra instances of the word 'Route'
+		const cleanedNameWithoutExtraRoute = cleanedNameWithAreas.replace(
+			/Route\s/gi,
+			(match, offset, string) => {
+				// Only replace 'Route' if it's not at the start of the string
+				if (offset > 0) {
+					return "";
+				} else {
+					return match;
+				}
+			},
+		);
+
+		return { ...location, location: cleanedNameWithoutExtraRoute };
 	});
 
 	const optimizedLocations = [];
