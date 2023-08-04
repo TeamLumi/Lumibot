@@ -819,6 +819,24 @@
       "maxLevel": 26,
       "encounterTypeIndex": 1,
       "zoneId": 297
+    },
+    {
+      "routeName": "Route 204 South",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 7,
+      "maxLevel": 7,
+      "encounterTypeIndex": 0,
+      "zoneId": 357
+    },
+    {
+      "routeName": "Route 204 South",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 7,
+      "maxLevel": 7,
+      "encounterTypeIndex": 1,
+      "zoneId": 357
     }
   ],
   "27": [
@@ -2546,6 +2564,15 @@
       "zoneId": 287
     },
     {
+      "routeName": "Snowpoint Temple B1F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 50,
+      "maxLevel": 50,
+      "encounterTypeIndex": 1,
+      "zoneId": 287
+    },
+    {
       "routeName": "Snowpoint Temple B2F",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
@@ -2582,6 +2609,15 @@
       "zoneId": 288
     },
     {
+      "routeName": "Snowpoint Temple B2F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 50,
+      "maxLevel": 50,
+      "encounterTypeIndex": 1,
+      "zoneId": 288
+    },
+    {
       "routeName": "Snowpoint Temple B3F",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
@@ -2618,6 +2654,15 @@
       "zoneId": 289
     },
     {
+      "routeName": "Snowpoint Temple B3F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 50,
+      "maxLevel": 50,
+      "encounterTypeIndex": 1,
+      "zoneId": 289
+    },
+    {
       "routeName": "Snowpoint Temple B4F",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
@@ -2651,6 +2696,15 @@
       "minLevel": 50,
       "maxLevel": 50,
       "encounterTypeIndex": 3,
+      "zoneId": 290
+    },
+    {
+      "routeName": "Snowpoint Temple B4F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 50,
+      "maxLevel": 50,
+      "encounterTypeIndex": 1,
       "zoneId": 290
     },
     {
@@ -2687,6 +2741,15 @@
       "minLevel": 50,
       "maxLevel": 50,
       "encounterTypeIndex": 3,
+      "zoneId": 291
+    },
+    {
+      "routeName": "Snowpoint Temple B5F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 50,
+      "maxLevel": 50,
+      "encounterTypeIndex": 1,
       "zoneId": 291
     },
     {
@@ -7848,6 +7911,24 @@
       "zoneId": 361
     },
     {
+      "routeName": "Route 215",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 30,
+      "maxLevel": 30,
+      "encounterTypeIndex": 0,
+      "zoneId": 394
+    },
+    {
+      "routeName": "Route 215",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 30,
+      "maxLevel": 30,
+      "encounterTypeIndex": 1,
+      "zoneId": 394
+    },
+    {
       "routeName": "Floaroma Meadow",
       "encounterType": "Honey Tree",
       "encounterRate": "20%",
@@ -7931,6 +8012,24 @@
       "maxLevel": 8,
       "encounterTypeIndex": 1,
       "zoneId": 356
+    },
+    {
+      "routeName": "Route 211 East",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 19,
+      "maxLevel": 19,
+      "encounterTypeIndex": 0,
+      "zoneId": 378
+    },
+    {
+      "routeName": "Route 211 East",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 19,
+      "maxLevel": 19,
+      "encounterTypeIndex": 1,
+      "zoneId": 378
     }
   ],
   "105": [
@@ -8045,6 +8144,267 @@
       "maxLevel": 18,
       "encounterTypeIndex": 0,
       "zoneId": 306
+    },
+    {
+      "routeName": "Old Chateau",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 18,
+      "maxLevel": 18,
+      "encounterTypeIndex": 1,
+      "zoneId": 306
+    },
+    {
+      "routeName": "Old Chateau",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 18,
+      "maxLevel": 18,
+      "encounterTypeIndex": 0,
+      "zoneId": 307
+    },
+    {
+      "routeName": "Old Chateau",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 18,
+      "maxLevel": 18,
+      "encounterTypeIndex": 1,
+      "zoneId": 307
+    },
+    {
+      "routeName": "Old Chateau",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 18,
+      "maxLevel": 18,
+      "encounterTypeIndex": 0,
+      "zoneId": 308
+    },
+    {
+      "routeName": "Old Chateau",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 18,
+      "maxLevel": 18,
+      "encounterTypeIndex": 1,
+      "zoneId": 308
+    },
+    {
+      "routeName": "Old Chateau",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 18,
+      "maxLevel": 18,
+      "encounterTypeIndex": 0,
+      "zoneId": 309
+    },
+    {
+      "routeName": "Old Chateau",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 18,
+      "maxLevel": 18,
+      "encounterTypeIndex": 1,
+      "zoneId": 309
+    },
+    {
+      "routeName": "Old Chateau",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 18,
+      "maxLevel": 18,
+      "encounterTypeIndex": 0,
+      "zoneId": 310
+    },
+    {
+      "routeName": "Old Chateau",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 18,
+      "maxLevel": 18,
+      "encounterTypeIndex": 1,
+      "zoneId": 310
+    },
+    {
+      "routeName": "Old Chateau",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 18,
+      "maxLevel": 18,
+      "encounterTypeIndex": 0,
+      "zoneId": 311
+    },
+    {
+      "routeName": "Old Chateau",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 18,
+      "maxLevel": 18,
+      "encounterTypeIndex": 1,
+      "zoneId": 311
+    },
+    {
+      "routeName": "Old Chateau",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 18,
+      "maxLevel": 18,
+      "encounterTypeIndex": 0,
+      "zoneId": 312
+    },
+    {
+      "routeName": "Old Chateau",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 18,
+      "maxLevel": 18,
+      "encounterTypeIndex": 1,
+      "zoneId": 312
+    },
+    {
+      "routeName": "Old Chateau",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 18,
+      "maxLevel": 18,
+      "encounterTypeIndex": 0,
+      "zoneId": 313
+    },
+    {
+      "routeName": "Old Chateau",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 18,
+      "maxLevel": 18,
+      "encounterTypeIndex": 1,
+      "zoneId": 313
+    },
+    {
+      "routeName": "Old Chateau",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 18,
+      "maxLevel": 18,
+      "encounterTypeIndex": 0,
+      "zoneId": 314
+    },
+    {
+      "routeName": "Old Chateau",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 18,
+      "maxLevel": 18,
+      "encounterTypeIndex": 1,
+      "zoneId": 314
+    },
+    {
+      "routeName": "Lost Tower 1F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 30,
+      "maxLevel": 30,
+      "encounterTypeIndex": 0,
+      "zoneId": 368
+    },
+    {
+      "routeName": "Lost Tower 1F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 30,
+      "maxLevel": 30,
+      "encounterTypeIndex": 1,
+      "zoneId": 368
+    },
+    {
+      "routeName": "Lost Tower 2F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 30,
+      "maxLevel": 30,
+      "encounterTypeIndex": 0,
+      "zoneId": 369
+    },
+    {
+      "routeName": "Lost Tower 2F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 30,
+      "maxLevel": 30,
+      "encounterTypeIndex": 1,
+      "zoneId": 369
+    },
+    {
+      "routeName": "Lost Tower 3F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 30,
+      "maxLevel": 30,
+      "encounterTypeIndex": 0,
+      "zoneId": 370
+    },
+    {
+      "routeName": "Lost Tower 3F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 30,
+      "maxLevel": 30,
+      "encounterTypeIndex": 1,
+      "zoneId": 370
+    },
+    {
+      "routeName": "Lost Tower 4F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 30,
+      "maxLevel": 30,
+      "encounterTypeIndex": 0,
+      "zoneId": 371
+    },
+    {
+      "routeName": "Lost Tower 4F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 30,
+      "maxLevel": 30,
+      "encounterTypeIndex": 1,
+      "zoneId": 371
+    },
+    {
+      "routeName": "Lost Tower 5F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 30,
+      "maxLevel": 30,
+      "encounterTypeIndex": 0,
+      "zoneId": 372
+    },
+    {
+      "routeName": "Lost Tower 5F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 30,
+      "maxLevel": 30,
+      "encounterTypeIndex": 1,
+      "zoneId": 372
+    },
+    {
+      "routeName": "Route 211 West",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 18,
+      "maxLevel": 18,
+      "encounterTypeIndex": 0,
+      "zoneId": 377
+    },
+    {
+      "routeName": "Route 211 West",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 18,
+      "maxLevel": 18,
+      "encounterTypeIndex": 1,
+      "zoneId": 377
     },
     {
       "routeName": "Route 212 South",
@@ -9560,6 +9920,15 @@
       "zoneId": 367
     },
     {
+      "routeName": "Route 209",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 24,
+      "maxLevel": 24,
+      "encounterTypeIndex": 1,
+      "zoneId": 367
+    },
+    {
       "routeName": "Route 210 South",
       "encounterType": "ground_mons",
       "encounterRate": "5%",
@@ -9603,6 +9972,24 @@
       "maxLevel": 30,
       "encounterTypeIndex": 11,
       "zoneId": 373
+    },
+    {
+      "routeName": "Route 212 South",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 36,
+      "maxLevel": 36,
+      "encounterTypeIndex": 0,
+      "zoneId": 383
+    },
+    {
+      "routeName": "Route 212 South",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 36,
+      "maxLevel": 36,
+      "encounterTypeIndex": 1,
+      "zoneId": 383
     },
     {
       "routeName": "Route 229",
@@ -14936,6 +15323,24 @@
     },
     {
       "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 0,
+      "zoneId": 225
+    },
+    {
+      "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 1,
+      "zoneId": 225
+    },
+    {
+      "routeName": "Solaceon Ruins",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 25,
@@ -15098,6 +15503,24 @@
     },
     {
       "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 0,
+      "zoneId": 227
+    },
+    {
+      "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 1,
+      "zoneId": 227
+    },
+    {
+      "routeName": "Solaceon Ruins",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 25,
@@ -15260,6 +15683,24 @@
     },
     {
       "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 0,
+      "zoneId": 228
+    },
+    {
+      "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 1,
+      "zoneId": 228
+    },
+    {
+      "routeName": "Solaceon Ruins",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 25,
@@ -15422,6 +15863,24 @@
     },
     {
       "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 0,
+      "zoneId": 229
+    },
+    {
+      "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 1,
+      "zoneId": 229
+    },
+    {
+      "routeName": "Solaceon Ruins",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 25,
@@ -15584,6 +16043,24 @@
     },
     {
       "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 0,
+      "zoneId": 230
+    },
+    {
+      "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 1,
+      "zoneId": 230
+    },
+    {
+      "routeName": "Solaceon Ruins",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 25,
@@ -15746,6 +16223,24 @@
     },
     {
       "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 0,
+      "zoneId": 231
+    },
+    {
+      "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 1,
+      "zoneId": 231
+    },
+    {
+      "routeName": "Solaceon Ruins",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 25,
@@ -15908,6 +16403,24 @@
     },
     {
       "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 0,
+      "zoneId": 232
+    },
+    {
+      "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 1,
+      "zoneId": 232
+    },
+    {
+      "routeName": "Solaceon Ruins",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 25,
@@ -16070,6 +16583,24 @@
     },
     {
       "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 0,
+      "zoneId": 233
+    },
+    {
+      "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 1,
+      "zoneId": 233
+    },
+    {
+      "routeName": "Solaceon Ruins",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 25,
@@ -16232,6 +16763,24 @@
     },
     {
       "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 0,
+      "zoneId": 234
+    },
+    {
+      "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 1,
+      "zoneId": 234
+    },
+    {
+      "routeName": "Solaceon Ruins",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 25,
@@ -16394,6 +16943,24 @@
     },
     {
       "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 0,
+      "zoneId": 235
+    },
+    {
+      "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 1,
+      "zoneId": 235
+    },
+    {
+      "routeName": "Solaceon Ruins",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 25,
@@ -16556,6 +17123,24 @@
     },
     {
       "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 0,
+      "zoneId": 236
+    },
+    {
+      "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 1,
+      "zoneId": 236
+    },
+    {
+      "routeName": "Solaceon Ruins",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 25,
@@ -16718,6 +17303,24 @@
     },
     {
       "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 0,
+      "zoneId": 237
+    },
+    {
+      "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 1,
+      "zoneId": 237
+    },
+    {
+      "routeName": "Solaceon Ruins",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 25,
@@ -16880,6 +17483,24 @@
     },
     {
       "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 0,
+      "zoneId": 238
+    },
+    {
+      "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 1,
+      "zoneId": 238
+    },
+    {
+      "routeName": "Solaceon Ruins",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 25,
@@ -17042,6 +17663,24 @@
     },
     {
       "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 0,
+      "zoneId": 239
+    },
+    {
+      "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 1,
+      "zoneId": 239
+    },
+    {
+      "routeName": "Solaceon Ruins",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 25,
@@ -17204,6 +17843,24 @@
     },
     {
       "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 0,
+      "zoneId": 240
+    },
+    {
+      "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 1,
+      "zoneId": 240
+    },
+    {
+      "routeName": "Solaceon Ruins",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 25,
@@ -17366,6 +18023,24 @@
     },
     {
       "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 0,
+      "zoneId": 241
+    },
+    {
+      "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 1,
+      "zoneId": 241
+    },
+    {
+      "routeName": "Solaceon Ruins",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 25,
@@ -17528,6 +18203,24 @@
     },
     {
       "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 0,
+      "zoneId": 242
+    },
+    {
+      "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 1,
+      "zoneId": 242
+    },
+    {
+      "routeName": "Solaceon Ruins",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 25,
@@ -17686,6 +18379,24 @@
       "minLevel": 25,
       "maxLevel": 25,
       "encounterTypeIndex": 3,
+      "zoneId": 243
+    },
+    {
+      "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 0,
+      "zoneId": 243
+    },
+    {
+      "routeName": "Solaceon Ruins",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 25,
+      "maxLevel": 25,
+      "encounterTypeIndex": 1,
       "zoneId": 243
     }
   ],
@@ -18982,6 +19693,24 @@
       "maxLevel": 19,
       "encounterTypeIndex": 10,
       "zoneId": 378
+    },
+    {
+      "routeName": "Route 212 North",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 26,
+      "maxLevel": 26,
+      "encounterTypeIndex": 0,
+      "zoneId": 379
+    },
+    {
+      "routeName": "Route 212 North",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 26,
+      "maxLevel": 26,
+      "encounterTypeIndex": 1,
+      "zoneId": 379
     }
   ],
   "217": [
@@ -20100,6 +20829,15 @@
       "minLevel": 16,
       "maxLevel": 16,
       "encounterTypeIndex": 0,
+      "zoneId": 200
+    },
+    {
+      "routeName": "Eterna Forest",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 16,
+      "maxLevel": 16,
+      "encounterTypeIndex": 1,
       "zoneId": 200
     },
     {
@@ -33456,6 +34194,15 @@
       "zoneId": 359
     },
     {
+      "routeName": "Route 205 South",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 13,
+      "maxLevel": 13,
+      "encounterTypeIndex": 1,
+      "zoneId": 359
+    },
+    {
       "routeName": "Route 209",
       "encounterType": "ground_mons",
       "encounterRate": "5%",
@@ -33688,6 +34435,24 @@
     },
     {
       "routeName": "Wayward Cave",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 22,
+      "maxLevel": 22,
+      "encounterTypeIndex": 0,
+      "zoneId": 292
+    },
+    {
+      "routeName": "Wayward Cave",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 22,
+      "maxLevel": 22,
+      "encounterTypeIndex": 1,
+      "zoneId": 292
+    },
+    {
+      "routeName": "Wayward Cave",
       "encounterType": "ground_mons",
       "encounterRate": "morning",
       "minLevel": 22,
@@ -33765,6 +34530,24 @@
       "minLevel": 22,
       "maxLevel": 22,
       "encounterTypeIndex": 3,
+      "zoneId": 293
+    },
+    {
+      "routeName": "Wayward Cave",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 22,
+      "maxLevel": 22,
+      "encounterTypeIndex": 0,
+      "zoneId": 293
+    },
+    {
+      "routeName": "Wayward Cave",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 22,
+      "maxLevel": 22,
+      "encounterTypeIndex": 1,
       "zoneId": 293
     }
   ],
@@ -34916,6 +35699,15 @@
       "zoneId": 287
     },
     {
+      "routeName": "Snowpoint Temple B1F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 50,
+      "maxLevel": 50,
+      "encounterTypeIndex": 0,
+      "zoneId": 287
+    },
+    {
       "routeName": "Snowpoint Temple B2F",
       "encounterType": "ground_mons",
       "encounterRate": "4%",
@@ -34931,6 +35723,15 @@
       "minLevel": 50,
       "maxLevel": 50,
       "encounterTypeIndex": 10,
+      "zoneId": 288
+    },
+    {
+      "routeName": "Snowpoint Temple B2F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 50,
+      "maxLevel": 50,
+      "encounterTypeIndex": 0,
       "zoneId": 288
     },
     {
@@ -34949,6 +35750,15 @@
       "minLevel": 50,
       "maxLevel": 50,
       "encounterTypeIndex": 10,
+      "zoneId": 289
+    },
+    {
+      "routeName": "Snowpoint Temple B3F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 50,
+      "maxLevel": 50,
+      "encounterTypeIndex": 0,
       "zoneId": 289
     },
     {
@@ -34967,6 +35777,15 @@
       "minLevel": 50,
       "maxLevel": 50,
       "encounterTypeIndex": 10,
+      "zoneId": 290
+    },
+    {
+      "routeName": "Snowpoint Temple B4F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 50,
+      "maxLevel": 50,
+      "encounterTypeIndex": 0,
       "zoneId": 290
     },
     {
@@ -34985,6 +35804,15 @@
       "minLevel": 50,
       "maxLevel": 50,
       "encounterTypeIndex": 10,
+      "zoneId": 291
+    },
+    {
+      "routeName": "Snowpoint Temple B5F",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 50,
+      "maxLevel": 50,
+      "encounterTypeIndex": 0,
       "zoneId": 291
     }
   ],
@@ -35071,6 +35899,33 @@
       "maxLevel": 67,
       "encounterTypeIndex": 0,
       "zoneId": 485
+    },
+    {
+      "routeName": "Route 220",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 67,
+      "maxLevel": 67,
+      "encounterTypeIndex": 1,
+      "zoneId": 485
+    },
+    {
+      "routeName": "Route 230",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 67,
+      "maxLevel": 67,
+      "encounterTypeIndex": 0,
+      "zoneId": 489
+    },
+    {
+      "routeName": "Route 230",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 67,
+      "maxLevel": 67,
+      "encounterTypeIndex": 1,
+      "zoneId": 489
     }
   ],
   "863": [
@@ -35082,6 +35937,33 @@
       "maxLevel": 40,
       "encounterTypeIndex": 0,
       "zoneId": 404
+    },
+    {
+      "routeName": "Route 221",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 40,
+      "maxLevel": 40,
+      "encounterTypeIndex": 1,
+      "zoneId": 404
+    },
+    {
+      "routeName": "Route 227",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 67,
+      "maxLevel": 67,
+      "encounterTypeIndex": 0,
+      "zoneId": 414
+    },
+    {
+      "routeName": "Route 227",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 67,
+      "maxLevel": 67,
+      "encounterTypeIndex": 1,
+      "zoneId": 414
     }
   ],
   "864": [
@@ -35093,6 +35975,87 @@
       "maxLevel": 60,
       "encounterTypeIndex": 2,
       "zoneId": 142
+    },
+    {
+      "routeName": "Sendoff Spring",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 54,
+      "maxLevel": 54,
+      "encounterTypeIndex": 0,
+      "zoneId": 263
+    },
+    {
+      "routeName": "Sendoff Spring",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 54,
+      "maxLevel": 54,
+      "encounterTypeIndex": 1,
+      "zoneId": 263
+    },
+    {
+      "routeName": "Iron Island (Outside)",
+      "encounterType": "Surfing Incense",
+      "encounterRate": "30%",
+      "minLevel": 45,
+      "maxLevel": 45,
+      "encounterTypeIndex": 2,
+      "zoneId": 298
+    },
+    {
+      "routeName": "Iron Island (Outside)",
+      "encounterType": "Surfing Incense",
+      "encounterRate": "30%",
+      "minLevel": 45,
+      "maxLevel": 40,
+      "encounterTypeIndex": 2,
+      "zoneId": 298
+    },
+    {
+      "routeName": "Lake Acuity (After)",
+      "encounterType": "Surfing Incense",
+      "encounterRate": "30%",
+      "minLevel": 51,
+      "maxLevel": 51,
+      "encounterTypeIndex": 2,
+      "zoneId": 330
+    },
+    {
+      "routeName": "Route 222",
+      "encounterType": "Surfing Incense",
+      "encounterRate": "30%",
+      "minLevel": 55,
+      "maxLevel": 55,
+      "encounterTypeIndex": 2,
+      "zoneId": 407
+    },
+    {
+      "routeName": "Route 225",
+      "encounterType": "Surfing Incense",
+      "encounterRate": "30%",
+      "minLevel": 67,
+      "maxLevel": 67,
+      "encounterTypeIndex": 2,
+      "zoneId": 412
+    },
+    {
+      "routeName": "Route 228",
+      "encounterType": "Surfing Incense",
+      "encounterRate": "30%",
+      "minLevel": 67,
+      "maxLevel": 67,
+      "encounterTypeIndex": 2,
+      "zoneId": 416
+    },
+    {
+      "routeName": "Route 223",
+      "encounterType": "Surfing Incense",
+      "encounterRate": "30%",
+      "minLevel": 60,
+      "maxLevel": 60,
+      "encounterTypeIndex": 2,
+      "zoneId": 486
     }
   ],
   "865": [
@@ -35103,6 +36066,15 @@
       "minLevel": 54,
       "maxLevel": 54,
       "encounterTypeIndex": 0,
+      "zoneId": 327
+    },
+    {
+      "routeName": "Lake Valor (After)",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 54,
+      "maxLevel": 54,
+      "encounterTypeIndex": 1,
       "zoneId": 327
     }
   ],
@@ -35115,6 +36087,15 @@
       "maxLevel": 51,
       "encounterTypeIndex": 0,
       "zoneId": 330
+    },
+    {
+      "routeName": "Lake Acuity (After)",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 51,
+      "maxLevel": 51,
+      "encounterTypeIndex": 1,
+      "zoneId": 330
     }
   ],
   "903": [
@@ -35126,6 +36107,33 @@
       "maxLevel": 53,
       "encounterTypeIndex": 0,
       "zoneId": 206
+    },
+    {
+      "routeName": "Mt. Coronet Snow Area",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 53,
+      "maxLevel": 53,
+      "encounterTypeIndex": 1,
+      "zoneId": 206
+    },
+    {
+      "routeName": "Acuity Lakefront",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 49,
+      "maxLevel": 49,
+      "encounterTypeIndex": 0,
+      "zoneId": 351
+    },
+    {
+      "routeName": "Acuity Lakefront",
+      "encounterType": "Incense",
+      "encounterRate": "10%",
+      "minLevel": 49,
+      "maxLevel": 49,
+      "encounterTypeIndex": 1,
+      "zoneId": 351
     }
   ],
   "904": [
@@ -35137,6 +36145,33 @@
       "maxLevel": 45,
       "encounterTypeIndex": 2,
       "zoneId": 24
+    },
+    {
+      "routeName": "Canalave City",
+      "encounterType": "Surfing Incense",
+      "encounterRate": "30%",
+      "minLevel": 45,
+      "maxLevel": 40,
+      "encounterTypeIndex": 2,
+      "zoneId": 24
+    },
+    {
+      "routeName": "Resort Area",
+      "encounterType": "Surfing Incense",
+      "encounterRate": "30%",
+      "minLevel": 40,
+      "maxLevel": 40,
+      "encounterTypeIndex": 2,
+      "zoneId": 473
+    },
+    {
+      "routeName": "Route 226",
+      "encounterType": "Surfing Incense",
+      "encounterRate": "30%",
+      "minLevel": 67,
+      "maxLevel": 67,
+      "encounterTypeIndex": 2,
+      "zoneId": 487
     }
   ],
   "1024": [
