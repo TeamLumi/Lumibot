@@ -21,7 +21,11 @@ function getEncounterLocations(monsNo) {
 		"Canalave City",
 		"Snowpoint City",
 		"Sunyshore City",
+		"Pokemon League",
 	];
+
+	// Define an array of location names to be filtered.
+	const locationsToFilter = ["Lake Verity (Before)"];
 
 	const locations = [];
 	const groupedCitiesAndTowns = [];
@@ -206,7 +210,12 @@ function getEncounterLocations(monsNo) {
 			},
 		);
 
-		return { ...location, location: cleanedNameWithoutExtraRoute };
+		const cleanedNameWithoutAfter = cleanedNameWithoutExtraRoute.replace(
+			/\s?\(after\)/gi,
+			"",
+		);
+
+		return { ...location, location: cleanedNameWithoutAfter };
 	});
 
 	const optimizedLocations = [];
@@ -249,7 +258,11 @@ function getEncounterLocations(monsNo) {
 		}
 	}
 
-	return optimizedLocations;
+	const filteredLocations = optimizedLocations.filter(
+		(location) => !locationsToFilter.includes(location.location),
+	);
+
+	return filteredLocations;
 }
 
 module.exports = { getEncounterLocations };
