@@ -1,21 +1,38 @@
 const { encounterData } = require("../../lumibot/__gamedata");
 
 function getEncounterLocations(monsNo) {
-	// If the Pokémon number is not found, return an empty array
+	// If the Pokémon number is not found, return an empty array.
 	if (!encounterData[monsNo]) {
 		return [];
 	}
 
+	const cityAndTownNames = [
+		"Twinleaf Town",
+		"Sandgem Town",
+		"Jubilife City",
+		"Oreburgh City",
+		"Floaroma Town",
+		"Eterna City",
+		"Veilstone City",
+		"Celestic Town",
+		"Pastoria City",
+		"Hearthome City",
+		"Solaceon Town",
+		"Canalave City",
+		"Snowpoint City",
+		"Sunyshore City",
+	];
+
 	const locations = [];
+	const groupedCitiesAndTowns = [];
 
 	for (const location of encounterData[monsNo]) {
 		let enc_type = location["encounterType"];
 		let enc_location = location["routeName"];
-
 		const enc_level = location["maxLevel"];
 		let enc_rate = location["encounterRate"];
 
-		// Convert the encounter rate to a numerical value
+		// Convert the encounter rate to a numerical value.
 		if (enc_rate === "morning") {
 			enc_rate = 10;
 			enc_type = "Morning";
@@ -24,6 +41,7 @@ function getEncounterLocations(monsNo) {
 		}
 
 		const isRouteLocation = enc_location.toLowerCase().startsWith("route");
+		const isCityOrTownLocation = cityAndTownNames.includes(enc_location);
 
 		const nameWithFloor = enc_location.match(/.*?(?=\s-)|.*/i);
 		const mainLocationName = nameWithFloor ? nameWithFloor[0] : enc_location;
@@ -32,7 +50,7 @@ function getEncounterLocations(monsNo) {
 			"i",
 		);
 
-		// Compress locations with similar encounter types and levels
+		// Compress locations with similar encounter types and levels.
 		const similarLocation = locations.find((loc) =>
 			loc.encounters.some(
 				(enc) =>
@@ -49,7 +67,6 @@ function getEncounterLocations(monsNo) {
 				(enc) => enc.type === enc_type && enc.level === enc_level,
 			);
 			if (existingEncounter) {
-				// Only update the encounter rate if the location names are the same
 				if (similarLocation.location === enc_location) {
 					existingEncounter.rate += enc_rate;
 				}
@@ -61,25 +78,57 @@ function getEncounterLocations(monsNo) {
 				});
 			}
 
-			// Add the floor or location information to the existing location's name
+			// Add the floor or location information to the existing location's name.
 			if (!similarLocation.location.includes(enc_location)) {
 				similarLocation.location += `, ${enc_location}`;
 			}
 		} else {
-			locations.push({
-				location: enc_location,
-				encounters: [
-					{
-						type: enc_type,
-						level: enc_level,
-						rate: enc_rate,
-					},
-				],
-			});
+			if (isCityOrTownLocation) {
+				const existingCityOrTown = groupedCitiesAndTowns.find(
+					(loc) => loc.location === enc_location,
+				);
+
+				if (existingCityOrTown) {
+					const existingEncounter = existingCityOrTown.encounters.find(
+						(enc) => enc.type === enc_type && enc.level === enc_level,
+					);
+					if (existingEncounter) {
+						existingEncounter.rate += enc_rate;
+					} else {
+						existingCityOrTown.encounters.push({
+							type: enc_type,
+							level: enc_level,
+							rate: enc_rate,
+						});
+					}
+				} else {
+					groupedCitiesAndTowns.push({
+						location: enc_location,
+						encounters: [
+							{
+								type: enc_type,
+								level: enc_level,
+								rate: enc_rate,
+							},
+						],
+					});
+				}
+			} else {
+				locations.push({
+					location: enc_location,
+					encounters: [
+						{
+							type: enc_type,
+							level: enc_level,
+							rate: enc_rate,
+						},
+					],
+				});
+			}
 		}
 	}
 
-	// Group all locations that have the same names after creating an array as above
+	// Group all locations that have the same names after creating an array as above.
 	const groupedLocations = [];
 	for (const location of locations) {
 		const existingGroupedLocation = groupedLocations.find(
@@ -93,7 +142,26 @@ function getEncounterLocations(monsNo) {
 		}
 	}
 
-	// Clean and compress location names
+	// Create an array for just the towns and cities, merge where appropriate then add to the front of the groupedLocations array.
+	const mergedCitiesAndTowns = [];
+	const encounterMap = new Map();
+
+	for (const location of groupedCitiesAndTowns) {
+		const key = `${location.encounters[0].type}-${location.encounters[0].level}-${location.encounters[0].rate}`;
+
+		if (encounterMap.has(key)) {
+			const existingLocationIndex = encounterMap.get(key);
+			mergedCitiesAndTowns[
+				existingLocationIndex
+			].location += `, ${location.location}`;
+		} else {
+			encounterMap.set(key, mergedCitiesAndTowns.length);
+			mergedCitiesAndTowns.push(location);
+		}
+	}
+	groupedLocations.unshift(...mergedCitiesAndTowns);
+
+	// Clean and compress location names.
 	const cleanedLocations = groupedLocations.map((location) => {
 		const mainLocationName = location.location.match(/.*?(?=\s-)|.*/i)[0];
 		let encounteredMainName = false;
@@ -114,7 +182,7 @@ function getEncounterLocations(monsNo) {
 			},
 		);
 
-		// Clean up extra instances of the hyphen
+		// Clean up extra instances of the hyphen.
 		const cleanedNameWithoutExtraHyphen = cleanedName.replace(
 			/-\s?/g,
 			(match, offset) => {
@@ -126,7 +194,7 @@ function getEncounterLocations(monsNo) {
 			},
 		);
 
-		// Clean up extra instances of the word 'Route'
+		// Clean up extra instances of the word 'Route'.
 		const cleanedNameWithoutExtraRoute = cleanedNameWithoutExtraHyphen.replace(
 			/Route\s/gi,
 			(match, offset) => {
