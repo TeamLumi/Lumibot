@@ -242,16 +242,27 @@ function getEncounterLocations(monsNo) {
 			);
 
 		if (sameRateAndLevel) {
+			const groundMonsEncounter = {
+				type: "ground_mons",
+				level: morningDayNightEncounters[0].level,
+				rate: morningDayNightEncounters[0].rate,
+			};
+
+			const existingGroundMonsIndex = otherEncounters.findIndex(
+				(enc) =>
+					enc.type === "ground_mons" && enc.level === groundMonsEncounter.level,
+			);
+
+			if (existingGroundMonsIndex !== -1) {
+				otherEncounters[existingGroundMonsIndex].rate +=
+					groundMonsEncounter.rate;
+			} else {
+				otherEncounters.push(groundMonsEncounter);
+			}
+
 			optimizedLocations.push({
 				location: locName,
-				encounters: [
-					{
-						type: "ground_mons",
-						level: morningDayNightEncounters[0].level,
-						rate: morningDayNightEncounters[0].rate,
-					},
-					...otherEncounters,
-				],
+				encounters: otherEncounters,
 			});
 		} else {
 			optimizedLocations.push(location);
