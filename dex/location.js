@@ -25,9 +25,7 @@ function getEncounterLocations(monsNo) {
 
 		const isRouteLocation = enc_location.toLowerCase().startsWith("route");
 
-		const nameWithFloor = enc_location.match(
-			/.*?(?=\s(?:\d+F|B\d+F|Area\b))|.*?(?=\s\()/i,
-		);
+		const nameWithFloor = enc_location.match(/.*?(?=\s-)|.*/i);
 		const mainLocationName = nameWithFloor ? nameWithFloor[0] : enc_location;
 		const mainLocationNamePattern = new RegExp(
 			mainLocationName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
@@ -97,18 +95,17 @@ function getEncounterLocations(monsNo) {
 
 	// Clean and compress location names
 	const cleanedLocations = groupedLocations.map((location) => {
-		const nameWithFloor = location.location.match(
-			/.*?(?=\s(?:\d+F|B\d+F|Area\b))|.*?(?=\s\()/i,
-		);
-		const mainLocationName = nameWithFloor
-			? nameWithFloor[0]
-			: location.location;
+		const mainLocationName = location.location.match(/.*?(?=\s-)|.*/i)[0];
 		let encounteredMainName = false;
 
 		const cleanedName = location.location.replace(
 			new RegExp(mainLocationName, "g"),
 			(match) => {
-				if (encounteredMainName && match === mainLocationName) {
+				if (
+					!location.location.toLowerCase().startsWith("route") &&
+					encounteredMainName &&
+					match.trim() === mainLocationName.trim()
+				) {
 					return "";
 				} else {
 					encounteredMainName = true;
@@ -116,21 +113,23 @@ function getEncounterLocations(monsNo) {
 				}
 			},
 		);
-		const cleanedNameWithAreas = cleanedName.replace(
-			/Area\s(\d+),?\s?/g,
-			(match, p1, offset, string) => {
-				if (offset === string.length - match.length) {
-					return `${p1}`;
+
+		// Clean up extra instances of the hyphen
+		const cleanedNameWithoutExtraHyphen = cleanedName.replace(
+			/-\s?/g,
+			(match, offset) => {
+				if (offset > 0) {
+					return "";
 				} else {
-					return `${p1}, `;
+					return match;
 				}
 			},
 		);
 
 		// Clean up extra instances of the word 'Route'
-		const cleanedNameWithoutExtraRoute = cleanedNameWithAreas.replace(
+		const cleanedNameWithoutExtraRoute = cleanedNameWithoutExtraHyphen.replace(
 			/Route\s/gi,
-			(match, offset, string) => {
+			(match, offset) => {
 				if (offset > 0) {
 					return "";
 				} else {
@@ -170,7 +169,7 @@ function getEncounterLocations(monsNo) {
 				location: locName,
 				encounters: [
 					{
-						type: "<:grass:1136228499477246043> Walking",
+						type: "ground_mons",
 						level: morningDayNightEncounters[0].level,
 						rate: morningDayNightEncounters[0].rate,
 					},
