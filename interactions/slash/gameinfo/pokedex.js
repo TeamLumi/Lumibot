@@ -182,6 +182,9 @@ module.exports = {
 				embed.setColor(typeColor);
 			}
 
+			const solaceonRuinsRegex = /^Solaceon Ruins\b.*/;
+			const turnbackCaveRegex = /^Turnback Cave\b.*/;
+
 			if (locations.length === 0) {
 				embed.setDescription(
 					`Sorry! I couldn't locate that Pokemon as I don't have enough data about it. It might not appear in the wild, or maybe it's just exceedinly rare.`,
@@ -197,7 +200,19 @@ module.exports = {
 								return `${encounterType}\nLevel: ${encounter.level} | Rate: ${encounter.rate}%`;
 							})
 							.join("\n");
-						return `**${location.location}**\n${encounters}`;
+						let locationTitle = location.location;
+						if (solaceonRuinsRegex.test(locationTitle)) {
+							locationTitle = locationTitle.replace(
+								solaceonRuinsRegex,
+								"Solaceon Ruins",
+							);
+						} else if (turnbackCaveRegex.test(locationTitle)) {
+							locationTitle = locationTitle.replace(
+								turnbackCaveRegex,
+								"Turnback Cave",
+							);
+						}
+						return `**${locationTitle}**\n${encounters}`;
 					})
 					.join("\n\n");
 				embed.setDescription(
