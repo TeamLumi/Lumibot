@@ -52,6 +52,22 @@ const typeIcons = {
 	Normal: "<:t_normal:1117062635817554010>",
 };
 
+// Rename the encounter types
+const reverseEncounterTypeMap = {
+	ground_mons: "<:grass:1136228499477246043> Walking",
+	swayGrass: "<:pokeradar:1136357617074180116> Radar",
+	tairyo: ":tv: Swarm",
+	water_mons: ":ocean: Surfing",
+	boro_mons: "<:oldrod:1136220484304896001> Old Rod",
+	ii_mons: "<:goodrod:1136220559856906400> Good Rod",
+	sugoi_mons: "<:superrod:1136220619432792097> Super Rod",
+	day: ":sunny: Day",
+	night: ":crescent_moon: Night",
+	Morning: ":sunrise_over_mountains: Morning",
+	"Honey Tree": ":honey_pot: Honey Tree",
+	Incense: "<:incense:1136358228356243506> Incense",
+};
+
 /**
  * @type {import('../../../typings').SlashInteractionCommand}
  */
@@ -97,64 +113,35 @@ module.exports = {
 		const visualization = interaction.options.getString("visualization");
 		const mode = interaction.options.getString("mode");
 
-		let name,
+		// Attempting to capitalise Pokemon names that result in a default egg.
+		const isDefaultEgg = pokemonInfo.name === "Egg";
+		const capitalizedPokemonName = isDefaultEgg
+			? pokemonName
+					.toLowerCase()
+					.replace(/(?:^|\s|-)\S/g, (char) => char.toUpperCase())
+			: pokemonName;
+
+		const targetPokemonInfo = isDefaultEgg
+			? getPokemonInfo(getPokemonIdFromDisplayName(capitalizedPokemonName))
+			: pokemonInfo;
+
+		const {
+			name,
 			ability1,
 			ability2,
 			abilityH,
 			tmLearnset,
 			baseStatsTotal,
-			pWeight,
-			pHeight,
+			weight: pWeight,
+			height: pHeight,
 			type1,
 			type2,
 			imageSrc,
-			imageLnk,
-			genderDecimalValue;
+			genderDecimalValue,
+		} = targetPokemonInfo;
 
-		// Here we default to the string conversion method of getting Pokemon info if you manage to avoid the autocomplete. Else set normally.
-		if (pokemonInfo.name === "Egg") {
-			const pokemonBackupName = interaction.options
-				.getString("pokemon")
-				.toLowerCase();
-			const pokemonBackupNameCapital = pokemonBackupName.replace(
-				/(?:^|\s|-)\S/g,
-				(char) => char.toUpperCase(),
-			);
-			const monsBackupID = getPokemonIdFromDisplayName(
-				pokemonBackupNameCapital,
-			);
-			const pokemonBackupInfo = getPokemonInfo(monsBackupID);
-
-			name = pokemonBackupInfo.name;
-			ability1 = pokemonBackupInfo.ability1;
-			ability2 = pokemonBackupInfo.ability2;
-			abilityH = pokemonBackupInfo.abilityH;
-			tmLearnset = pokemonBackupInfo.tmLearnset;
-			baseStatsTotal = pokemonBackupInfo.baseStatsTotal;
-			pWeight = pokemonBackupInfo.weight;
-			pHeight = pokemonBackupInfo.height;
-			type1 = pokemonBackupInfo.type1;
-			type2 = pokemonBackupInfo.type2;
-			imageSrc = pokemonBackupInfo.imageSrc;
-			imagePrefix = `https://luminescent.team`;
-			imageLnk = `${imagePrefix}${imageSrc}`;
-			genderDecimalValue = pokemonBackupInfo.genderDecimalValue;
-		} else {
-			name = pokemonInfo.name;
-			ability1 = pokemonInfo.ability1;
-			ability2 = pokemonInfo.ability2;
-			abilityH = pokemonInfo.abilityH;
-			tmLearnset = pokemonInfo.tmLearnset;
-			baseStatsTotal = pokemonInfo.baseStatsTotal;
-			pWeight = pokemonInfo.weight;
-			pHeight = pokemonInfo.height;
-			type1 = pokemonInfo.type1;
-			type2 = pokemonInfo.type2;
-			imageSrc = pokemonInfo.imageSrc;
-			imagePrefix = `https://luminescent.team`;
-			imageLnk = `${imagePrefix}${imageSrc}`;
-			genderDecimalValue = pokemonInfo.genderDecimalValue;
-		}
+		const imagePrefix = `https://luminescent.team`;
+		const imageLnk = `${imagePrefix}${imageSrc}`;
 
 		// Ignore pokemon that are still eggs after  error catching.
 		if (name === "Egg") {
@@ -204,7 +191,10 @@ module.exports = {
 					.map((location) => {
 						const encounters = location.encounters
 							.map((encounter) => {
-								return `${encounter.type}\nLevel: ${encounter.level} | Rate: ${encounter.rate}%`;
+								// Use the reverseEncounterTypeMap to map the internal encounter.type to the desired display name.
+								const encounterType =
+									reverseEncounterTypeMap[encounter.type] || encounter.type;
+								return `${encounterType}\nLevel: ${encounter.level} | Rate: ${encounter.rate}%`;
 							})
 							.join("\n");
 						return `**${location.location}**\n${encounters}`;
@@ -217,7 +207,7 @@ module.exports = {
 
 			return interaction.reply({ embeds: [embed] });
 		} else if (mode === "evolution") {
-			// Begin evolution mode
+			// Begin evolution mode.
 			const embed = new EmbedBuilder()
 				.setTitle(name)
 				.setDescription(
@@ -300,12 +290,12 @@ module.exports = {
 			}
 
 			if (visualization === "graph") {
-				const hp = pokemonInfo.baseStats.hp;
-				const atk = pokemonInfo.baseStats.atk;
-				const def = pokemonInfo.baseStats.def;
-				const spa = pokemonInfo.baseStats.spa;
-				const spd = pokemonInfo.baseStats.spd;
-				const spe = pokemonInfo.baseStats.spe;
+				const hp = targetPokemonInfo.baseStats.hp;
+				const atk = targetPokemonInfo.baseStats.atk;
+				const def = targetPokemonInfo.baseStats.def;
+				const spa = targetPokemonInfo.baseStats.spa;
+				const spd = targetPokemonInfo.baseStats.spd;
+				const spe = targetPokemonInfo.baseStats.spe;
 
 				const width = 240; // Define the width of the chart
 				const height = 240; // Define the height of the chart
@@ -379,21 +369,21 @@ module.exports = {
 				const attachment = new AttachmentBuilder(image, { name: "chart.png" });
 				embed.setImage("attachment://chart.png");
 
-				interaction.reply({ embeds: [embed], files: [attachment] });
+				return interaction.reply({ embeds: [embed], files: [attachment] });
 			} else {
-				const hp = String(pokemonInfo.baseStats.hp).padEnd(3, " ");
-				const atk = String(pokemonInfo.baseStats.atk).padEnd(3, " ");
-				const def = String(pokemonInfo.baseStats.def).padEnd(3, " ");
-				const spa = String(pokemonInfo.baseStats.spa).padEnd(3, " ");
-				const spd = String(pokemonInfo.baseStats.spd).padEnd(3, " ");
-				const spe = String(pokemonInfo.baseStats.spe).padEnd(3, " ");
+				const hp = String(targetPokemonInfo.baseStats.hp).padEnd(3, " ");
+				const atk = String(targetPokemonInfo.baseStats.atk).padEnd(3, " ");
+				const def = String(targetPokemonInfo.baseStats.def).padEnd(3, " ");
+				const spa = String(targetPokemonInfo.baseStats.spa).padEnd(3, " ");
+				const spd = String(targetPokemonInfo.baseStats.spd).padEnd(3, " ");
+				const spe = String(targetPokemonInfo.baseStats.spe).padEnd(3, " ");
 
 				embed.addFields({
 					name: `**Base Stats:**`,
 					value: `\`╔═══╤═══╤═══╤═══╤═══╤═══╗\`\n\`║HP\u00A0│ATK│DEF│SPA│SPD│SPE║\`\n\`╠═══╪═══╪═══╪═══╪═══╪═══╣\`\n\`║${hp}│${atk}│${def}│${spa}│${spd}│${spe}║\`\n\`╚═══╧═══╧═══╧═══╧═══╧═══╝\``,
 				});
 
-				interaction.reply({ embeds: [embed] });
+				return interaction.reply({ embeds: [embed] });
 			}
 		}
 	},
