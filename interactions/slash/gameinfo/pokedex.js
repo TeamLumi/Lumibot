@@ -159,21 +159,7 @@ module.exports = {
 		}
 
 		if (mode === "location") {
-			// Begin location mode and handle the Magikarp situation.
-			if (pokemonName === "Magikarp") {
-				const embed = new EmbedBuilder()
-					.setTitle(name)
-					.setThumbnail(imageLnk)
-					.setDescription(
-						`Hmm, this Pokemon seems to appear anywhere there is an open body of water. What a successful species! It must be exceedingly strong...`,
-					);
-				const typeColor = typeColors[type1];
-				if (typeColor) {
-					embed.setColor(typeColor);
-				}
-				return interaction.reply({ embeds: [embed] });
-			}
-
+			// Begin location mode.
 			const locations = getEncounterLocations(monsID);
 
 			const embed = new EmbedBuilder().setTitle(name).setThumbnail(imageLnk);
@@ -190,7 +176,18 @@ module.exports = {
 					`Sorry! I couldn't locate that Pokemon as I don't have enough data about it. It might not appear in the wild, or maybe it's just exceedinly rare.`,
 				);
 			} else {
-				const formattedLocations = locations
+				let slicedLocations = locations;
+				let slicedNote = "";
+
+				// Truncate the response when ran outside of the bot channel.
+				if (interaction.channel.id !== "1116745890577776862") {
+					if (locations.length > 4) {
+						slicedLocations = locations.slice(0, 3);
+						slicedNote =
+							"**Note:** Encounters have been truncated. Run this command in the bot channel to see all encounters.";
+					}
+				}
+				const formattedLocations = slicedLocations
 					.map((location) => {
 						const encounters = location.encounters
 							.map((encounter) => {
@@ -200,6 +197,8 @@ module.exports = {
 								return `${encounterType}\nLevel: ${encounter.level} | Rate: ${encounter.rate}%`;
 							})
 							.join("\n");
+
+						// Check if the location title is Solaceon or Turnback and remove all the zones.
 						let locationTitle = location.location;
 						if (solaceonRuinsRegex.test(locationTitle)) {
 							locationTitle = locationTitle.replace(
@@ -212,11 +211,13 @@ module.exports = {
 								"Turnback Cave",
 							);
 						}
+
 						return `**${locationTitle}**\n${encounters}`;
 					})
 					.join("\n\n");
+
 				embed.setDescription(
-					`**Encounter information:**\n\nStandard rates assume that incense/radar are not active. For further accuracy, visit [our docs](https://luminescent.team/docs).\n\n${formattedLocations}`,
+					`**Encounter information:**\n\nStandard rates assume that incense/radar are not active. For further accuracy, visit [our docs](https://luminescent.team/docs).\n\n${formattedLocations}\n\n${slicedNote}`,
 				);
 			}
 
