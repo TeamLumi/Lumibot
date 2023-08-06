@@ -8,6 +8,14 @@ module.exports = {
 		name: ["[rule 0]", "[rule0]"],
 	},
 	execute(message, args) {
+		if (
+			!interaction.guild.members.me.permissions.has(
+				PermissionsBitField.Flags.KickMembers,
+			)
+		) {
+			return;
+		}
+
 		const embed = new EmbedBuilder()
 			.setThumbnail(
 				"https://cdn.discordapp.com/attachments/1115345759496323173/1115682729107935392/ban_hammer_dj.png",
