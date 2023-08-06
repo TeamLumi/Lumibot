@@ -5,18 +5,16 @@ const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
  */
 module.exports = {
 	data: {
-		name: ["[features]"],
+		name: ["[changes]", "[changelog]"],
 	},
 	execute(message, args) {
 		const embed = new EmbedBuilder()
 			.setThumbnail(
-				"https://cdn.discordapp.com/attachments/1115345759496323173/1115682729762242570/features.png",
+				"https://cdn.discordapp.com/attachments/1115345759496323173/1115682730164879483/changelog.png",
 			)
-			.setTitle("Mod Features")
-			.setURL("https://luminescent.team/docs/features")
-			.setDescription(
-				"See all the cool features, updates, and included mods in Luminescent Platinum!",
-			)
+			.setTitle("Luminescent Changelog")
+			.setURL("https://luminescent.team/docs/changelog")
+			.setDescription("See what's changed in our newest updates!")
 			.setColor(0x000000);
 
 		message.channel.send({ embeds: [embed] });

@@ -5,17 +5,17 @@ const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
  */
 module.exports = {
 	data: {
-		name: ["[features]"],
+		name: ["[npc]", "[npcs]"],
 	},
 	execute(message, args) {
 		const embed = new EmbedBuilder()
 			.setThumbnail(
 				"https://cdn.discordapp.com/attachments/1115345759496323173/1115682729762242570/features.png",
 			)
-			.setTitle("Mod Features")
-			.setURL("https://luminescent.team/docs/features")
+			.setTitle("Useful NPCs")
+			.setURL("https://luminescent.team/docs/npc")
 			.setDescription(
-				"See all the cool features, updates, and included mods in Luminescent Platinum!",
+				"All of our useful NPCs in Luminescent Platinum, including IV Hyper Trainer, EV Trainer, and Jan!",
 			)
 			.setColor(0x000000);
 
