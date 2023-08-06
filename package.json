@@ -1,10 +1,12 @@
 {
 	"name": "lumibot",
 	"version": "1.0.0",
-	"description": "An in-progress bot for Team Luminescent. Built from the DiscordBot-Template by Naman Vrati",
+	"description": "Discord Bot for the Luminescent Platinum ROM Hack.",
 	"main": "bot.js",
 	"scripts": {
-		"start": "node bot.js"
+		"start": "node bot.js",
+		"start:prod": "NODE_ENV=production npm start",
+		"reset": "node reset.js"
 	},
 	"repository": {
 		"type": "git",

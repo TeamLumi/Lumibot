@@ -24,7 +24,26 @@ const {
 } = require("discord.js");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
-const { token, client_id, test_guild_id } = require("./config.json");
+const {
+	token_dev,
+	token_prod,
+	client_id_dev,
+	client_id_prod,
+	test_guild_id,
+} = require("./config.json");
+
+let token = [];
+let client_id = [];
+
+if (process.env.NODE_ENV === "production") {
+	console.log("Running in production mode");
+	token = token_prod;
+	client_id = client_id_prod;
+} else {
+	console.log("Running in development mode");
+	token = token_dev;
+	client_id = client_id_dev;
+}
 
 // Create a new client instance.
 
@@ -246,37 +265,20 @@ const commandJsonData = [
 	try {
 		console.log("Started refreshing application (/) commands.");
 
-		await rest.put(
-			/*
-			 * The code below causes the bot to run in development mode.
-			 * This means it only deploys guild commands in the development server.
-			 * Please comment the below (uncommented) line (for guild commands).
-			 * You will also need to uncomment the (commented) line below.
-			 */
+		let route;
+		if (process.env.NODE_ENV === "production") {
+			route = Routes.applicationCommands(client_id);
+		} else {
+			route = Routes.applicationGuildCommands(client_id, test_guild_id);
+		}
 
-			Routes.applicationGuildCommands(client_id, test_guild_id),
-
-			/*
-			 * Please uncomment the below (commented) line to deploy global commands.
-			 * Global command only need to be executed once to update to the Discord API.
-			 * Though they do require some time to replicate.
-			 * Please comment it again after running the bot once to ensure they don't get re-deployed.
-			 */
-
-			//Routes.applicationCommands(client_id),
-
-			{ body: commandJsonData },
-		);
+		await rest.put(route, { body: commandJsonData });
 
 		console.log("Successfully reloaded application (/) commands.");
 	} catch (error) {
 		console.error(error);
 	}
 })();
-
-/*
- All registration snippets should be changed to use node:path like the code for Triggers below.
- */
 
 // Registration of Message Based Chat Triggers
 
