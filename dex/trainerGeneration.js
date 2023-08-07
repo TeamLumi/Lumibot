@@ -161,6 +161,11 @@ function get_trainer_pokemon(trainerId) {
 			break;
 		}
 	}
+
+	if (!trainer) {
+		return [];
+	}
+
 	pokemon_list = get_pokemon_from_trainer_info(trainer);
 	return pokemon_list;
 }
@@ -310,20 +315,20 @@ function get_pokemon_from_trainer_info(trainer) {
 	return pokemon_list;
 }
 
-function sortTrainersByLevel(trainer_info) {
+function sortTrainersByLevel(trainerInfo) {
 	/*
-    Requires the trainer_info from the trainer_info.json
+    Requires the trainerInfo from the trainer_info.json (trainerInfo in the index)
     Function requirements: get_trainer_pokemon, get_avg_trainer_level, sort_dicts_by_key
     Adds the trainer's team and average level to trainer_info
     Calls the sort_dicts_by_key function and sorts the trainers by zoneName then average level
 */
-	for (const trainer of trainer_info) {
+	for (const trainer of trainerInfo) {
 		const trainerId = trainer["trainerId"];
 		trainer["team"] = get_trainer_pokemon(trainerId);
 		trainer["avg_lvl"] = get_avg_trainer_level(trainer["team"]);
 	}
 	const sorted_trainers_by_level = sort_dicts_by_key(
-		trainer_info,
+		trainerInfo,
 		"zoneName",
 		"avg_lvl",
 		ZONE_ORDER,
@@ -331,4 +336,4 @@ function sortTrainersByLevel(trainer_info) {
 	return sorted_trainers_by_level;
 }
 
-module.exports = { sortTrainersByLevel };
+module.exports = { sortTrainersByLevel, get_trainer_pokemon };
