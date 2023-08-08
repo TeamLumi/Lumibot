@@ -1,4 +1,4 @@
-export const EVOLUTION_METHOD_DETAILS = {
+module.exports.EVOLUTION_METHOD_DETAILS = {
   0: {
     method: '',
     requiresLevel: false,
