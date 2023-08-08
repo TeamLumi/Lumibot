@@ -20,7 +20,7 @@ const locationsToFilter = ["Lake Verity (Before)"];
 
 function getEncounterLocations(monsNo) {
 	if (!encounterData[monsNo]) {
-		return [];
+		throw new Error(`Bad pokemon ID: ${monsNo}`);
 	}
 
 	const locations = [];

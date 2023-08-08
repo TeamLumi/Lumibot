@@ -64,6 +64,12 @@ describe("getEvolutionTree", () => {
 		}).toThrow("Bad pokemon ID: invalid");
 	});
 
+	it("should throw an error for an invalid pokemonId number", () => {
+		expect(() => {
+			getEvolutionTree("9999");
+		}).toThrow("Bad pokemon ID: 9999");
+	});
+
 	it("should return the evolution tree for a complex Pokemon", () => {
 		const pokemonId = 133; // Eevee
 		const result = getEvolutionTree(pokemonId);
