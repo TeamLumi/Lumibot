@@ -5,7 +5,7 @@
 	"main": "bot.js",
 	"scripts": {
 		"start": "node bot.js",
-		"start:prod": "NODE_ENV=production npm start",
+		"start:prod": "npm test && NODE_ENV=production npm start",
 		"reset": "node reset.js",
 		"reset:prod": "NODE_ENV=production npm reset",
 		"test": "jest"
