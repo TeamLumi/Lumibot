@@ -107,23 +107,14 @@ module.exports = {
 
 	async execute(interaction) {
 		// Here we grab the Pokemon name then we convert it to the Pokemon's ID which we use to get further information.
-		const pokemonName = interaction.options.getString("pokemon");
+		const pokemonName = interaction.options
+			.getString("pokemon")
+			.toLowerCase()
+			.replace(/(?:^|\s|-)\S/g, (char) => char.toUpperCase());
 		const monsID = getPokemonIdFromDisplayName(pokemonName);
 		const pokemonInfo = getPokemonInfo(monsID);
 		const visualization = interaction.options.getString("visualization");
 		const mode = interaction.options.getString("mode");
-
-		// Attempting to capitalise Pokemon names that result in a default egg.
-		const isDefaultEgg = pokemonInfo.name === "Egg";
-		const capitalizedPokemonName = isDefaultEgg
-			? pokemonName
-					.toLowerCase()
-					.replace(/(?:^|\s|-)\S/g, (char) => char.toUpperCase())
-			: pokemonName;
-
-		const targetPokemonInfo = isDefaultEgg
-			? getPokemonInfo(getPokemonIdFromDisplayName(capitalizedPokemonName))
-			: pokemonInfo;
 
 		const {
 			name,
@@ -138,7 +129,10 @@ module.exports = {
 			type2,
 			imageSrc,
 			genderDecimalValue,
-		} = targetPokemonInfo;
+			isValid,
+		} = pokemonInfo;
+
+		console.log(isValid);
 
 		const imagePrefix = `https://luminescent.team`;
 		const imageLnk = `${imagePrefix}${imageSrc}`;
@@ -286,11 +280,23 @@ module.exports = {
 
 			if (type1 === type2) {
 				const type1Icon = typeIcons[type1];
-				embed.setDescription(`**Type:** ${type1Icon}`);
+				if (isValid === 0) {
+					embed.setDescription(
+						`*This Pokemon is* ***not*** *available in 2.0F*\n\n**Type:** ${type1Icon}`,
+					);
+				} else {
+					embed.setDescription(`**Type:** ${type1Icon}`);
+				}
 			} else {
 				const type1Icon = typeIcons[type1];
 				const type2Icon = typeIcons[type2];
-				embed.setDescription(`**Type:** ${type1Icon} \u200b ${type2Icon}`);
+				if (isValid === 0) {
+					embed.setDescription(
+						`*This Pokemon is* ***not*** *available in 2.0F*\n\n**Type:** ${type1Icon} \u200b ${type2Icon}`,
+					);
+				} else {
+					embed.setDescription(`**Type:** ${type1Icon} \u200b ${type2Icon}`);
+				}
 			}
 
 			if (malePercentage === 0 && femalePercentage === 0) {
@@ -306,12 +312,12 @@ module.exports = {
 			}
 
 			if (visualization === "graph") {
-				const hp = targetPokemonInfo.baseStats.hp;
-				const atk = targetPokemonInfo.baseStats.atk;
-				const def = targetPokemonInfo.baseStats.def;
-				const spa = targetPokemonInfo.baseStats.spa;
-				const spd = targetPokemonInfo.baseStats.spd;
-				const spe = targetPokemonInfo.baseStats.spe;
+				const hp = pokemonInfo.baseStats.hp;
+				const atk = pokemonInfo.baseStats.atk;
+				const def = pokemonInfo.baseStats.def;
+				const spa = pokemonInfo.baseStats.spa;
+				const spd = pokemonInfo.baseStats.spd;
+				const spe = pokemonInfo.baseStats.spe;
 
 				const width = 240; // Define the width of the chart
 				const height = 240; // Define the height of the chart
@@ -387,12 +393,12 @@ module.exports = {
 
 				return interaction.reply({ embeds: [embed], files: [attachment] });
 			} else {
-				const hp = String(targetPokemonInfo.baseStats.hp).padEnd(3, " ");
-				const atk = String(targetPokemonInfo.baseStats.atk).padEnd(3, " ");
-				const def = String(targetPokemonInfo.baseStats.def).padEnd(3, " ");
-				const spa = String(targetPokemonInfo.baseStats.spa).padEnd(3, " ");
-				const spd = String(targetPokemonInfo.baseStats.spd).padEnd(3, " ");
-				const spe = String(targetPokemonInfo.baseStats.spe).padEnd(3, " ");
+				const hp = String(pokemonInfo.baseStats.hp).padEnd(3, " ");
+				const atk = String(pokemonInfo.baseStats.atk).padEnd(3, " ");
+				const def = String(pokemonInfo.baseStats.def).padEnd(3, " ");
+				const spa = String(pokemonInfo.baseStats.spa).padEnd(3, " ");
+				const spd = String(pokemonInfo.baseStats.spd).padEnd(3, " ");
+				const spe = String(pokemonInfo.baseStats.spe).padEnd(3, " ");
 
 				embed.addFields({
 					name: `**Base Stats:**`,

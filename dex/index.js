@@ -91,6 +91,7 @@ function getPokemonInfo(monsId = 0) {
 		type2: getTypeName(p.type2),
 		imageSrc: getImage(monsNo, formNo),
 		genderDecimalValue: p.sex,
+		isValid: p.valid_flag,
 	};
 }
 
