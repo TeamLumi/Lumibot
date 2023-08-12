@@ -13,8 +13,6 @@ git clone
 
 npm install
 
-create config.json as below
-
 npm run start
 ```
 
