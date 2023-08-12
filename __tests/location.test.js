@@ -1,10 +1,10 @@
 const { getEncounterLocations } = require("../../lumibot/dex/location");
 
 describe("Dex utils encounter Location getter tests", () => {
-	it("should throw an error for an invalid pokemonId number", () => {
-		expect(() => {
-			getEncounterLocations("9999");
-		}).toThrow("Bad pokemon ID: 9999");
+	it("should throw an empty array for an invalid pokemonId number", () => {
+		const input = "9999";
+		const result = getEncounterLocations(input);
+		expect(result).toHaveLength(0);
 	});
 
 	it("should return an array of locations and encounters for a simple Pokemon (any)", () => {
