@@ -289,7 +289,7 @@ module.exports = {
 				const type1Icon = typeIcons[type1];
 				if (isValid === 0) {
 					embed.setDescription(
-						`*This Pokemon is* ***not*** *available in 2.0F*\n\n**Type:** ${type1Icon}`,
+						`*This Pokemon is* ***not*** *available in 2.0F.*\n\n**Type:** ${type1Icon}`,
 					);
 				} else {
 					embed.setDescription(`**Type:** ${type1Icon}`);
@@ -299,7 +299,7 @@ module.exports = {
 				const type2Icon = typeIcons[type2];
 				if (isValid === 0) {
 					embed.setDescription(
-						`*This Pokemon is* ***not*** *available in 2.0F*\n\n**Type:** ${type1Icon} \u200b ${type2Icon}`,
+						`*This Pokemon is* ***not*** *available in 2.0F.*\n\n**Type:** ${type1Icon} \u200b ${type2Icon}`,
 					);
 				} else {
 					embed.setDescription(`**Type:** ${type1Icon} \u200b ${type2Icon}`);
