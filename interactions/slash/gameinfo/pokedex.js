@@ -7,6 +7,7 @@ const { getPokemonIdFromDisplayName } = require("../../../dex/index.js");
 const { getPokemonInfo } = require("../../../dex/index.js");
 const { getEncounterLocations } = require("../../../dex/index.js");
 const { CanvasRenderService } = require("chartjs-node-canvas");
+const { botChannelProd, botChannelDev } = require("../../../config.json");
 
 // Array for pokemon types to set colours.
 const typeColors = {
@@ -132,8 +133,6 @@ module.exports = {
 			isValid,
 		} = pokemonInfo;
 
-		console.log(isValid);
-
 		const imagePrefix = `https://luminescent.team`;
 		const imageLnk = `${imagePrefix}${imageSrc}`;
 
@@ -173,8 +172,16 @@ module.exports = {
 				let slicedLocations = locations;
 				let slicedNote = "";
 
+				let botChannel = [];
+
+				if (process.env.NODE_ENV === "production") {
+					botChannel = botChannelProd;
+				} else {
+					botChannel = botChannelDev;
+				}
+
 				// Truncate the response when ran outside of the bot channel.
-				if (interaction.channel.id !== "1116745890577776862") {
+				if (interaction.channel.id !== botChannel) {
 					if (locations.length > 4) {
 						slicedLocations = locations.slice(0, 3);
 						slicedNote =
