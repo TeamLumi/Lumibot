@@ -3,6 +3,7 @@
 Discord bot for the Luminescent Platinum ROM Hack. Including a custom Luminescent Platinum Pokedex with all of our changes.
 
 » Help command **/help**
+
 » Pokedex command **/pokedex**
 
 ## How to get started
