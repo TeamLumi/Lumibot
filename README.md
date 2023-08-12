@@ -8,12 +8,11 @@ Discord bot for the Luminescent Platinum ROM Hack. Including a custom Luminescen
 
 ## How to get started
 
+
 ```
-git clone
-
-npm install
-
-npm run start
+$ git clone
+$ npm install
+$ npm start
 ```
 
 ## Config.json
