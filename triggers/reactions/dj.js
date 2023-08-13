@@ -9,7 +9,7 @@ module.exports = {
 	},
 	execute(message, args) {
 		const embed = new EmbedBuilder()
-			.setTitle("DJ")
+			.setTitle("DJ - Noun.")
 			.setDescription(`The best person on the Lumi team.`)
 			.setImage(
 				"https://archives.bulbagarden.net/media/upload/4/4c/0133Eevee.png",

@@ -21,7 +21,7 @@ module.exports = {
 				.setDescription(
 					"See how to install the mod on official Switch hardware using the Atmosphere loader. If you still have issues, please make a thread in https://discord.com/channels/912508046159261728/1020986285076250624 \n\nThis requires having a hacked Switch. Questions about how to hack your Switch or use Atmosphere should be taken to more appropriate servers or Googled.",
 				);
-		} else if (message.content.toLowerCase().includes("[atmosphere]")) {
+		} else if (message.content.toLowerCase().includes("[switch]")) {
 			embed
 				.setTitle("Switch Atmosphere Installation")
 				.setURL("https://luminescent.team/docs/installation/atmosphere")
