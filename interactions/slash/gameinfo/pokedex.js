@@ -166,7 +166,7 @@ module.exports = {
 
 			if (locations.length === 0) {
 				embed.setDescription(
-					`Sorry! I couldn't locate that Pokemon as I don't have enough data about it. It might not appear in the wild, or maybe it's just exceedinly rare.`,
+					`Sorry! I couldn't locate that Pokemon as I don't have enough data about it. It might not appear in the wild, or maybe it's just exceedingly rare.`,
 				);
 			} else {
 				let slicedLocations = locations;
