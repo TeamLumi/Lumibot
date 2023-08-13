@@ -67,6 +67,7 @@ const reverseEncounterTypeMap = {
 	Morning: ":sunrise_over_mountains: Morning",
 	"Honey Tree": ":honey_pot: Honey Tree",
 	Incense: "<:incense:1136358228356243506> Incense",
+	"Daily Trophy Garden": ":trophy: Daily Trophy Garden",
 };
 
 /**
