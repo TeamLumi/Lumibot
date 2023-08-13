@@ -67,6 +67,7 @@ const reverseEncounterTypeMap = {
 	Morning: ":sunrise_over_mountains: Morning",
 	"Honey Tree": ":honey_pot: Honey Tree",
 	Incense: "<:incense:1136358228356243506> Incense",
+	"Daily Trophy Garden": ":trophy: Daily Trophy Garden",
 };
 
 /**
@@ -91,8 +92,8 @@ module.exports = {
 				)
 				.setRequired(false)
 				.addChoices(
-					{ name: "Statistics", value: "statistics" },
-					{ name: "Location", value: "location" },
+					{ name: "statistics", value: "statistics" },
+					{ name: "location", value: "location" },
 				),
 		)
 		.addStringOption((option) =>
@@ -101,23 +102,20 @@ module.exports = {
 				.setDescription("The type of visualization (graph or table)")
 				.setRequired(false)
 				.addChoices(
-					{ name: "Graph", value: "graph" },
-					{ name: "Table", value: "table" },
+					{ name: "graph", value: "graph" },
+					{ name: "table", value: "table" },
 				),
 		),
 
 	async execute(interaction) {
 		// Here we grab the Pokemon name then we convert it to the Pokemon's ID which we use to get further information.
-		const pokemonName = interaction.options
-			.getString("pokemon")
-			.toLowerCase()
-			.replace(/(?:^|\s|-)\S/g, (char) => char.toUpperCase());
+		let pokemonName = interaction.options.getString("pokemon");
 		const monsID = getPokemonIdFromDisplayName(pokemonName);
 		const pokemonInfo = getPokemonInfo(monsID);
 		const visualization = interaction.options.getString("visualization");
 		const mode = interaction.options.getString("mode");
 
-		const {
+		let {
 			name,
 			ability1,
 			ability2,
@@ -132,6 +130,32 @@ module.exports = {
 			genderDecimalValue,
 			isValid,
 		} = pokemonInfo;
+
+		if (name === "Egg") {
+			pokemonName = pokemonName
+				.toLowerCase()
+				.replace(/(?:^|\s|-)\S/g, (char) => char.toUpperCase());
+
+			const BackupInfo = getPokemonInfo(
+				getPokemonIdFromDisplayName(pokemonName),
+			);
+
+			({
+				name,
+				ability1,
+				ability2,
+				abilityH,
+				tmLearnset,
+				baseStatsTotal,
+				weight: pWeight,
+				height: pHeight,
+				type1,
+				type2,
+				imageSrc,
+				genderDecimalValue,
+				isValid,
+			} = BackupInfo);
+		}
 
 		const imagePrefix = `https://luminescent.team`;
 		const imageLnk = `${imagePrefix}${imageSrc}`;
@@ -166,7 +190,7 @@ module.exports = {
 
 			if (locations.length === 0) {
 				embed.setDescription(
-					`Sorry! I couldn't locate that Pokemon as I don't have enough data about it. It might not appear in the wild, or maybe it's just exceedinly rare.`,
+					`Sorry! I couldn't locate that Pokemon as I don't have enough data about it. It might not appear in the wild, or maybe it's just exceedingly rare.`,
 				);
 			} else {
 				let slicedLocations = locations;
