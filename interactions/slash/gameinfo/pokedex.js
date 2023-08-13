@@ -91,8 +91,8 @@ module.exports = {
 				)
 				.setRequired(false)
 				.addChoices(
-					{ name: "Statistics", value: "statistics" },
-					{ name: "Location", value: "location" },
+					{ name: "statistics", value: "statistics" },
+					{ name: "location", value: "location" },
 				),
 		)
 		.addStringOption((option) =>
@@ -101,8 +101,8 @@ module.exports = {
 				.setDescription("The type of visualization (graph or table)")
 				.setRequired(false)
 				.addChoices(
-					{ name: "Graph", value: "graph" },
-					{ name: "Table", value: "table" },
+					{ name: "graph", value: "graph" },
+					{ name: "table", value: "table" },
 				),
 		),
 
