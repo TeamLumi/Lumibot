@@ -108,16 +108,13 @@ module.exports = {
 
 	async execute(interaction) {
 		// Here we grab the Pokemon name then we convert it to the Pokemon's ID which we use to get further information.
-		const pokemonName = interaction.options
-			.getString("pokemon")
-			.toLowerCase()
-			.replace(/(?:^|\s|-)\S/g, (char) => char.toUpperCase());
+		let pokemonName = interaction.options.getString("pokemon");
 		const monsID = getPokemonIdFromDisplayName(pokemonName);
 		const pokemonInfo = getPokemonInfo(monsID);
 		const visualization = interaction.options.getString("visualization");
 		const mode = interaction.options.getString("mode");
 
-		const {
+		let {
 			name,
 			ability1,
 			ability2,
@@ -132,6 +129,32 @@ module.exports = {
 			genderDecimalValue,
 			isValid,
 		} = pokemonInfo;
+
+		if (name === "Egg") {
+			pokemonName = pokemonName
+				.toLowerCase()
+				.replace(/(?:^|\s|-)\S/g, (char) => char.toUpperCase());
+
+			const BackupInfo = getPokemonInfo(
+				getPokemonIdFromDisplayName(pokemonName),
+			);
+
+			({
+				name,
+				ability1,
+				ability2,
+				abilityH,
+				tmLearnset,
+				baseStatsTotal,
+				weight: pWeight,
+				height: pHeight,
+				type1,
+				type2,
+				imageSrc,
+				genderDecimalValue,
+				isValid,
+			} = BackupInfo);
+		}
 
 		const imagePrefix = `https://luminescent.team`;
 		const imageLnk = `${imagePrefix}${imageSrc}`;
