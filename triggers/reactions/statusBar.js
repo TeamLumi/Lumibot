@@ -1,4 +1,8 @@
-const { EmbedBuilder, AttachmentBuilder, Message } = require("discord.js");
+const {
+	EmbedBuilder,
+	PermissionsBitField,
+	AttachmentBuilder,
+} = require("discord.js");
 
 /**
  * @type {import('../../typings').TriggerCommand}
