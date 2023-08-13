@@ -5,7 +5,7 @@ const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
  */
 module.exports = {
 	data: {
-		name: ["[status bar]", "[status]", "[1.3.0]"],
+		name: ["[status bar]", "[status]", "[1.3.0]",],
 	},
 	execute(message, args) {
 		if (
