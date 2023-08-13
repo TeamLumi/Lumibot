@@ -12,9 +12,9 @@ module.exports = {
 		const embed = new EmbedBuilder().setTitle(`Shaymin:`);
 
 		if (interaction.member.id === "194583783368818688") {
-			embed.setDescription("You're very cute DJ! :)");
+			embed.setDescription("You're very cute, DJ! :)");
 		} else {
-			embed.setDescription("You are not as cute as DJ. Sorry :(");
+			embed.setDescription("You are not as cute as DJ. Sorry. :(");
 		}
 		await interaction.reply({ embeds: [embed] });
 	},
