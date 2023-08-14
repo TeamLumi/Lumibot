@@ -130,15 +130,14 @@ module.exports = {
 			genderDecimalValue,
 			isValid,
 		} = pokemonInfo;
+		let BackupInfo;
 
 		if (name === "Egg") {
 			pokemonName = pokemonName
 				.toLowerCase()
 				.replace(/(?:^|\s|-)\S/g, (char) => char.toUpperCase());
 
-			const BackupInfo = getPokemonInfo(
-				getPokemonIdFromDisplayName(pokemonName),
-			);
+			BackupInfo = getPokemonInfo(getPokemonIdFromDisplayName(pokemonName));
 
 			({
 				name,
@@ -343,12 +342,30 @@ module.exports = {
 			}
 
 			if (visualization === "graph") {
-				const hp = pokemonInfo.baseStats.hp;
-				const atk = pokemonInfo.baseStats.atk;
-				const def = pokemonInfo.baseStats.def;
-				const spa = pokemonInfo.baseStats.spa;
-				const spd = pokemonInfo.baseStats.spd;
-				const spe = pokemonInfo.baseStats.spe;
+				const hp =
+					pokemonInfo.baseStats.hp !== 0
+						? pokemonInfo.baseStats.hp
+						: BackupInfo.baseStats.hp;
+				const atk =
+					pokemonInfo.baseStats.atk !== 0
+						? pokemonInfo.baseStats.atk
+						: BackupInfo.baseStats.atk;
+				const def =
+					pokemonInfo.baseStats.def !== 0
+						? pokemonInfo.baseStats.def
+						: BackupInfo.baseStats.def;
+				const spa =
+					pokemonInfo.baseStats.spa !== 0
+						? pokemonInfo.baseStats.spa
+						: BackupInfo.baseStats.spa;
+				const spd =
+					pokemonInfo.baseStats.spd !== 0
+						? pokemonInfo.baseStats.spd
+						: BackupInfo.baseStats.spd;
+				const spe =
+					pokemonInfo.baseStats.spe !== 0
+						? pokemonInfo.baseStats.spe
+						: BackupInfo.baseStats.spe;
 
 				const width = 240; // Define the width of the chart
 				const height = 240; // Define the height of the chart
@@ -424,12 +441,36 @@ module.exports = {
 
 				return interaction.reply({ embeds: [embed], files: [attachment] });
 			} else {
-				const hp = String(pokemonInfo.baseStats.hp).padEnd(3, " ");
-				const atk = String(pokemonInfo.baseStats.atk).padEnd(3, " ");
-				const def = String(pokemonInfo.baseStats.def).padEnd(3, " ");
-				const spa = String(pokemonInfo.baseStats.spa).padEnd(3, " ");
-				const spd = String(pokemonInfo.baseStats.spd).padEnd(3, " ");
-				const spe = String(pokemonInfo.baseStats.spe).padEnd(3, " ");
+				const hp = String(
+					pokemonInfo.baseStats.hp !== 0
+						? pokemonInfo.baseStats.hp
+						: BackupInfo.baseStats.hp,
+				).padEnd(3, " ");
+				const atk = String(
+					pokemonInfo.baseStats.atk !== 0
+						? pokemonInfo.baseStats.atk
+						: BackupInfo.baseStats.atk,
+				).padEnd(3, " ");
+				const def = String(
+					pokemonInfo.baseStats.def !== 0
+						? pokemonInfo.baseStats.def
+						: BackupInfo.baseStats.def,
+				).padEnd(3, " ");
+				const spa = String(
+					pokemonInfo.baseStats.spa !== 0
+						? pokemonInfo.baseStats.spa
+						: BackupInfo.baseStats.spa,
+				).padEnd(3, " ");
+				const spd = String(
+					pokemonInfo.baseStats.spd !== 0
+						? pokemonInfo.baseStats.spd
+						: BackupInfo.baseStats.spd,
+				).padEnd(3, " ");
+				const spe = String(
+					pokemonInfo.baseStats.spe !== 0
+						? pokemonInfo.baseStats.spe
+						: BackupInfo.baseStats.spe,
+				).padEnd(3, " ");
 
 				embed.addFields({
 					name: `**Base Stats:**`,
