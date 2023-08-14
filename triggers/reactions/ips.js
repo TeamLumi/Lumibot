@@ -1,4 +1,8 @@
-const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
+const {
+	EmbedBuilder,
+	PermissionsBitField,
+	AttachmentBuilder,
+} = require("discord.js");
 
 /**
  * @type {import('../../typings').TriggerCommand}
@@ -9,9 +13,7 @@ module.exports = {
 	},
 	execute(message, args) {
 		if (
-			!interaction.guild.members.me.permissions.has(
-				PermissionsBitField.Flags.KickMembers,
-			)
+			!message.member.permissions.has(PermissionsBitField.Flags.KickMembers)
 		) {
 			return;
 		}
