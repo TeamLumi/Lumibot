@@ -8,7 +8,7 @@ module.exports = {
 		name: ["[io]", "[randomize]", "[randomise]"],
 	},
 	execute(message, args) {
-		const embed = new EmbedBuilder().setColor(0x000000);
+		const embed = new EmbedBuilder().setColor(0x9f2b68);
 
 		if (message.content.toLowerCase().includes("[io]")) {
 			embed

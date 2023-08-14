@@ -15,7 +15,7 @@ module.exports = {
 			.setTitle("Incense Burner & Regionals")
 			.setURL("https://luminescent.team/docs/incense-regional")
 			.setDescription(
-				"What's an incense burner? How do I find the regional Pokémon? What generations are included? All those answers and more are found here!",
+				"What's an incense burner? How do I find the regional Pokémon? What generations are included? All those answers and more are [found here](https://luminescent.team/docs/incense-regional)!",
 			)
 			.setColor(0x000000);
 
