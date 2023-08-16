@@ -3,9 +3,12 @@ const {
 	EmbedBuilder,
 	SlashCommandBuilder,
 } = require("discord.js");
-const { getPokemonIdFromDisplayName } = require("../../../dex/index.js");
-const { getPokemonInfo } = require("../../../dex/index.js");
-const { getEncounterLocations } = require("../../../dex/index.js");
+const {
+	getPokemonIdFromDisplayName,
+	getPokemonInfo,
+	getEncounterLocations,
+	generateMovesViaLearnset,
+} = require("../../../dex/index.js");
 const { CanvasRenderService } = require("chartjs-node-canvas");
 const { botChannelProd, botChannelDev } = require("../../../config.json");
 
@@ -94,6 +97,7 @@ module.exports = {
 				.addChoices(
 					{ name: "statistics", value: "statistics" },
 					{ name: "location", value: "location" },
+					{ name: "learnset", value: "learnset" },
 				),
 		)
 		.addStringOption((option) =>
@@ -110,7 +114,7 @@ module.exports = {
 	async execute(interaction) {
 		// Here we grab the Pokemon name then we convert it to the Pokemon's ID which we use to get further information.
 		let pokemonName = interaction.options.getString("pokemon");
-		const monsID = getPokemonIdFromDisplayName(pokemonName);
+		let monsID = getPokemonIdFromDisplayName(pokemonName);
 		const pokemonInfo = getPokemonInfo(monsID);
 		const visualization = interaction.options.getString("visualization");
 		const mode = interaction.options.getString("mode");
@@ -154,6 +158,8 @@ module.exports = {
 				genderDecimalValue,
 				isValid,
 			} = BackupInfo);
+
+			monsID = getPokemonIdFromDisplayName(pokemonName) || 0;
 		}
 
 		const imagePrefix = `https://luminescent.team`;
@@ -164,12 +170,15 @@ module.exports = {
 			const embed = new EmbedBuilder()
 				.setTitle(`Oops!`)
 				.setDescription(
-					`I couldn't find that in the Pokédex. \nPerhaps there are still Pokémon yet \u00A0 \u00A0\nto be discovered!`,
+					`I couldn't find that in the Pokédex. Perhaps there are still Pokémon yet to be discovered!`,
 				)
 				.setThumbnail(
 					"https://cdn.discordapp.com/attachments/995539661084696626/1116076538480308244/shaymin_paradox_error.png",
 				)
-				.setColor(0x2664ea);
+				.setColor(0x2664ea)
+				.setFooter({
+					text: "Thumbnail by @senpai_satan",
+				});
 
 			return interaction.reply({ embeds: [embed] });
 		}
@@ -261,6 +270,44 @@ module.exports = {
 			}
 
 			return interaction.reply({ embeds: [embed] });
+		} else if (mode === "learnset") {
+			// Begin learnset mode.
+			const embed = new EmbedBuilder().setTitle(name).setThumbnail(imageLnk);
+
+			const typeColor = typeColors[type1];
+			if (typeColor) {
+				embed.setColor(typeColor);
+			}
+
+			let validDesc = "";
+			if (isValid === 0) {
+				validDesc = `*This Pokemon is* ***not*** *available in 2.0F.*\n\n`;
+			}
+
+			try {
+				const learnset = generateMovesViaLearnset(monsID, 100);
+
+				const movesetString = learnset
+					.map((entry) => {
+						const moveTypeIcon = typeIcons[entry.typeName];
+						const paddedLevel = entry.level.toString().padEnd(2, "\u00A0");
+						return `Level ${paddedLevel} - ${moveTypeIcon} ${entry.moveName}`;
+					})
+					.join("\n");
+
+				embed.setDescription(`${validDesc}**Learnset**:\n${movesetString}`);
+
+				return interaction.reply({ embeds: [embed] });
+			} catch (error) {
+				console.error(error);
+
+				// Create a default embed to handle the error situation
+				embed.setDescription(
+					"That Pokemon seems to learn a move I am unfamiliar with. Perhaps we will get to see such a move one day.",
+				);
+
+				return interaction.reply({ embeds: [embed] });
+			}
 		} else {
 			// Begin general/statistics mode.
 			let malePercentage;

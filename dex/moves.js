@@ -10,6 +10,7 @@ const {
 	moveInfo,
 } = require("../../lumibot/__gamedata");
 const { getPokemonFormId } = require("./name");
+const { getTypeName } = require("./types");
 
 const IS_MOVE_INDEX = false;
 const MAX_TM_COUNT = 104;
@@ -36,16 +37,31 @@ function generateMovesViaLearnset(monsNo, level) {
 	if (cutoffIndex === -1) {
 		cutoffIndex = LearnsetTable.WazaOboe[monsNo].ar.length;
 	}
-	const moves = LearnsetTable.WazaOboe[monsNo].ar.slice(0, cutoffIndex);
 
-	const moveset = [
-		moves.at(-7) || 0,
-		moves.at(-5) || 0,
-		moves.at(-3) || 0,
-		moves.at(-1) || 0,
-	];
+	let moves = LearnsetTable.WazaOboe[monsNo].ar;
+	const moveset = [];
 
-	return moveset.map(getMoveString);
+	for (let i = 0; i < moves.length; i += 2) {
+		const moveLevel = moves[i];
+		const moveId = moves[i + 1];
+
+		if (moveLevel > level) {
+			break; // Stop processing moves if the move level is higher than the specified level
+		}
+
+		const moveName = getMoveString(moveId);
+		const moveInfo = MovesTable.Waza[moveId];
+		const type = moveInfo.type;
+		const typeName = getTypeName(type);
+
+		moveset.push({
+			level: moveLevel,
+			moveName: moveName,
+			typeName: typeName,
+		});
+	}
+
+	return moveset;
 }
 
 function isMoveNameSmogonCompatible(moveString) {
