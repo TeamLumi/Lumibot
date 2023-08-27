@@ -5,12 +5,12 @@ const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
  */
 module.exports = {
 	data: {
-		name: ["[io]", "[randomize]", "[randomise]"],
+		name: ["[io]", "[imposter's ordeal]", "[imposters ordeal]", "[randomize]", "[randomise]"],
 	},
 	execute(message, args) {
 		const embed = new EmbedBuilder().setColor(0x9f2b68);
 
-		if (message.content.toLowerCase().includes("[io]")) {
+		if (message.content.toLowerCase().includes("[io]", "[imposter's ordeal]", "[imposters ordeal]")) {
 			embed
 				.setTitle("Imposter's Ordeal")
 				.setURL("https://github.com/Nifyr/Imposters-Ordeal/")
