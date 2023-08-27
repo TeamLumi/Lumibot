@@ -10,7 +10,7 @@ module.exports = {
 	execute(message, args) {
 		const embed = new EmbedBuilder().setColor(0x9f2b68);
 
-		if (message.content.toLowerCase().includes("[io]", "[imposter's ordeal]", "[imposters ordeal]")) {
+		if (message.content.toLowerCase().includes("[io]")) {
 			embed
 				.setTitle("Imposter's Ordeal")
 				.setURL("https://github.com/Nifyr/Imposters-Ordeal/")
