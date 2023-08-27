@@ -5,7 +5,7 @@ const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
  */
 module.exports = {
 	data: {
-		name: ["[io]", "[imposter's ordeal]", "[imposters ordeal]", "[randomize]", "[randomise]"],
+		name: ["[io]", "[randomize]", "[randomise]"],
 	},
 	execute(message, args) {
 		const embed = new EmbedBuilder().setColor(0x9f2b68);
