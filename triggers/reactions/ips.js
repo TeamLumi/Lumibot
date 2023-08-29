@@ -19,6 +19,9 @@ module.exports = {
 		}
 
 		const embed = new EmbedBuilder()
+			.setAuthor({
+				name: "Team Lumi",
+			})
 			.setImage(
 				"https://luminescent.team/assets/images/exefs_install-502e47bd652324cf9cd505eb2c2a39fd.png",
 			)

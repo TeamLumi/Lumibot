@@ -9,6 +9,9 @@ module.exports = {
 	},
 	execute(message, args) {
 		const embed = new EmbedBuilder()
+			.setAuthor({
+				name: "Team Lumi",
+			})
 			.setTitle("DJ - Noun.")
 			.setDescription(`The best person on the Lumi team.`)
 			.setImage(

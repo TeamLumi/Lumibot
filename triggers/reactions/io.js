@@ -8,7 +8,11 @@ module.exports = {
 		name: ["[io]", "[randomize]", "[randomise]"],
 	},
 	execute(message, args) {
-		const embed = new EmbedBuilder().setColor(0x9f2b68);
+		const embed = new EmbedBuilder()
+			.setAuthor({
+				name: "Team Lumi",
+			})
+			.setColor(0x9f2b68);
 
 		if (message.content.toLowerCase().includes("[io]")) {
 			embed

@@ -19,6 +19,9 @@ module.exports = {
 		}
 
 		const embed = new EmbedBuilder()
+			.setAuthor({
+				name: "Team Lumi",
+			})
 			.setImage(
 				"https://raw.githubusercontent.com/TeamLumi/luminescent-team/main/static/img/yuzuryu.png",
 			)

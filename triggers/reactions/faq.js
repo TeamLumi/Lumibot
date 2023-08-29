@@ -9,6 +9,9 @@ module.exports = {
 	},
 	execute(message, args) {
 		const embed = new EmbedBuilder()
+			.setAuthor({
+				name: "Team Lumi",
+			})
 			.setThumbnail(
 				"https://cdn.discordapp.com/attachments/1115345759496323173/1115682731343499314/faq.png",
 			)

@@ -19,6 +19,9 @@ module.exports = {
 		}
 
 		const embed = new EmbedBuilder()
+			.setAuthor({
+				name: "Team Lumi",
+			})
 			.setThumbnail(
 				"https://cdn.discordapp.com/attachments/1115345759496323173/1115682729107935392/ban_hammer_dj.png",
 			)

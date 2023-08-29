@@ -9,6 +9,9 @@ module.exports = {
 	},
 	execute(message, args) {
 		const embed = new EmbedBuilder()
+			.setAuthor({
+				name: "Team Lumi",
+			})
 			.setThumbnail(
 				"https://archives.bulbagarden.net/media/upload/e/e2/0133Eevee-Gigantamax.png",
 			)
