@@ -48,6 +48,8 @@ const {
 	getPokemonIdFromMonsNoAndForm,
 } = require("./functions");
 
+const { getEvolutionTree, getEvolutionMethodDetail } = require("./evolution");
+
 const { PersonalTable } = require("../../lumibot/__gamedata");
 
 const POKEMON_MOVE_LEVEL_TYPE = {
@@ -102,6 +104,8 @@ module.exports = {
 	getGrassKnotPower,
 	getImage,
 	formatBaseStats,
+	getEvolutionTree,
+	getEvolutionMethodDetail,
 	getTMCompatibility,
 	getPokemonIdFromMonsNoAndForm,
 	getPokemonInfo,
@@ -128,6 +132,7 @@ module.exports = {
 	getPokemonIdFromName,
 	getPokemonIdFromDisplayName,
 	getPokemonNames,
+	getPokemonDisplayName,
 	getNatureId,
 	getNatureName,
 	getTypeName,

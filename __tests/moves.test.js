@@ -8,14 +8,29 @@ const {
 	getMoveProperties,
 	getPokemonLearnset,
 	getTMCompatibility,
-  } = require ("../../lumibot/dex/moves");
+} = require("../../lumibot/dex/moves");
 
 describe("Dex Utils Move Getters", () => {
 	describe("generateMovesViaLearnset", () => {
 		it("should return the expected moves for Pikachu at level 20", () => {
 			const monsNo = 25; // Pikachu
 			const level = 20;
-			const expectedMoves = ["Electro Ball", "Shock Wave", "Feint", "Spark"];
+			const expectedMoves = [
+				{ moveName: "Growl", typeName: "Normal", level: 1 },
+				{ moveName: "Tail Whip", typeName: "Normal", level: 1 },
+				{ moveName: "Thunder Shock", typeName: "Electric", level: 1 },
+				{ moveName: "Charm", typeName: "Fairy", level: 1 },
+				{ moveName: "Nuzzle", typeName: "Electric", level: 1 },
+				{ moveName: "Sweet Kiss", typeName: "Fairy", level: 1 },
+				{ moveName: "Play Nice", typeName: "Normal", level: 1 },
+				{ moveName: "Quick Attack", typeName: "Normal", level: 4 },
+				{ moveName: "Thunder Wave", typeName: "Electric", level: 7 },
+				{ moveName: "Double Kick", typeName: "Fighting", level: 11 },
+				{ moveName: "Electro Ball", typeName: "Electric", level: 12 },
+				{ moveName: "Shock Wave", typeName: "Electric", level: 13 },
+				{ moveName: "Feint", typeName: "Normal", level: 16 },
+				{ moveName: "Spark", typeName: "Electric", level: 19 },
+			];
 			const actualMoves = generateMovesViaLearnset(monsNo, level);
 			expect(actualMoves).toEqual(expectedMoves);
 		});
@@ -24,10 +39,18 @@ describe("Dex Utils Move Getters", () => {
 			const monsNo = 25; // Pikachu
 			const level = 15;
 			const expectedMoves = [
-				"Thunder Wave",
-				"Double Kick",
-				"Electro Ball",
-				"Shock Wave",
+				{ moveName: "Growl", typeName: "Normal", level: 1 },
+				{ moveName: "Tail Whip", typeName: "Normal", level: 1 },
+				{ moveName: "Thunder Shock", typeName: "Electric", level: 1 },
+				{ moveName: "Charm", typeName: "Fairy", level: 1 },
+				{ moveName: "Nuzzle", typeName: "Electric", level: 1 },
+				{ moveName: "Sweet Kiss", typeName: "Fairy", level: 1 },
+				{ moveName: "Play Nice", typeName: "Normal", level: 1 },
+				{ moveName: "Quick Attack", typeName: "Normal", level: 4 },
+				{ moveName: "Thunder Wave", typeName: "Electric", level: 7 },
+				{ moveName: "Double Kick", typeName: "Fighting", level: 11 },
+				{ moveName: "Electro Ball", typeName: "Electric", level: 12 },
+				{ moveName: "Shock Wave", typeName: "Electric", level: 13 },
 			];
 			const actualMoves = generateMovesViaLearnset(monsNo, level);
 			expect(actualMoves).toEqual(expectedMoves);
@@ -36,10 +59,10 @@ describe("Dex Utils Move Getters", () => {
 		it("should return the expected moves for Bulbasaur at level 10", () => {
 			const bulbasaurNo = 1;
 			const expectedBulbasaurMoves = [
-				"Growl",
-				"Tackle",
-				"Vine Whip",
-				"Leech Seed",
+				{ moveName: "Growl", typeName: "Normal", level: 1 },
+				{ moveName: "Tackle", typeName: "Normal", level: 1 },
+				{ moveName: "Vine Whip", typeName: "Grass", level: 5 },
+				{ moveName: "Leech Seed", typeName: "Grass", level: 8 },
 			];
 			const actualMoves = generateMovesViaLearnset(bulbasaurNo, 10);
 			expect(actualMoves).toEqual(expectedBulbasaurMoves);

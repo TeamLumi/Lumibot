@@ -1,38 +1,89 @@
-const { evolutionData } = require("../../lumibot/__gamedata");
+const { EvolutionData } = require("../../lumibot/__gamedata");
 const { getPokemonIdFromMonsNoAndForm } = require("./functions");
-const { EVOLUTION_METHOD_DETAILS } = require("./evolutionConstants");
+const {
+	EVOLUTION_METHOD_DETAILS,
+	evolutionFunctions,
+} = require("./evolutionConstants");
+const { getItemString } = require("./item");
+const { getMoveString, getMoveProperties } = require("./moves");
+const { getPokemonName } = require("./name");
+const { getTypeName } = require("./types");
 
-function getEvolutionMethodDetail(methodId) {
-	if (!Number.isInteger(methodId) || methodId < 0)
+function getEvolutionMethodDetail(methodId, methodParameter = 0, level) {
+	if (methodId === -1) {
+		return -1;
+	}
+	if (!Number.isInteger(methodId) || methodId < 0 || methodId > 47) {
 		throw new Error(`Bad method: ${methodId}`);
-
-	return EVOLUTION_METHOD_DETAILS[methodId];
+	}
+	const evolutionDetails = { ...EVOLUTION_METHOD_DETAILS[methodId] };
+	const evoFunction = evolutionFunctions[methodId];
+	let evoMethod = evolutionDetails.method;
+	if (evoFunction === "Level") {
+		evoMethod = "Level";
+		evolutionDetails.method = evolutionDetails.method.replace("REPLACE", level);
+	} else if (evoFunction === "getItemString") {
+		evoMethod = getItemString(methodParameter);
+		evolutionDetails.method = evolutionDetails.method.replace(
+			"REPLACE",
+			evoMethod,
+		);
+	} else if (evoFunction === "getMoveString") {
+		evoMethod = getMoveString(methodParameter);
+		evolutionDetails.method = evolutionDetails.method.replace(
+			"REPLACE",
+			evoMethod,
+		);
+	} else if (evoFunction === "getPokemonName") {
+		evoMethod = getPokemonName(methodParameter);
+		evolutionDetails.method = evolutionDetails.method.replace(
+			"REPLACE",
+			evoMethod,
+		);
+	} else if (evoFunction === "getMoveProperties") {
+		evoMethod = getTypeName(methodParameter);
+		evolutionDetails.method = evolutionDetails.method.replace(
+			"REPLACE",
+			evoMethod,
+		);
+	}
+	return [evolutionDetails, evoMethod];
 }
 
 function getEvolutionTree(pokemonId = 0, fromRoot = true) {
 	if (!Number.isInteger(pokemonId) || pokemonId < 0) {
 		throw new Error(`Bad pokemon ID: ${pokemonId}`);
 	}
-	const pokemon = evolutionData[pokemonId];
+
+	const pokemon = EvolutionData[pokemonId];
 	if (!pokemon) {
 		throw new Error(`Bad pokemon ID: ${pokemonId}`);
 	}
 
 	const startPokemonId = fromRoot ? pokemon.path[0] : pokemonId;
 
-	const evolution = evolutionData[startPokemonId];
+	const evolution = EvolutionData[startPokemonId];
 
-	return {
+	const evolutionTree = {
 		pokemonId: startPokemonId,
 		evolutionDetails: getEvolutionDetails(startPokemonId),
 		evolvesInto: evolution.targets.map((nextStagePokemonId) =>
 			getEvolutionTree(nextStagePokemonId, false),
 		),
 	};
+	return evolutionTree;
+}
+
+function checkEvolutionPath(evolutionData, originalPokemonId) {
+	const originalPath = EvolutionData[originalPokemonId].path;
+
+	function comparePath(treeNode, expectedId) {}
+
+	comparePath(evolutionData, originalPath[0]);
 }
 
 function getEvolutionDetails(pokemonId) {
-	const evolutionDetails = evolutionData[pokemonId].ar;
+	const evolutionDetails = EvolutionData[pokemonId].ar;
 
 	if (!evolutionDetails) {
 		return null;
@@ -40,9 +91,14 @@ function getEvolutionDetails(pokemonId) {
 
 	for (let i = 0; i < evolutionDetails.length; i++) {
 		const evolutionData = evolutionDetails[i];
+		let methodIds = [];
+		let methodParameters = [];
+		let monsNos = [];
+		let formNos = [];
+		let levels = [];
 
 		for (let j = 0; j < evolutionData.length; j += 5) {
-			const methodId = evolutionData[j];
+			const methodId = evolutionData[j + 0];
 			const methodParameter = evolutionData[j + 1];
 			const monsNo = evolutionData[j + 2];
 			const formNo = evolutionData[j + 3];
@@ -50,17 +106,23 @@ function getEvolutionDetails(pokemonId) {
 
 			const evolutionPokemonId = getPokemonIdFromMonsNoAndForm(monsNo, formNo);
 			if (evolutionPokemonId === pokemonId) {
-				return {
-					methodId,
-					methodParameter,
-					monsNo,
-					formNo,
-					level,
-				};
+				methodIds.push(methodId);
+				methodParameters.push(methodParameter);
+				monsNos.push(monsNo);
+				formNos.push(formNo);
+				levels.push(level);
 			}
 		}
+		if (methodIds.length > 0) {
+			return {
+				methodIds,
+				methodParameters,
+				monsNos,
+				formNos,
+				levels,
+			};
+		}
 	}
-
 	return null;
 }
 
