@@ -12,6 +12,7 @@ module.exports = {
 		       "[randomise]",
 		       "[randomizer]",
 		       "[randomiser]",
+		      ],
 	},
 	execute(message, args) {
 		const embed = new EmbedBuilder()
