@@ -8,6 +8,7 @@ module.exports = {
 		name: [
 			"[encounters]",
 			"[gifts]",
+			"[gift]",
 			"[static]",
 			"[legendary]",
 			"[legendaries]",
@@ -32,6 +33,13 @@ module.exports = {
 		if (message.content.toLowerCase().includes("[encounters]")) {
 			embed.setURL("https://luminescent.team/docs/category/special-events");
 		} else if (message.content.toLowerCase().includes("[gifts]")) {
+			embed
+				.setTitle("Gifted Pokémon")
+				.setURL("https://luminescent.team/docs/special-events/gifts")
+				.setDescription(
+					"See what gifts you can receive in Luminescent Platinum.",
+				);
+		} else if (message.content.toLowerCase().includes("[gift]")) {
 			embed
 				.setTitle("Gifted Pokémon")
 				.setURL("https://luminescent.team/docs/special-events/gifts")
