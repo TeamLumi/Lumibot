@@ -5,7 +5,7 @@ const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
  */
 module.exports = {
 	data: {
-		name: ["[items]", "[tms]", "[keyitems]"],
+		name: ["[items]", "[tms]", "[key items]"],
 	},
 	execute(message, args) {
 		const embed = new EmbedBuilder()
@@ -21,6 +21,9 @@ module.exports = {
 				"List of our items, key items, and TM locations. Currently copied from Renegade Platinum's list, and being updated to match Luminescent Platinum's.\n\nPlease report any issues or corrections to https://discord.com/channels/912508046159261728/1073098396774182972",
 			)
 			.setColor(0x000000);
+
+		if (message.content.toLowerCase().includes("[key items]")) {
+			embed.setURL("https://luminescent.team/docs/items#key-items");
 
 		message.channel.send({ embeds: [embed] });
 	},
