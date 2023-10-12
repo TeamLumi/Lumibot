@@ -5,7 +5,7 @@ const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
  */
 module.exports = {
 	data: {
-		name: ["[items]", "[tms]", "[keyitems]"],
+		name: ["[items]", "[tms]", "[key items]"],
 	},
 	execute(message, args) {
 		const embed = new EmbedBuilder()
@@ -22,7 +22,7 @@ module.exports = {
 			)
 			.setColor(0x000000);
 
-		if (message.content.toLowerCase().includes("[keyitems]")) {
+		if (message.content.toLowerCase().includes("[key items]")) {
 			embed.setURL("https://luminescent.team/docs/items#key-items");
 		}
 
