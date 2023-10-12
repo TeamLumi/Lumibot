@@ -24,6 +24,7 @@ module.exports = {
 
 		if (message.content.toLowerCase().includes("[keyitems]")) {
 			embed.setURL("https://luminescent.team/docs/items#key-items");
+		}
 
 		message.channel.send({ embeds: [embed] });
 	},
