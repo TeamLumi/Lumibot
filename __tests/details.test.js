@@ -1,4 +1,4 @@
-const { getHeight, getWeight } = require ("../../lumibot/dex/details");
+const { getHeight, getWeight } = require("../dex/details");
 
 const TEST_POKEMON = 1; //Bulbasaur
 

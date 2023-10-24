@@ -6,7 +6,7 @@ const {
 	formatBaseStats,
 	getPokemonIdFromMonsNoAndForm,
 	createFormMap,
-} = require("../../lumibot/dex/functions");
+} = require("../dex/functions");
 
 describe("Dex utils function tests", () => {
 	it("Should return the form_no when provided accurate monsno and pokemon ID", () => {

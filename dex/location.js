@@ -1,4 +1,4 @@
-const { encounterData } = require("../../lumibot/__gamedata");
+const { encounterData } = require("../__gamedata");
 const cityAndTownNames = [
 	"Twinleaf Town",
 	"Sandgem Town",

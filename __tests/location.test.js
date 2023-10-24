@@ -1,4 +1,4 @@
-const { getEncounterLocations } = require("../../lumibot/dex/location");
+const { getEncounterLocations } = require("../dex/location");
 
 describe("Dex utils encounter Location getter tests", () => {
 	it("should throw an empty array for an invalid pokemonId number", () => {

@@ -2,7 +2,7 @@ const {
 	PersonalTable,
 	basePokemonNames,
 	formPokemonNames,
-} = require("../../lumibot/__gamedata");
+} = require("../__gamedata");
 const { FORM_MAP } = require("./functions");
 
 const POKEMON_NAME_MAP = PersonalTable.Personal.reduce(createPokemonMap, {});

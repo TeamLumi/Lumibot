@@ -8,7 +8,7 @@ const {
 	getMoveProperties,
 	getPokemonLearnset,
 	getTMCompatibility,
-} = require("../../lumibot/dex/moves");
+} = require("../dex/moves");
 
 describe("Dex Utils Move Getters", () => {
 	describe("generateMovesViaLearnset", () => {

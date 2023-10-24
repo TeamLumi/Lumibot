@@ -3,7 +3,7 @@ const {
 	getAbilityIdFromAbilityName,
 	getAbilityString,
 	getAbilityInfo,
-} = require ("../../lumibot/dex/ability");
+} = require("../dex/ability");
 
 describe("Ability dex utils", () => {
 	it("Should make a valid Smogon ability object", () => {

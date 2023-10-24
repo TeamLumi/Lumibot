@@ -3,7 +3,7 @@ const {
 	TrainerTable,
 	LearnsetTable,
 	moveEnum,
-} = require("../../lumibot/__gamedata");
+} = require("../__gamedata");
 const { getMoveString } = require("./moves");
 const { getPokemonIdFromFormMap } = require("./functions");
 const { getAbilityString } = require("./ability");

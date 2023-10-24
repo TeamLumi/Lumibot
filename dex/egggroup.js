@@ -1,4 +1,4 @@
-const { PersonalTable } = require("../../lumibot/__gamedata");
+const { PersonalTable } = require("../__gamedata");
 
 const EGG_GROUPS = {
 	0: "None",

@@ -1,4 +1,4 @@
-const { getNatureId, getNatureName } = require ("../../lumibot/dex/nature");
+const { getNatureId, getNatureName } = require("../dex/nature");
 
 describe("Dex utils Nature getters", () => {
 	describe("getNatureId", () => {

@@ -1,5 +1,5 @@
-const { findClosestString } = require("../../lumibot/dex/fuzzy");
-const { DISPLAY_POKEMON_NAME_MAP } = require("../../lumibot/dex/name");
+const { findClosestString } = require("../dex/fuzzy");
+const { DISPLAY_POKEMON_NAME_MAP } = require("../dex/name");
 const POKEMON_NAME_LIST = [...new Set(Object.values(DISPLAY_POKEMON_NAME_MAP))];
 
 describe("findClosestString Fuzzy for Pokedex searches", () => {

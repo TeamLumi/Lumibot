@@ -1,4 +1,4 @@
-const { EvolutionData } = require("../../lumibot/__gamedata");
+const { EvolutionData } = require("../__gamedata");
 const { getPokemonIdFromMonsNoAndForm } = require("./functions");
 const {
 	EVOLUTION_METHOD_DETAILS,

@@ -9,7 +9,7 @@ const {
 	createPokemonMap, //y
 	getPokemonDisplayName,
 	getPokemonIdFromDisplayName,
-} = require("../../lumibot/dex/name");
+} = require("../dex/name");
 
 describe("Dex utils Name getters", () => {
 	describe("createPokemonMap", () => {
@@ -159,18 +159,18 @@ describe("Dex utils Name getters", () => {
 		});
 	});
 
-	describe('getPokemonIdFromDisplayName', () => {
-		it('should return the correct id for a valid display name', () => {
-		  const displayName = 'Stitched Gengar';
-		  const id = getPokemonIdFromDisplayName(displayName);
-		  const expectedId = 1073;
-		  expect(id).toBe(expectedId);
+	describe("getPokemonIdFromDisplayName", () => {
+		it("should return the correct id for a valid display name", () => {
+			const displayName = "Stitched Gengar";
+			const id = getPokemonIdFromDisplayName(displayName);
+			const expectedId = 1073;
+			expect(id).toBe(expectedId);
 		});
-	  
-		it('should return 0 for an invalid display name', () => {
-		  const invalidName = 'Invalid Pokémon';
-		  const id = getPokemonIdFromDisplayName(invalidName);
-		  expect(id).toBe(0);
+
+		it("should return 0 for an invalid display name", () => {
+			const invalidName = "Invalid Pokémon";
+			const id = getPokemonIdFromDisplayName(invalidName);
+			expect(id).toBe(0);
 		});
-	  });
+	});
 });

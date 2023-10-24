@@ -1,4 +1,4 @@
-const { getTypeName, getTypes } = require("../../lumibot/dex/types");
+const { getTypeName, getTypes } = require("../dex/types");
 
 describe("Dex Utils Type Getters", () => {
 	const typeName = {

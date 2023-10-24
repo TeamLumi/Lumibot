@@ -1,4 +1,4 @@
-const { abilityNames, abilityInfo } = require("../../lumibot/__gamedata");
+const { abilityNames, abilityInfo } = require("../__gamedata");
 
 function makeSmogonAbilityObject(abilityId = 0) {
 	const abilityString =

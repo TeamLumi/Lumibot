@@ -1,7 +1,4 @@
-const {
-	getItemIdFromItemName,
-	getItemString,
-} = require ("../../lumibot/dex/item");
+const { getItemIdFromItemName, getItemString } = require("../dex/item");
 
 describe("Dex utils Item getter tests", () => {
 	describe("getItemIdFromItemName", () => {

@@ -1,4 +1,4 @@
-const { get_trainer_pokemon } = require("../../lumibot/dex/trainerGeneration");
+const { get_trainer_pokemon } = require("../dex/trainerGeneration");
 
 const TrainerTable = {
 	TrainerPoke: [

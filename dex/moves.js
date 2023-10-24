@@ -8,7 +8,7 @@ const {
 	PersonalTable,
 	moveNames,
 	moveInfo,
-} = require("../../lumibot/__gamedata");
+} = require("../__gamedata");
 const { getPokemonFormId } = require("./name");
 const { getTypeName } = require("./types");
 

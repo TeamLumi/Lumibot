@@ -2,7 +2,7 @@ const {
 	getPokemonIdsInEggGroup,
 	getEggGroupNameById,
 	getEggGroupViaPokemonId,
-} = require ("../../lumibot/dex/egggroup");
+} = require("../dex/egggroup");
 
 describe("Dex Utils Egg Group Tests", () => {
 	describe("getEggGroupViaPokemonId", () => {

@@ -1,8 +1,4 @@
-const {
-	itemNames,
-	PersonalTable,
-	itemInfo,
-} = require("../../lumibot/__gamedata");
+const { itemNames, PersonalTable, itemInfo } = require("../__gamedata");
 
 function getItemIdFromItemName(itemName) {
 	if (!itemName) throw Error(`Bad item name: ${itemName}`);
