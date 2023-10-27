@@ -56,13 +56,13 @@ module.exports = {
 		),
 
 	async execute(interaction) {
-		// Here we grab the Pokemon name then we convert it to the Pokemon's ID which we use to get further information.
 		let pokemonName = interaction.options.getString("pokemon");
 		let monsID = getPokemonIdFromDisplayName(pokemonName);
 		let pokemonInfo = getPokemonInfo(monsID);
 		const visualization = interaction.options.getString("visualization");
 		const mode = interaction.options.getString("mode");
 
+		// Try capitalise only the first digit of the Pokemon's name to get data.
 		if (pokemonInfo.name === "Egg") {
 			pokemonName = pokemonName
 				.toLowerCase()
