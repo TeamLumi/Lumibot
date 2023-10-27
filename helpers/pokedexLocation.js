@@ -47,10 +47,12 @@ const reverseEncounterTypeMap = {
 	"Daily Trophy Garden": ":trophy: Daily Trophy Garden",
 };
 
-function locationMode(name, imageLnk, type1, monsID, isValid, interaction) {
+function locationMode(pokemonInfo, monsID, imageLnk, interaction) {
 	const locations = getEncounterLocations(monsID);
-	const embed = new EmbedBuilder().setTitle(name).setThumbnail(imageLnk);
-	const typeColor = typeColors[type1];
+	const embed = new EmbedBuilder()
+		.setTitle(pokemonInfo.name)
+		.setThumbnail(imageLnk);
+	const typeColor = typeColors[pokemonInfo.type1];
 
 	if (typeColor) {
 		embed.setColor(typeColor);
@@ -106,7 +108,7 @@ function locationMode(name, imageLnk, type1, monsID, isValid, interaction) {
 
 	// If nothing found, check mon is valid, if so, try getting the location of its earliest evolution that appears in the wild.
 	if (locations.length === 0) {
-		if (isValid === 0) {
+		if (pokemonInfo.isValid === 0) {
 			embed.setDescription(
 				`*This Pokemon is* ***not*** *available in 2.0F.*\n\nSorry! I couldn't locate that Pokémon as I don't have enough data about it. It might not appear in the wild.`,
 			);

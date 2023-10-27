@@ -52,14 +52,14 @@ const wordToEmojiMap = {
 	"Female": "<:female:1157322686234640404> Female",
 };
 
-function evolutionMode(name, imageLnk, type1, monsID, isValid) {
-	if (name === `Shedinja`) {
+function evolutionMode(pokemonInfo, monsID, imageLnk) {
+	if (pokemonInfo.name === `Shedinja`) {
 		const embed = new EmbedBuilder()
-			.setTitle(name)
+			.setTitle(pokemonInfo.name)
 			.setDescription(`*Evolves from:*\n**Nincada**\nFree Space + Poké Ball`)
 			.setThumbnail(imageLnk);
 
-		const typeColor = typeColors[type1];
+		const typeColor = typeColors[pokemonInfo.type1];
 		if (typeColor) {
 			embed.setColor(typeColor);
 		}
@@ -196,18 +196,18 @@ function evolutionMode(name, imageLnk, type1, monsID, isValid) {
 
 	let evolutionDescription = getEvolutionDescription(evolutionDetails, monsID);
 
-	if (isValid === 0) {
+	if (pokemonInfo.isValid === 0) {
 		evolutionDescription =
 			"*This Pokemon is* ***not*** *available in 2.0F.*\n\n" +
 			evolutionDescription;
 	}
 
 	const embed = new EmbedBuilder()
-		.setTitle(name)
+		.setTitle(pokemonInfo.name)
 		.setDescription(`${evolutionDescription}`)
 		.setThumbnail(imageLnk);
 
-	const typeColor = typeColors[type1];
+	const typeColor = typeColors[pokemonInfo.type1];
 	if (typeColor) {
 		embed.setColor(typeColor);
 	}

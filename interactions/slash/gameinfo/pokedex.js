@@ -59,58 +59,24 @@ module.exports = {
 		// Here we grab the Pokemon name then we convert it to the Pokemon's ID which we use to get further information.
 		let pokemonName = interaction.options.getString("pokemon");
 		let monsID = getPokemonIdFromDisplayName(pokemonName);
-		const pokemonInfo = getPokemonInfo(monsID);
+		let pokemonInfo = getPokemonInfo(monsID);
 		const visualization = interaction.options.getString("visualization");
 		const mode = interaction.options.getString("mode");
 
-		let {
-			name,
-			ability1,
-			ability2,
-			abilityH,
-			tmLearnset,
-			baseStatsTotal,
-			weight: pWeight,
-			height: pHeight,
-			type1,
-			type2,
-			imageSrc,
-			genderDecimalValue,
-			isValid,
-		} = pokemonInfo;
-		let BackupInfo;
-
-		if (name === "Egg") {
+		if (pokemonInfo.name === "Egg") {
 			pokemonName = pokemonName
 				.toLowerCase()
 				.replace(/(?:^|\s|-)\S/g, (char) => char.toUpperCase());
 
-			BackupInfo = getPokemonInfo(getPokemonIdFromDisplayName(pokemonName));
-
-			({
-				name,
-				ability1,
-				ability2,
-				abilityH,
-				tmLearnset,
-				baseStatsTotal,
-				weight: pWeight,
-				height: pHeight,
-				type1,
-				type2,
-				imageSrc,
-				genderDecimalValue,
-				isValid,
-			} = BackupInfo);
-
 			monsID = getPokemonIdFromDisplayName(pokemonName) || 0;
+			pokemonInfo = getPokemonInfo(monsID);
 		}
 
 		const imagePrefix = `https://luminescent.team`;
-		const imageLnk = `${imagePrefix}${imageSrc}`;
+		const imageLnk = `${imagePrefix}${pokemonInfo.imageSrc}`;
 
 		// Ignore pokemon that are still eggs after  error catching.
-		if (name === "Egg") {
+		if (pokemonInfo.name === "Egg") {
 			const embed = new EmbedBuilder()
 				.setTitle(`Oops!`)
 				.setDescription(
@@ -129,42 +95,33 @@ module.exports = {
 
 		switch (mode) {
 			case "location":
-				embed = locationMode(name, imageLnk, type1, monsID, isValid, interaction);
+				embed = locationMode(pokemonInfo, monsID, imageLnk, interaction);
 				break;
 			case "evolution":
-				embed = evolutionMode(name, imageLnk, type1, monsID, isValid);
+				embed = evolutionMode(pokemonInfo, monsID, imageLnk);
 				break;
 			case "learnset":
-				embed = learnsetMode(name, imageLnk, type1, monsID, isValid);
+				embed = learnsetMode(pokemonInfo, monsID, imageLnk);
 				break;
 			default:
-				embed = statisticsMode(
-					name,
-					imageLnk,
-					ability1,
-					ability2,
-					abilityH,
-					baseStatsTotal,
-					type1,
-					type2,
-					isValid,
-					genderDecimalValue
-				);
+				embed = statisticsMode(pokemonInfo, imageLnk);
 				if (visualization === "graph") {
-					const image = await createGraphVisualization(pokemonInfo, BackupInfo);
-					const attachment = new AttachmentBuilder(image, { name: "chart.png" });
+					const image = await createGraphVisualization(pokemonInfo);
+					const attachment = new AttachmentBuilder(image, {
+						name: "chart.png",
+					});
 					embed.setImage("attachment://chart.png");
 					interaction.reply({ embeds: [embed], files: [attachment] });
 					return;
 				} else {
-					const textInfo = createTextVisualization(pokemonInfo, BackupInfo);
+					const textInfo = createTextVisualization(pokemonInfo);
 					embed.addFields({
 						name: "**Base Stats:**",
 						value: textInfo,
 					});
 				}
 		}
-		
+
 		interaction.reply({ embeds: [embed] });
 	},
 };

@@ -47,17 +47,19 @@ const typeIcons = {
 	Normal: "<:t_normal:1117062635817554010>",
 };
 
-function learnsetMode(name, imageLnk, type1, monsID, isValid) {
+function learnsetMode(pokemonInfo, monsID, imageLnk) {
 	// Begin learnset mode.
-	const embed = new EmbedBuilder().setTitle(name).setThumbnail(imageLnk);
+	const embed = new EmbedBuilder()
+		.setTitle(pokemonInfo.name)
+		.setThumbnail(imageLnk);
 
-	const typeColor = typeColors[type1];
+	const typeColor = typeColors[pokemonInfo.type1];
 	if (typeColor) {
 		embed.setColor(typeColor);
 	}
 
 	let validDesc = "";
-	if (isValid === 0) {
+	if (pokemonInfo.isValid === 0) {
 		validDesc = `*This Pokemon is* ***not*** *available in 2.0F.*\n\n`;
 	}
 
