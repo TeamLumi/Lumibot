@@ -5,7 +5,7 @@ const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
  */
 module.exports = {
 	data: {
-		name: ["[download]"],
+		name: ["[download]", "[nexus]"],
 	},
 	execute(message, args) {
 		const embed = new EmbedBuilder()
