@@ -18,7 +18,7 @@ module.exports = {
 			.setTitle("Luminescent Website")
 			.setURL("https://luminescent.team/")
 			.setDescription(
-				"Check out our [website :computer:](https://luminescent.team/) for all the help you need!",
+				"Check out our [website](https://luminescent.team/) for all the help you need!",
 			)
 			.setColor(0x00b0f4);
 
