@@ -174,7 +174,7 @@ function statisticsMode(pokemonInfo, imageLnk) {
 
 	const typeDescription =
 		pokemonInfo.isValid === 0
-			? `*This Pokemon is* ***not*** *available in 2.0F.*`
+			? `*This Pokemon is* ***not*** *available in 2.0F.*\n\n`
 			: "";
 
 	embed.setDescription(
