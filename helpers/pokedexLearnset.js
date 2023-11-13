@@ -50,7 +50,7 @@ const typeIcons = {
 function learnsetMode(pokemonInfo, monsID, imageLnk) {
 	// Begin learnset mode.
 	const embed = new EmbedBuilder()
-		.setTitle(pokemonInfo.name)
+		.setTitle(`**${pokemonInfo.name}**`)
 		.setThumbnail(imageLnk);
 
 	const typeColor = typeColors[pokemonInfo.type1];
@@ -74,7 +74,9 @@ function learnsetMode(pokemonInfo, monsID, imageLnk) {
 			})
 			.join("\n");
 
-		embed.setDescription(`${validDesc}**Learnset**:\n${movesetString}`);
+		embed.setDescription(
+			`${validDesc}**Learnset**:\n${movesetString}\n\n[See more in Pokédex](https://luminescent.team/pokedex/${monsID})`,
+		);
 
 		return embed;
 	} catch (error) {

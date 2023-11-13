@@ -50,7 +50,7 @@ const reverseEncounterTypeMap = {
 function locationMode(pokemonInfo, monsID, imageLnk, interaction) {
 	const locations = getEncounterLocations(monsID);
 	const embed = new EmbedBuilder()
-		.setTitle(pokemonInfo.name)
+		.setTitle(`**${pokemonInfo.name}**`)
 		.setThumbnail(imageLnk);
 	const typeColor = typeColors[pokemonInfo.type1];
 
@@ -62,7 +62,7 @@ function locationMode(pokemonInfo, monsID, imageLnk, interaction) {
 	const turnbackCaveRegex = /^Turnback Cave\b.*/;
 
 	// Helper function to format location encounters
-	function formatLocationEncounters(locationData, isBackup) {
+	function formatLocationEncounters(locationData, interaction) {
 		let slicedLocations = locationData;
 		let slicedNote = "";
 
@@ -73,7 +73,7 @@ function locationMode(pokemonInfo, monsID, imageLnk, interaction) {
 		if (interaction.channel.id !== botChannel && locationData.length > 4) {
 			slicedLocations = locationData.slice(0, 3);
 			slicedNote =
-				"**Note:** Encounters have been truncated. Run this command in the bot channel to see all encounters.";
+				"**Note:** Encounters have been truncated. Run this command in the bot channel to see all encounters. ";
 		}
 
 		return (
@@ -102,7 +102,7 @@ function locationMode(pokemonInfo, monsID, imageLnk, interaction) {
 
 					return `**${locationTitle}**\n${encounters}`;
 				})
-				.join("\n\n") + (isBackup ? `\n\n${slicedNote}` : "")
+				.join("\n\n") + `\n\n${slicedNote}`
 		);
 	}
 
@@ -129,8 +129,8 @@ function locationMode(pokemonInfo, monsID, imageLnk, interaction) {
 					embed.setDescription(
 						`**Encounter information:**\n\nStandard rates assume that incense/radar are not active. For further accuracy, visit [our docs](https://luminescent.team/docs).\n\n**${backupName}** can be found:\n\n${formatLocationEncounters(
 							locationsBackup,
-							true,
-						)}`,
+							interaction,
+						)}[See more in Pokédex](https://luminescent.team/pokedex/${monsID})`,
 					);
 				}
 			} else {
@@ -143,8 +143,8 @@ function locationMode(pokemonInfo, monsID, imageLnk, interaction) {
 		embed.setDescription(
 			`**Encounter information:**\n\nStandard rates assume that incense/radar are not active. For further accuracy, visit [our docs](https://luminescent.team/docs).\n\n${formatLocationEncounters(
 				locations,
-				false,
-			)}`,
+				interaction,
+			)}[See more in Pokédex](https://luminescent.team/pokedex/${monsID})`,
 		);
 	}
 

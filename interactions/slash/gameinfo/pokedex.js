@@ -104,13 +104,17 @@ module.exports = {
 				embed = learnsetMode(pokemonInfo, monsID, imageLnk);
 				break;
 			default:
-				embed = statisticsMode(pokemonInfo, imageLnk);
+				embed = statisticsMode(pokemonInfo, monsID, imageLnk);
 				if (visualization === "graph") {
 					const image = await createGraphVisualization(pokemonInfo);
 					const attachment = new AttachmentBuilder(image, {
 						name: "chart.png",
 					});
 					embed.setImage("attachment://chart.png");
+					embed.addFields({
+						name: `BST: ${pokemonInfo.baseStatsTotal}`,
+						value: `[See more in Pokédex](https://luminescent.team/pokedex/${monsID})`,
+					});
 					interaction.reply({ embeds: [embed], files: [attachment] });
 					return;
 				} else {
@@ -120,6 +124,10 @@ module.exports = {
 						value: textInfo,
 					});
 				}
+				embed.addFields({
+					name: `BST: ${pokemonInfo.baseStatsTotal}`,
+					value: `[See more in Pokédex](https://luminescent.team/pokedex/${monsID})`,
+				});
 		}
 
 		interaction.reply({ embeds: [embed] });

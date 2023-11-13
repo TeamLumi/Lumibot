@@ -55,7 +55,7 @@ const wordToEmojiMap = {
 function evolutionMode(pokemonInfo, monsID, imageLnk) {
 	if (pokemonInfo.name === `Shedinja`) {
 		const embed = new EmbedBuilder()
-			.setTitle(pokemonInfo.name)
+			.setTitle(`**${pokemonInfo.name}**`)
 			.setDescription(`*Evolves from:*\n**Nincada**\nFree Space + Poké Ball`)
 			.setThumbnail(imageLnk);
 
@@ -187,6 +187,10 @@ function evolutionMode(pokemonInfo, monsID, imageLnk) {
 			}
 		}
 
+		description.push(
+			`[See more in Pokédex](https://luminescent.team/pokedex/${monsID})`,
+		);
+
 		if (description.length === 0) {
 			return "Sorry! This Pokémon is not known to evolve from or into anything.\n\n...At least not that I know of!";
 		}
@@ -203,7 +207,7 @@ function evolutionMode(pokemonInfo, monsID, imageLnk) {
 	}
 
 	const embed = new EmbedBuilder()
-		.setTitle(pokemonInfo.name)
+		.setTitle(`**${pokemonInfo.name}**`)
 		.setDescription(`${evolutionDescription}`)
 		.setThumbnail(imageLnk);
 

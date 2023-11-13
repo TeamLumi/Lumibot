@@ -142,10 +142,36 @@ function createTextVisualization(pokemonInfo) {
 	return `\`╔═══╤═══╤═══╤═══╤═══╤═══╗\`\n\`║HP\u00A0│ATK│DEF│SPA│SPD│SPE║\`\n\`╠═══╪═══╪═══╪═══╪═══╪═══╣\`\n\`║${statValues[0]}│${statValues[1]}│${statValues[2]}│${statValues[3]}│${statValues[4]}│${statValues[5]}║\`\n\`╚═══╧═══╧═══╧═══╧═══╧═══╝\``;
 }
 
-function statisticsMode(pokemonInfo, imageLnk) {
+function statisticsMode(pokemonInfo, monsID, imageLnk) {
 	const embed = new EmbedBuilder()
-		.setTitle(pokemonInfo.name)
+		.setTitle(`**${pokemonInfo.name}**`)
 		.setThumbnail(imageLnk);
+
+	let malePercentage;
+	let femalePercentage;
+
+	if (pokemonInfo.genderDecimalValue === 255) {
+		malePercentage = 0;
+		femalePercentage = 0;
+	} else {
+		const totalPossibleValues = 254;
+		const femaleValue = pokemonInfo.genderDecimalValue;
+		const maleValue = totalPossibleValues - pokemonInfo.genderDecimalValue;
+
+		malePercentage = Math.round((maleValue / totalPossibleValues) * 100);
+		femalePercentage = Math.round((femaleValue / totalPossibleValues) * 100);
+	}
+
+	let genderText = "";
+	if (malePercentage === 0 && femalePercentage === 0) {
+		genderText = "Unknown";
+	} else if (malePercentage === 100) {
+		genderText = "100% Male";
+	} else if (femalePercentage === 100) {
+		genderText = "100% Female";
+	} else {
+		genderText = `${malePercentage}% Male, ${femalePercentage}% Female`;
+	}
 
 	const abilityField =
 		pokemonInfo.ability1 === pokemonInfo.ability2
@@ -161,7 +187,7 @@ function statisticsMode(pokemonInfo, imageLnk) {
 	embed.addFields(
 		...abilityField,
 		{ name: "**Hidden Ability:**", value: pokemonInfo.abilityH, inline: true },
-		{ name: "**Stats:**", value: `Total: ${pokemonInfo.baseStatsTotal}` },
+		{ name: "**Gender:**", value: `${genderText}` },
 	);
 
 	const typeColor = typeColors[pokemonInfo.type1];
@@ -182,34 +208,6 @@ function statisticsMode(pokemonInfo, imageLnk) {
 			pokemonInfo.type1 !== pokemonInfo.type2 ? ` \u200b ${type2Icon}` : ""
 		}`,
 	);
-
-	let malePercentage;
-	let femalePercentage;
-
-	if (pokemonInfo.genderDecimalValue === 255) {
-		malePercentage = 0;
-		femalePercentage = 0;
-	} else {
-		const totalPossibleValues = 254;
-		const femaleValue = pokemonInfo.genderDecimalValue;
-		const maleValue = totalPossibleValues - pokemonInfo.genderDecimalValue;
-
-		malePercentage = Math.round((maleValue / totalPossibleValues) * 100);
-		femalePercentage = Math.round((femaleValue / totalPossibleValues) * 100);
-	}
-
-	let genderText = "";
-	if (malePercentage === 0 && femalePercentage === 0) {
-		genderText = "Gender: Unknown";
-	} else if (malePercentage === 100) {
-		genderText = "Gender: 100% Male";
-	} else if (femalePercentage === 100) {
-		genderText = "Gender: 100% Female";
-	} else {
-		genderText = `Gender: ${malePercentage}% Male, ${femalePercentage}% Female`;
-	}
-
-	embed.setFooter({ text: genderText });
 
 	return embed;
 }
