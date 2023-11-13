@@ -188,7 +188,7 @@ function evolutionMode(pokemonInfo, monsID, imageLnk) {
 		}
 
 		description.push(
-			`[See more in Pokédex](https://luminescent.team/pokedex/${monsID})`,
+			`See more in the [Pokédex](https://luminescent.team/pokedex/${monsID}).`,
 		);
 
 		if (description.length === 0) {

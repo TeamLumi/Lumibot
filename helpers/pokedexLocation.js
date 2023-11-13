@@ -130,7 +130,7 @@ function locationMode(pokemonInfo, monsID, imageLnk, interaction) {
 						`**Encounter information:**\n\nStandard rates assume that incense/radar are not active. For further accuracy, visit [our docs](https://luminescent.team/docs).\n\n**${backupName}** can be found:\n\n${formatLocationEncounters(
 							locationsBackup,
 							interaction,
-						)}[See more in Pokédex](https://luminescent.team/pokedex/${monsID})`,
+						)}See more in the [Pokédex](https://luminescent.team/pokedex/${monsID}).`,
 					);
 				}
 			} else {
@@ -144,7 +144,7 @@ function locationMode(pokemonInfo, monsID, imageLnk, interaction) {
 			`**Encounter information:**\n\nStandard rates assume that incense/radar are not active. For further accuracy, visit [our docs](https://luminescent.team/docs).\n\n${formatLocationEncounters(
 				locations,
 				interaction,
-			)}[See more in Pokédex](https://luminescent.team/pokedex/${monsID})`,
+			)}See more in the [Pokédex](https://luminescent.team/pokedex/${monsID}).`,
 		);
 	}
 

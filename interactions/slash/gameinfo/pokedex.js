@@ -126,7 +126,7 @@ module.exports = {
 				}
 				embed.addFields({
 					name: `BST: ${pokemonInfo.baseStatsTotal}`,
-					value: `[See more in Pokédex](https://luminescent.team/pokedex/${monsID})`,
+					value: `See more in the [Pokédex](https://luminescent.team/pokedex/${monsID}).`,
 				});
 		}
 

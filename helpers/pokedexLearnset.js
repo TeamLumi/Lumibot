@@ -75,7 +75,7 @@ function learnsetMode(pokemonInfo, monsID, imageLnk) {
 			.join("\n");
 
 		embed.setDescription(
-			`${validDesc}**Learnset**:\n${movesetString}\n\n[See more in Pokédex](https://luminescent.team/pokedex/${monsID})`,
+			`${validDesc}**Learnset**:\n${movesetString}\n\nSee more in the [Pokédex](https://luminescent.team/pokedex/${monsID}).`,
 		);
 
 		return embed;
