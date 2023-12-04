@@ -57,7 +57,7 @@ const POKEMON_MOVE_LEVEL_TYPE = {
 	TM: "tm",
 };
 
-const { getEncounterLocations } = require("./location");
+const { getEncounterLocations, getStaticLocations } = require("./location");
 
 function getPokemonInfo(monsId = 0) {
 	const p = PersonalTable.Personal[monsId];
@@ -125,6 +125,7 @@ module.exports = {
 	getTechMachineLearnset,
 	getMoveProperties,
 	getEncounterLocations,
+	getStaticLocations,
 	getPokemonMonsnoFromName,
 	getFormName,
 	getFormNameOfProblematicPokemon,

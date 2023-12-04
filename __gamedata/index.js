@@ -15,6 +15,7 @@ const pokemonHeight = require("./english_ss_zkn_height.json");
 const pokemonWeight = require("./english_ss_zkn_weight.json");
 const pokemonDexType = require("./english_ss_zkn_type.json");
 const pokemonPokedexInfo = require("./english_dp_pokedex_diamond.json");
+const staticLocations = require("./static_locations.json");
 
 // All the other English files
 const natureNames = require("./english_ss_seikaku.json");
@@ -46,6 +47,7 @@ module.exports = {
 	pokemonWeight,
 	pokemonDexType,
 	pokemonPokedexInfo,
+	staticLocations,
 	natureNames,
 	abilityNames,
 	abilityInfo,
