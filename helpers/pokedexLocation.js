@@ -62,8 +62,8 @@ const staticNameReplacements = {
 	"Floaroma Town": "**Floaroma Town**\nReward from the Interviewer in the Pokémon Center for answering her questions.",
 	"Eterna City Galactic Building": "**Eterna City**\nFound in the Eterna Galactic Building after defeating Jupiter.",
 	"Old Chateau": "**Old Chateau**\nFound haunting an object in the Old Chateu.",
-	"Wayward Cave": "**Wayward Cave**\nFound in the deepest part of Wayward cave.",
-	"Hearthome City - Egg": "**Eterna City**\nOne of the random Pokémon from Cynthia's Egg.",
+	"Wayward Cave": "**Wayward Cave**\nFound in the deepest part of Wayward Cave.",
+	"Hearthome City - Egg": "**Eterna City**\nOne of the random Pokémon from Cynthia's egg.",
 	"Route 209": "**Route 209**\nPlace the Odd Keystone into the broken stone tower.",
 	"Solaceon Town": "**Solaceon Town**\nObtained in a trade with the Breeder for a Starter Pokémon.",
 	"Lost Tower": "**Lost Tower**\nProceed through Lost Tower and defeat the uncatchable Chandelure.",
@@ -96,7 +96,7 @@ const staticNameReplacements = {
 	"Turnback Cave - Giratina": "**Turnback Cave**\nDefeat Giratina in the Distortion World, then find it again in Turnback Cave.",
 	"Newmoon Island - Darkrai": "**Newmoon Island**\nTake the Member Card from the dark house on Route 217 to Canalave after the Cresselia events.",
 	"Flower Paradise - Shaymin": "**Flower Paradise**\nGo to Route 224 with Oak's Letter and write your message on the stone tablet.",
-	"Hall of Origin - Arceus": "**Hall of Origin**\nDefeat all of the Type Master Trainers to earn their plates, then take the Azure Flute to Spear Pillar.",
+	"Hall of Origin - Arceus": "**Hall of Origin**\nDefeat all of the Type Master Trainers to earn their Plates, then take the Azure Flute to Spear Pillar.",
 	"Amity Square": "**Amity Square**\nEnter Amity Square and proceed through the event.",
 };
 
