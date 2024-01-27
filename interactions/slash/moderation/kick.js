@@ -3,6 +3,7 @@ const {
 	EmbedBuilder,
 	PermissionsBitField,
 	SlashCommandBuilder,
+	ChannelType,
 } = require("discord.js");
 
 /**
@@ -109,31 +110,12 @@ module.exports = {
 				}
 
 				try {
-					await member.kick({
+					await member.ban({
+						deleteMessageSeconds: deleteSeconds,
 						reason: kickReason,
 					});
 
-					if (deleteSeconds > 0) {
-						try {
-							const messages = await interaction.channel.messages.fetch({
-								limit: 100,
-							});
-
-							const userMessages = messages.filter(
-								(msg) => msg.author.id === member.id,
-							);
-							const messagesToDelete = userMessages.filter(
-								(msg) =>
-									Date.now() - msg.createdTimestamp < deleteSeconds * 1000,
-							);
-
-							if (messagesToDelete.size > 0) {
-								await interaction.channel.bulkDelete(messagesToDelete, true);
-							}
-						} catch (error) {
-							console.log(error);
-						}
-					}
+					await interaction.guild.members.unban(member.user);
 
 					const embed = new EmbedBuilder()
 						.setTitle(`Member Kicked`)

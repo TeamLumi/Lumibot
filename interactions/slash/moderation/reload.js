@@ -21,7 +21,7 @@ module.exports = {
 				.setRequired(true)
 				.setAutocomplete(true),
 		)
-		.setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator)
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.MuteMembers)
 		.setDMPermission(false),
 
 	async execute(interaction) {

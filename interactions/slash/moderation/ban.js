@@ -3,6 +3,7 @@ const {
 	EmbedBuilder,
 	PermissionsBitField,
 	SlashCommandBuilder,
+	ChannelType,
 } = require("discord.js");
 
 /**
@@ -108,49 +109,28 @@ module.exports = {
 					});
 				}
 
-				try {
-					if (!member.user.bot) {
-						try {
-							if (
-								banReason.trim().toLowerCase() === "rule 0" ||
-								banReason.trim().toLowerCase() === "rule0"
-							) {
-								const dmMessage = `You have been banned from the Team Luminescent server | Reason: Rule 0\n\nPokémon Luminescent Platinum is a romhack that requires Brilliant Diamond 1.3.0 to work. You must legally own and acquire your own copy of the game. If you cannot dump the files from a hacked Nintendo Switch, then they are not considered legal!\n\n**NO PIRACY IS ALLOWED IN THE SERVER, EVER, FOR ANY REASON. THIS INCLUDES ALLUDING TO OR IMPLYING YOUR PIRACY OR ASKING FOR: THE ROMS, NSP, XCI, UPDATE FILES, GAMES, FIRMWARE, SHADER CACHES OR KEYS, OR WHERE TO FIND THEM.**`;
-								await member.send(dmMessage);
-							} else if (banReason !== "No reason provided.") {
-								const dmMessage = `You have been banned from the Team Luminescent server | Reason: ${banReason}`;
-								await member.send(dmMessage);
-							}
-						} catch (error) {
-							console.log(error);
+				if (!member.user.bot) {
+					try {
+						if (
+							banReason.trim().toLowerCase() === "rule 0" ||
+							banReason.trim().toLowerCase() === "rule0"
+						) {
+							const dmMessage = `You have been banned from the Team Luminescent server | Reason: Rule 0\n\nPokémon Luminescent Platinum is a romhack that requires Brilliant Diamond 1.3.0 to work. You must legally own and acquire your own copy of the game. If you cannot dump the files from a hacked Nintendo Switch, then they are not considered legal!\n\n**NO PIRACY IS ALLOWED IN THE SERVER, EVER, FOR ANY REASON. THIS INCLUDES ALLUDING TO OR IMPLYING YOUR PIRACY OR ASKING FOR: THE ROMS, NSP, XCI, UPDATE FILES, GAMES, FIRMWARE, SHADER CACHES OR KEYS, OR WHERE TO FIND THEM.**`;
+							await member.send(dmMessage);
+						} else if (banReason !== "No reason provided.") {
+							const dmMessage = `You have been banned from the Team Luminescent server | Reason: ${banReason}`;
+							await member.send(dmMessage);
 						}
+					} catch (error) {
+						console.log(error);
 					}
+				}
 
+				try {
 					await member.ban({
+						deleteMessageSeconds: deleteSeconds,
 						reason: banReason,
 					});
-
-					if (deleteSeconds > 0) {
-						try {
-							const messages = await interaction.channel.messages.fetch({
-								limit: 100,
-							});
-
-							const userMessages = messages.filter(
-								(msg) => msg.author.id === member.id,
-							);
-							const messagesToDelete = userMessages.filter(
-								(msg) =>
-									Date.now() - msg.createdTimestamp < deleteSeconds * 1000,
-							);
-
-							if (messagesToDelete.size > 0) {
-								await interaction.channel.bulkDelete(messagesToDelete, true);
-							}
-						} catch (error) {
-							console.log(error);
-						}
-					}
 
 					const embed = new EmbedBuilder()
 						.setTitle(`Member Banned`)

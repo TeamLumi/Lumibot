@@ -13,7 +13,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("pull")
 		.setDescription("Super Mod Command: Pulls the remote repo to the bot.")
-		.setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator)
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.MuteMembers)
 		.setDMPermission(false),
 
 	async execute(interaction) {
