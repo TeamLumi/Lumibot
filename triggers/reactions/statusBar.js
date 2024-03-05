@@ -23,7 +23,7 @@ module.exports = {
 				name: "Team Lumi",
 			})
 			.setImage(
-				"https://raw.githubusercontent.com/TeamLumi/luminescent-team/main/static/img/yuzuryu.png",
+				"https://media.discordapp.net/attachments/1032914152257228820/1214356178939936859/image.png",
 			)
 			.setColor(0x000000);
 
