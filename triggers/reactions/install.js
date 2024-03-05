@@ -33,7 +33,7 @@ module.exports = {
 				);
 		} else if (message.content.toLowerCase().includes("[yuzu]")) {
 			embed
-				.setTitle("Yuzu Installation")
+				.setTitle("Yuzu Installation?")
 				.setURL("https://luminescent.team/docs/installation/")
 				.setDescription(
 					"We no longer support installation or bugs regarding the Yuzu emulator. Please seek another way to play our mod, such as Atmosphere or Ryujinx.",
