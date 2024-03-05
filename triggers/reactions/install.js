@@ -34,9 +34,9 @@ module.exports = {
 		} else if (message.content.toLowerCase().includes("[yuzu]")) {
 			embed
 				.setTitle("Yuzu Installation")
-				.setURL("https://luminescent.team/docs/installation/yuzu")
+				.setURL("https://luminescent.team/docs/installation/")
 				.setDescription(
-					"See how to install the mod on Yuzu emulator. If you still have issues, please make a thread in https://discord.com/channels/912508046159261728/1020986285076250624 \n\nWe strongly recommend against using Yuzu due to a multitude of bugs, and future incompatibility with our mods because of inaccurate emulation.\n\nQuestions on how to use or install the emulator itself should be taken to more appropriate servers or Googled.",
+					"We no longer support installation or bugs regarding the Yuzu emulator. Please seek another way to play our mod, such as Atmosphere or Ryujinx.",
 				);
 		} else if (message.content.toLowerCase().includes("[ryujinx]")) {
 			embed
