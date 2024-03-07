@@ -4,7 +4,7 @@
 	"description": "Discord Bot for the Luminescent Platinum ROM Hack.",
 	"main": "bot.js",
 	"scripts": {
-		"start": "node bot.js",
+		"start": "GAME_VERSION=3.0 node bot.js",
 		"start:prod": "npm test && cross-env NODE_ENV=production forever start bot.js",
 		"reset": "node reset.js",
 		"reset:prod": "NODE_ENV=production npm reset",

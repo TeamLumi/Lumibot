@@ -50,7 +50,7 @@ const {
 
 const { getEvolutionTree, getEvolutionMethodDetail } = require("./evolution");
 
-const { PersonalTable } = require("../__gamedata");
+const { PersonalTable } = require(global.gameDataFolder);
 
 const POKEMON_MOVE_LEVEL_TYPE = {
 	EGG: "egg",

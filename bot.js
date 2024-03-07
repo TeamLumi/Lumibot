@@ -45,6 +45,9 @@ if (process.env.NODE_ENV === "production") {
 	client_id = client_id_dev;
 }
 
+global.gameDataFolder =
+	process.env.GAME_VERSION === "3.0" ? "../__3.0gamedata" : "../__gamedata";
+
 // Create a new client instance.
 
 const client = new Client({

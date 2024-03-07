@@ -8,7 +8,7 @@ const {
 	PersonalTable,
 	moveNames,
 	moveInfo,
-} = require("../__gamedata");
+} = require(global.gameDataFolder);
 const { getPokemonFormId } = require("./name");
 const { getTypeName } = require("./types");
 

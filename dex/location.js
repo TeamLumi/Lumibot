@@ -1,4 +1,4 @@
-const { encounterData, staticLocations } = require("../__gamedata");
+const { encounterData, staticLocations } = require(global.gameDataFolder);
 const cityAndTownNames = [
 	"Twinleaf Town",
 	"Sandgem Town",

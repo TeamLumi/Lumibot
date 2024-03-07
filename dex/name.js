@@ -2,7 +2,7 @@ const {
 	PersonalTable,
 	basePokemonNames,
 	formPokemonNames,
-} = require("../__gamedata");
+} = require(global.gameDataFolder);
 const { FORM_MAP } = require("./functions");
 
 const POKEMON_NAME_MAP = PersonalTable.Personal.reduce(createPokemonMap, {});
@@ -33,7 +33,8 @@ function createPokemonMap(pokemonNameMap, currentPokemon) {
 		pokemonNameMap[id] = getFormNameOfProblematicPokemon(id);
 		return pokemonNameMap;
 	} catch (e) {
-		throw Error(`${currentPokemon.id} - ${e}`);
+		throw Error(`${currentPokemon.id} - ${e}
+		pulling from directory ${global.gameDataFolder}`);
 	}
 }
 
@@ -87,21 +88,42 @@ function getPokemonIdFromName(name = "Egg") {
 }
 
 function getFormNameOfProblematicPokemon(id = 0) {
-	switch (id) {
-		case 1242:
-			return "Ash-Greninja";
-		case 1285:
-			return "Meowstic-F";
-		case 1310:
-			return "Rockruff Own-Tempo";
-		case 1441:
-			return "Indeedee-F";
-		case 1454:
-			return "Basculegion-F";
-		case 1456:
-			return "Oinkologne-F";
-		default:
-			throw Error(`Bad Pokemon ID in PokemonNameMap: ${id}`);
+	if (global.gameDataFolder == "../__3.0gamedata") {
+		switch (id) {
+			case 1266:
+				return "Ash-Greninja";
+			case 1309:
+				return "Meowstic-F";
+			case 1335:
+				return "Rockruff Own-Tempo";
+			case 1466:
+				return "Indeedee-F";
+			case 1481:
+				return "Basculegion-F";
+			case 1483:
+				return "Oinkologne-F";
+			default:
+				throw Error(`Bad Pokemon ID in PokemonNameMap
+							from getFormNameOfProblematicPokemon(${id})`);
+		}
+	} else {
+		switch (id) {
+			case 1242:
+				return "Ash-Greninja";
+			case 1285:
+				return "Meowstic-F";
+			case 1310:
+				return "Rockruff Own-Tempo";
+			case 1441:
+				return "Indeedee-F";
+			case 1454:
+				return "Basculegion-F";
+			case 1456:
+				return "Oinkologne-F";
+			default:
+				throw Error(`Bad Pokemon ID in PokemonNameMap
+							from getFormNameOfProblematicPokemon(${id})`);
+		}
 	}
 }
 

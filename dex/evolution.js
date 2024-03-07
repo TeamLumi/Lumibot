@@ -1,50 +1,36 @@
-const { EvolutionData } = require("../__gamedata");
+const { EvolutionData } = require(global.gameDataFolder);
 const { getPokemonIdFromMonsNoAndForm } = require("./functions");
 const {
+	REPLACE_STRING,
 	EVOLUTION_METHOD_DETAILS,
 	evolutionFunctions,
 } = require("./evolutionConstants");
-const { getItemString } = require("./item");
-const { getMoveString, getMoveProperties } = require("./moves");
-const { getPokemonName } = require("./name");
-const { getTypeName } = require("./types");
 
 function getEvolutionMethodDetail(methodId, methodParameter = 0, level) {
 	if (methodId === -1) {
 		return -1;
 	}
-	if (!Number.isInteger(methodId) || methodId < 0 || methodId > 47) {
+	if (
+		!Number.isInteger(methodId) ||
+		methodId < 0 ||
+		(global.gameDataFolder === "../__3.0gamedata" && methodId > 59) ||
+		(global.gameDataFolder !== "../__3.0gamedata" && methodId > 47)
+	)
 		throw new Error(`Bad method: ${methodId}`);
-	}
 	const evolutionDetails = { ...EVOLUTION_METHOD_DETAILS[methodId] };
-	const evoFunction = evolutionFunctions[methodId];
+	const evoFunction = evolutionDetails.function;
 	let evoMethod = evolutionDetails.method;
-	if (evoFunction === "Level") {
+	if (evolutionDetails.requiresLevel) {
 		evoMethod = "Level";
-		evolutionDetails.method = evolutionDetails.method.replace("REPLACE", level);
-	} else if (evoFunction === "getItemString") {
-		evoMethod = getItemString(methodParameter);
 		evolutionDetails.method = evolutionDetails.method.replace(
-			"REPLACE",
-			evoMethod,
+			REPLACE_STRING,
+			level,
 		);
-	} else if (evoFunction === "getMoveString") {
-		evoMethod = getMoveString(methodParameter);
+	} else {
+		evoMethod = evoFunction(methodParameter);
 		evolutionDetails.method = evolutionDetails.method.replace(
-			"REPLACE",
-			evoMethod,
-		);
-	} else if (evoFunction === "getPokemonName") {
-		evoMethod = getPokemonName(methodParameter);
-		evolutionDetails.method = evolutionDetails.method.replace(
-			"REPLACE",
-			evoMethod,
-		);
-	} else if (evoFunction === "getMoveProperties") {
-		evoMethod = getTypeName(methodParameter);
-		evolutionDetails.method = evolutionDetails.method.replace(
-			"REPLACE",
-			evoMethod,
+			REPLACE_STRING,
+			evoFunction(methodParameter),
 		);
 	}
 	return [evolutionDetails, evoMethod];

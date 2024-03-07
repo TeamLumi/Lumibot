@@ -1,4 +1,4 @@
-const { PersonalTable } = require("../__gamedata");
+const { PersonalTable } = require(global.gameDataFolder);
 
 //BDSP does not stick to the same structure when working with forms, thus this map is necessary.
 const FORM_MAP = PersonalTable.Personal.reduce(createFormMap, {});
@@ -48,6 +48,10 @@ function getPokemonIdFromMonsNoAndForm(monsno, formno) {
 	)?.id;
 }
 
+function doNothing(evoMethod, evolutionDetails) {
+	return [evolutionDetails, evoMethod];
+}
+
 module.exports = {
 	FORM_MAP,
 	getPokemonIdFromFormMap,
@@ -57,4 +61,5 @@ module.exports = {
 	formatBaseStats,
 	getPokemonIdFromMonsNoAndForm,
 	createFormMap,
+	doNothing,
 };

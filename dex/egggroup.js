@@ -1,4 +1,4 @@
-const { PersonalTable } = require("../__gamedata");
+const { PersonalTable } = require(global.gameDataFolder);
 
 const EGG_GROUPS = {
 	0: "None",

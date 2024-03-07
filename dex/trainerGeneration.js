@@ -3,7 +3,7 @@ const {
 	TrainerTable,
 	LearnsetTable,
 	moveEnum,
-} = require("../__gamedata");
+} = require(global.gameDataFolder);
 const { getMoveString } = require("./moves");
 const { getPokemonIdFromFormMap } = require("./functions");
 const { getAbilityString } = require("./ability");
