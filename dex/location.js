@@ -177,6 +177,7 @@ const staticEncounters = {
 	"lmpt-105": ["Shaymin"],
 	"lmpt-106": ["Arceus"],
 	"lmpt-107": ["Tinkatuff"],
+	"lmpt-109": ["Mew"],
 };
 
 function getEncounterLocations(monsNo) {

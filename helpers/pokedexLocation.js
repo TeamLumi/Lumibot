@@ -98,6 +98,7 @@ const staticNameReplacements = {
 	"Flower Paradise - Shaymin": "**Flower Paradise**\nGo to Route 224 with Oak's Letter and write your message on the stone tablet.",
 	"Hall of Origin - Arceus": "**Hall of Origin**\nDefeat all of the Type Master Trainers to earn their Plates, then take the Azure Flute to Spear Pillar.",
 	"Amity Square": "**Amity Square**\nEnter Amity Square and proceed through the event.",
+	"Route 201 - Mew": "**Route 201**\n[Find transformed Mew](https://luminescent.team/docs/special-events/legendaries#kanto-legendaries) in three locations across Sinnoh, then encounter at Route 201.",
 };
 
 function locationMode(pokemonInfo, monsID, imageLnk, interaction) {
