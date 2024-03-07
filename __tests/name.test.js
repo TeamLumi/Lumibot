@@ -79,15 +79,31 @@ describe("Dex utils Name getters", () => {
 	});
 	describe("getFormNameOfProblematicPokemon", () => {
 		test("getFormNameOfProblematicPokemon returns correct form name for specified ID", () => {
-			expect(getFormNameOfProblematicPokemon(1242)).toBe("Ash-Greninja");
-			expect(getFormNameOfProblematicPokemon(1285)).toBe("Meowstic-F");
-			expect(getFormNameOfProblematicPokemon(1310)).toBe("Rockruff Own-Tempo");
-			expect(getFormNameOfProblematicPokemon(1441)).toBe("Indeedee-F");
-			expect(getFormNameOfProblematicPokemon(1454)).toBe("Basculegion-F");
-			expect(getFormNameOfProblematicPokemon(1456)).toBe("Oinkologne-F");
-			expect(() => getFormNameOfProblematicPokemon(1000)).toThrow(
-				"Bad Pokemon ID in PokemonNameMap: 1000",
-			);
+			if (global.gameDataFolder == "../__3.0gamedata") {
+				expect(getFormNameOfProblematicPokemon(1266)).toBe("Ash-Greninja");
+				expect(getFormNameOfProblematicPokemon(1309)).toBe("Meowstic-F");
+				expect(getFormNameOfProblematicPokemon(1335)).toBe(
+					"Rockruff Own-Tempo",
+				);
+				expect(getFormNameOfProblematicPokemon(1466)).toBe("Indeedee-F");
+				expect(getFormNameOfProblematicPokemon(1481)).toBe("Basculegion-F");
+				expect(getFormNameOfProblematicPokemon(1483)).toBe("Oinkologne-F");
+				expect(() => getFormNameOfProblematicPokemon(1000)).toThrow(
+					"Bad Pokemon ID in PokemonNameMap: 1000",
+				);
+			} else {
+				expect(getFormNameOfProblematicPokemon(1242)).toBe("Ash-Greninja");
+				expect(getFormNameOfProblematicPokemon(1285)).toBe("Meowstic-F");
+				expect(getFormNameOfProblematicPokemon(1310)).toBe(
+					"Rockruff Own-Tempo",
+				);
+				expect(getFormNameOfProblematicPokemon(1441)).toBe("Indeedee-F");
+				expect(getFormNameOfProblematicPokemon(1454)).toBe("Basculegion-F");
+				expect(getFormNameOfProblematicPokemon(1456)).toBe("Oinkologne-F");
+				expect(() => getFormNameOfProblematicPokemon(1000)).toThrow(
+					"Bad Pokemon ID in PokemonNameMap: 1000",
+				);
+			}
 		});
 	});
 

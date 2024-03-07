@@ -103,8 +103,7 @@ function getFormNameOfProblematicPokemon(id = 0) {
 			case 1483:
 				return "Oinkologne-F";
 			default:
-				throw Error(`Bad Pokemon ID in PokemonNameMap
-							from getFormNameOfProblematicPokemon(${id})`);
+				throw Error(`Bad Pokemon ID in PokemonNameMap: ${id})`);
 		}
 	} else {
 		switch (id) {
@@ -121,8 +120,7 @@ function getFormNameOfProblematicPokemon(id = 0) {
 			case 1456:
 				return "Oinkologne-F";
 			default:
-				throw Error(`Bad Pokemon ID in PokemonNameMap
-							from getFormNameOfProblematicPokemon(${id})`);
+				throw Error(`Bad Pokemon ID in PokemonNameMap: ${id})`);
 		}
 	}
 }

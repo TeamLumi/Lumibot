@@ -1,13 +1,17 @@
-const {
-	getEvolutionMethodDetail,
-	getEvolutionTree,
-} = require("../dex/evolution");
+const { getEvolutionMethodDetail, getEvolutionTree } = require("../dex/evolution");
+
+const { getItemString } = require("../dex/item");
+const { getMoveString } = require("../dex/moves");
+const { getPokemonName } = require("../dex/name");
+const { getTypeName } = require("../dex/types");
+const { doNothing } = require("../dex/functions");
 
 describe("getEvolutionMethodDetail", () => {
 	it("Should return a valid method for a valid id", () => {
 		const methodId = 1; // High Friendship
 		const [result, evoMethod] = getEvolutionMethodDetail(methodId);
 		const expected = {
+			function: doNothing,
 			method: "Friendship",
 			parameterType: "None",
 			requiresLevel: false,
@@ -23,6 +27,7 @@ describe("getEvolutionMethodDetail", () => {
 			methodParameter,
 		);
 		const expected = {
+			function: getItemString,
 			method: "Use Ice Stone",
 			parameterType: "Item",
 			requiresLevel: false,
