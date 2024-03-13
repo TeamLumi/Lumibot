@@ -126,9 +126,12 @@ function locationMode(pokemonInfo, monsID, imageLnk) {
 			routes.forEach((route) => {
 				const methodEmoji =
 					reverseEncounterTypeMap[route.method] || route.method;
-				text += `*Method:* ${methodEmoji}\n`;
-				text += `*Levels:* ${route.minLevel} - ${route.maxLevel}\n`;
-				text += `*Encounter:* ${route.chance}%\n\n`;
+				text += `${methodEmoji} - ${route.chance}%\n`;
+				if (route.minLevel === route.maxLevel) {
+					text += `*Level:* ${route.minLevel}\n\n`;
+				} else {
+					text += `*Level:* ${route.minLevel} - ${route.maxLevel}\n\n`;
+				}
 			});
 		}
 		return text;
