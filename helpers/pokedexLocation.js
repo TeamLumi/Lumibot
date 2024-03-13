@@ -1,6 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 const {
-	getEncounterLocations,
+	getRoutesFromPokemonId,
 	getEvolutionTree,
 	getPokemonDisplayName,
 	getStaticLocations,
@@ -33,18 +33,18 @@ const typeColors = {
 // Rename the encounter types
 // prettier-ignore
 const reverseEncounterTypeMap = {
-	ground_mons: "<:grass:1136228499477246043> Walking",
-	swayGrass: "<:pokeradar:1136357617074180116> Radar",
-	tairyo: ":tv: Swarm",
-	water_mons: ":ocean: Surfing",
-	boro_mons: "<:oldrod:1136220484304896001> Old Rod",
-	ii_mons: "<:goodrod:1136220559856906400> Good Rod",
-	sugoi_mons: "<:superrod:1136220619432792097> Super Rod",
-	day: "<:Sun:1157324258519818332> Day",
-	night: "<:Moon:1157324256988889221> Night",
-	Morning: ":sunrise_over_mountains: Morning",
+	"Walking": "<:grass:1136228499477246043> Walking",
+	"Radar": "<:pokeradar:1136357617074180116> Radar",
+	"Swarm": ":tv: Swarm",
+	"Surfing": ":ocean: Surfing",
+	"Old Rod": "<:oldrod:1136220484304896001> Old Rod",
+	"Good Rod": "<:goodrod:1136220559856906400> Good Rod",
+	"Super Rod": "<:superrod:1136220619432792097> Super Rod",
+	"Day": "<:Sun:1157324258519818332> Day",
+	"Night": "<:Moon:1157324256988889221> Night",
+	"Morning": ":sunrise_over_mountains: Morning",
 	"Honey Tree": ":honey_pot: Honey Tree",
-	Incense: "<:incense:1136358228356243506> Incense",
+	"Incense": "<:incense:1136358228356243506> Incense",
 	"Daily Trophy Garden": ":trophy: Daily Trophy Garden",
 };
 
@@ -101,8 +101,7 @@ const staticNameReplacements = {
 	"Route 201 - Mew": "**Route 201**\n[Find transformed Mew](https://luminescent.team/docs/special-events/legendaries#kanto-legendaries) in three locations across Sinnoh, then encounter at Route 201.",
 };
 
-function locationMode(pokemonInfo, monsID, imageLnk, interaction) {
-	const locations = getEncounterLocations(monsID);
+function locationMode(pokemonInfo, monsID, imageLnk) {
 	const embed = new EmbedBuilder()
 		.setTitle(`**${pokemonInfo.name}**`)
 		.setThumbnail(imageLnk);
@@ -112,60 +111,32 @@ function locationMode(pokemonInfo, monsID, imageLnk, interaction) {
 		embed.setColor(typeColor);
 	}
 
-	const solaceonRuinsRegex = /^Solaceon Ruins\b.*/;
-	const turnbackCaveRegex = /^Turnback Cave\b.*/;
+	const locations = getRoutesFromPokemonId(monsID);
+	function buildTextFromRoutes(routes) {
+		const combinedRoutes = routes.reduce((acc, route) => {
+			const key = route.name;
+			acc[key] = acc[key] || [];
+			acc[key].push(route);
+			return acc;
+		}, {});
 
-	// Helper function to format location encounters
-	function formatLocationEncounters(locationData, interaction) {
-		let slicedLocations = locationData;
-		let slicedNote = "";
-
-		if (slicedLocations.length == 0) return "";
-
-		const botChannel =
-			process.env.NODE_ENV === "production" ? botChannelProd : botChannelDev;
-
-		// Truncate the response when not in the bot channel.
-		if (interaction.channel.id !== botChannel && locationData.length > 4) {
-			slicedLocations = locationData.slice(0, 3);
-			slicedNote =
-				"**Note:** Encounters have been truncated. Run this command in the bot channel to see all encounters. ";
+		let text = "";
+		for (const [key, routes] of Object.entries(combinedRoutes)) {
+			text += `**${key}**\n`;
+			routes.forEach((route) => {
+				const methodEmoji =
+					reverseEncounterTypeMap[route.method] || route.method;
+				text += `*Method:* ${methodEmoji}\n`;
+				text += `*Levels:* ${route.minLevel} - ${route.maxLevel}\n`;
+				text += `*Encounter:* ${route.chance}%\n\n`;
+			});
 		}
-
-		return (
-			slicedLocations
-				.map((location) => {
-					const encounters = location.encounters
-						.map((encounter) => {
-							const encounterType =
-								reverseEncounterTypeMap[encounter.type] || encounter.type;
-							return `${encounterType}\nLevel: ${encounter.level} | Rate: ${encounter.rate}%`;
-						})
-						.join("\n");
-
-					let locationTitle = location.location;
-					if (solaceonRuinsRegex.test(locationTitle)) {
-						locationTitle = locationTitle.replace(
-							solaceonRuinsRegex,
-							"Solaceon Ruins",
-						);
-					} else if (turnbackCaveRegex.test(locationTitle)) {
-						locationTitle = locationTitle.replace(
-							turnbackCaveRegex,
-							"Turnback Cave",
-						);
-					}
-
-					return `**${locationTitle}**\n${encounters}`;
-				})
-				.join("\n\n") + `\n\n${slicedNote}`
-		);
+		return text;
 	}
 
-	// Get static encounter information
 	const staticEncounters = getStaticLocations(pokemonInfo.name);
-	const formattedStaticEncounters =
-		staticEncounters.length > 0
+	function formatStaticEncounters(staticEncounters) {
+		return staticEncounters.length > 0
 			? `${staticEncounters
 					.map((location) => {
 						const replacedName = staticNameReplacements[location] || location;
@@ -173,51 +144,63 @@ function locationMode(pokemonInfo, monsID, imageLnk, interaction) {
 					})
 					.join("\n\n")}\n\n`
 			: "";
+	}
 
-	// If nothing found, check mon is valid, if so, try getting the location of its earliest evolution that appears in the wild.
-	if (locations.length === 0 && staticEncounters.length === 0) {
-		if (pokemonInfo.isValid === 0) {
-			embed.setDescription(
-				`*This Pokemon is* ***not*** *available in 2.0F.*\n\nSorry! I couldn't locate that Pokémon as I don't have enough data about it. It might not appear in the wild.`,
+	function getBackupData(monsID) {
+		const evolutionDetails = getEvolutionTree(monsID);
+		if (monsID !== evolutionDetails.pokemonId) {
+			const locationsBackup = getRoutesFromPokemonId(
+				evolutionDetails.pokemonId,
 			);
-		} else {
-			const evolutionDetails = getEvolutionTree(monsID);
+			const backupName = getPokemonDisplayName(evolutionDetails.pokemonId);
+			const staticEncountersBackup = getStaticLocations(backupName);
+			return {
+				locationsBackup,
+				backupName,
+				staticEncountersBackup,
+			};
+		}
+		return null;
+	}
 
-			if (monsID !== evolutionDetails.pokemonId) {
-				const locationsBackup = getEncounterLocations(
-					evolutionDetails.pokemonId,
-				);
-
-				if (locationsBackup.length === 0 && staticEncounters.length === 0) {
-					embed.setDescription(
-						`Sorry! I couldn't locate that Pokémon as I don't have enough data about it. It might not appear in the wild.`,
-					);
+	function generateEmbedDescription(
+		monsID,
+		locations,
+		staticEncounters,
+		backupData,
+	) {
+		let backupText = "";
+		if (locations.length === 0 && staticEncounters.length === 0) {
+			if (backupData) {
+				const { locationsBackup, backupName, staticEncountersBackup } =
+					backupData;
+				if (
+					locationsBackup.length === 0 &&
+					staticEncountersBackup.length === 0
+				) {
+					return `Sorry! I couldn't locate that Pokémon as I don't have enough data about it. It might not appear in the wild.`;
 				} else {
-					const backupName = getPokemonDisplayName(evolutionDetails.pokemonId);
-					embed.setDescription(
-						`**Encounter information:**\n\nStandard rates assume that incense/radar are not active. For further accuracy, visit [our docs](https://luminescent.team/docs).\n\n${formatLocationEncounters(
-							locations,
-							interaction,
-						)}${formattedStaticEncounters}**${backupName}** can be found:\n\n${formatLocationEncounters(
-							locationsBackup,
-							interaction,
-						)}See more in the [Pokédex](https://luminescent.team/pokedex/${monsID}).`,
-					);
+					backupText = `**${backupName}** can be found:\n\n`;
+					locations = locationsBackup;
+					staticEncounters = staticEncountersBackup;
 				}
 			} else {
-				embed.setDescription(
-					`Sorry! I couldn't locate that Pokémon as I don't have enough data about it. It might not appear in the wild.`,
-				);
+				return `Sorry! I couldn't locate that Pokémon as I don't have enough data about it. It might not appear in the wild.`;
 			}
 		}
-	} else {
-		embed.setDescription(
-			`**Encounter information:**\n\nStandard rates assume that incense/radar are not active. For further accuracy, visit [our docs](https://luminescent.team/docs).\n\n${formatLocationEncounters(
-				locations,
-				interaction,
-			)}${formattedStaticEncounters}See more in the [Pokédex](https://luminescent.team/pokedex/${monsID}).`,
-		);
+		const locationText = buildTextFromRoutes(locations);
+		const formattedStaticEncounters = formatStaticEncounters(staticEncounters);
+		return `**Encounter information:**\n\nStandard rates assume that incense/radar are not active. For further accuracy, visit [our docs](https://luminescent.team/docs).\n\n${backupText}${locationText}${formattedStaticEncounters} See more in the [Pokédex](https://luminescent.team/pokedex/${monsID}).`;
 	}
+
+	const backupData = getBackupData(monsID);
+	const embedDescription = generateEmbedDescription(
+		monsID,
+		locations,
+		staticEncounters,
+		backupData,
+	);
+	embed.setDescription(embedDescription);
 
 	return embed;
 }

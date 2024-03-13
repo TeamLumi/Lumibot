@@ -32,7 +32,7 @@ const moveEnum = require("./moveEnum.json");
 const smogonMoves = require("./smogonMoves.json");
 const trainerInfo = require("./trainer_info.json");
 const EvolutionData = require("./evolution.json");
-const encounterData = require("./encounter_locations.json");
+const pokemonLocations = require("./pokemon_locations.json");
 
 module.exports = {
 	PersonalTable,
@@ -62,5 +62,5 @@ module.exports = {
 	TrainerTable,
 	itemInfo,
 	EvolutionData,
-	encounterData,
+	pokemonLocations,
 };

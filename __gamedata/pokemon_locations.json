@@ -3601,16 +3601,7 @@
       "zoneId": 252
     },
     {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "ground_mons",
-      "encounterRate": "10%",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 4,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "ground_mons",
       "encounterRate": "10%",
       "minLevel": 5,
@@ -3837,7 +3828,7 @@
       "zoneId": 263
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "ground_mons",
       "encounterRate": "10%",
       "minLevel": 54,
@@ -6452,7 +6443,7 @@
       "zoneId": 247
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "water_mons",
       "encounterRate": "30%",
       "minLevel": 51,
@@ -6461,7 +6452,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "water_mons",
       "encounterRate": "4%",
       "minLevel": 51,
@@ -6470,7 +6461,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "water_mons",
       "encounterRate": "1%",
       "minLevel": 51,
@@ -8072,7 +8063,7 @@
       "zoneId": 245
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "ground_mons",
       "encounterRate": "10%",
       "minLevel": 54,
@@ -10057,7 +10048,7 @@
       "zoneId": 291
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "ground_mons",
       "encounterRate": "morning",
       "minLevel": 51,
@@ -10066,7 +10057,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "ground_mons",
       "encounterRate": "5%",
       "minLevel": 51,
@@ -10075,7 +10066,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "tairyo",
       "encounterRate": "20%",
       "minLevel": 51,
@@ -10084,7 +10075,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "day",
       "encounterRate": "10%",
       "minLevel": 51,
@@ -10093,7 +10084,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "night",
       "encounterRate": "10%",
       "minLevel": 51,
@@ -11057,97 +11048,7 @@
       "zoneId": 298
     },
     {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "boro_mons",
-      "encounterRate": "60%",
-      "minLevel": 10,
-      "maxLevel": 10,
-      "encounterTypeIndex": 0,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "boro_mons",
-      "encounterRate": "30%",
-      "minLevel": 10,
-      "maxLevel": 10,
-      "encounterTypeIndex": 1,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "boro_mons",
-      "encounterRate": "5%",
-      "minLevel": 10,
-      "maxLevel": 10,
-      "encounterTypeIndex": 2,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "boro_mons",
-      "encounterRate": "4%",
-      "minLevel": 10,
-      "maxLevel": 10,
-      "encounterTypeIndex": 3,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "boro_mons",
-      "encounterRate": "1%",
-      "minLevel": 10,
-      "maxLevel": 10,
-      "encounterTypeIndex": 4,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "ii_mons",
-      "encounterRate": "60%",
-      "minLevel": 25,
-      "maxLevel": 25,
-      "encounterTypeIndex": 0,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "ii_mons",
-      "encounterRate": "30%",
-      "minLevel": 25,
-      "maxLevel": 20,
-      "encounterTypeIndex": 1,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "ii_mons",
-      "encounterRate": "5%",
-      "minLevel": 25,
-      "maxLevel": 25,
-      "encounterTypeIndex": 2,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "ii_mons",
-      "encounterRate": "4%",
-      "minLevel": 25,
-      "maxLevel": 25,
-      "encounterTypeIndex": 3,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "ii_mons",
-      "encounterRate": "1%",
-      "minLevel": 25,
-      "maxLevel": 25,
-      "encounterTypeIndex": 4,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "boro_mons",
       "encounterRate": "60%",
       "minLevel": 10,
@@ -11156,7 +11057,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "boro_mons",
       "encounterRate": "30%",
       "minLevel": 10,
@@ -11165,7 +11066,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "boro_mons",
       "encounterRate": "5%",
       "minLevel": 10,
@@ -11174,7 +11075,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "boro_mons",
       "encounterRate": "4%",
       "minLevel": 10,
@@ -11183,7 +11084,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "boro_mons",
       "encounterRate": "1%",
       "minLevel": 10,
@@ -11192,7 +11093,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "ii_mons",
       "encounterRate": "60%",
       "minLevel": 25,
@@ -11201,7 +11102,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "ii_mons",
       "encounterRate": "30%",
       "minLevel": 25,
@@ -11210,7 +11111,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "ii_mons",
       "encounterRate": "5%",
       "minLevel": 25,
@@ -11219,7 +11120,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "ii_mons",
       "encounterRate": "4%",
       "minLevel": 25,
@@ -11228,7 +11129,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "ii_mons",
       "encounterRate": "1%",
       "minLevel": 25,
@@ -11237,7 +11138,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "boro_mons",
       "encounterRate": "60%",
       "minLevel": 10,
@@ -11246,7 +11147,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "boro_mons",
       "encounterRate": "30%",
       "minLevel": 10,
@@ -11255,7 +11156,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "boro_mons",
       "encounterRate": "5%",
       "minLevel": 10,
@@ -11264,7 +11165,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "boro_mons",
       "encounterRate": "4%",
       "minLevel": 10,
@@ -11273,7 +11174,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "boro_mons",
       "encounterRate": "1%",
       "minLevel": 10,
@@ -11282,7 +11183,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "ii_mons",
       "encounterRate": "60%",
       "minLevel": 25,
@@ -11291,7 +11192,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "ii_mons",
       "encounterRate": "30%",
       "minLevel": 25,
@@ -11300,7 +11201,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "ii_mons",
       "encounterRate": "5%",
       "minLevel": 25,
@@ -11309,7 +11210,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "ii_mons",
       "encounterRate": "4%",
       "minLevel": 25,
@@ -11318,7 +11219,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "ii_mons",
       "encounterRate": "1%",
       "minLevel": 25,
@@ -11327,7 +11228,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "boro_mons",
       "encounterRate": "60%",
       "minLevel": 10,
@@ -11336,7 +11237,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "boro_mons",
       "encounterRate": "30%",
       "minLevel": 10,
@@ -11345,7 +11246,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "boro_mons",
       "encounterRate": "5%",
       "minLevel": 10,
@@ -11354,7 +11255,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "boro_mons",
       "encounterRate": "4%",
       "minLevel": 10,
@@ -11363,7 +11264,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "boro_mons",
       "encounterRate": "1%",
       "minLevel": 10,
@@ -11372,7 +11273,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "ii_mons",
       "encounterRate": "60%",
       "minLevel": 25,
@@ -11381,7 +11282,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "ii_mons",
       "encounterRate": "30%",
       "minLevel": 25,
@@ -11390,7 +11291,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "ii_mons",
       "encounterRate": "5%",
       "minLevel": 25,
@@ -11399,7 +11300,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "ii_mons",
       "encounterRate": "4%",
       "minLevel": 25,
@@ -11408,7 +11309,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "ii_mons",
       "encounterRate": "1%",
       "minLevel": 25,
@@ -12607,52 +12508,7 @@
       "zoneId": 298
     },
     {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "sugoi_mons",
-      "encounterRate": "60%",
-      "minLevel": 50,
-      "maxLevel": 50,
-      "encounterTypeIndex": 0,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "sugoi_mons",
-      "encounterRate": "30%",
-      "minLevel": 50,
-      "maxLevel": 50,
-      "encounterTypeIndex": 1,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "sugoi_mons",
-      "encounterRate": "5%",
-      "minLevel": 50,
-      "maxLevel": 50,
-      "encounterTypeIndex": 2,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "sugoi_mons",
-      "encounterRate": "4%",
-      "minLevel": 50,
-      "maxLevel": 50,
-      "encounterTypeIndex": 3,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "sugoi_mons",
-      "encounterRate": "1%",
-      "minLevel": 50,
-      "maxLevel": 50,
-      "encounterTypeIndex": 4,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "sugoi_mons",
       "encounterRate": "60%",
       "minLevel": 50,
@@ -12661,7 +12517,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "sugoi_mons",
       "encounterRate": "30%",
       "minLevel": 50,
@@ -12670,7 +12526,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "sugoi_mons",
       "encounterRate": "5%",
       "minLevel": 50,
@@ -12679,7 +12535,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "sugoi_mons",
       "encounterRate": "4%",
       "minLevel": 50,
@@ -12688,7 +12544,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "sugoi_mons",
       "encounterRate": "1%",
       "minLevel": 50,
@@ -12697,7 +12553,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "sugoi_mons",
       "encounterRate": "60%",
       "minLevel": 50,
@@ -12706,7 +12562,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "sugoi_mons",
       "encounterRate": "30%",
       "minLevel": 50,
@@ -12715,7 +12571,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "sugoi_mons",
       "encounterRate": "5%",
       "minLevel": 50,
@@ -12724,7 +12580,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "sugoi_mons",
       "encounterRate": "4%",
       "minLevel": 50,
@@ -12733,7 +12589,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "sugoi_mons",
       "encounterRate": "1%",
       "minLevel": 50,
@@ -12742,7 +12598,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "sugoi_mons",
       "encounterRate": "60%",
       "minLevel": 50,
@@ -12751,7 +12607,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "sugoi_mons",
       "encounterRate": "30%",
       "minLevel": 50,
@@ -12760,7 +12616,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "sugoi_mons",
       "encounterRate": "5%",
       "minLevel": 50,
@@ -12769,7 +12625,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "sugoi_mons",
       "encounterRate": "4%",
       "minLevel": 50,
@@ -12778,7 +12634,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "sugoi_mons",
       "encounterRate": "1%",
       "minLevel": 50,
@@ -13149,7 +13005,7 @@
       "zoneId": 247
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "water_mons",
       "encounterRate": "5%",
       "minLevel": 51,
@@ -18411,7 +18267,7 @@
       "zoneId": 263
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "swayGrass",
       "encounterRate": "20%",
       "minLevel": 54,
@@ -18420,7 +18276,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "swayGrass",
       "encounterRate": "20%",
       "minLevel": 51,
@@ -19522,7 +19378,7 @@
       "zoneId": 291
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 51,
@@ -19531,7 +19387,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "ground_mons",
       "encounterRate": "10%",
       "minLevel": 51,
@@ -19849,7 +19705,7 @@
   ],
   "221": [
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "ground_mons",
       "encounterRate": "morning",
       "minLevel": 51,
@@ -19858,7 +19714,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "ground_mons",
       "encounterRate": "4%",
       "minLevel": 51,
@@ -19867,7 +19723,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "ground_mons",
       "encounterRate": "4%",
       "minLevel": 51,
@@ -19876,7 +19732,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "ground_mons",
       "encounterRate": "1%",
       "minLevel": 51,
@@ -19885,7 +19741,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "ground_mons",
       "encounterRate": "1%",
       "minLevel": 51,
@@ -19894,7 +19750,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "day",
       "encounterRate": "10%",
       "minLevel": 51,
@@ -19903,7 +19759,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "night",
       "encounterRate": "10%",
       "minLevel": 51,
@@ -21454,25 +21310,7 @@
       "zoneId": 298
     },
     {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "ground_mons",
-      "encounterRate": "5%",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 6,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "ground_mons",
-      "encounterRate": "5%",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 7,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "ground_mons",
       "encounterRate": "5%",
       "minLevel": 5,
@@ -21481,7 +21319,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "ground_mons",
       "encounterRate": "5%",
       "minLevel": 5,
@@ -21768,70 +21606,7 @@
   ],
   "283": [
     {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "ground_mons",
-      "encounterRate": "morning",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 2,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "ground_mons",
-      "encounterRate": "10%",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 5,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "tairyo",
-      "encounterRate": "20%",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 0,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "day",
-      "encounterRate": "10%",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 0,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "night",
-      "encounterRate": "10%",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 0,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "water_mons",
-      "encounterRate": "60%",
-      "minLevel": 40,
-      "maxLevel": 40,
-      "encounterTypeIndex": 0,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "water_mons",
-      "encounterRate": "30%",
-      "minLevel": 40,
-      "maxLevel": 40,
-      "encounterTypeIndex": 1,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "ground_mons",
       "encounterRate": "morning",
       "minLevel": 5,
@@ -21840,7 +21615,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "ground_mons",
       "encounterRate": "10%",
       "minLevel": 5,
@@ -21849,7 +21624,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "tairyo",
       "encounterRate": "20%",
       "minLevel": 5,
@@ -21858,7 +21633,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "day",
       "encounterRate": "10%",
       "minLevel": 5,
@@ -21867,7 +21642,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "night",
       "encounterRate": "10%",
       "minLevel": 5,
@@ -21876,7 +21651,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "water_mons",
       "encounterRate": "60%",
       "minLevel": 40,
@@ -21885,7 +21660,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "water_mons",
       "encounterRate": "30%",
       "minLevel": 40,
@@ -21894,7 +21669,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "water_mons",
       "encounterRate": "60%",
       "minLevel": 54,
@@ -21903,7 +21678,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "water_mons",
       "encounterRate": "30%",
       "minLevel": 54,
@@ -21914,34 +21689,7 @@
   ],
   "284": [
     {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "water_mons",
-      "encounterRate": "5%",
-      "minLevel": 40,
-      "maxLevel": 40,
-      "encounterTypeIndex": 2,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "water_mons",
-      "encounterRate": "4%",
-      "minLevel": 40,
-      "maxLevel": 40,
-      "encounterTypeIndex": 3,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "water_mons",
-      "encounterRate": "1%",
-      "minLevel": 40,
-      "maxLevel": 40,
-      "encounterTypeIndex": 4,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "water_mons",
       "encounterRate": "5%",
       "minLevel": 40,
@@ -21950,7 +21698,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "water_mons",
       "encounterRate": "4%",
       "minLevel": 40,
@@ -21959,7 +21707,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "water_mons",
       "encounterRate": "1%",
       "minLevel": 40,
@@ -21968,7 +21716,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "ground_mons",
       "encounterRate": "morning",
       "minLevel": 54,
@@ -21977,7 +21725,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "ground_mons",
       "encounterRate": "morning",
       "minLevel": 54,
@@ -21986,7 +21734,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "tairyo",
       "encounterRate": "20%",
       "minLevel": 54,
@@ -21995,7 +21743,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "day",
       "encounterRate": "10%",
       "minLevel": 54,
@@ -22004,7 +21752,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "day",
       "encounterRate": "10%",
       "minLevel": 54,
@@ -22013,7 +21761,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "night",
       "encounterRate": "10%",
       "minLevel": 54,
@@ -22022,7 +21770,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "night",
       "encounterRate": "10%",
       "minLevel": 54,
@@ -22031,7 +21779,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "water_mons",
       "encounterRate": "5%",
       "minLevel": 54,
@@ -22040,7 +21788,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "water_mons",
       "encounterRate": "4%",
       "minLevel": 54,
@@ -22049,7 +21797,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "water_mons",
       "encounterRate": "1%",
       "minLevel": 54,
@@ -22654,34 +22402,7 @@
   ],
   "298": [
     {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "ground_mons",
-      "encounterRate": "morning",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 3,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "day",
-      "encounterRate": "10%",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 1,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "night",
-      "encounterRate": "10%",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 1,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "ground_mons",
       "encounterRate": "morning",
       "minLevel": 5,
@@ -22690,7 +22411,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "day",
       "encounterRate": "10%",
       "minLevel": 5,
@@ -22699,7 +22420,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "night",
       "encounterRate": "10%",
       "minLevel": 5,
@@ -31510,16 +31231,7 @@
   ],
   "360": [
     {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "swayGrass",
-      "encounterRate": "20%",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 3,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "swayGrass",
       "encounterRate": "20%",
       "minLevel": 5,
@@ -31640,7 +31352,7 @@
       "zoneId": 291
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "ground_mons",
       "encounterRate": "10%",
       "minLevel": 51,
@@ -31752,7 +31464,7 @@
       "zoneId": 247
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "water_mons",
       "encounterRate": "60%",
       "minLevel": 51,
@@ -32411,52 +32123,7 @@
   ],
   "396": [
     {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "ground_mons",
-      "encounterRate": "20%",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 0,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "ground_mons",
-      "encounterRate": "4%",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 8,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "ground_mons",
-      "encounterRate": "4%",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 9,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "ground_mons",
-      "encounterRate": "1%",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 10,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "ground_mons",
-      "encounterRate": "1%",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 11,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 5,
@@ -32465,7 +32132,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "ground_mons",
       "encounterRate": "4%",
       "minLevel": 5,
@@ -32474,7 +32141,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "ground_mons",
       "encounterRate": "4%",
       "minLevel": 5,
@@ -32483,7 +32150,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "ground_mons",
       "encounterRate": "1%",
       "minLevel": 5,
@@ -32492,7 +32159,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "ground_mons",
       "encounterRate": "1%",
       "minLevel": 5,
@@ -32602,7 +32269,7 @@
       "zoneId": 263
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 54,
@@ -32611,7 +32278,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "ground_mons",
       "encounterRate": "5%",
       "minLevel": 54,
@@ -32620,7 +32287,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "ground_mons",
       "encounterRate": "4%",
       "minLevel": 54,
@@ -32629,7 +32296,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "ground_mons",
       "encounterRate": "1%",
       "minLevel": 54,
@@ -32721,16 +32388,7 @@
   ],
   "399": [
     {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "ground_mons",
-      "encounterRate": "20%",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 1,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 5,
@@ -32912,7 +32570,7 @@
       "zoneId": 263
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 54,
@@ -32921,7 +32579,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "ground_mons",
       "encounterRate": "5%",
       "minLevel": 54,
@@ -32930,7 +32588,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "ground_mons",
       "encounterRate": "4%",
       "minLevel": 54,
@@ -32939,7 +32597,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "ground_mons",
       "encounterRate": "1%",
       "minLevel": 54,
@@ -35571,7 +35229,7 @@
       "zoneId": 207
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "ground_mons",
       "encounterRate": "20%",
       "minLevel": 51,
@@ -35580,7 +35238,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "ground_mons",
       "encounterRate": "5%",
       "minLevel": 51,
@@ -36013,7 +35671,7 @@
       "zoneId": 298
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "Surfing Incense",
       "encounterRate": "30%",
       "minLevel": 51,
@@ -36060,7 +35718,7 @@
   ],
   "865": [
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "Incense",
       "encounterRate": "10%",
       "minLevel": 54,
@@ -36069,7 +35727,7 @@
       "zoneId": 327
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "Incense",
       "encounterRate": "10%",
       "minLevel": 54,
@@ -36080,7 +35738,7 @@
   ],
   "866": [
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "Incense",
       "encounterRate": "10%",
       "minLevel": 51,
@@ -36089,7 +35747,7 @@
       "zoneId": 330
     },
     {
-      "routeName": "Lake Acuity (After)",
+      "routeName": "Lake Acuity",
       "encounterType": "Incense",
       "encounterRate": "10%",
       "minLevel": 51,
@@ -36579,25 +36237,7 @@
   ],
   "1051": [
     {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "Incense",
-      "encounterRate": "10%",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 0,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "Incense",
-      "encounterRate": "10%",
-      "minLevel": 5,
-      "maxLevel": 5,
-      "encounterTypeIndex": 1,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "Incense",
       "encounterRate": "10%",
       "minLevel": 5,
@@ -36606,7 +36246,7 @@
       "zoneId": 324
     },
     {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "Incense",
       "encounterRate": "10%",
       "minLevel": 5,
@@ -37038,16 +36678,7 @@
       "zoneId": 256
     },
     {
-      "routeName": "Lake Verity (Before)",
-      "encounterType": "Surfing Incense",
-      "encounterRate": "30%",
-      "minLevel": 40,
-      "maxLevel": 40,
-      "encounterTypeIndex": 2,
-      "zoneId": 323
-    },
-    {
-      "routeName": "Lake Verity (After)",
+      "routeName": "Lake Verity",
       "encounterType": "Surfing Incense",
       "encounterRate": "30%",
       "minLevel": 40,
@@ -37139,7 +36770,7 @@
       "zoneId": 247
     },
     {
-      "routeName": "Lake Valor (After)",
+      "routeName": "Lake Valor",
       "encounterType": "Surfing Incense",
       "encounterRate": "30%",
       "minLevel": 54,

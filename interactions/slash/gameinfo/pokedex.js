@@ -95,7 +95,7 @@ module.exports = {
 
 		switch (mode) {
 			case "location":
-				embed = locationMode(pokemonInfo, monsID, imageLnk, interaction);
+				embed = locationMode(pokemonInfo, monsID, imageLnk);
 				break;
 			case "evolution":
 				embed = evolutionMode(pokemonInfo, monsID, imageLnk);
