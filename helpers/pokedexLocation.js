@@ -192,7 +192,7 @@ function locationMode(pokemonInfo, monsID, imageLnk) {
 		}
 		const locationText = buildTextFromRoutes(locations);
 		const formattedStaticEncounters = formatStaticEncounters(staticEncounters);
-		return `**Encounter information:**\n\nStandard rates assume that incense/radar are not active. For further accuracy, visit [our docs](https://luminescent.team/docs).\n${backupText}${locationText}${formattedStaticEncounters} See more in the [Pokédex](https://luminescent.team/pokedex/${monsID}).`;
+		return `**Encounter information:**\n\nStandard rates assume that incense/radar are not active. For further accuracy, visit [our docs](https://luminescent.team/docs).\n${backupText}${locationText}${formattedStaticEncounters}See more in the [Pokédex](https://luminescent.team/pokedex/${monsID}).`;
 	}
 
 	const backupData = getBackupData(monsID);

@@ -122,8 +122,8 @@ module.exports = {
 						name: "**Base Stats:**",
 						value: textInfo,
 					});
+					embed.addFields(pokedexText);
 				}
-				embed.addFields(pokedexText);
 		}
 		interaction.reply({ embeds: [embed] });
 	},
