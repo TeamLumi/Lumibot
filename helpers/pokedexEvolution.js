@@ -1,8 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
 const {
-	getPokemonIdFromDisplayName,
-	getPokemonInfo,
-	generateMovesViaLearnset,
 	getEvolutionTree,
 	getPokemonDisplayName,
 	getEvolutionMethodDetail,
@@ -50,6 +47,25 @@ const wordToEmojiMap = {
 	"Level": "<:rarecandy:1157320353677328406> Level",
 	"Male": "<:male:1157322687320965221> Male",
 	"Female": "<:female:1157322686234640404> Female",
+	"Auspicious Armor": "<:auspiciousarmor:1215384209397522442> Auspicious Armor",
+	"Malicious Armor": "<:auspiciousarmor:1215384209397522442> Malicious Armor",
+	"Linking Cord": "<:linkingcord:1215384218180264007> Linking Cord",
+	"Galarica Cuff": "<:galaricacuff:1215384213705064499> Galarica Cuff",
+	"Galarica Twig": "<:galaricatwig:1215384215299035227> Galarica Twig",
+	"Gimmighoul Coin": "<:gimmighoulcoin:1215384216934555648> Gimmighoul Coin",
+	"Meltan Candy": "<:meltancandy:1215384455544311820> Meltan Candy",
+	"Syrupy Apple": "<:syrupyapple:1215384458429997137> Syrupy Apple",
+	"Sweet Apple": "<:sweetapple:1215384234760478780> Sweet Apple",
+	"Tart Apple": "<:tartapple:1215384238271238144> Tart Apple",
+	"Sachet": "<:sachet:1215384457029230642> Sachet",
+	"Whipped Dream": "<:whippeddream:1215384241513300088> Whipped Dream",
+	"Unremarkable Teacup": "<:unremarkableteacup:1215384460074160138> Unremarkable Teacup",
+	"Masterpiece Teacup": "<:masterpieceteacup:1215384221514997770> Masterpiece Teacup",
+	"Chipped Pot": "<:chippedpot:1215384210626445473> Chipped Pot",
+	"Cracked Pot": "<:crackedpot:1215384212044255303> Cracked Pot",
+	"Metal Alloy": "<:metalalloy:1215384224803328072> Metal Alloy",
+	"Scroll of Darkness": "<:scrollofdarkness:1215384229232386048> Scroll of Darkness",
+	"Scroll of Waters": "<:scrollofwaters:1215384233187475477> Scroll of Waters",
 };
 
 function evolutionMode(pokemonInfo, monsID, imageLnk) {
@@ -187,13 +203,13 @@ function evolutionMode(pokemonInfo, monsID, imageLnk) {
 			}
 		}
 
+		if (description.length === 0) {
+			return "Sorry! This Pokémon is not known to evolve from or into anything.\n...At least not that I know of!\n\nSee more in the [Pokédex](https://luminescent.team/pokedex/${monsID}).";
+		}
+
 		description.push(
 			`See more in the [Pokédex](https://luminescent.team/pokedex/${monsID}).`,
 		);
-
-		if (description.length === 0) {
-			return "Sorry! This Pokémon is not known to evolve from or into anything.\n\n...At least not that I know of!";
-		}
 
 		return description.join("\n");
 	}

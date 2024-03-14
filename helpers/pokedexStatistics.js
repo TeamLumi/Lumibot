@@ -1,4 +1,4 @@
-const { AttachmentBuilder, EmbedBuilder } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const { CanvasRenderService } = require("chartjs-node-canvas");
 
 // Array for pokemon types to set colours.

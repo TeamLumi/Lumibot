@@ -72,9 +72,6 @@ module.exports = {
 			pokemonInfo = getPokemonInfo(monsID);
 		}
 
-		const imagePrefix = `https://luminescent.team`;
-		const imageLnk = `${imagePrefix}${pokemonInfo.imageSrc}`;
-
 		// Ignore pokemon that are still eggs after  error catching.
 		if (pokemonInfo.name === "Egg") {
 			const embed = new EmbedBuilder()
@@ -92,6 +89,12 @@ module.exports = {
 
 			return interaction.reply({ embeds: [embed] });
 		}
+
+		const imageLnk = `https://luminescent.team${pokemonInfo.imageSrc}`;
+		const pokedexText = {
+			name: `BST: ${pokemonInfo.baseStatsTotal}`,
+			value: `See more in the [Pokédex](https://luminescent.team/pokedex/${monsID})`,
+		};
 
 		switch (mode) {
 			case "location":
@@ -111,12 +114,8 @@ module.exports = {
 						name: "chart.png",
 					});
 					embed.setImage("attachment://chart.png");
-					embed.addFields({
-						name: `BST: ${pokemonInfo.baseStatsTotal}`,
-						value: `[See more in Pokédex](https://luminescent.team/pokedex/${monsID})`,
-					});
-					interaction.reply({ embeds: [embed], files: [attachment] });
-					return;
+					embed.addFields(pokedexText);
+					return interaction.reply({ embeds: [embed], files: [attachment] });
 				} else {
 					const textInfo = createTextVisualization(pokemonInfo);
 					embed.addFields({
@@ -124,12 +123,8 @@ module.exports = {
 						value: textInfo,
 					});
 				}
-				embed.addFields({
-					name: `BST: ${pokemonInfo.baseStatsTotal}`,
-					value: `See more in the [Pokédex](https://luminescent.team/pokedex/${monsID}).`,
-				});
+				embed.addFields(pokedexText);
 		}
-
 		interaction.reply({ embeds: [embed] });
 	},
 };
