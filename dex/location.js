@@ -166,19 +166,4 @@ function getRoutesFromPokemonId(pokemonId) {
 	return combineEncounterTypes(locationRates);
 }
 
-function getStaticLocations(pokemonName) {
-	const locations = [];
-
-	for (const staticEntry of staticLocations.statics) {
-		if (staticEntry.filterKey in STATIC_ENCOUNTERS) {
-			const pokemonList = STATIC_ENCOUNTERS[staticEntry.filterKey];
-			if (pokemonList.includes(pokemonName)) {
-				locations.push(staticEntry.location);
-			}
-		}
-	}
-
-	return locations;
-}
-
-module.exports = { getRoutesFromPokemonId, getStaticLocations };
+module.exports = { getRoutesFromPokemonId };

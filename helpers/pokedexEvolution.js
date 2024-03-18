@@ -4,69 +4,7 @@ const {
 	getPokemonDisplayName,
 	getEvolutionMethodDetail,
 } = require("../dex/index.js");
-
-// Get colours for Types
-// prettier-ignore
-const typeColors = {
-	Grass: "#09B051",
-	Fire: "#EE8130",
-	Water: "#6390F0",
-	Electric: "#F7D02C",
-	Ice: "#96D9D6",
-	Fighting: "#C22E28",
-	Poison: "#A33EA1",
-	Ground: "#E2BF65",
-	Flying: "#A98FF3",
-	Psychic: "#F95587",
-	Bug: "#A6B91A",
-	Rock: "#B6A136",
-	Ghost: "#735797",
-	Dragon: "#6F35FC",
-	Dark: "#705746",
-	Steel: "#B7B7CE",
-	Fairy: "#D685AD",
-	Normal: "#A8A77A",
-};
-
-// Rename the evolution types
-// prettier-ignore
-const wordToEmojiMap = {
-	"Water Stone": "<:waterstone:1157321781036720249> Water Stone",
-	"Fire Stone": "<:firestone:1157321773235323001> Fire Stone",
-	"Thunder Stone": "<:thunderstone:1157321778004238418> Thunder Stone",
-	"Leaf Stone": "<:leafstone:1157321776045494273> Leaf Stone",
-	"Ice Stone": "<:icestone:1157321774434885693> Ice Stone",
-	"Moon Stone": "<:moonstone:1157323732570869850> Moon Stone",
-	"Sun Stone": "<:sunstone:1157323733149679738> Sun Stone",
-	"Dawn Stone": "<:dawnstone:1157322508903657622> Dawn Stone",
-	"Shiny Stone": "<:shinystone:1157321777299603599> Shiny Stone",
-	"Friendship": "<:soothebell:1157323348108390411> Friendship",
-	"Fairy Move": "<:fairytm:1157321780038467645> Fairy Move",
-	"Day": "<:Sun:1157324258519818332> Day",
-	"Night": "<:Moon:1157324256988889221> Night",
-	"Level": "<:rarecandy:1157320353677328406> Level",
-	"Male": "<:male:1157322687320965221> Male",
-	"Female": "<:female:1157322686234640404> Female",
-	"Auspicious Armor": "<:auspiciousarmor:1215384209397522442> Auspicious Armor",
-	"Malicious Armor": "<:auspiciousarmor:1215384209397522442> Malicious Armor",
-	"Linking Cord": "<:linkingcord:1215384218180264007> Linking Cord",
-	"Galarica Cuff": "<:galaricacuff:1215384213705064499> Galarica Cuff",
-	"Galarica Twig": "<:galaricatwig:1215384215299035227> Galarica Twig",
-	"Gimmighoul Coin": "<:gimmighoulcoin:1215384216934555648> Gimmighoul Coin",
-	"Meltan Candy": "<:meltancandy:1215384455544311820> Meltan Candy",
-	"Syrupy Apple": "<:syrupyapple:1215384458429997137> Syrupy Apple",
-	"Sweet Apple": "<:sweetapple:1215384234760478780> Sweet Apple",
-	"Tart Apple": "<:tartapple:1215384238271238144> Tart Apple",
-	"Sachet": "<:sachet:1215384457029230642> Sachet",
-	"Whipped Dream": "<:whippeddream:1215384241513300088> Whipped Dream",
-	"Unremarkable Teacup": "<:unremarkableteacup:1215384460074160138> Unremarkable Teacup",
-	"Masterpiece Teacup": "<:masterpieceteacup:1215384221514997770> Masterpiece Teacup",
-	"Chipped Pot": "<:chippedpot:1215384210626445473> Chipped Pot",
-	"Cracked Pot": "<:crackedpot:1215384212044255303> Cracked Pot",
-	"Metal Alloy": "<:metalalloy:1215384224803328072> Metal Alloy",
-	"Scroll of Darkness": "<:scrollofdarkness:1215384229232386048> Scroll of Darkness",
-	"Scroll of Waters": "<:scrollofwaters:1215384233187475477> Scroll of Waters",
-};
+const { typeColors, evoToEmojiMap } = require("./pokedexConstants.js");
 
 function evolutionMode(pokemonInfo, monsID, imageLnk) {
 	if (pokemonInfo.name === `Shedinja`) {
@@ -97,12 +35,12 @@ function evolutionMode(pokemonInfo, monsID, imageLnk) {
 			);
 
 			// Create a regular expression pattern that matches all words to be replaced
-			const pattern = new RegExp(Object.keys(wordToEmojiMap).join("|"), "gi");
+			const pattern = new RegExp(Object.keys(evoToEmojiMap).join("|"), "gi");
 
 			// Replace the matched words with their corresponding emojis
 			const methodDescriptionWithEmojis = evoMethodDetail[0].method.replace(
 				pattern,
-				(matchedWord) => wordToEmojiMap[matchedWord],
+				(matchedWord) => evoToEmojiMap[matchedWord],
 			);
 
 			// Handles Ninjask and Nincada
