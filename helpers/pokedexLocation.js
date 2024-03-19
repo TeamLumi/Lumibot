@@ -32,7 +32,12 @@ function locationMode(pokemonInfo, monsID, imageLnk) {
 		let lumiWebsite = "https://luminescent.team/docs/special-events/";
 
 		let text = "";
+		let counter = 0;
 		for (const [key, routes] of Object.entries(combinedRoutes)) {
+			if (counter >= 10) {
+				text += `\nLocations have been truncated.`;
+				break;
+			}
 			text += `\n**${key}**\n`;
 			routes.forEach((route) => {
 				const methodEmoji =
@@ -61,6 +66,7 @@ function locationMode(pokemonInfo, monsID, imageLnk) {
 					text += `*Level:* ${route.minLevel} - ${route.maxLevel}\n`;
 				}
 			});
+			counter++;
 		}
 		return text;
 	}
