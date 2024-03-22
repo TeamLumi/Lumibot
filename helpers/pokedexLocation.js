@@ -16,9 +16,7 @@ function locationMode(pokemonInfo, monsID, imageLnk) {
 		.setThumbnail(imageLnk);
 	const typeColor = typeColors[pokemonInfo.type1];
 
-	if (typeColor) {
-		embed.setColor(typeColor);
-	}
+	if (typeColor) embed.setColor(typeColor);
 
 	const locations = getRoutesFromPokemonId(monsID);
 	function buildTextFromRoutes(routes, pokemonName) {
@@ -39,32 +37,26 @@ function locationMode(pokemonInfo, monsID, imageLnk) {
 				break;
 			}
 			text += `\n**${key}**\n`;
-			routes.forEach((route) => {
-				const methodEmoji =
-					reverseEncounterTypeMap[route.method] || route.method;
+			routes.forEach(route => {
+				const methodEmoji = reverseEncounterTypeMap[route.method] || route.method;
 				const roundedChance = Math.ceil(route.chance);
-				if (key === "Underground") {
-					return (text += `${methodEmoji}\n`);
-				}
+				if (key === "Underground") return (text += `${methodEmoji}\n`);
 
-				if (route.method === "Gifts") {
-					text += `[${methodEmoji}](${route.link}) - ${roundedChance}%\n`;
-				} else if (route.link) {
-					text += `[${methodEmoji}](${route.link})\n`;
-				} else if (
+				if (route.link) text += `[${methodEmoji}](${route.link})`;
+				else if (
+					route.method === "Gifts" ||
 					route.method === "Legendaries" ||
 					route.method === "Static"
-				) {
-					text += `[${methodEmoji}](${lumiWebsite}${route.method.toLowerCase()}#${pokemonName.toLowerCase()})\n`;
-				} else {
-					text += `${methodEmoji} - ${roundedChance}%\n`;
-				}
+				)
+					text += `[${methodEmoji}](${lumiWebsite}${route.method.toLowerCase()}#${pokemonName.toLowerCase()})`;
+				else text += `${methodEmoji}`;
 
-				if (route.minLevel === route.maxLevel) {
+				if (roundedChance === 100) text += ` \n`;
+				else text += ` - ${roundedChance}%\n`;
+
+				if (route.minLevel === route.maxLevel)
 					text += `*Level:* ${route.minLevel}\n`;
-				} else {
-					text += `*Level:* ${route.minLevel} - ${route.maxLevel}\n`;
-				}
+				else text += `*Level:* ${route.minLevel} - ${route.maxLevel}\n`;
 			});
 			counter++;
 		}
@@ -74,9 +66,7 @@ function locationMode(pokemonInfo, monsID, imageLnk) {
 	function getBackupData(monsID) {
 		const evolutionDetails = getEvolutionTree(monsID);
 		if (monsID !== evolutionDetails.pokemonId) {
-			const locationsBackup = getRoutesFromPokemonId(
-				evolutionDetails.pokemonId,
-			);
+			const locationsBackup = getRoutesFromPokemonId(evolutionDetails.pokemonId);
 			const backupName = getPokemonDisplayName(evolutionDetails.pokemonId);
 			return {
 				locationsBackup,
