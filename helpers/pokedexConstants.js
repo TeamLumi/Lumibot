@@ -52,7 +52,6 @@ const evoToEmojiMap = {
 	"Male": "<:male:1218006521477202050> Male",
 	"Female": "<:female:1218006542293532722> Female",
 	"in Rain": "<:raining:1218034030293811210> in Rain",
-	// Evolution Items
 	"Water Stone": "<:waterstone:1157321781036720249> Water Stone",
 	"Fire Stone": "<:firestone:1157321773235323001> Fire Stone",
 	"Thunder Stone": "<:thunderstone:1157321778004238418> Thunder Stone",
@@ -114,9 +113,9 @@ const reverseEncounterTypeMap = {
 	"Honey Tree": ":honey_pot: Honey Tree",
 	"Incense": "<:incense:1136358228356243506> Incense",
 	"Daily Trophy Garden": "<:trophy:1218429965347983391> Daily Trophy Garden",
-    "Trade": "<:trade:1217991109297307648> Trade",
-    "Legendaries": "<:legendary:1217991082705686599> Legendary",
-    "Static": "<:static:1217991097897189386> Static",
+  "Trade": "<:trade:1217991109297307648> Trade",
+  "Legendaries": "<:legendary:1217991082705686599> Legendary",
+  "Static": "<:static:1217991097897189386> Static",
 	"Gifts": "<:mysterygift:1217991122857758740> Gift",
 };
 

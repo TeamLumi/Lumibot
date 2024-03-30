@@ -59,9 +59,7 @@ function createPokemonDisplayNameMap(pokemonNameMap, currentPokemon) {
 			let displayName = `${baseName} - ${alternateFormName}`;
 
 			// Check if the alternate form name includes the base name
-			if (alternateFormName.includes(baseName)) {
-				displayName = alternateFormName;
-			}
+			if (alternateFormName.includes(baseName)) displayName = alternateFormName;
 
 			pokemonNameMap[id] = displayName;
 			return pokemonNameMap;
@@ -83,7 +81,7 @@ function getPokemonName(pokemonId = 0) {
 }
 
 function getPokemonIdFromName(name = "Egg") {
-	const id = Object.values(POKEMON_NAME_MAP).findIndex((e) => e === name);
+	const id = Object.values(POKEMON_NAME_MAP).findIndex(e => e === name);
 	return id === -1 ? 0 : id;
 }
 
@@ -128,7 +126,7 @@ function getFormNameOfProblematicPokemon(id = 0) {
 function getPokemonMonsnoFromName(pokemonName) {
 	if (!pokemonName) return -1;
 	return basePokemonNames.labelDataArray.findIndex(
-		(e) => e.wordDataArray[0].str === pokemonName,
+		e => e.wordDataArray[0].str === pokemonName,
 	);
 }
 
@@ -144,7 +142,7 @@ function getPokemonNames(to, from = 0) {
 }
 
 function getPokemonFormId(monsno = 0, id) {
-	return FORM_MAP[monsno]?.findIndex((e) => e === id) ?? -1;
+	return FORM_MAP[monsno]?.findIndex(e => e === id) ?? -1;
 }
 
 function getPokemonDisplayName(pokemonId = 0) {
@@ -153,7 +151,7 @@ function getPokemonDisplayName(pokemonId = 0) {
 
 function getPokemonIdFromDisplayName(displayName) {
 	const id = Object.values(DISPLAY_POKEMON_NAME_MAP).findIndex(
-		(e) => e === displayName,
+		e => e === displayName,
 	);
 	return id === -1 ? 0 : id;
 }

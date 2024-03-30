@@ -20,8 +20,8 @@ function getEncounterObject(encounter) {
 function containsAllTOD(todEncounters) {
 	const desiredEncounterTypes = ["Morning", "Day", "Night"];
 
-	const hasAllEncounterTypes = desiredEncounterTypes.every((type) =>
-		todEncounters.some((encounter) => encounter.method === type),
+	const hasAllEncounterTypes = desiredEncounterTypes.every(type =>
+		todEncounters.some(encounter => encounter.method === type),
 	);
 	return hasAllEncounterTypes;
 }
@@ -30,16 +30,14 @@ function combineEncounterTypes(encounterData) {
 	const combinedEncounters = {};
 	const todEncounters = {};
 
-	encounterData.forEach((encounter) => {
+	encounterData.forEach(encounter => {
 		const { isTOD, isBadArea } = checkIsBadArea(encounter);
 
 		const key = `${encounter.name}_${encounter.method}`;
 		if (isTOD && !isBadArea) {
-			if (!todEncounters[encounter.name]) {
+			if (!todEncounters[encounter.name])
 				todEncounters[encounter.name] = [getEncounterObject(encounter)];
-			} else {
-				todEncounters[encounter.name].push(getEncounterObject(encounter));
-			}
+			else todEncounters[encounter.name].push(getEncounterObject(encounter));
 		} else if (!combinedEncounters[key] && !isBadArea) {
 			combinedEncounters[key] = getEncounterObject(encounter);
 		} else if (!isBadArea) {
@@ -89,9 +87,7 @@ function checkIsBadArea(encounter) {
 		encounter.name = "Old Chateau";
 		encounter.chance = parseFloat(encounter.chance) / 9;
 	}
-	if (isInside && isMorning) {
-		encounter.method = "Walking";
-	}
+	if (isInside && isMorning) encounter.method = "Walking";
 	return { isTOD, isBadArea };
 }
 
@@ -99,7 +95,7 @@ function addTODEncounters(todEncounters, combinedEncounters) {
 	for (const locationKey of Object.keys(todEncounters)) {
 		const combinedValues = Object.values(combinedEncounters);
 		const routeIndex = combinedValues.findLastIndex(
-			(enc) => enc.name === locationKey,
+			enc => enc.name === locationKey,
 		);
 
 		if (containsAllTOD(todEncounters[locationKey])) {
@@ -114,22 +110,16 @@ function addTODEncounters(todEncounters, combinedEncounters) {
 				);
 			}
 		} else if (routeIndex !== -1) {
-			todEncounters[locationKey].forEach((encounter) => {
+			todEncounters[locationKey].forEach(encounter => {
 				const routeKey = `${encounter.name}_${encounter.method}`;
-				if (!combinedEncounters[routeKey]) {
-					combinedEncounters[routeKey] = encounter;
-				} else {
-					combinedEncounters[routeKey].chance += parseFloat(encounter.chance);
-				}
+				if (!combinedEncounters[routeKey]) combinedEncounters[routeKey] = encounter;
+				else combinedEncounters[routeKey].chance += parseFloat(encounter.chance);
 			});
 		} else {
-			todEncounters[locationKey].forEach((encounter) => {
+			todEncounters[locationKey].forEach(encounter => {
 				const routeKey = `${encounter.name}_${encounter.method}`;
-				if (!combinedEncounters[routeKey]) {
-					combinedEncounters[routeKey] = encounter;
-				} else {
-					combinedEncounters[routeKey].chance += parseFloat(encounter.chance);
-				}
+				if (!combinedEncounters[routeKey]) combinedEncounters[routeKey] = encounter;
+				else combinedEncounters[routeKey].chance += parseFloat(encounter.chance);
 			});
 		}
 	}
@@ -138,15 +128,12 @@ function addTODEncounters(todEncounters, combinedEncounters) {
 function getRoutesFromPokemonId(pokemonId) {
 	const pokemonName = getPokemonName(pokemonId);
 	let routes = [];
-	if (pokemonLocations[pokemonId] && staticLocations[pokemonName]) {
+	if (pokemonLocations[pokemonId] && staticLocations[pokemonName])
 		routes = pokemonLocations[pokemonId].concat(staticLocations[pokemonName]);
-	} else if (pokemonLocations[pokemonId]) {
-		routes = pokemonLocations[pokemonId];
-	} else {
-		routes = staticLocations[pokemonName] || [];
-	}
+	else if (pokemonLocations[pokemonId]) routes = pokemonLocations[pokemonId];
+	else routes = staticLocations[pokemonName] || [];
 
-	const locationRates = routes.map((route) => {
+	const locationRates = routes.map(route => {
 		let method = ENC_TYPES[route.encounterType] ?? route.encounterType;
 		let chance = route.encounterRate;
 		if (chance === "morning") {

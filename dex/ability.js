@@ -12,7 +12,7 @@ function getAbilityIdFromAbilityName(abilityString) {
 	if (!abilityString) throw Error(`Bad ability string: ${abilityString}`);
 
 	const abilityId = abilityNames.labelDataArray.findIndex(
-		(e) => e.wordDataArray[0].str === abilityString,
+		e => e.wordDataArray[0].str === abilityString,
 	);
 
 	if (abilityId === -1) throw Error(`Bad ability string: ${abilityString}`);

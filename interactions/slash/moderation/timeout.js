@@ -27,20 +27,20 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("timeout")
 		.setDescription("Moderator Command: Times out a user (for an hour default)")
-		.addStringOption((option) =>
+		.addStringOption(option =>
 			option
 				.setName("user")
 				.setDescription("The name of the User")
 				.setRequired(true)
 				.setAutocomplete(true),
 		)
-		.addStringOption((option) =>
+		.addStringOption(option =>
 			option
 				.setName("reason")
 				.setDescription("Reason for the timeout")
 				.setRequired(false),
 		)
-		.addStringOption((option) =>
+		.addStringOption(option =>
 			option
 				.setName("duration")
 				.setDescription("Duration of the timeout")
@@ -54,7 +54,7 @@ module.exports = {
 					{ name: "0 (end timeout)", value: "0" },
 				),
 		)
-		.addStringOption((option) =>
+		.addStringOption(option =>
 			option
 				.setName("customduration")
 				.setDescription("Custom duration for timeout in minutes")
@@ -94,55 +94,49 @@ module.exports = {
 			});
 		}
 
-		if ((timeoutMS !== 0 && timeoutMS < 5000) || timeoutMS > 2.419e9) {
+		if ((timeoutMS !== 0 && timeoutMS < 5000) || timeoutMS > 2.419e9)
 			return interaction.reply({
 				content: `That's not a valid timeout duration.\n\nTimeout must be longer than 5 seconds and shorter than 28 days.`,
 				ephemeral: true,
 			});
-		}
 
 		interaction.guild.members
 			.fetch({ query: userName, limit: 1 })
-			.then(async (members) => {
+			.then(async members => {
 				const member = members.first();
-				if (!member) {
+				if (!member)
 					return interaction.reply({
 						content: `Sorry! I couldn't find that member.`,
 						ephemeral: true,
 					});
-				}
 
-				if (member.id === "1115351318740095058") {
+				if (member.id === "1115351318740095058")
 					return interaction.reply({
 						content: `I can't timeout myself!`,
 						ephemeral: true,
 					});
-				}
 
-				if (interaction.member.id === member.id) {
+				if (interaction.member.id === member.id)
 					return interaction.reply({
 						content: `I can't time you out.`,
 						ephemeral: true,
 					});
-				}
 
 				const targetHighestRole = member.roles.highest;
 				const userHighestRole = interaction.member.roles.highest;
 				const botHighestRole = interaction.guild.members.me.roles.highest;
 
-				if (userHighestRole.comparePositionTo(targetHighestRole) <= 0) {
+				if (userHighestRole.comparePositionTo(targetHighestRole) <= 0)
 					return interaction.reply({
 						content: `Your permissions are less than or equal to the user you are trying to timeout.`,
 						ephemeral: true,
 					});
-				}
 
-				if (botHighestRole.comparePositionTo(targetHighestRole) <= 0) {
+				if (botHighestRole.comparePositionTo(targetHighestRole) <= 0)
 					return interaction.reply({
 						content: `My permissions are less than or equal to the user you are trying to ban.`,
 						ephemeral: true,
 					});
-				}
 
 				if (timeoutMS === 0) {
 					try {
@@ -192,7 +186,7 @@ module.exports = {
 					});
 				}
 			})
-			.catch((error) => {
+			.catch(error => {
 				console.log(error);
 				return interaction.reply({
 					content: `Sorry! An error occurred. Consult the logs for more info.`,

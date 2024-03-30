@@ -14,9 +14,7 @@ function evolutionMode(pokemonInfo, monsID, imageLnk) {
 			.setThumbnail(imageLnk);
 
 		const typeColor = typeColors[pokemonInfo.type1];
-		if (typeColor) {
-			embed.setColor(typeColor);
-		}
+		if (typeColor) embed.setColor(typeColor);
 
 		return embed;
 	}
@@ -40,7 +38,7 @@ function evolutionMode(pokemonInfo, monsID, imageLnk) {
 			// Replace the matched words with their corresponding emojis
 			const methodDescriptionWithEmojis = evoMethodDetail[0].method.replace(
 				pattern,
-				(matchedWord) => evoToEmojiMap[matchedWord],
+				matchedWord => evoToEmojiMap[matchedWord],
 			);
 
 			// Handles Ninjask and Nincada
@@ -55,15 +53,11 @@ function evolutionMode(pokemonInfo, monsID, imageLnk) {
 		}
 
 		function findPokemonInTree(tree, targetId) {
-			if (tree.pokemonId === targetId) {
-				return tree;
-			}
+			if (tree.pokemonId === targetId) return tree;
 
 			for (const evolution of tree.evolvesInto) {
 				const result = findPokemonInTree(evolution, targetId);
-				if (result) {
-					return result;
-				}
+				if (result) return result;
 			}
 
 			return null;
@@ -72,34 +66,25 @@ function evolutionMode(pokemonInfo, monsID, imageLnk) {
 		function findEvolutionDetails(tree, targetId) {
 			const targetPokemon = findPokemonInTree(tree, targetId);
 
-			if (!targetPokemon) {
-				return null;
-			}
+			if (!targetPokemon) return null;
 
-			if (targetPokemon.pokemonId !== tree.pokemonId) {
+			if (targetPokemon.pokemonId !== tree.pokemonId)
 				return targetPokemon.evolutionDetails;
-			}
 
 			return targetPokemon.evolutionDetails;
 		}
 
 		const targetPokemon = findPokemonInTree(evolutionTree, targetPokemonId);
 
-		if (!targetPokemon) {
-			return "Pokemon not found in the evolution tree.";
-		}
+		if (!targetPokemon) return "Pokemon not found in the evolution tree.";
 
 		const description = [];
 
 		function findImmediatePreviousEvolution(tree, targetId) {
 			for (const evolution of tree.evolvesInto) {
-				if (evolution.pokemonId === targetId) {
-					return tree;
-				}
+				if (evolution.pokemonId === targetId) return tree;
 				const result = findImmediatePreviousEvolution(evolution, targetId);
-				if (result) {
-					return result;
-				}
+				if (result) return result;
 			}
 			return null;
 		}
@@ -120,11 +105,10 @@ function evolutionMode(pokemonInfo, monsID, imageLnk) {
 					immediatePreviousEvolution,
 					targetPokemonId,
 				);
-				if (previousEvolutionDetails) {
+				if (previousEvolutionDetails)
 					description.push(
 						generateEvolutionStageDescription(previousEvolutionDetails),
 					);
-				}
 			}
 		}
 
@@ -141,9 +125,8 @@ function evolutionMode(pokemonInfo, monsID, imageLnk) {
 			}
 		}
 
-		if (description.length === 0) {
+		if (description.length === 0)
 			return "Sorry! This Pokémon is not known to evolve from or into anything.\n...At least not that I know of!\n\nSee more in the [Pokédex](https://luminescent.team/pokedex/${monsID}).";
-		}
 
 		description.push(
 			`See more in the [Pokédex](https://luminescent.team/pokedex/${monsID}).`,
@@ -166,9 +149,7 @@ function evolutionMode(pokemonInfo, monsID, imageLnk) {
 		.setThumbnail(imageLnk);
 
 	const typeColor = typeColors[pokemonInfo.type1];
-	if (typeColor) {
-		embed.setColor(typeColor);
-	}
+	if (typeColor) embed.setColor(typeColor);
 
 	return embed;
 }

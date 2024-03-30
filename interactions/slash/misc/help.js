@@ -18,10 +18,8 @@ const permissionName = {
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("help")
-		.setDescription(
-			"List all commands of bot or info about a specific command.",
-		)
-		.addStringOption((option) =>
+		.setDescription("List all commands of bot or info about a specific command.")
+		.addStringOption(option =>
 			option
 				.setName("command")
 				.setDescription("The specific command to see the info of.")
@@ -41,8 +39,8 @@ module.exports = {
 				helpEmbed.setTitle(`List of all my tags`).setDescription(
 					"`" +
 						interaction.client.triggers
-							.filter((command) => !shouldExcludeCommand(command))
-							.map((command) => command.data.name)
+							.filter(command => !shouldExcludeCommand(command))
+							.map(command => command.data.name)
 							.join("`, `") +
 						"`",
 				);
@@ -73,9 +71,7 @@ module.exports = {
 				}
 
 				if (command.data.description) {
-					helpEmbed.setDescription(
-						command.data.description + "\n\n**Parameters:**",
-					);
+					helpEmbed.setDescription(command.data.description + "\n\n**Parameters:**");
 
 					// Loop through each parameter of the command and add it to the embed.
 					if (command.data.options && command.data.options.length > 0) {
@@ -112,17 +108,15 @@ module.exports = {
 			helpEmbed.setTitle("List of all my slash commands").setDescription(
 				"`" +
 					interaction.client.slashCommands
-						.filter((command) => !shouldExcludeCommand(command))
-						.filter((command) => {
+						.filter(command => !shouldExcludeCommand(command))
+						.filter(command => {
 							// Check if the command has specific member permissions defined and filter out.
-							const requiredPermissions =
-								command.data.default_member_permissions;
-							if (requiredPermissions) {
+							const requiredPermissions = command.data.default_member_permissions;
+							if (requiredPermissions)
 								return interaction.member.permissions.has(requiredPermissions);
-							}
 							return true;
 						})
-						.map((command) => command.data.name)
+						.map(command => command.data.name)
 						.join("`, `") +
 					"`",
 			);

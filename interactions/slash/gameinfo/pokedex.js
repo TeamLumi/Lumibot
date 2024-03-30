@@ -23,14 +23,14 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("pokedex")
 		.setDescription("Retrieve information about a Pokemon")
-		.addStringOption((option) =>
+		.addStringOption(option =>
 			option
 				.setName("pokemon")
 				.setDescription("The name of the Pokemon")
 				.setRequired(true)
 				.setAutocomplete(true),
 		)
-		.addStringOption((option) =>
+		.addStringOption(option =>
 			option
 				.setName("mode")
 				.setDescription(
@@ -44,7 +44,7 @@ module.exports = {
 					{ name: "evolution", value: "evolution" },
 				),
 		)
-		.addStringOption((option) =>
+		.addStringOption(option =>
 			option
 				.setName("visualization")
 				.setDescription("The type of visualization (graph or table)")
@@ -66,7 +66,7 @@ module.exports = {
 		if (pokemonInfo.name === "Egg") {
 			pokemonName = pokemonName
 				.toLowerCase()
-				.replace(/(?:^|\s|-)\S/g, (char) => char.toUpperCase());
+				.replace(/(?:^|\s|-)\S/g, char => char.toUpperCase());
 
 			monsID = getPokemonIdFromDisplayName(pokemonName) || 0;
 			pokemonInfo = getPokemonInfo(monsID);

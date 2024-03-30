@@ -9,20 +9,17 @@ function learnsetMode(pokemonInfo, monsID, imageLnk) {
 		.setThumbnail(imageLnk);
 
 	const typeColor = typeColors[pokemonInfo.type1];
-	if (typeColor) {
-		embed.setColor(typeColor);
-	}
+	if (typeColor) embed.setColor(typeColor);
 
 	let validDesc = "";
-	if (pokemonInfo.isValid === 0) {
+	if (pokemonInfo.isValid === 0)
 		validDesc = `*This Pokemon is* ***not*** *available in 2.0F.*\n\n`;
-	}
 
 	try {
 		const learnset = generateMovesViaLearnset(monsID, 100);
 
 		const movesetString = learnset
-			.map((entry) => {
+			.map(entry => {
 				const moveTypeIcon = typeIcons[entry.typeName];
 				const paddedLevel = entry.level.toString().padEnd(2, "\u00A0");
 				return `Level ${paddedLevel} - ${moveTypeIcon} ${entry.moveName}`;

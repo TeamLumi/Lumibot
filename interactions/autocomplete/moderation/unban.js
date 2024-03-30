@@ -9,17 +9,15 @@ module.exports = {
 
 		interaction.guild.bans
 			.fetch()
-			.then(async (members) => {
-				let guildUsers = members.filter((member) =>
+			.then(async members => {
+				let guildUsers = members.filter(member =>
 					member.user.username.toLowerCase().includes(focusedValue),
 				);
 
-				if (guildUsers.size > 5) {
-					guildUsers = guildUsers.first(5);
-				}
+				if (guildUsers.size > 5) guildUsers = guildUsers.first(5);
 
 				await interaction.respond(
-					guildUsers.map((member) => ({
+					guildUsers.map(member => ({
 						name: member.nickname
 							? `${member.nickname}/${member.user.username}`
 							: member.user.username,
@@ -27,7 +25,7 @@ module.exports = {
 					})),
 				);
 			})
-			.catch((error) => {
+			.catch(error => {
 				console.error(`Failed to fetch guild members: ${error}`);
 			});
 	},

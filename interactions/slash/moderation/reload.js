@@ -14,7 +14,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("reload")
 		.setDescription("Super Mod Command: Reloads a command.")
-		.addStringOption((option) =>
+		.addStringOption(option =>
 			option
 				.setName("command")
 				.setDescription("The name of the command to be reloaded")
@@ -48,7 +48,7 @@ module.exports = {
 
 			const slashCommands = fs.readdirSync(slashCommandsFolderPath);
 
-			const folderName = slashCommands.find((folder) =>
+			const folderName = slashCommands.find(folder =>
 				fs
 					.readdirSync(path.join(slashCommandsFolderPath, folder))
 					.includes(`${commandName}.js`),
@@ -91,8 +91,8 @@ module.exports = {
 
 			const triggerFolders = fs
 				.readdirSync(triggersFolderPath, { withFileTypes: true })
-				.filter((item) => item.isDirectory())
-				.map((item) => item.name);
+				.filter(item => item.isDirectory())
+				.map(item => item.name);
 
 			client.triggers.clear();
 
@@ -100,7 +100,7 @@ module.exports = {
 				const triggersPath = path.join(triggersFolderPath, folder);
 				const triggerFiles = fs
 					.readdirSync(triggersPath)
-					.filter((file) => file.endsWith(".js"));
+					.filter(file => file.endsWith(".js"));
 
 				for (const file of triggerFiles) {
 					const filePath = path.join(triggersPath, file);
@@ -108,13 +108,12 @@ module.exports = {
 
 					try {
 						const trigger = require(filePath);
-						if ("data" in trigger && "execute" in trigger) {
+						if ("data" in trigger && "execute" in trigger)
 							client.triggers.set(trigger.data.name, trigger);
-						} else {
+						else
 							console.log(
 								`[WARNING] The trigger at ${filePath} is missing a required "data" or "execute" property.`,
 							);
-						}
 					} catch (error) {
 						console.error(error);
 					}
@@ -143,7 +142,7 @@ module.exports = {
 				const modulePath = path.join(slashCommandsFolderPath, module);
 				const commandFiles = fs
 					.readdirSync(modulePath)
-					.filter((file) => file.endsWith(".js"));
+					.filter(file => file.endsWith(".js"));
 
 				for (const commandFile of commandFiles) {
 					const filePath = path.join(modulePath, commandFile);
@@ -165,9 +164,7 @@ module.exports = {
 			}
 			const newCommandNamesArray = Array.from(newCommandNames);
 			const newCommandList =
-				newCommandNamesArray.length > 0
-					? newCommandNamesArray.join(", ")
-					: "None";
+				newCommandNamesArray.length > 0 ? newCommandNamesArray.join(", ") : "None";
 
 			return interaction.editReply({
 				content: `Registered new commands: \`${newCommandList}\``,

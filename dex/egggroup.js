@@ -51,13 +51,11 @@ function getEggGroupNameById(eggGroupId = 0) {
 
 function createPokemonByEggGroupMap(pokemonMap, currentPokemon) {
 	// Use sets so I don't have to handle duplicates, looking at you Unown
-	if (pokemonMap[currentPokemon.egg_group1] === undefined) {
+	if (pokemonMap[currentPokemon.egg_group1] === undefined)
 		pokemonMap[currentPokemon.egg_group1] = new Set();
-	}
 
-	if (pokemonMap[currentPokemon.egg_group2] === undefined) {
+	if (pokemonMap[currentPokemon.egg_group2] === undefined)
 		pokemonMap[currentPokemon.egg_group2] = new Set();
-	}
 
 	pokemonMap[currentPokemon.egg_group1].add(currentPokemon.id);
 	pokemonMap[currentPokemon.egg_group2].add(currentPokemon.id);

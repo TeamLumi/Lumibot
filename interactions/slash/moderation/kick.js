@@ -13,28 +13,25 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("kick")
 		.setDescription("Moderator Command: Kicks a user")
-		.addStringOption((option) =>
+		.addStringOption(option =>
 			option
 				.setName("user")
 				.setDescription("The name of the User")
 				.setRequired(true)
 				.setAutocomplete(true),
 		)
-		.addStringOption((option) =>
+		.addStringOption(option =>
 			option
 				.setName("reason")
 				.setDescription("Reason for the kick")
 				.setRequired(false),
 		)
-		.addStringOption((option) =>
+		.addStringOption(option =>
 			option
 				.setName("deletemessages")
 				.setDescription("Users messages to be deleted")
 				.setRequired(false)
-				.addChoices(
-					{ name: "No", value: "0" },
-					{ name: "Yes", value: "86400" },
-				),
+				.addChoices({ name: "No", value: "0" }, { name: "Yes", value: "86400" }),
 		)
 		.setDefaultMemberPermissions(PermissionsBitField.Flags.KickMembers)
 		.setDMPermission(false),
@@ -68,46 +65,41 @@ module.exports = {
 
 		interaction.guild.members
 			.fetch({ query: userName, limit: 1 })
-			.then(async (members) => {
+			.then(async members => {
 				const member = members.first();
-				if (!member) {
+				if (!member)
 					return interaction.reply({
 						content: `Sorry! I couldn't find that member.`,
 						ephemeral: true,
 					});
-				}
 
-				if (member.id === "1115351318740095058") {
+				if (member.id === "1115351318740095058")
 					return interaction.reply({
 						content: `I can't kick myself!`,
 						ephemeral: true,
 					});
-				}
 
-				if (interaction.member.id === member.id) {
+				if (interaction.member.id === member.id)
 					return interaction.reply({
 						content: `I can't kick you.`,
 						ephemeral: true,
 					});
-				}
 
 				const targetHighestRole = member.roles.highest;
 				const userHighestRole = interaction.member.roles.highest;
 				const botHighestRole = interaction.guild.members.me.roles.highest;
 
-				if (userHighestRole.comparePositionTo(targetHighestRole) <= 0) {
+				if (userHighestRole.comparePositionTo(targetHighestRole) <= 0)
 					return interaction.reply({
 						content: `Your permissions are less than or equal to the user you are trying to kick.`,
 						ephemeral: true,
 					});
-				}
 
-				if (botHighestRole.comparePositionTo(targetHighestRole) <= 0) {
+				if (botHighestRole.comparePositionTo(targetHighestRole) <= 0)
 					return interaction.reply({
 						content: `My permissions are less than or equal to the user you are trying to ban.`,
 						ephemeral: true,
 					});
-				}
 
 				try {
 					await member.ban({
@@ -139,7 +131,7 @@ module.exports = {
 					});
 				}
 			})
-			.catch((error) => {
+			.catch(error => {
 				console.log(error);
 				return interaction.reply({
 					content: `Sorry! An error occurred. Consult the logs for more info.`,

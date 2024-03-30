@@ -4,9 +4,8 @@ const { PersonalTable } = require(global.gameDataFolder);
 const FORM_MAP = PersonalTable.Personal.reduce(createFormMap, {});
 
 function createFormMap(formMap, currentPokemon) {
-	if (!Array.isArray(formMap[currentPokemon.monsno])) {
+	if (!Array.isArray(formMap[currentPokemon.monsno]))
 		formMap[currentPokemon.monsno] = [];
-	}
 
 	formMap[currentPokemon.monsno].push(currentPokemon.id);
 	return formMap;
@@ -44,7 +43,7 @@ function getGrassKnotPower(weightkg) {
 
 function getPokemonIdFromMonsNoAndForm(monsno, formno) {
 	return PersonalTable.Personal.find(
-		(e) => e.monsno === monsno && FORM_MAP[e.monsno][formno] === e.id,
+		e => e.monsno === monsno && FORM_MAP[e.monsno][formno] === e.id,
 	)?.id;
 }
 

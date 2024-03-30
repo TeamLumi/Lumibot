@@ -12,7 +12,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("unban")
 		.setDescription("Moderator Command: Unbans a user")
-		.addStringOption((option) =>
+		.addStringOption(option =>
 			option
 				.setName("user")
 				.setDescription("The name of the User")
@@ -47,14 +47,13 @@ module.exports = {
 
 		try {
 			const bannedUsers = await interaction.guild.bans.fetch();
-			const member = bannedUsers.find((ban) => ban.user.username === userName);
+			const member = bannedUsers.find(ban => ban.user.username === userName);
 
-			if (!member) {
+			if (!member)
 				return interaction.reply({
 					content: `Sorry! I couldn't find that member.`,
 					ephemeral: true,
 				});
-			}
 			await interaction.guild.members.unban(member.user);
 			const embed = new EmbedBuilder()
 				.setTitle(`Member Unbanned`)

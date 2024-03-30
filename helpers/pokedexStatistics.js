@@ -3,7 +3,7 @@ const { CanvasRenderService } = require("chartjs-node-canvas");
 const { typeColors, typeIcons } = require("./pokedexConstants.js");
 
 function createGraphVisualization(pokemonInfo) {
-	const stats = ["hp", "atk", "def", "spa", "spd", "spe"].map((stat) => {
+	const stats = ["hp", "atk", "def", "spa", "spd", "spe"].map(stat => {
 		const statValue =
 			pokemonInfo.baseStats[stat] !== 0
 				? pokemonInfo.baseStats[stat]
@@ -17,7 +17,7 @@ function createGraphVisualization(pokemonInfo) {
 	const canvasRenderService = new CanvasRenderService(
 		width,
 		height,
-		(ChartJS) => {},
+		ChartJS => {},
 	);
 
 	const labels = [
@@ -85,7 +85,7 @@ function createGraphVisualization(pokemonInfo) {
 }
 
 function createTextVisualization(pokemonInfo) {
-	const statValues = ["hp", "atk", "def", "spa", "spd", "spe"].map((stat) => {
+	const statValues = ["hp", "atk", "def", "spa", "spd", "spe"].map(stat => {
 		const statValue = String(
 			pokemonInfo.baseStats[stat] !== 0
 				? pokemonInfo.baseStats[stat]
@@ -118,15 +118,10 @@ function statisticsMode(pokemonInfo, monsID, imageLnk) {
 	}
 
 	let genderText = "";
-	if (malePercentage === 0 && femalePercentage === 0) {
-		genderText = "Unknown";
-	} else if (malePercentage === 100) {
-		genderText = "100% Male";
-	} else if (femalePercentage === 100) {
-		genderText = "100% Female";
-	} else {
-		genderText = `${malePercentage}% Male, ${femalePercentage}% Female`;
-	}
+	if (malePercentage === 0 && femalePercentage === 0) genderText = "Unknown";
+	else if (malePercentage === 100) genderText = "100% Male";
+	else if (femalePercentage === 100) genderText = "100% Female";
+	else genderText = `${malePercentage}% Male, ${femalePercentage}% Female`;
 
 	const abilityField =
 		pokemonInfo.ability1 === pokemonInfo.ability2
@@ -146,9 +141,7 @@ function statisticsMode(pokemonInfo, monsID, imageLnk) {
 	);
 
 	const typeColor = typeColors[pokemonInfo.type1];
-	if (typeColor) {
-		embed.setColor(typeColor);
-	}
+	if (typeColor) embed.setColor(typeColor);
 
 	const type1Icon = typeIcons[pokemonInfo.type1];
 	const type2Icon = typeIcons[pokemonInfo.type2];

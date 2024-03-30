@@ -7,9 +7,7 @@ const {
 } = require("./evolutionConstants");
 
 function getEvolutionMethodDetail(methodId, methodParameter = 0, level) {
-	if (methodId === -1) {
-		return -1;
-	}
+	if (methodId === -1) return -1;
 	if (
 		!Number.isInteger(methodId) ||
 		methodId < 0 ||
@@ -37,14 +35,11 @@ function getEvolutionMethodDetail(methodId, methodParameter = 0, level) {
 }
 
 function getEvolutionTree(pokemonId = 0, fromRoot = true) {
-	if (!Number.isInteger(pokemonId) || pokemonId < 0) {
+	if (!Number.isInteger(pokemonId) || pokemonId < 0)
 		throw new Error(`Bad pokemon ID: ${pokemonId}`);
-	}
 
 	const pokemon = EvolutionData[pokemonId];
-	if (!pokemon) {
-		throw new Error(`Bad pokemon ID: ${pokemonId}`);
-	}
+	if (!pokemon) throw new Error(`Bad pokemon ID: ${pokemonId}`);
 
 	const startPokemonId = fromRoot ? pokemon.path[0] : pokemonId;
 
@@ -53,7 +48,7 @@ function getEvolutionTree(pokemonId = 0, fromRoot = true) {
 	const evolutionTree = {
 		pokemonId: startPokemonId,
 		evolutionDetails: getEvolutionDetails(startPokemonId),
-		evolvesInto: evolution.targets.map((nextStagePokemonId) =>
+		evolvesInto: evolution.targets.map(nextStagePokemonId =>
 			getEvolutionTree(nextStagePokemonId, false),
 		),
 	};
@@ -71,9 +66,7 @@ function checkEvolutionPath(evolutionData, originalPokemonId) {
 function getEvolutionDetails(pokemonId) {
 	const evolutionDetails = EvolutionData[pokemonId].ar;
 
-	if (!evolutionDetails) {
-		return null;
-	}
+	if (!evolutionDetails) return null;
 
 	for (let i = 0; i < evolutionDetails.length; i++) {
 		const evolutionData = evolutionDetails[i];
@@ -99,7 +92,7 @@ function getEvolutionDetails(pokemonId) {
 				levels.push(level);
 			}
 		}
-		if (methodIds.length > 0) {
+		if (methodIds.length > 0)
 			return {
 				methodIds,
 				methodParameters,
@@ -107,7 +100,6 @@ function getEvolutionDetails(pokemonId) {
 				formNos,
 				levels,
 			};
-		}
 	}
 	return null;
 }

@@ -24,9 +24,7 @@ function generateMovesViaLearnset(monsNo, level) {
 		throw new Error("Invalid Pokémon number");
 	}
 
-	if (!Number.isInteger(level) || level < 0) {
-		throw new Error("Invalid level");
-	}
+	if (!Number.isInteger(level) || level < 0) throw new Error("Invalid level");
 
 	let cutoffIndex = LearnsetTable.WazaOboe[monsNo].ar.findIndex(
 		(currentMoveOrLevel, i) => {
@@ -34,9 +32,7 @@ function generateMovesViaLearnset(monsNo, level) {
 			return currentMoveOrLevel > level;
 		},
 	);
-	if (cutoffIndex === -1) {
-		cutoffIndex = LearnsetTable.WazaOboe[monsNo].ar.length;
-	}
+	if (cutoffIndex === -1) cutoffIndex = LearnsetTable.WazaOboe[monsNo].ar.length;
 
 	let moves = LearnsetTable.WazaOboe[monsNo].ar;
 	const moveset = [];
@@ -45,9 +41,7 @@ function generateMovesViaLearnset(monsNo, level) {
 		const moveLevel = moves[i];
 		const moveId = moves[i + 1];
 
-		if (moveLevel > level) {
-			break; // Stop processing moves if the move level is higher than the specified level
-		}
+		if (moveLevel > level) break; // Stop processing moves if the move level is higher than the specified level
 
 		const moveName = getMoveString(moveId);
 		const moveInfo = MovesTable.Waza[moveId];
@@ -67,7 +61,7 @@ function generateMovesViaLearnset(monsNo, level) {
 function isMoveNameSmogonCompatible(moveString) {
 	if (typeof moveString !== "string" || !moveString)
 		throw Error(`Bad move string: ${moveString}`);
-	return smogonMoves.some((movesPerGeneration) =>
+	return smogonMoves.some(movesPerGeneration =>
 		Object.keys(movesPerGeneration).includes(moveString),
 	);
 }
@@ -75,7 +69,7 @@ function isMoveNameSmogonCompatible(moveString) {
 function getMoveId(moveName) {
 	if (typeof moveName !== "string" || !moveName)
 		throw Error(`Bad move name: ${moveName}`);
-	const id = moveEnum.findIndex((e) => e === moveName.trim());
+	const id = moveEnum.findIndex(e => e === moveName.trim());
 	if (id === -1) throw Error(`Bad move name: ${moveName}`);
 	return id;
 }
@@ -85,9 +79,8 @@ function getMoveString(id = 0) {
 		throw Error(`Bad move string found: ID - ${id}`);
 
 	const str = moveEnum[id];
-	if (typeof str !== "string" || !isMoveNameSmogonCompatible(str)) {
+	if (typeof str !== "string" || !isMoveNameSmogonCompatible(str))
 		throw Error(`Incompatible move string found: ID - ${id}, String: ${str}`);
-	}
 
 	return str;
 }
@@ -121,9 +114,9 @@ function getEggMoves(dexId = 0) {
 	const { monsno } = PersonalTable.Personal[dexId];
 	const formNo = getPokemonFormId(monsno, dexId);
 	const eggMoves =
-		EggMovesTable.Data.find((e) => e.no === monsno && e.formNo === formNo)
+		EggMovesTable.Data.find(e => e.no === monsno && e.formNo === formNo)
 			?.wazaNo ?? [];
-	return eggMoves.map((moveId) => ({
+	return eggMoves.map(moveId => ({
 		level: "egg",
 		moveId,
 	}));
@@ -168,9 +161,7 @@ function getTechMachineLearnset(pokemonId = 0) {
 		const legalitySetValue = ItemTable.Item[tm.itemNo].group_id;
 		const isLearnable = learnset[legalitySetValue - 1];
 
-		if (isLearnable) {
-			canLearn.push({ level: "tm", moveId: tm.wazaNo });
-		}
+		if (isLearnable) canLearn.push({ level: "tm", moveId: tm.wazaNo });
 	}
 
 	return canLearn;

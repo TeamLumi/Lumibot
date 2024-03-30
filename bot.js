@@ -66,20 +66,19 @@ const client = new Client({
 const eventFolderPath = path.join(__dirname, "events");
 const eventFiles = fs
 	.readdirSync(eventFolderPath)
-	.filter((file) => file.endsWith(".js"));
+	.filter(file => file.endsWith(".js"));
 
 for (const file of eventFiles) {
 	const filePath = path.join(eventFolderPath, file);
 	const event = require(filePath);
 
-	if (event.once) {
+	if (event.once)
 		client.once(event.name, (...args) => event.execute(...args, client));
-	} else {
+	else
 		client.on(
 			event.name,
 			async (...args) => await event.execute(...args, client),
 		);
-	}
 }
 
 // Define Collection of Commands, Slash Commands and cooldowns
@@ -103,18 +102,17 @@ for (const folder of commandFolders) {
 	const folderPath = path.join(commandFolderPath, folder);
 	const commandFiles = fs
 		.readdirSync(folderPath)
-		.filter((file) => file.endsWith(".js"));
+		.filter(file => file.endsWith(".js"));
 
 	for (const file of commandFiles) {
 		const filePath = path.join(folderPath, file);
 		const command = require(filePath);
-		if ("data" in command && "execute" in command) {
+		if ("data" in command && "execute" in command)
 			client.commands.set(command.data.name, command);
-		} else {
+		else
 			console.log(
 				`[WARNING] the command at ${filePath} is missing a required "data" or "execute" property.`,
 			);
-		}
 	}
 }
 
@@ -127,18 +125,17 @@ for (const module of slashCommands) {
 	const modulePath = path.join(slashCommandsFolderPath, module);
 	const commandFiles = fs
 		.readdirSync(modulePath)
-		.filter((file) => file.endsWith(".js"));
+		.filter(file => file.endsWith(".js"));
 
 	for (const commandFile of commandFiles) {
 		const filePath = path.join(modulePath, commandFile);
 		const command = require(filePath);
-		if ("data" in command && "execute" in command) {
+		if ("data" in command && "execute" in command)
 			client.slashCommands.set(command.data.name, command);
-		} else {
+		else
 			console.log(
 				`[WARNING] the slash-command at ${filePath} is missing a required "data" or "execute" property.`,
 			);
-		}
 	}
 }
 
@@ -153,20 +150,17 @@ const autocompleteInteractions = fs.readdirSync(autocompleteFolderPath);
 
 for (const module of autocompleteInteractions) {
 	const modulePath = path.join(autocompleteFolderPath, module);
-	const files = fs
-		.readdirSync(modulePath)
-		.filter((file) => file.endsWith(".js"));
+	const files = fs.readdirSync(modulePath).filter(file => file.endsWith(".js"));
 
 	for (const interactionFile of files) {
 		const filePath = path.join(modulePath, interactionFile);
 		const interaction = require(filePath);
-		if ("execute" in interaction) {
+		if ("execute" in interaction)
 			client.autocompleteInteractions.set(interaction.name, interaction);
-		} else {
+		else
 			console.log(
 				`[WARNING] the autocomplete interaction at ${filePath} is missing a required "execute" property.`,
 			);
-		}
 	}
 }
 
@@ -181,9 +175,7 @@ const contextMenus = fs.readdirSync(contextMenusFolderPath);
 
 for (const folder of contextMenus) {
 	const folderPath = path.join(contextMenusFolderPath, folder);
-	const files = fs
-		.readdirSync(folderPath)
-		.filter((file) => file.endsWith(".js"));
+	const files = fs.readdirSync(folderPath).filter(file => file.endsWith(".js"));
 
 	for (const file of files) {
 		const filePath = path.join(folderPath, file);
@@ -206,7 +198,7 @@ for (const module of buttonCommands) {
 	const modulePath = path.join(buttonCommandsFolderPath, module);
 	const commandFiles = fs
 		.readdirSync(modulePath)
-		.filter((file) => file.endsWith(".js"));
+		.filter(file => file.endsWith(".js"));
 
 	for (const commandFile of commandFiles) {
 		const filePath = path.join(modulePath, commandFile);
@@ -224,7 +216,7 @@ for (const module of modalCommands) {
 	const modulePath = path.join(modalCommandsFolderPath, module);
 	const commandFiles = fs
 		.readdirSync(modulePath)
-		.filter((file) => file.endsWith(".js"));
+		.filter(file => file.endsWith(".js"));
 
 	for (const commandFile of commandFiles) {
 		const filePath = path.join(modulePath, commandFile);
@@ -246,7 +238,7 @@ for (const module of selectMenus) {
 	const modulePath = path.join(selectMenusFolderPath, module);
 	const commandFiles = fs
 		.readdirSync(modulePath)
-		.filter((file) => file.endsWith(".js"));
+		.filter(file => file.endsWith(".js"));
 
 	for (const commandFile of commandFiles) {
 		const filePath = path.join(modulePath, commandFile);
@@ -260,8 +252,8 @@ for (const module of selectMenus) {
 const rest = new REST({ version: "9" }).setToken(token);
 
 const commandJsonData = [
-	...Array.from(client.slashCommands.values()).map((c) => c.data.toJSON()),
-	...Array.from(client.contextCommands.values()).map((c) => c.data),
+	...Array.from(client.slashCommands.values()).map(c => c.data.toJSON()),
+	...Array.from(client.contextCommands.values()).map(c => c.data),
 ];
 
 (async () => {
@@ -269,11 +261,9 @@ const commandJsonData = [
 		console.log("Started refreshing application (/) commands.");
 
 		let route;
-		if (process.env.NODE_ENV === "production") {
+		if (process.env.NODE_ENV === "production")
 			route = Routes.applicationCommands(client_id);
-		} else {
-			route = Routes.applicationGuildCommands(client_id, test_guild_id);
-		}
+		else route = Routes.applicationGuildCommands(client_id, test_guild_id);
 
 		await rest.put(route, { body: commandJsonData });
 
@@ -294,17 +284,16 @@ for (const folder of triggerFolders) {
 	const triggersPath = path.join(triggersFolderPath, folder);
 	const triggerFiles = fs
 		.readdirSync(triggersPath)
-		.filter((file) => file.endsWith(".js"));
+		.filter(file => file.endsWith(".js"));
 	for (const file of triggerFiles) {
 		const filePath = path.join(triggersPath, file);
 		const trigger = require(filePath);
-		if ("data" in trigger && "execute" in trigger) {
+		if ("data" in trigger && "execute" in trigger)
 			client.triggers.set(trigger.data.name, trigger);
-		} else {
+		else
 			console.log(
 				`[WARNING] the reaction at ${filePath} is missing a required "data" or "execute" property.`,
 			);
-		}
 	}
 }
 

@@ -12,7 +12,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("avatar")
 		.setDescription("Moderator Command: Gets the avatar of a user.")
-		.addStringOption((option) =>
+		.addStringOption(option =>
 			option
 				.setName("user")
 				.setDescription("The name of the User")
@@ -36,14 +36,13 @@ module.exports = {
 
 		interaction.guild.members
 			.fetch({ query: userName, limit: 1 })
-			.then(async (members) => {
+			.then(async members => {
 				const member = members.first();
-				if (!member) {
+				if (!member)
 					return interaction.reply({
 						content: `Sorry! I couldn't find that member.`,
 						ephemeral: true,
 					});
-				}
 
 				const avatar = member.user.displayAvatarURL({
 					size: 1024,
@@ -63,7 +62,7 @@ module.exports = {
 					embeds: [embed],
 				});
 			})
-			.catch((error) => {
+			.catch(error => {
 				console.log(error);
 				return interaction.reply({
 					content: `Sorry! An error occurred. Consult the logs for more info.`,

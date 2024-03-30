@@ -5,7 +5,7 @@ const { prefix, owner } = require("../config.json");
 
 // Prefix regex, we will use to match in mention prefix.
 
-const escapeRegex = (string) => {
+const escapeRegex = string => {
 	return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 };
 
@@ -42,53 +42,47 @@ module.exports = {
 		const args = content.slice(matchedPrefix.length).trim().split(/ +/);
 		const commandName = args.shift().toLowerCase();
 
-		if (!message.content.startsWith(matchedPrefix) || message.author.bot)
-			return;
+		if (!message.content.startsWith(matchedPrefix) || message.author.bot) return;
 		const command =
 			client.commands.get(commandName) ||
 			client.commands.find(
-				(cmd) => cmd.aliases && cmd.aliases.includes(commandName),
+				cmd => cmd.aliases && cmd.aliases.includes(commandName),
 			);
 		if (!command) return;
 
 		// Owner Only Property, add in our command properties if true.
 
-		if (command.ownerOnly && message.author.id !== owner) {
+		if (command.ownerOnly && message.author.id !== owner)
 			return message.reply({ content: "This is a owner only command!" });
-		}
 
 		// Guild Only Property, add in our command properties if true.
 
-		if (command.guildOnly && message.channel.type === ChannelType.DM) {
+		if (command.guildOnly && message.channel.type === ChannelType.DM)
 			return message.reply({
 				content: "I can't execute that command inside DMs!",
 			});
-		}
 
 		// Will skip the permission check if command channel is a DM. Use guildOnly for possible error prone commands!
 
 		if (command.permissions && message.channel.type !== ChannelType.DM) {
 			const authorPerms = message.channel.permissionsFor(message.author);
-			if (!authorPerms || !authorPerms.has(command.permissions)) {
+			if (!authorPerms || !authorPerms.has(command.permissions))
 				return message.reply({ content: "You can not do this!" });
-			}
 		}
 
 		if (command.args && !args.length) {
 			let reply = `You didn't provide any arguments, ${message.author}!`;
 
-			if (command.usage) {
+			if (command.usage)
 				reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
-			}
 
 			return message.channel.send({ content: reply });
 		}
 
 		const { cooldowns } = client;
 
-		if (!cooldowns.has(command.name)) {
+		if (!cooldowns.has(command.name))
 			cooldowns.set(command.name, new Collection());
-		}
 
 		const now = Date.now();
 		const timestamps = cooldowns.get(command.name);
