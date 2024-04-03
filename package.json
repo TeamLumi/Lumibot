@@ -32,6 +32,8 @@
 		"discord-api-types": "^0.37.36",
 		"discord.js": "^14.9.0",
 		"fuse.js": "^6.6.2",
+		"mongodb": "^6.5.0",
+		"mongoose": "^8.2.4",
 		"simple-git": "^3.19.1"
 	},
 	"devDependencies": {
@@ -44,8 +46,10 @@
 		"node": ">=18.16.0"
 	},
 	"jest": {
-		"setupFiles": ["./__tests/jest.setup.js"],
+		"setupFiles": [
+			"./__tests/jest.setup.js"
+		],
 		"testEnvironment": "node",
 		"testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.jsx?$"
-	  }
+	}
 }

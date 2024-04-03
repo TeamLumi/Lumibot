@@ -13,12 +13,11 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("kick")
 		.setDescription("Moderator Command: Kicks a user")
-		.addStringOption(option =>
+		.addUserOption(option =>
 			option
 				.setName("user")
 				.setDescription("The name of the User")
-				.setRequired(true)
-				.setAutocomplete(true),
+				.setRequired(true),
 		)
 		.addStringOption(option =>
 			option
@@ -37,11 +36,22 @@ module.exports = {
 		.setDMPermission(false),
 
 	async execute(interaction) {
-		const userName = interaction.options.getString("user");
+		const user = interaction.options.getUser("user");
 		const providedReason = interaction.options.getString("reason");
 		const kickReason = providedReason || "No reason provided.";
 		const deleteMessages = interaction.options.getString("deletemessages");
 		const deleteSeconds = deleteMessages || "0";
+		let member = null;
+
+		try {
+			member = interaction.guild.members.cache.get(user.id);
+		} catch (error) {
+			console.error(`Failed to get associated guild member:`, error);
+			interaction.reply({
+				content: `Couldn't get the associated guild member. They may already have been kicked or left.`,
+				ephemeral: true,
+			});
+		}
 
 		if (
 			!interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)
@@ -63,80 +73,62 @@ module.exports = {
 			});
 		}
 
-		interaction.guild.members
-			.fetch({ query: userName, limit: 1 })
-			.then(async members => {
-				const member = members.first();
-				if (!member)
-					return interaction.reply({
-						content: `Sorry! I couldn't find that member.`,
-						ephemeral: true,
-					});
-
-				if (member.id === "1115351318740095058")
-					return interaction.reply({
-						content: `I can't kick myself!`,
-						ephemeral: true,
-					});
-
-				if (interaction.member.id === member.id)
-					return interaction.reply({
-						content: `I can't kick you.`,
-						ephemeral: true,
-					});
-
-				const targetHighestRole = member.roles.highest;
-				const userHighestRole = interaction.member.roles.highest;
-				const botHighestRole = interaction.guild.members.me.roles.highest;
-
-				if (userHighestRole.comparePositionTo(targetHighestRole) <= 0)
-					return interaction.reply({
-						content: `Your permissions are less than or equal to the user you are trying to kick.`,
-						ephemeral: true,
-					});
-
-				if (botHighestRole.comparePositionTo(targetHighestRole) <= 0)
-					return interaction.reply({
-						content: `My permissions are less than or equal to the user you are trying to ban.`,
-						ephemeral: true,
-					});
-
-				try {
-					await member.ban({
-						deleteMessageSeconds: deleteSeconds,
-						reason: kickReason,
-					});
-
-					await interaction.guild.members.unban(member.user);
-
-					const embed = new EmbedBuilder()
-						.setTitle(`Member Kicked`)
-						.setDescription(
-							`> ${member.user.username} just got kicked. For reason: ${kickReason}`,
-						)
-						.setColor("#D22B2B")
-						.setFooter({
-							text: `Requested by ${interaction.member.user.username}`,
-							iconURL: interaction.member.user.displayAvatarURL(),
-						});
-
-					interaction.reply({
-						embeds: [embed],
-					});
-				} catch (error) {
-					console.error(`Failed to kick member:`, error);
-					interaction.reply({
-						content: `An issue occured kicking that user. Consult the logs for more info.`,
-						ephemeral: true,
-					});
-				}
-			})
-			.catch(error => {
-				console.log(error);
-				return interaction.reply({
-					content: `Sorry! An error occurred. Consult the logs for more info.`,
-					ephemeral: true,
-				});
+		if (user.id === "1115351318740095058")
+			return interaction.reply({
+				content: `I can't kick myself!`,
+				ephemeral: true,
 			});
+
+		if (interaction.member.id === user.id)
+			return interaction.reply({
+				content: `I can't kick you.`,
+				ephemeral: true,
+			});
+
+		const targetHighestRole = member.roles.highest;
+		const userHighestRole = interaction.member.roles.highest;
+		const botHighestRole = interaction.guild.members.me.roles.highest;
+
+		if (userHighestRole.comparePositionTo(targetHighestRole) <= 0)
+			return interaction.reply({
+				content: `Your permissions are less than or equal to the user you are trying to kick.`,
+				ephemeral: true,
+			});
+
+		if (botHighestRole.comparePositionTo(targetHighestRole) <= 0)
+			return interaction.reply({
+				content: `My permissions are less than or equal to the user you are trying to ban.`,
+				ephemeral: true,
+			});
+
+		try {
+			await member.ban({
+				deleteMessageSeconds: deleteSeconds,
+				reason: kickReason,
+			});
+
+			await interaction.guild.members.unban(user);
+
+			const embed = new EmbedBuilder()
+				.setTitle(`Member Kicked`)
+				.setDescription(
+					`> ${user.username} just got kicked. For reason: ${kickReason}`,
+				)
+				.setColor("#D22B2B")
+				.setFooter({
+					text: `Requested by ${interaction.member.user.username}`,
+					iconURL: interaction.member.user.displayAvatarURL(),
+				});
+
+			interaction.reply({
+				embeds: [embed],
+			});
+		} catch (error) {
+			console.error(`Failed to kick member:`, error);
+			interaction.reply({
+				content: `An issue occured kicking that user. Consult the logs for more info.`,
+				ephemeral: true,
+			});
+		}
 	},
 };

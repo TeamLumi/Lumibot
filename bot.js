@@ -2,7 +2,7 @@
  * Hey Zatsu here. If you are reading this, welcome to the Lumi Discord Bot.
  * This was built from an Open Source boilerplate made by https://github.com/NamVr
  * This file probably shouldnt be edited, as you can create your own commands
- * in the /commands folder.
+ * in the /interactions/slash folder.
  *
  * You can also set triggers in the /triggers folder. So that the bot will react
  * to certain words without the need of slash commands.
@@ -30,7 +30,9 @@ const {
 	client_id_dev,
 	client_id_prod,
 	test_guild_id,
+	mongoURI,
 } = require("./config.json");
+const mongoose = require("mongoose");
 
 let token = [];
 let client_id = [];
@@ -60,6 +62,12 @@ const client = new Client({
 	],
 	partials: [Partials.Channel],
 });
+
+// Uses Mongoose to initialise the mongodb connection.
+mongoose
+	.connect(mongoURI)
+	.then(() => console.log("Connected to MongoDB."))
+	.catch(err => console.error("Error connecting to MongoDB:", err));
 
 // initialises the event handling files.
 

@@ -27,12 +27,11 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("timeout")
 		.setDescription("Moderator Command: Times out a user (for an hour default)")
-		.addStringOption(option =>
+		.addUserOption(option =>
 			option
 				.setName("user")
 				.setDescription("The name of the User")
-				.setRequired(true)
-				.setAutocomplete(true),
+				.setRequired(true),
 		)
 		.addStringOption(option =>
 			option
@@ -64,12 +63,23 @@ module.exports = {
 		.setDMPermission(false),
 
 	async execute(interaction) {
-		const userName = interaction.options.getString("user");
+		const user = interaction.options.getUser("user");
 		const providedReason = interaction.options.getString("reason");
 		const timeoutReason = providedReason || "No reason provided.";
 		const providedDuration = interaction.options.getString("duration");
 		const customDuration = interaction.options.getString("customduration");
 		const timeoutDuration = customDuration || providedDuration || "60";
+		let member = null;
+
+		try {
+			member = interaction.guild.members.cache.get(user.id);
+		} catch (error) {
+			console.error(`Failed to get associated guild member:`, error);
+			interaction.reply({
+				content: `Couldn't get the associated guild member. They may have left or just haven't spoke yet.`,
+				ephemeral: true,
+			});
+		}
 
 		const timeoutMS = parseInt(timeoutDuration) * 60000;
 		const prettyDuration = formatDuration(timeoutMS);
@@ -100,98 +110,80 @@ module.exports = {
 				ephemeral: true,
 			});
 
-		interaction.guild.members
-			.fetch({ query: userName, limit: 1 })
-			.then(async members => {
-				const member = members.first();
-				if (!member)
-					return interaction.reply({
-						content: `Sorry! I couldn't find that member.`,
-						ephemeral: true,
+		if (user.id === "1115351318740095058")
+			return interaction.reply({
+				content: `I can't timeout myself!`,
+				ephemeral: true,
+			});
+
+		if (interaction.member.id === user.id)
+			return interaction.reply({
+				content: `I can't time you out.`,
+				ephemeral: true,
+			});
+
+		const targetHighestRole = member.roles.highest;
+		const userHighestRole = interaction.member.roles.highest;
+		const botHighestRole = interaction.guild.members.me.roles.highest;
+
+		if (userHighestRole.comparePositionTo(targetHighestRole) <= 0)
+			return interaction.reply({
+				content: `Your permissions are less than or equal to the user you are trying to timeout.`,
+				ephemeral: true,
+			});
+
+		if (botHighestRole.comparePositionTo(targetHighestRole) <= 0)
+			return interaction.reply({
+				content: `My permissions are less than or equal to the user you are trying to ban.`,
+				ephemeral: true,
+			});
+
+		if (timeoutMS === 0) {
+			try {
+				await member.timeout(null);
+				const embed = new EmbedBuilder()
+					.setTitle(`Timeout ended`)
+					.setDescription(`> ${user.username}'s timeout has been ended.`)
+					.setColor("#00ff00")
+					.setFooter({
+						text: `Requested by ${interaction.member.user.username}`,
+						iconURL: interaction.member.user.displayAvatarURL(),
 					});
 
-				if (member.id === "1115351318740095058")
-					return interaction.reply({
-						content: `I can't timeout myself!`,
-						ephemeral: true,
-					});
-
-				if (interaction.member.id === member.id)
-					return interaction.reply({
-						content: `I can't time you out.`,
-						ephemeral: true,
-					});
-
-				const targetHighestRole = member.roles.highest;
-				const userHighestRole = interaction.member.roles.highest;
-				const botHighestRole = interaction.guild.members.me.roles.highest;
-
-				if (userHighestRole.comparePositionTo(targetHighestRole) <= 0)
-					return interaction.reply({
-						content: `Your permissions are less than or equal to the user you are trying to timeout.`,
-						ephemeral: true,
-					});
-
-				if (botHighestRole.comparePositionTo(targetHighestRole) <= 0)
-					return interaction.reply({
-						content: `My permissions are less than or equal to the user you are trying to ban.`,
-						ephemeral: true,
-					});
-
-				if (timeoutMS === 0) {
-					try {
-						await member.timeout(null);
-						const embed = new EmbedBuilder()
-							.setTitle(`Timeout ended`)
-							.setDescription(`> ${member}'s timeout has been ended.`)
-							.setColor("#00ff00")
-							.setFooter({
-								text: `Requested by ${interaction.member.user.username}`,
-								iconURL: interaction.member.user.displayAvatarURL(),
-							});
-
-						return interaction.reply({
-							embeds: [embed],
-						});
-					} catch (error) {
-						console.error(`Failed to end timeout:`, error);
-						return interaction.reply({
-							content: `Failed to end timeout. I may not have permission to timeout users.`,
-							ephemeral: true,
-						});
-					}
-				}
-
-				try {
-					await member.timeout(timeoutMS, timeoutReason);
-					const embed = new EmbedBuilder()
-						.setTitle(`Member Timed Out`)
-						.setDescription(
-							`> ${member} just got Timed Out for ${prettyDuration}. For reason: ${timeoutReason}`,
-						)
-						.setColor("#D22B2B")
-						.setFooter({
-							text: `Requested by ${interaction.member.displayName}`,
-							iconURL: interaction.member.user.displayAvatarURL(),
-						});
-
-					interaction.reply({
-						embeds: [embed],
-					});
-				} catch (error) {
-					console.error(`Failed to timeout member:`, error);
-					interaction.reply({
-						content: `An issue occured timing out that user. Consult the logs for more info.`,
-						ephemeral: true,
-					});
-				}
-			})
-			.catch(error => {
-				console.log(error);
 				return interaction.reply({
-					content: `Sorry! An error occurred. Consult the logs for more info.`,
+					embeds: [embed],
+				});
+			} catch (error) {
+				console.error(`Failed to end timeout:`, error);
+				return interaction.reply({
+					content: `Failed to end timeout. I may not have permission to timeout users.`,
 					ephemeral: true,
 				});
+			}
+		}
+
+		try {
+			await member.timeout(timeoutMS, timeoutReason);
+			const embed = new EmbedBuilder()
+				.setTitle(`Member Timed Out`)
+				.setDescription(
+					`> ${user.username} just got timed out for ${prettyDuration}. For reason: ${timeoutReason}`,
+				)
+				.setColor("#D22B2B")
+				.setFooter({
+					text: `Requested by ${interaction.member.displayName}`,
+					iconURL: interaction.member.user.displayAvatarURL(),
+				});
+
+			interaction.reply({
+				embeds: [embed],
 			});
+		} catch (error) {
+			console.error(`Failed to timeout member:`, error);
+			interaction.reply({
+				content: `An issue occured timing out that user. Consult the logs for more info.`,
+				ephemeral: true,
+			});
+		}
 	},
 };

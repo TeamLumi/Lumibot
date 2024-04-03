@@ -2,6 +2,7 @@
 
 const { Collection, ChannelType } = require("discord.js");
 const { prefix, owner } = require("../config.json");
+const { containsSpam } = require("./spamUtils.js");
 
 // Prefix regex, we will use to match in mention prefix.
 
@@ -20,6 +21,10 @@ module.exports = {
 		// Declares const to be used.
 
 		const { client, guild, channel, content, author } = message;
+
+		// Anti-spam checks
+		const isSpam = await containsSpam(message);
+		if (isSpam) return; // Currently does nothing but prevents checking further commands.
 
 		// Checks if the bot is mentioned in the message all alone and triggers onMention trigger.
 		// We can change the behavior as per your liking at ./messages/onMention.js
