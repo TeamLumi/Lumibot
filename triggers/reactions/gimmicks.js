@@ -33,7 +33,7 @@ module.exports = {
 			embed
 				.setTitle("Distortion World")
 				.setDescription(
-					"**Just not happening.** Too much effort for a 15 minute hallway simulator. If it happens, it will be when we have nothing left to do.",
+					"We have a map and do confirm that it will be in the mod eventually, but we will not hold up any other updates for its inclusion. It'll be here when it's here.",
 				);
 		else if (message.content.toLowerCase().includes("rtx"))
 			embed
