@@ -138,51 +138,36 @@ module.exports = {
 				ephemeral: true,
 			});
 
+		interaction.reply({
+			content: `Timing out user...`,
+			ephemeral: true,
+		});
+
 		if (timeoutMS === 0) {
 			try {
 				await member.timeout(null);
-				const embed = new EmbedBuilder()
-					.setTitle(`Timeout ended`)
-					.setDescription(`> ${user.username}'s timeout has been ended.`)
-					.setColor("#00ff00")
-					.setFooter({
-						text: `Requested by ${interaction.member.user.username}`,
-						iconURL: interaction.member.user.displayAvatarURL(),
-					});
 
-				return interaction.reply({
-					embeds: [embed],
+				return interaction.editReply({
+					content: `> ${user.username}'s timeout has been ended.`,
 				});
 			} catch (error) {
 				console.error(`Failed to end timeout:`, error);
-				return interaction.reply({
+				return interaction.editReply({
 					content: `Failed to end timeout. I may not have permission to timeout users.`,
-					ephemeral: true,
 				});
 			}
 		}
 
 		try {
 			await member.timeout(timeoutMS, timeoutReason);
-			const embed = new EmbedBuilder()
-				.setTitle(`Member Timed Out`)
-				.setDescription(
-					`> ${user.username} just got timed out for ${prettyDuration}. For reason: ${timeoutReason}`,
-				)
-				.setColor("#D22B2B")
-				.setFooter({
-					text: `Requested by ${interaction.member.displayName}`,
-					iconURL: interaction.member.user.displayAvatarURL(),
-				});
 
-			interaction.reply({
-				embeds: [embed],
+			interaction.editReply({
+				content: `> ${user.username} just got timed out for ${prettyDuration}. For reason: ${timeoutReason}`,
 			});
 		} catch (error) {
 			console.error(`Failed to timeout member:`, error);
-			interaction.reply({
+			interaction.editReply({
 				content: `An issue occured timing out that user. Consult the logs for more info.`,
-				ephemeral: true,
 			});
 		}
 	},

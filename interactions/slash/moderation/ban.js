@@ -40,7 +40,7 @@ module.exports = {
 		const providedReason = interaction.options.getString("reason");
 		const banReason = providedReason || "No reason provided.";
 		const deleteMessages = interaction.options.getString("deletemessages");
-		const deleteSeconds = deleteMessages || "0";
+		const deleteSeconds = deleteMessages || "86400";
 		let member = null;
 
 		try {
@@ -101,6 +101,11 @@ module.exports = {
 				ephemeral: true,
 			});
 
+		interaction.reply({
+			content: `Banning user...`,
+			ephemeral: true,
+		});
+
 		if (!user.bot) {
 			try {
 				if (
@@ -124,25 +129,13 @@ module.exports = {
 				reason: banReason,
 			});
 
-			const embed = new EmbedBuilder()
-				.setTitle(`Member Banned`)
-				.setDescription(
-					`> ${user.username} just got banned. For reason: ${banReason}`,
-				)
-				.setColor("#D22B2B")
-				.setFooter({
-					text: `Requested by ${interaction.member.displayName}`,
-					iconURL: interaction.member.user.displayAvatarURL(),
-				});
-
-			interaction.reply({
-				embeds: [embed],
+			interaction.editReply({
+				content: `> ${user.username} just got banned. For reason: ${banReason}`,
 			});
 		} catch (error) {
 			console.error(`Failed to ban member:`, error);
-			interaction.reply({
+			interaction.editReply({
 				content: `An issue occured banning that user. Consult the logs for more info.`,
-				ephemeral: true,
 			});
 		}
 	},

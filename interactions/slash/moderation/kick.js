@@ -40,7 +40,7 @@ module.exports = {
 		const providedReason = interaction.options.getString("reason");
 		const kickReason = providedReason || "No reason provided.";
 		const deleteMessages = interaction.options.getString("deletemessages");
-		const deleteSeconds = deleteMessages || "0";
+		const deleteSeconds = deleteMessages || "86400";
 		let member = null;
 
 		try {
@@ -101,6 +101,11 @@ module.exports = {
 				ephemeral: true,
 			});
 
+		interaction.reply({
+			content: `Kicking user...`,
+			ephemeral: true,
+		});
+
 		try {
 			await member.ban({
 				deleteMessageSeconds: deleteSeconds,
@@ -109,25 +114,13 @@ module.exports = {
 
 			await interaction.guild.members.unban(user);
 
-			const embed = new EmbedBuilder()
-				.setTitle(`Member Kicked`)
-				.setDescription(
-					`> ${user.username} just got kicked. For reason: ${kickReason}`,
-				)
-				.setColor("#D22B2B")
-				.setFooter({
-					text: `Requested by ${interaction.member.user.username}`,
-					iconURL: interaction.member.user.displayAvatarURL(),
-				});
-
-			interaction.reply({
-				embeds: [embed],
+			interaction.editReply({
+				content: `> ${user.username} just got kicked. For reason: ${kickReason}`,
 			});
 		} catch (error) {
 			console.error(`Failed to kick member:`, error);
-			interaction.reply({
+			interaction.editReply({
 				content: `An issue occured kicking that user. Consult the logs for more info.`,
-				ephemeral: true,
 			});
 		}
 	},

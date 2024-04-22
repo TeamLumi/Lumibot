@@ -69,13 +69,11 @@ module.exports = {
 
 				return interaction.editReply({
 					content: `Command \`${newCommand.data.name}\` was reloaded!`,
-					ephemeral: true,
 				});
 			} catch (error) {
 				console.error(error);
-				return interaction.reply({
+				return interaction.editReply({
 					content: `There was an error while reloading command \`${commandName}\``,
-					ephemeral: true,
 				});
 			}
 		} else if (commandName === "triggers") {
@@ -121,7 +119,6 @@ module.exports = {
 			}
 			return interaction.editReply({
 				content: `All triggers have been reloaded!`,
-				ephemeral: true,
 			});
 		} else if (commandName === "new") {
 			// Loads new commands.
@@ -168,12 +165,10 @@ module.exports = {
 
 			return interaction.editReply({
 				content: `Registered new commands: \`${newCommandList}\``,
-				ephemeral: true,
 			});
 		} else {
 			return interaction.editReply({
 				content: `There is no command with name or alias \`${commandName}\``,
-				ephemeral: true,
 			});
 		}
 	},

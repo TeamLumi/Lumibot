@@ -45,33 +45,28 @@ module.exports = {
 			});
 		}
 
+		interaction.reply({
+			content: `Unbanning user...`,
+			ephemeral: true,
+		});
+
 		try {
 			const bannedUsers = await interaction.guild.bans.fetch();
 			const member = bannedUsers.find(ban => ban.user.username === userName);
 
 			if (!member)
-				return interaction.reply({
+				return interaction.editReply({
 					content: `Sorry! I couldn't find that member.`,
-					ephemeral: true,
 				});
 			await interaction.guild.members.unban(member.user);
-			const embed = new EmbedBuilder()
-				.setTitle(`Member Unbanned`)
-				.setDescription(`> ${member.user.username} just got unbanned.`)
-				.setColor("#00ff00")
-				.setFooter({
-					text: `Requested by ${interaction.member.user.username}`,
-					iconURL: interaction.member.user.displayAvatarURL(),
-				});
 
-			interaction.reply({
-				embeds: [embed],
+			interaction.editReply({
+				content: `> ${member.user.username} just got unbanned.`,
 			});
 		} catch (error) {
 			console.error(`Failed to unban member:`, error);
-			interaction.reply({
+			interaction.editReply({
 				content: `An issue occured unbanning that user. Consult the logs for more info.`,
-				ephemeral: true,
 			});
 		}
 	},
