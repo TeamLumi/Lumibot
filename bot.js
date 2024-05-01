@@ -64,6 +64,7 @@ const client = new Client({
 });
 
 // Uses Mongoose to initialise the mongodb connection.
+
 mongoose
 	.connect(mongoURI)
 	.then(() => console.log("Connected to MongoDB."))

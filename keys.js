@@ -6,4 +6,5 @@ const guildConfigSchema = new mongoose.Schema({
 	blacklistedPhrases: { type: [String], default: [] },
 });
 
-module.exports = mongoose.model("GuildConfig", guildConfigSchema);
+const GuildConfig = mongoose.model("GuildConfig", guildConfigSchema);
+module.exports = { GuildConfig };

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionsBitField } = require("discord.js");
-const { GuildConfig } = require("../../../models/keys.js");
+const { GuildConfig } = require("../../../keys.js");
 
 /**
  * @type {import('../../../typings').SlashInteractionCommand}
@@ -33,6 +33,11 @@ module.exports = {
 						.setDescription("Select a role here")
 						.setRequired(true),
 				),
+		)
+		.addSubcommand(subcommand =>
+			subcommand
+				.setName("list")
+				.setDescription("Whitelist subcommand to list all whitelisted roles"),
 		),
 
 	async execute(interaction) {
@@ -40,15 +45,20 @@ module.exports = {
 		const targetRole = interaction.options.getRole("target");
 
 		try {
-			// Find the guild configuration data
-			const guildConfig = await GuildConfig.findOne({
+			let guildConfig = await GuildConfig.findOne({
 				guildId: interaction.guild.id,
 			});
 
 			if (!guildConfig) {
-				await interaction.reply("Guild configuration not found.");
-				return;
+				guildConfig = new GuildConfig({
+					guildId: interaction.guild.id,
+					whitelistedRoles: [],
+					blacklistedPhrases: [],
+				});
+				await guildConfig.save();
 			}
+
+			let replyMessage;
 
 			switch (subcommand) {
 				case "add":
@@ -74,6 +84,22 @@ module.exports = {
 						await interaction.reply(`${targetRole.name} is not whitelisted.`);
 					}
 					break;
+				case "list":
+					if (guildConfig.whitelistedRoles.length === 0) {
+						replyMessage = "There are no whitelisted roles.";
+					} else {
+						replyMessage = "Whitelisted Roles:\n";
+						guildConfig.whitelistedRoles.forEach((roleId, index) => {
+							const role = interaction.guild.roles.cache.get(roleId);
+							if (role) {
+								replyMessage += `${index + 1}. ${role.name}\n`;
+							} else {
+								// If the role is not found (perhaps it was deleted), display its ID instead
+								replyMessage += `${index + 1}. Role ID: ${roleId} (Role not found)\n`;
+							}
+						});
+					}
+					await interaction.reply(replyMessage);
 				default:
 					await interaction.reply("Invalid subcommand.");
 			}
