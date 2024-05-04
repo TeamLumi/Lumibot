@@ -34,6 +34,19 @@ const {
 } = require("./config.json");
 const mongoose = require("mongoose");
 
+import("ts-cache-mongoose")
+	.then(cacheModule => {
+		const cache = cacheModule.default;
+
+		cache.init(mongoose, {
+			defaultTTL: "60 seconds",
+			engine: "memory",
+		});
+	})
+	.catch(error => {
+		console.error("Error importing ts-cache-mongoose:", error);
+	});
+
 let token = [];
 let client_id = [];
 

@@ -34,7 +34,8 @@
 		"fuse.js": "^6.6.2",
 		"mongodb": "^6.5.0",
 		"mongoose": "^8.2.4",
-		"simple-git": "^3.19.1"
+		"simple-git": "^3.19.1",
+		"ts-cache-mongoose": "1.5.0"
 	},
 	"devDependencies": {
 		"cross-env": "^7.0.3",

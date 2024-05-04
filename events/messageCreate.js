@@ -24,7 +24,11 @@ module.exports = {
 
 		// Anti-spam checks
 		const isSpam = await containsSpam(message);
-		if (isSpam) return; // Currently does nothing but prevents checking further commands.
+
+		if (isSpam) {
+			console.log(`Found spam: ${author.username}:${content}`);
+			return; // Currently does nothing but logs the message and prevents checking further commands.
+		}
 
 		// Checks if the bot is mentioned in the message all alone and triggers onMention trigger.
 		// We can change the behavior as per your liking at ./messages/onMention.js

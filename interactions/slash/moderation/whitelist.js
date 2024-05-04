@@ -66,9 +66,15 @@ module.exports = {
 						// Push the new role ID to the whitelistedRoles array
 						guildConfig.whitelistedRoles.push(targetRole.id);
 						await guildConfig.save();
-						await interaction.reply(`${targetRole.name} has been whitelisted.`);
+						await interaction.reply({
+							content: `${targetRole.name} has been whitelisted.\n`,
+							ephemeral: true,
+						});
 					} else {
-						await interaction.reply(`${targetRole.name} is already whitelisted.`);
+						await interaction.reply({
+							content: `${targetRole.name} is already whitelisted.\n`,
+							ephemeral: true,
+						});
 					}
 					break;
 				case "remove":
@@ -77,18 +83,22 @@ module.exports = {
 						// Remove the role ID from the whitelistedRoles array
 						guildConfig.whitelistedRoles.splice(index, 1);
 						await guildConfig.save();
-						await interaction.reply(
-							`${targetRole.name} has been removed from the whitelist.`,
-						);
+						await interaction.reply({
+							content: `${targetRole.name} has been removed from the whitelist.\n`,
+							ephemeral: true,
+						});
 					} else {
-						await interaction.reply(`${targetRole.name} is not whitelisted.`);
+						await interaction.reply({
+							content: `${targetRole.name} is not whitelisted.\n`,
+							ephemeral: true,
+						});
 					}
 					break;
 				case "list":
 					if (guildConfig.whitelistedRoles.length === 0) {
-						replyMessage = "There are no whitelisted roles.";
+						replyMessage = `There are no whitelisted roles.\n`;
 					} else {
-						replyMessage = "Whitelisted Roles:\n";
+						replyMessage = `Whitelisted Roles:\n`;
 						guildConfig.whitelistedRoles.forEach((roleId, index) => {
 							const role = interaction.guild.roles.cache.get(roleId);
 							if (role) {
@@ -99,13 +109,23 @@ module.exports = {
 							}
 						});
 					}
-					await interaction.reply(replyMessage);
+					await interaction.reply({
+						content: replyMessage,
+						ephemeral: true,
+					});
+					break;
 				default:
-					await interaction.reply("Invalid subcommand.");
+					await interaction.reply({
+						content: `Invalid subcommand.`,
+						ephemeral: true,
+					});
 			}
 		} catch (error) {
 			console.error("Error:", error);
-			await interaction.reply("An error occurred.");
+			await interaction.reply({
+				content: `An error occurred.`,
+				ephemeral: true,
+			});
 		}
 	},
 };

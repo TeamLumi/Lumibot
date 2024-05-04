@@ -66,11 +66,14 @@ module.exports = {
 						// Add the new phrase to the blacklist
 						guildConfig.blacklistedPhrases.push(targetPhrase);
 						await guildConfig.save();
-						replyMessage = `Added "${targetPhrase}" to the blacklist.`;
+						replyMessage = `Added "${targetPhrase}" to the blacklist.\n`;
 					} else {
-						replyMessage = `${targetPhrase} is already blacklisted.`;
+						replyMessage = `${targetPhrase} is already blacklisted.\n`;
 					}
-					await interaction.reply(replyMessage);
+					await interaction.reply({
+						content: replyMessage,
+						ephemeral: true,
+					});
 					break;
 				case "remove":
 					const index = guildConfig.blacklistedPhrases.indexOf(targetPhrase);
@@ -78,29 +81,43 @@ module.exports = {
 						// Remove the phrase from the blacklist
 						guildConfig.blacklistedPhrases.splice(index, 1);
 						await guildConfig.save();
-						replyMessage = `Removed "${targetPhrase}" from the blacklist.`;
+						await interaction.reply({
+							content: `Removed "${targetPhrase}" from the blacklist.\n`,
+							ephemeral: true,
+						});
 					} else {
-						replyMessage = `${targetPhrase} is not blacklisted.`;
+						await interaction.reply({
+							content: `${targetPhrase} is not blacklisted.\n`,
+							ephemeral: true,
+						});
 					}
-					await interaction.reply(replyMessage);
 					break;
 				case "list":
 					if (guildConfig.blacklistedPhrases.length === 0) {
-						replyMessage = "There are no blacklisted phrases.";
+						replyMessage = `There are no blacklisted phrases.\n`;
 					} else {
-						replyMessage = "Blacklisted Phrases:\n";
+						replyMessage = `Blacklisted Phrases:\n`;
 						guildConfig.blacklistedPhrases.forEach((phrase, index) => {
 							replyMessage += `${index + 1}. ${phrase}\n`;
 						});
 					}
-					await interaction.reply(replyMessage);
+					await interaction.reply({
+						content: replyMessage,
+						ephemeral: true,
+					});
 					break;
 				default:
-					await interaction.reply("Invalid subcommand.");
+					await interaction.reply({
+						content: `Invalid subcommand.`,
+						ephemeral: true,
+					});
 			}
 		} catch (error) {
-			console.error("Error:", error);
-			await interaction.reply("An error occurred.");
+			console.error(`Error:`, error);
+			await interaction.reply({
+				content: `An error occurred.`,
+				ephemeral: true,
+			});
 		}
 	},
 };
