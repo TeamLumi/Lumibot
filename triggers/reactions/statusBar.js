@@ -13,7 +13,8 @@ module.exports = {
 	},
 	execute(message, args) {
 		if (
-			!message.member.permissions.has(PermissionsBitField.Flags.KickMembers)
+			!message.member.permissions.has(PermissionsBitField.Flags.KickMembers) &&
+			!message.member.roles.cache.has('1198760768494129212')
 		) {
 			return;
 		}
