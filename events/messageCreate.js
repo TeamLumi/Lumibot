@@ -2,7 +2,7 @@
 
 const { Collection, ChannelType } = require("discord.js");
 const { prefix, owner } = require("../config.json");
-const { containsSpam } = require("./spamUtils.js");
+const { containsSpam, handleSpam } = require("./spamUtils.js");
 
 // Prefix regex, we will use to match in mention prefix.
 
@@ -27,7 +27,7 @@ module.exports = {
 
 		if (isSpam) {
 			console.log(`Found spam: ${author.username}:${content}`);
-			return; // Currently does nothing but logs the message and prevents checking further commands.
+			return handleSpam(message);
 		}
 
 		// Checks if the bot is mentioned in the message all alone and triggers onMention trigger.
