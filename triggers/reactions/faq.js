@@ -18,7 +18,7 @@ module.exports = {
 			.setTitle("Frequently Asked Questions")
 			.setURL("https://luminescent.team/docs/faq")
 			.setDescription(
-				`Find answers to all your frequently asked questions on our [:scroll: FAQ page](https://luminescent.team/docs/faq).`,
+				`Find answers to all your frequently asked questions on our [FAQ page](https://luminescent.team/docs/faq).`,
 			)
 			.setColor(0x90ee90);
 
