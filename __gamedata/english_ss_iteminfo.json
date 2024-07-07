@@ -79083,7 +79083,7 @@
                     "eventID": 7,
                     "tagIndex": -1,
                     "tagValue": 0.0,
-                    "str": "Renegade roses.",
+                    "str": "Ramanas roses.",
                     "strWidth": 195.71875
                 }
             ]
@@ -79129,7 +79129,7 @@
                     "eventID": 7,
                     "tagIndex": -1,
                     "tagValue": 0.0,
-                    "str": "Renegade roses.",
+                    "str": "Ramanas roses.",
                     "strWidth": 195.71875
                 }
             ]
@@ -79787,15 +79787,15 @@
                     "eventID": 3,
                     "tagIndex": -1,
                     "tagValue": 0.0,
-                    "str": "a nurse. It says to meet somebody at",
-                    "strWidth": 474.015625
+                    "str": "a Dragonite. It says to meet somebody ",
+                    "strWidth": 484.015625
                 },
                 {
                     "patternID": 0,
                     "eventID": 7,
                     "tagIndex": -1,
                     "tagValue": 0.0,
-                    "str": "the Gate.",
+                    "str": "at the Gate.",
                     "strWidth": 122.8125
                 }
             ]
@@ -79863,7 +79863,7 @@
                     "eventID": 1,
                     "tagIndex": -1,
                     "tagValue": 0.0,
-                    "str": "The Wing badge, acquired from Heather.",
+                    "str": "The Wind badge, acquired from Heather.",
                     "strWidth": 229.6875
                 },
                 {
