@@ -7,9 +7,11 @@ module.exports = {
 	data: {
 		name: ["[relumi]", "[reilluminated]", "[3.0]"],
 	},
-	execute(message) {
+	execute(message, args) {
 		const embed = new EmbedBuilder()
-			.setAuthor("Team Lumi")
+			.setAuthor({
+				name: "Team Lumi",
+			})
 			.setThumbnail("https://archives.bulbagarden.net/media/upload/8/84/0133Eevee-Partner.png")
 			.setTitle("Re:Illuminated Platinum")
 			.setDescription(
