@@ -36,7 +36,7 @@ module.exports = {
 				.setTitle("Yuzu Installation?")
 				.setURL("https://luminescent.team/docs/category/installation/")
 				.setDescription(
-					"We no longer support installation or bugs regarding the Yuzu emulator. Please seek another way to play our mod, such as Atmosphere or Ryujinx.",
+					"We no longer support installation or bugs regarding the Yuzu emulator. This is due to a legal issue and specifics of that suit mean that any forks or derivatives that use Yuzu's old coding is also unsupported. Playing on Android is thus not something we can provide help with at this time.\n\n Please seek another way to play our mod, such as Atmosphere or Ryujinx.",
 				);
 		else if (message.content.toLowerCase().includes("[ryujinx]"))
 			embed
