@@ -21,7 +21,7 @@ module.exports = {
 			embed
 				.setTitle("Battle Gimmicks")
 				.setDescription(
-					"**We aren't doing any of them.** No Megas, Z-Moves, Dynamaxing or Tera. They would simply be a full nightmare to balance and would only make the game less cohesive.\n\nPKHex-only access have been discussed internally, and more details will eventually be released as we figure out what is feasible.",
+					"**We aren't doing any of them.** No Megas, Z-Moves, Dynamaxing or Tera. They would simply be a full nightmare to balance and would only make the game less cohesive.\n\nPKHex-only access has been discussed internally, and more details will eventually be released as we figure out what is feasible.",
 				);
 		else if (message.content.toLowerCase().includes("chibi"))
 			embed
