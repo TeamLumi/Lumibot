@@ -43,7 +43,7 @@ module.exports = {
 				.setTitle("Ryujinx Installation")
 				.setURL("https://luminescent.team/docs/installation/ryujinx")
 				.setDescription(
-					"See how to install the mod on Ryujinx emulator. If you still have issues, please make a thread in https://discord.com/channels/912508046159261728/1020986285076250624 \n\nQuestions on how to use or install the emulator itself should be taken to more appropriate servers or Googled.",
+					"See how to install the mod on Ryujinx emulator. If you still have issues, please make a thread in https://discord.com/channels/912508046159261728/1020986285076250624 \n\nQuestions on how to use or install the emulator itself should be taken to more appropriate servers or Googled.\n\nRyujinx is no longer in development, but as it is not an issue of legality or DMCA takedowns, we still encourage use and support those installations. Please do not link Ryujinx builds here, as we do not have the power to vet all individual links.",
 				);
 		else
 			embed
