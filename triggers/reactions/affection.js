@@ -5,7 +5,7 @@ const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
  */
 module.exports = {
 	data: {
-		name: ["[affection]",],
+		name: ["[affection]", "[friendship]",],
 	},
 	execute(message, args) {
 		const embed = new EmbedBuilder()
@@ -13,7 +13,7 @@ module.exports = {
 				name: "Team Lumi",
 			})
 			.setThumbnail(
-				"https://cdn.discordapp.com/attachments/915474449657126932/1105083844073369621/randomize_.png",
+				"https://cdn.discordapp.com/attachments/1115345759496323173/1115682731343499314/faq.png",
 			)
 			.setTitle("Affection")
 			.setURL("https://luminescent.team/docs/faq")
