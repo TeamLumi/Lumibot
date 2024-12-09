@@ -45,7 +45,7 @@ module.exports = {
 			embed
 				.setTitle("Not in Development")
 				.setDescription(
-					"Luminescent Platinum does not intend to do any sort of special battle gimmicks, changes in graphics mode, or completely complicated by-hand sequences. You may have seen some related things in showcase videos, but are merely proof of concept and we do not intend to add them. This includes, but may not be limited to:\n\n- Megas, Z-Moves, Dynamaxing, Tera [gimmicks] bat\n- De-chibification [gimmicks] chibi (see also: https://discord.com/channels/912508046159261728/1315469606713819197)\n- Distortion World [gimmicks] dw\n- RTX Shading [gimmicks] rtx",
+					"Luminescent Platinum does not intend to do any sort of special battle gimmicks, changes in graphics mode, or completely complicated by-hand sequences. You may have seen some related things in showcase videos, but are merely proof of concept and we do not intend to add them. This includes, but may not be limited to:\n\n- Megas, Z-Moves, Dynamaxing, Tera: [gimmicks] bat\n- De-chibification: [gimmicks] chibi (see also: https://discord.com/channels/912508046159261728/1315469606713819197)\n- Distortion World: [gimmicks] dw\n- RTX Shading: [gimmicks] rtx",
 				);
 
 		message.channel.send({ embeds: [embed] });
