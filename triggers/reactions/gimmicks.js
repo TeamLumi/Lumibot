@@ -27,7 +27,7 @@ module.exports = {
 			embed
 				.setTitle("De-Chibification")
 				.setDescription(
-					"**We're not doing that.** You may have seen it in a proof of concept video, but we have determined that the scale of full battle models does not fit in the world map as it stands. We would need to redo all overworld graphics and make overworld models for those who don't have battle versions (townspeople and nurses), which has led us to determine that the workload for such a project is 100% not worth it.",
+					"[Dechibified Platinum](https://www.nexusmods.com/pokemonbdsp/mods/38) is a side-mod maintained by a single individual on Team Luminescent. It is not a full-fledged project by the entire team, but we do endorse his work where we can. The Nexus Mods page has install instructions. Please see https://discord.com/channels/912508046159261728/1315469606713819197 for updates or to submit bug reports.",
 				);
 		else if (message.content.toLowerCase().includes("dw"))
 			embed
@@ -45,7 +45,7 @@ module.exports = {
 			embed
 				.setTitle("Not in Development")
 				.setDescription(
-					"Luminescent Platinum does not intend to do any sort of special battle gimmicks, changes in graphics mode, or completely complicated by-hand sequences. You may have seen some related things in showcase videos, but are merely proof of concept and we do not intend to add them. This includes, but may not be limited to:\n\n- Megas, Z-Moves, Dynamaxing, Tera [gimmicks] bat\n- De-chibification [gimmicks] chibi\n- Distortion World [gimmicks] dw\n- RTX Shading [gimmicks] rtx",
+					"Luminescent Platinum does not intend to do any sort of special battle gimmicks, changes in graphics mode, or completely complicated by-hand sequences. You may have seen some related things in showcase videos, but are merely proof of concept and we do not intend to add them. This includes, but may not be limited to:\n\n- Megas, Z-Moves, Dynamaxing, Tera [gimmicks] bat\n- De-chibification [gimmicks] chibi (see also: https://discord.com/channels/912508046159261728/1315469606713819197)\n- Distortion World [gimmicks] dw\n- RTX Shading [gimmicks] rtx",
 				);
 
 		message.channel.send({ embeds: [embed] });
