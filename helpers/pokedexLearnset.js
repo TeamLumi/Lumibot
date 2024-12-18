@@ -26,8 +26,9 @@ function learnsetMode(pokemonInfo, monsID, imageLnk) {
 			})
 			.join("\n");
 
+		const pokemonPath = pokemonInfo.formno === 0 ? pokemonInfo.monsno : `${pokemonInfo.monsno}_${pokemonInfo.formno}`;
 		embed.setDescription(
-			`${validDesc}**Learnset**:\n${movesetString}\n\nSee more in the [Pokédex](https://luminescent.team/pokedex/${monsID}).`,
+			`${validDesc}**Learnset**:\n${movesetString}\n\nSee more in the [Pokédex](https://luminescent.team/pokedex/${pokemonPath})`,
 		);
 
 		return embed;
