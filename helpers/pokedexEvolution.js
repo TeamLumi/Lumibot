@@ -6,7 +6,7 @@ const {
 } = require("../dex/index.js");
 const { typeColors, evoToEmojiMap } = require("./pokedexConstants.js");
 
-function evolutionMode(pokemonInfo, monsID, imageLnk) {
+function evolutionMode(pokemonInfo, monsID, imageLnk, pokemonPath) {
 	if (pokemonInfo.name === `Shedinja`) {
 		const embed = new EmbedBuilder()
 			.setTitle(`**${pokemonInfo.name}**`)
@@ -125,12 +125,11 @@ function evolutionMode(pokemonInfo, monsID, imageLnk) {
 			}
 		}
 		
-  		const pokemonPath = pokemonInfo.formno === 0 ? pokemonInfo.monsno : `${pokemonInfo.monsno}_${pokemonInfo.formno}`;
 		if (description.length === 0)
 			return "Sorry! This Pokémon is not known to evolve from or into anything.\n...At least not that I know of!\n\nSee more in the [Pokédex](https://luminescent.team/pokedex/${pokemonPath}).";
 
 		description.push(
-			`See more in the [Pokédex](https://luminescent.team/pokedex/${pokemonPath})`,
+			`See more in the [Pokédex](https://luminescent.team/pokedex/${pokemonPath}).`,
 		);
 
 		return description.join("\n");

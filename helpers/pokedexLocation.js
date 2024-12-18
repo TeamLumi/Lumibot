@@ -9,7 +9,7 @@ const {
 	reverseEncounterTypeMap,
 } = require("./pokedexConstants.js");
 
-function locationMode(pokemonInfo, monsID, imageLnk) {
+function locationMode(pokemonInfo, monsID, imageLnk, pokemonPath) {
 	const pokemonName = pokemonInfo.name;
 	const embed = new EmbedBuilder()
 		.setTitle(`**${pokemonName}**`)
@@ -92,7 +92,6 @@ function locationMode(pokemonInfo, monsID, imageLnk) {
 			}
 		}
 		const locationText = buildTextFromRoutes(locations, pokemonName);
-		const pokemonPath = pokemonInfo.formno === 0 ? pokemonInfo.monsno : `${pokemonInfo.monsno}_${pokemonInfo.formno}`;
 		return `**Encounter information:**\n\nStandard rates assume that incense/radar are not active. For further accuracy, visit [our docs](https://luminescent.team/docs).\n${backupText}${locationText}\nSee more in the [Pokédex](https://luminescent.team/pokedex/${pokemonPath}).`;
 	}
 

@@ -92,23 +92,23 @@ module.exports = {
 
   		const pokemonPath = pokemonInfo.formno === 0 ? pokemonInfo.monsno : `${pokemonInfo.monsno}_${pokemonInfo.formno}`;
 		const imageLnk = `https://luminescent.team${pokemonInfo.imageSrc}`;
-		const pokedexText = {
-			name: `BST: ${pokemonInfo.baseStatsTotal}`,
-			value: `See more in the [Pokédex](https://luminescent.team/pokedex/${pokemonPath})`,
-		};
 
 		switch (mode) {
 			case "location":
-				embed = locationMode(pokemonInfo, monsID, imageLnk);
+				embed = locationMode(pokemonInfo, monsID, imageLnk, pokemonPath);
 				break;
 			case "evolution":
-				embed = evolutionMode(pokemonInfo, monsID, imageLnk);
+				embed = evolutionMode(pokemonInfo, monsID, imageLnk, pokemonPath);
 				break;
 			case "learnset":
-				embed = learnsetMode(pokemonInfo, monsID, imageLnk);
+				embed = learnsetMode(pokemonInfo, monsID, imageLnk, pokemonPath);
 				break;
 			default:
 				embed = statisticsMode(pokemonInfo, monsID, imageLnk);
+				const pokedexText = {
+					name: `BST: ${pokemonInfo.baseStatsTotal}`,
+					value: `See more in the [Pokédex](https://luminescent.team/pokedex/${pokemonPath})`,
+				};
 				if (visualization === "graph") {
 					const image = await createGraphVisualization(pokemonInfo);
 					const attachment = new AttachmentBuilder(image, {

@@ -2,7 +2,7 @@ const { EmbedBuilder } = require("discord.js");
 const { generateMovesViaLearnset } = require("../dex/index.js");
 const { typeColors, typeIcons } = require("./pokedexConstants.js");
 
-function learnsetMode(pokemonInfo, monsID, imageLnk) {
+function learnsetMode(pokemonInfo, monsID, imageLnk, pokemonPath) {
 	// Begin learnset mode.
 	const embed = new EmbedBuilder()
 		.setTitle(`**${pokemonInfo.name}**`)
@@ -26,9 +26,8 @@ function learnsetMode(pokemonInfo, monsID, imageLnk) {
 			})
 			.join("\n");
 
-		const pokemonPath = pokemonInfo.formno === 0 ? pokemonInfo.monsno : `${pokemonInfo.monsno}_${pokemonInfo.formno}`;
 		embed.setDescription(
-			`${validDesc}**Learnset**:\n${movesetString}\n\nSee more in the [Pokédex](https://luminescent.team/pokedex/${pokemonPath})`,
+			`${validDesc}**Learnset**:\n${movesetString}\n\nSee more in the [Pokédex](https://luminescent.team/pokedex/${pokemonPath}).`,
 		);
 
 		return embed;
