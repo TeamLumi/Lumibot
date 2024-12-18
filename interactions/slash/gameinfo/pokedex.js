@@ -90,7 +90,7 @@ module.exports = {
 			return interaction.reply({ embeds: [embed] });
 		}
 
-  		const pokemonPath = pokemonInfo.formNo === 0 ? pokemonInfo.monsNo : `${pokemonInfo.monsNo}_${pokemonInfo.formNo}`;
+  		const pokemonPath = pokemonInfo.formno === 0 ? pokemonInfo.monsno : `${pokemonInfo.monsno}_${pokemonInfo.formno}`;
 		const imageLnk = `https://luminescent.team${pokemonInfo.imageSrc}`;
 		const pokedexText = {
 			name: `BST: ${pokemonInfo.baseStatsTotal}`,
