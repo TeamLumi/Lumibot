@@ -126,7 +126,7 @@ function evolutionMode(pokemonInfo, monsID, imageLnk, pokemonPath) {
 		}
 		
 		if (description.length === 0)
-			return "Sorry! This Pokémon is not known to evolve from or into anything.\n...At least not that I know of!\n\nSee more in the [Pokédex](https://luminescent.team/pokedex/${pokemonPath}).";
+			return `Sorry! This Pokémon is not known to evolve from or into anything.\n...At least not that I know of!\n\nSee more in the [Pokédex](https://luminescent.team/pokedex/${pokemonPath}).`;
 
 		description.push(
 			`See more in the [Pokédex](https://luminescent.team/pokedex/${pokemonPath}).`,
