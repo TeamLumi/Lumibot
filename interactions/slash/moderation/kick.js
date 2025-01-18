@@ -85,42 +85,49 @@ module.exports = {
 				ephemeral: true,
 			});
 
-		const targetHighestRole = member.roles.highest;
-		const userHighestRole = interaction.member.roles.highest;
-		const botHighestRole = interaction.guild.members.me.roles.highest;
+		// Role hierarchy checks if the user is still in the guild
+		if (member) {
+			const targetHighestRole = member.roles.highest;
+			const userHighestRole = interaction.member.roles.highest;
+			const botHighestRole = interaction.guild.members.me.roles.highest;
 
-		if (userHighestRole.comparePositionTo(targetHighestRole) <= 0)
-			return interaction.reply({
-				content: `Your permissions are less than or equal to the user you are trying to kick.`,
-				ephemeral: true,
-			});
+			if (userHighestRole.comparePositionTo(targetHighestRole) <= 0) {
+				return interaction.reply({
+					content: `Your permissions are less than or equal to the user you are trying to ban.`,
+					ephemeral: true,
+				});
+			}
 
-		if (botHighestRole.comparePositionTo(targetHighestRole) <= 0)
-			return interaction.reply({
-				content: `My permissions are less than or equal to the user you are trying to ban.`,
-				ephemeral: true,
-			});
+			if (botHighestRole.comparePositionTo(targetHighestRole) <= 0) {
+				return interaction.reply({
+					content: `My permissions are less than or equal to the user you are trying to ban.`,
+					ephemeral: true,
+				});
+			}
+		}
 
-		interaction.reply({
+		// Notify the user that the kick process is starting
+		await interaction.reply({
 			content: `Kicking user...`,
 			ephemeral: true,
 		});
 
+		// Attempt to kick the user by banning and unbanning (for message deletion)
 		try {
-			await member.ban({
+			await interaction.guild.bans.create(user, {
 				deleteMessageSeconds: deleteSeconds,
 				reason: kickReason,
 			});
 
 			await interaction.guild.members.unban(user);
 
-			interaction.editReply({
-				content: `> ${user.username} just got kicked. For reason: ${kickReason}`,
+			await interaction.editReply({
+				content: `> ${user.username} just got kicked. Reason: ${kickReason}`,
 			});
 		} catch (error) {
-			console.error(`Failed to kick member:`, error);
-			interaction.editReply({
-				content: `An issue occured kicking that user. Consult the logs for more info.`,
+			console.error(`Failed to kick user:`, error);
+			await interaction.editReply({
+				content: `An issue occurred while kicking the user. Consult the logs for more info.`,
 			});
 		}
 	},
