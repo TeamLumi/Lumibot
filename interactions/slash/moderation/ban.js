@@ -128,7 +128,7 @@ module.exports = {
 		}
 
 		try {
-			await member.ban({
+			await user.ban({
 				deleteMessageSeconds: deleteSeconds,
 				reason: banReason,
 			});
@@ -137,7 +137,7 @@ module.exports = {
 				content: `> ${user.username} just got banned. For reason: ${banReason}`,
 			});
 		} catch (error) {
-			console.error(`Failed to ban member:`, error);
+			console.error(`Failed to ban user:`, error);
 			interaction.editReply({
 				content: `An issue occured banning that user. Consult the logs for more info.`,
 			});
