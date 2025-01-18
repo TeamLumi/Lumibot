@@ -111,7 +111,6 @@ module.exports = {
 					}
 					await interaction.reply({
 						content: replyMessage,
-						ephemeral: true,
 					});
 					break;
 				default:
