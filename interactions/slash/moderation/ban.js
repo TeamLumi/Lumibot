@@ -85,21 +85,25 @@ module.exports = {
 				ephemeral: true,
 			});
 
-		const targetHighestRole = member.roles.highest;
-		const userHighestRole = interaction.member.roles.highest;
-		const botHighestRole = interaction.guild.members.me.roles.highest;
+		try {
+			const targetHighestRole = member.roles.highest;
+			const userHighestRole = interaction.member.roles.highest;
+			const botHighestRole = interaction.guild.members.me.roles.highest;
 
-		if (userHighestRole.comparePositionTo(targetHighestRole) <= 0)
-			return interaction.reply({
-				content: `Your permissions are less than or equal to the user you are trying to ban.`,
-				ephemeral: true,
-			});
+			if (userHighestRole.comparePositionTo(targetHighestRole) <= 0)
+				return interaction.reply({
+					content: `Your permissions are less than or equal to the user you are trying to ban.`,
+					ephemeral: true,
+				});
 
-		if (botHighestRole.comparePositionTo(targetHighestRole) <= 0)
-			return interaction.reply({
-				content: `My permissions are less than or equal to the user you are trying to ban.`,
-				ephemeral: true,
-			});
+			if (botHighestRole.comparePositionTo(targetHighestRole) <= 0)
+				return interaction.reply({
+					content: `My permissions are less than or equal to the user you are trying to ban.`,
+					ephemeral: true,
+				});
+		} catch (error) {
+			console.error(`Failed to get associated guild member's roles:`, error);
+		});
 
 		interaction.reply({
 			content: `Banning user...`,
