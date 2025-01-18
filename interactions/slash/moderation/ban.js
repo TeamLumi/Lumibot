@@ -85,62 +85,62 @@ module.exports = {
 				ephemeral: true,
 			});
 
-		try {
-			const targetHighestRole = member.roles.highest;
-			const userHighestRole = interaction.member.roles.highest;
-			const botHighestRole = interaction.guild.members.me.roles.highest;
+	// Role hierarchy checks if the user is still in the guild
+	if (member) {
+		const targetHighestRole = member.roles.highest;
+		const userHighestRole = interaction.member.roles.highest;
+		const botHighestRole = interaction.guild.members.me.roles.highest;
 
-			if (userHighestRole.comparePositionTo(targetHighestRole) <= 0)
-				return interaction.reply({
-					content: `Your permissions are less than or equal to the user you are trying to ban.`,
-					ephemeral: true,
-				});
-
-			if (botHighestRole.comparePositionTo(targetHighestRole) <= 0)
-				return interaction.reply({
-					content: `My permissions are less than or equal to the user you are trying to ban.`,
-					ephemeral: true,
-				});
-		} catch (error) {
-			console.error(`Failed to get associated guild member's roles:`, error);
+		if (userHighestRole.comparePositionTo(targetHighestRole) <= 0) {
+			return interaction.reply({
+				content: `Your permissions are less than or equal to the user you are trying to ban.`,
+				ephemeral: true,
+			});
 		}
 
-		interaction.reply({
-			content: `Banning user...`,
-			ephemeral: true,
+		if (botHighestRole.comparePositionTo(targetHighestRole) <= 0) {
+			return interaction.reply({
+				content: `My permissions are less than or equal to the user you are trying to ban.`,
+				ephemeral: true,
+			});
+		}
+	}
+
+	// Notify the user that the ban process is starting
+	await interaction.reply({
+		content: `Banning user...`,
+		ephemeral: true,
+	});
+
+	// Try to DM the user about the ban (if they're not a bot)
+	if (!user.bot) {
+		try {
+			if (banReason.trim().toLowerCase() === "rule 0" || banReason.trim().toLowerCase() === "rule0") {
+				const dmMessage = `You have been banned from the Team Luminescent server | Reason: Rule 0\n\nPokémon Luminescent Platinum is a romhack that requires Brilliant Diamond 1.3.0 to work. You must legally own and acquire your own copy of the game. If you cannot dump the files from a hacked Nintendo Switch, then they are not considered legal!\n\n**NO PIRACY IS ALLOWED IN THE SERVER, EVER, FOR ANY REASON. THIS INCLUDES ALLUDING TO OR IMPLYING YOUR PIRACY OR ASKING FOR: THE ROMS, NSP, XCI, UPDATE FILES, GAMES, FIRMWARE, SHADER CACHES OR KEYS, OR WHERE TO FIND THEM.**`;
+				await user.send(dmMessage);
+			} else if (banReason !== "No reason provided.") {
+				const dmMessage = `You have been banned from the Team Luminescent server | Reason: ${banReason}`;
+				await user.send(dmMessage);
+			}
+		} catch (error) {
+			console.log(`Failed to send DM to user:`, error);
+		}
+	}
+
+	// Attempt to ban the user
+	try {
+		await interaction.guild.bans.create(user, {
+			deleteMessageSeconds: deleteSeconds,
+			reason: banReason,
 		});
 
-		if (!user.bot) {
-			try {
-				if (
-					banReason.trim().toLowerCase() === "rule 0" ||
-					banReason.trim().toLowerCase() === "rule0"
-				) {
-					const dmMessage = `You have been banned from the Team Luminescent server | Reason: Rule 0\n\nPokémon Luminescent Platinum is a romhack that requires Brilliant Diamond 1.3.0 to work. You must legally own and acquire your own copy of the game. If you cannot dump the files from a hacked Nintendo Switch, then they are not considered legal!\n\n**NO PIRACY IS ALLOWED IN THE SERVER, EVER, FOR ANY REASON. THIS INCLUDES ALLUDING TO OR IMPLYING YOUR PIRACY OR ASKING FOR: THE ROMS, NSP, XCI, UPDATE FILES, GAMES, FIRMWARE, SHADER CACHES OR KEYS, OR WHERE TO FIND THEM.**`;
-					await user.send(dmMessage);
-				} else if (banReason !== "No reason provided.") {
-					const dmMessage = `You have been banned from the Team Luminescent server | Reason: ${banReason}`;
-					await user.send(dmMessage);
-				}
-			} catch (error) {
-				console.log(error);
-			}
-		}
-
-		try {
-			await user.ban({
-				deleteMessageSeconds: deleteSeconds,
-				reason: banReason,
-			});
-
-			interaction.editReply({
-				content: `> ${user.username} just got banned. For reason: ${banReason}`,
-			});
-		} catch (error) {
-			console.error(`Failed to ban user:`, error);
-			interaction.editReply({
-				content: `An issue occured banning that user. Consult the logs for more info.`,
-			});
-		}
-	},
+		await interaction.editReply({
+			content: `> ${user.username} just got banned. Reason: ${banReason}`,
+		});
+	} catch (error) {
+		console.error(`Failed to ban user:`, error);
+		await interaction.editReply({
+			content: `An issue occurred while banning the user. Consult the logs for more info.`,
+		});
+	}
 };
