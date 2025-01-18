@@ -103,7 +103,7 @@ module.exports = {
 				});
 		} catch (error) {
 			console.error(`Failed to get associated guild member's roles:`, error);
-		});
+		}
 
 		interaction.reply({
 			content: `Banning user...`,
