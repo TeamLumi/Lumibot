@@ -3,6 +3,7 @@
 const { Collection, ChannelType } = require("discord.js");
 const { prefix, owner } = require("../config.json");
 const { containsSpam, handleSpam } = require("./spamUtils.js");
+const { containsEmulator, handleEmulator } = require("./emulatorUtils.js");
 
 // Prefix regex, we will use to match in mention prefix.
 
@@ -29,6 +30,14 @@ module.exports = {
 			console.log(`Found spam: ${author.username}:${content}`);
 			return handleSpam(message);
 		}
+
+        // Anti-emulator checks
+        const isEmulator = await containsEmulator(message);
+
+        if (isEmulator) {
+            console.log(`Found emulator: ${author.username}:${content}`);
+            return handleEmulator(message);
+        }
 
 		// Checks if the bot is mentioned in the message all alone and triggers onMention trigger.
 		// We can change the behavior as per your liking at ./messages/onMention.js

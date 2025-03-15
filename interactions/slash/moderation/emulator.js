@@ -6,38 +6,38 @@ const { GuildConfig } = require("../../../keys.js");
  */
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName("blacklist")
+		.setName("emulator")
 		.setDescription(
-			"Moderator Command: Base command for blacklisting phrases/URLs",
+			"Moderator Command: Base command for blacklisting emulators",
 		)
 		.setDefaultMemberPermissions(PermissionsBitField.Flags.BanMembers)
 		.setDMPermission(false)
 		.addSubcommand(subcommand =>
 			subcommand
 				.setName("add")
-				.setDescription("Blacklist subcommand to mark a phrase as spam")
+				.setDescription("Blacklist subcommand to mark an emulator name")
 				.addStringOption(option =>
 					option
 						.setName("string")
-						.setDescription("Type the phrase here")
+						.setDescription("Type the name here")
 						.setRequired(true),
 				),
 		)
 		.addSubcommand(subcommand =>
 			subcommand
 				.setName("remove")
-				.setDescription("Blacklist subcommand to remove a phrase from spam")
+				.setDescription("Blacklist subcommand to remove an emulator name")
 				.addStringOption(option =>
 					option
 						.setName("string")
-						.setDescription("Type the phrase here")
+						.setDescription("Type the name here")
 						.setRequired(true),
 				),
 		)
 		.addSubcommand(subcommand =>
 			subcommand
 				.setName("list")
-				.setDescription("Blacklist subcommand to list all blacklisted phrases"),
+				.setDescription("Blacklist subcommand to list all emulators"),
 		),
 
 	async execute(interaction) {
@@ -63,13 +63,13 @@ module.exports = {
 
 			switch (subcommand) {
 				case "add":
-					if (!guildConfig.blacklistedPhrases.includes(targetPhrase)) {
-						// Add the new phrase to the blacklist
-						guildConfig.blacklistedPhrases.push(targetPhrase);
+					if (!guildConfig.unsupportedEmulators.includes(targetPhrase)) {
+						// Add the new phrase to the emulator list
+						guildConfig.unsupportedEmulators.push(targetPhrase);
 						await guildConfig.save();
-						replyMessage = `Added "${targetPhrase}" to the blacklist.\n`;
+						replyMessage = `Added "${targetPhrase}" to the emulator list.\n`;
 					} else {
-						replyMessage = `${targetPhrase} is already blacklisted.\n`;
+						replyMessage = `${targetPhrase} is already in the list.\n`;
 					}
 					await interaction.reply({
 						content: replyMessage,
@@ -77,28 +77,28 @@ module.exports = {
 					});
 					break;
 				case "remove":
-					const index = guildConfig.blacklistedPhrases.indexOf(targetPhrase);
+					const index = guildConfig.unsupportedEmulators.indexOf(targetPhrase);
 					if (index !== -1) {
-						// Remove the phrase from the blacklist
-						guildConfig.blacklistedPhrases.splice(index, 1);
+						// Remove the phrase from the emulator list
+						guildConfig.unsupportedEmulators.splice(index, 1);
 						await guildConfig.save();
 						await interaction.reply({
-							content: `Removed "${targetPhrase}" from the blacklist.\n`,
+							content: `Removed "${targetPhrase}" from the emulator list.\n`,
 							ephemeral: true,
 						});
 					} else {
 						await interaction.reply({
-							content: `${targetPhrase} is not blacklisted.\n`,
+							content: `${targetPhrase} is not in the emulator list.\n`,
 							ephemeral: true,
 						});
 					}
 					break;
 				case "list":
-					if (guildConfig.blacklistedPhrases.length === 0) {
-						replyMessage = `There are no blacklisted phrases.\n`;
+					if (guildConfig.unsupportedEmulators.length === 0) {
+						replyMessage = `There are no emulators listed.\n`;
 					} else {
-						replyMessage = `Blacklisted Phrases:\n`;
-						guildConfig.blacklistedPhrases.forEach((phrase, index) => {
+						replyMessage = `Emulators:\n`;
+						guildConfig.unsupportedEmulators.forEach((phrase, index) => {
 							replyMessage += `${index + 1}. ${phrase}\n`;
 						});
 					}

@@ -54,6 +54,7 @@ module.exports = {
 					guildId: interaction.guild.id,
 					whitelistedRoles: [],
 					blacklistedPhrases: [],
+                    unsupportedEmulators: [],
 				});
 				await guildConfig.save();
 			}

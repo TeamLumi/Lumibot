@@ -77,11 +77,12 @@ const client = new Client({
 });
 
 // Uses Mongoose to initialise the mongodb connection.
-
-mongoose
-	.connect(mongoURI)
-	.then(() => console.log("Connected to MongoDB."))
-	.catch(err => console.error("Error connecting to MongoDB:", err));
+if (process.env.NODE_ENV === "production") {
+    mongoose
+        .connect(mongoURI)
+        .then(() => console.log("Connected to MongoDB."))
+        .catch(err => console.error("Error connecting to MongoDB:", err));
+}
 
 // initialises the event handling files.
 

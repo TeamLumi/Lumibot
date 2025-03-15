@@ -11,8 +11,8 @@ async function containsSpam(message) {
 	try {
 		// Query the GuildConfig collection for the guild ID with caching
 		const guildConfig = await GuildConfig.findOne({ guildId: guild.id })
-			.cache("1 hour")
-			.exec();
+			.cache?.("1 hour")
+			.exec?.();
 
 		if (!guildConfig) {
 			return false;
