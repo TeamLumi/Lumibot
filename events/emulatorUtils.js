@@ -1,6 +1,7 @@
 const { GuildConfig } = require("../keys.js");
 const {
 	PermissionsBitField,
+    EmbedBuilder,
 } = require("discord.js");
 
 async function containsEmulator(message) {
@@ -17,13 +18,11 @@ async function containsEmulator(message) {
 		}
 
 		if (member.permissions.has(PermissionsBitField.Flags.ManageMessages)) {
-            console.log(`user has permissions:`, member.id);
 			return false;
 		}
 
 		for (const phrase of guildConfig.unsupportedEmulators) {
 			if (content.includes(phrase)) {
-                console.log(`user said the thing:`, member.id);
 				return true;
 			}
 		}
@@ -36,10 +35,24 @@ async function containsEmulator(message) {
 }
 
 async function handleEmulator(message) {
-    message.reply({ 
-        content: `Your message was deleted due to it containing the name of an emulator for Nintendo Switch.\n\nAt this time we are not providing support for any particular emulator due to legal action from Nintendo. You can still reference our [legacy emulator installation](https://luminescent.team/docs/installation/ryujinx) guide but we cannot offer any support or recommendations beyond that at this time.`,
-        ephemeral: true, 
-    });
+    try {
+        const embed = new EmbedBuilder()
+            .setTitle(`Oops!`)
+            .setDescription(
+                `Your message was deleted due to it containing the name of an emulator for Nintendo Switch.\n\nAt this time we are not providing support for any emulators due to legal action from Nintendo. You can still reference our [legacy emulator installation](https://luminescent.team/docs/installation/ryujinx) guide but we cannot offer any support or recommendations beyond that currently.`,
+            )
+            .setThumbnail(
+                "https://cdn.discordapp.com/attachments/995539661084696626/1116076538480308244/shaymin_paradox_error.png",
+            )
+            .setColor(0x2664ea);
+
+        await interaction.reply({
+            embeds: [embed],
+            ephemeral: true
+         });
+    } catch (error) {
+        console.error("Failed to send response:", error);
+    }
     try {
         await message.delete();
     } catch (error) {
