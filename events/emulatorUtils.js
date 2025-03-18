@@ -37,7 +37,7 @@ async function containsEmulator(message) {
 
 async function handleEmulator(message) {
     message.reply({ 
-        content: `Your message was deleted due to it containing the name of an emulator for Nintendo Switch.\n\nAt this time we are not providing support for any particular emulator due to legal action from Nintendo. You can still reference our [legacy emulator installation](<https://luminescent.team/docs/installation/ryujinx>) guide but we cannot offer any support or recommendations beyond that at this time.`,
+        content: `Your message was deleted due to it containing the name of an emulator for Nintendo Switch.\n\nAt this time we are not providing support for any particular emulator due to legal action from Nintendo. You can still reference our [legacy emulator installation](https://luminescent.team/docs/installation/ryujinx) guide but we cannot offer any support or recommendations beyond that at this time.`,
         ephemeral: true, 
     });
     try {
