@@ -46,7 +46,7 @@ async function handleEmulator(message) {
             )
             .setColor(0x2664ea);
 
-        await interaction.reply({
+        await message.reply({
             embeds: [embed],
             ephemeral: true
          });
