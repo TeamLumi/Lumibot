@@ -59,7 +59,7 @@ Rapidash|Route 210 (South)|Grass|30|5%|Route 226|Grass|67|10%|
 Slowpoke|Route 205 (North)|Grass|17|20%|
 Magnemite|Valley Windworks (Outside)|Grass|13|20%|Fuego Ironworks (Outside)|Grass|40|30%|
 Magneton|Fuego Ironworks (Outside)|Grass|40|20%|Victory Road - 2F|Grass|59|20%|
-Farfetchâ€™d|Route 212 (North)|Radar|26|20%|Route 221|Grass|40|10%|
+Farfetch’d|Route 212 (North)|Radar|26|20%|Route 221|Grass|40|10%|
 Doduo|Route 201|Radar|5|20%|
 Dodrio|Route 221|Grass|40|10%|Route 226|Grass|67|10%|
 Seel|Mt. Coronet - B1F|Surfing|45|30%|
@@ -495,7 +495,7 @@ Spewpa|Route 205 (North)|Incense|17|10%|
 Vivillon|Route 212 (North)|Incense|26|20%|Route 218|Incense|39|20%|Route 222|Incense|54|20%|Route 230|Incense|67|20%|
 Litleo|Route 202|Incense|6|10%|
 Pyroar|Fuego Ironworks (Outside)|Incense|40|10%|Stark Mountain - Entrance|Incense|69|10%|Stark Mountain - Interior|Incense|69|10%|
-FlabÃ©bÃ©|Route 204 (South)|Incense|7|20%|
+Flabébé|Route 204 (South)|Incense|7|20%|
 Floette|Route 206|Incense|22|20%|Valor Lakefront|Incense|33|20%|
 Florges|Route 224|Incense|59|20%|
 Skiddo|Route 205 (North)|Incense|17|10%|
@@ -651,7 +651,7 @@ Grimmsnarl|Mt. Coronet - 2F|Incense|51|10%|Mt. Coronet - 3F|Incense|51|10%|Mt. C
 Obstagoon|Victory Road - 1F|Incense|59|10%|Victory Road - 2F|Incense|59|10%|Victory Road - B1F|Incense|59|10%|Victory Road - 1F Back (Marley)|Incense|59|10%|Victory Road - 1F Back (Entrance)|Incense|59|10%|Victory Road - 1F Back (214 Exit)|Incense|59|10%|Route 230|Incense|67|10%|
 Perrserker|Route 221|Incense|40|10%|
 Cursola|Iron Island (Overworld)|Surfing Incense|45|30%|Sendoff Spring|Incense|54|10%|Route 222|Surfing Incense|55|30%|Sunyshore City|Surfing Incense|60|30%|Route 223|Surfing Incense|60|30%|Route 225|Surfing Incense|67|30%|Route 228|Surfing Incense|67|30%|
-Sirfetchâ€™d|Route 218|Incense|39|10%|Lake Valor (After)|Incense|54|10%|
+Sirfetch’d|Route 218|Incense|39|10%|Lake Valor (After)|Incense|54|10%|
 Mr. Rime|Lake Acuity (After)|Incense|51|10%|
 Runerigus|Snowpoint Temple - 1F|Incense|50|10%|Snowpoint Temple - B1F|Incense|50|10%|Snowpoint Temple - B2F|Incense|50|10%|Snowpoint Temple - B3F|Incense|50|10%|Snowpoint Temple - B4F|Incense|50|10%|Snowpoint Temple - B5F|Incense|50|10%|Mt. Coronet - Summit|Incense|52|10%|Turnback Cave - Entrance|Incense|66|10%|Turnback Cave - d17r0103|Incense|66|10%|Turnback Cave - d17r0104|Incense|66|10%|Turnback Cave - d17r0105|Incense|66|10%|Turnback Cave - d17r0106|Incense|66|10%|Turnback Cave - d17r0107|Incense|66|10%|Turnback Cave - d17r0108|Incense|66|10%|Turnback Cave - d17r0109|Incense|66|10%|Turnback Cave - d17r0110|Incense|66|10%|Turnback Cave - d17r0111|Incense|66|10%|Turnback Cave - d17r0112|Incense|66|10%|Turnback Cave - d17r0113|Incense|66|10%|Turnback Cave - d17r0114|Incense|66|10%|Turnback Cave - d17r0115|Incense|66|10%|Turnback Cave - d17r0116|Incense|66|10%|Turnback Cave - d17r0117|Incense|66|10%|Turnback Cave - d17r0118|Incense|66|10%|Turnback Cave - d17r0119|Incense|66|10%|Turnback Cave - d17r0120|Incense|66|10%|Turnback Cave - d17r0121|Incense|66|10%|
 Milcery|Route 212 (North)|Incense|26|10%|
@@ -739,7 +739,7 @@ Hisuian Goodra|Victory Road - 1F|Incense|59|10%|Victory Road - 2F|Incense|59|10%
 Hisuian Avalugg|Route 217|Incense|48|10%|Mt. Coronet - Summit|Incense|52|10%|
 Hisuian Decidueye|Route 227|Incense|67|10%|
 Pom-Pom Style Oricorio|Route 206|Incense|22|20%|
-Paâ€™u Style Oricorio|Route 224|Incense|59|20%|
+Pa’u Style Oricorio|Route 224|Incense|59|20%|
 Rockruff Own-Tempo|Valor Lakefront|Incense|33|20%|
 Midnight Form Lycanroc|Route 218|Incense|39|10%|
 Dusk Form Lycanroc|Route 221|Incense|40|10%|
