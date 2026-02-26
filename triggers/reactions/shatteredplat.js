@@ -13,7 +13,7 @@ module.exports = {
 				name: "Team Lumi",
 			})
 			.setThumbnail(
-				"https://cdn.discordapp.com/attachments/1116745890577776862/1476701476255567964/STP.png",
+				"https://cdn.discordapp.com/attachments/1115345759496323173/1476702569350041682/STP.png?",
 			)
 			.setTitle("Pokemon Shattered Platinum")
 			.setURL("https://discord.gg/6EgVgkqfUf")
