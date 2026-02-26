@@ -12,6 +12,9 @@ module.exports = {
 			.setAuthor({
 				name: "Team Lumi",
 			})
+			.setThumbnail(
+				"https://cdn.discordapp.com/attachments/1116745890577776862/1476701476255567964/STP.png",
+			)
 			.setTitle("Pokemon Shattered Platinum")
 			.setURL("https://discord.gg/6EgVgkqfUf")
 			.setDescription(
