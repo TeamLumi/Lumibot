@@ -15,7 +15,7 @@ module.exports = {
 			.setTitle("Pokemon Shattered Platinum")
 			.setURL("https://discord.gg/6EgVgkqfUf")
 			.setDescription(
-				"# **Pokémon Shattered Platinum** \n\nShattered Platinum is a mod for Pokémon Brilliant Diamond and Shining Pearl, based on Re:Illuminated Platinum.Its goal is to provide a more 'Vanilla' experience with modern quality of life changes and some extras. \n-# NOTE: This mod will release AFTER Re:Illuminated Platinum! \n\n[Server Invite](https://discord.gg/6EgVgkqfUf)",
+				'# **Pokémon Shattered Platinum** \n\nShattered Platinum is a mod for Pokémon Brilliant Diamond and Shining Pearl, based on Re:Illuminated Platinum. Its goal is to provide a more "Vanilla" experience with modern quality of life changes and some extras. \n -# NOTE: This mod will release AFTER Re:Illuminated Platinum! \n\n[Server Invite](https://discord.gg/6EgVgkqfUf)',
 			)
 			.setColor(0x000000);
 
