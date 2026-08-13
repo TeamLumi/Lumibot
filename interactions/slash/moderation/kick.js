@@ -36,22 +36,18 @@ module.exports = {
 		.setDMPermission(false),
 
 	async execute(interaction) {
-		const user = interaction.options.getUser("user");
+		const user = interaction.options.getUser("user", true);
+		const member = interaction.options.getMember("user");
 		const providedReason = interaction.options.getString("reason");
 		const kickReason = providedReason || "No reason provided.";
 		const deleteMessages = interaction.options.getString("deletemessages");
 		const deleteSeconds = deleteMessages || "86400";
-		let member = null;
 
-		try {
-			member = interaction.guild.members.cache.get(user.id);
-		} catch (error) {
-			console.error(`Failed to get associated guild member:`, error);
-			interaction.reply({
-				content: `Couldn't get the associated guild member. They may already have been kicked or left.`,
+		if (!member)
+			return interaction.reply({
+				content: `That user is not currently a member of this server.`,
 				ephemeral: true,
 			});
-		}
 
 		if (
 			!interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)
@@ -85,25 +81,22 @@ module.exports = {
 				ephemeral: true,
 			});
 
-		// Role hierarchy checks if the user is still in the guild
-		if (member) {
-			const targetHighestRole = member.roles.highest;
-			const userHighestRole = interaction.member.roles.highest;
-			const botHighestRole = interaction.guild.members.me.roles.highest;
+		const targetHighestRole = member.roles.highest;
+		const userHighestRole = interaction.member.roles.highest;
+		const botHighestRole = interaction.guild.members.me.roles.highest;
 
-			if (userHighestRole.comparePositionTo(targetHighestRole) <= 0) {
-				return interaction.reply({
-					content: `Your permissions are less than or equal to the user you are trying to ban.`,
-					ephemeral: true,
-				});
-			}
+		if (userHighestRole.comparePositionTo(targetHighestRole) <= 0) {
+			return interaction.reply({
+				content: `Your permissions are less than or equal to the user you are trying to kick.`,
+				ephemeral: true,
+			});
+		}
 
-			if (botHighestRole.comparePositionTo(targetHighestRole) <= 0) {
-				return interaction.reply({
-					content: `My permissions are less than or equal to the user you are trying to ban.`,
-					ephemeral: true,
-				});
-			}
+		if (botHighestRole.comparePositionTo(targetHighestRole) <= 0) {
+			return interaction.reply({
+				content: `My permissions are less than or equal to the user you are trying to kick.`,
+				ephemeral: true,
+			});
 		}
 
 		// Notify the user that the kick process is starting

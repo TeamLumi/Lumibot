@@ -36,22 +36,12 @@ module.exports = {
 		.setDMPermission(false),
 
 	async execute(interaction) {
-		const user = interaction.options.getUser("user");
+		const user = interaction.options.getUser("user", true);
+		const member = interaction.options.getMember("user");
 		const providedReason = interaction.options.getString("reason");
 		const banReason = providedReason || "No reason provided.";
 		const deleteMessages = interaction.options.getString("deletemessages");
 		const deleteSeconds = deleteMessages || "86400";
-		let member = null;
-
-		try {
-			member = interaction.guild.members.cache.get(user.id);
-		} catch (error) {
-			console.error(`Failed to get associated guild member:`, error);
-			interaction.reply({
-				content: `Couldn't get the associated guild member. They may already have been banned or left.`,
-				ephemeral: true,
-			});
-		}
 
 		if (
 			!interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers)

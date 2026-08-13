@@ -63,23 +63,19 @@ module.exports = {
 		.setDMPermission(false),
 
 	async execute(interaction) {
-		const user = interaction.options.getUser("user");
+		const user = interaction.options.getUser("user", true);
+		const member = interaction.options.getMember("user");
 		const providedReason = interaction.options.getString("reason");
 		const timeoutReason = providedReason || "No reason provided.";
 		const providedDuration = interaction.options.getString("duration");
 		const customDuration = interaction.options.getString("customduration");
 		const timeoutDuration = customDuration || providedDuration || "60";
-		let member = null;
 
-		try {
-			member = interaction.guild.members.cache.get(user.id);
-		} catch (error) {
-			console.error(`Failed to get associated guild member:`, error);
-			interaction.reply({
-				content: `Couldn't get the associated guild member. They may have left or just haven't spoke yet.`,
+		if (!member)
+			return interaction.reply({
+				content: `That user is not currently a member of this server.`,
 				ephemeral: true,
 			});
-		}
 
 		const timeoutMS = parseInt(timeoutDuration) * 60000;
 		const prettyDuration = formatDuration(timeoutMS);
