@@ -25,13 +25,12 @@ module.exports = {
 	async execute(message) {
 		// Declares const to be used.
 
-		const { client, guild, channel, content, author } = message;
+		const { client, guild, channel, content } = message;
 
 		// Rapid cross-channel spam checks
 		const handledBurstSpam = await handleChannelBurstSpam(message);
 
 		if (handledBurstSpam) {
-			console.log(`Found burst spam: ${author.username}:${content}`);
 			return;
 		}
 
@@ -39,17 +38,15 @@ module.exports = {
 		const isSpam = await containsSpam(message);
 
 		if (isSpam) {
-			console.log(`Found spam: ${author.username}:${content}`);
 			return handleSpam(message);
 		}
 
         // Anti-emulator checks
-        const isEmulator = await containsEmulator(message);
+		const isEmulator = await containsEmulator(message);
 
-        if (isEmulator) {
-            console.log(`Found emulator: ${author.username}:${content}`);
-            return handleEmulator(message);
-        }
+		if (isEmulator) {
+			return handleEmulator(message);
+		}
 
 		// Checks if the bot is mentioned in the message all alone and triggers onMention trigger.
 		// We can change the behavior as per your liking at ./messages/onMention.js
